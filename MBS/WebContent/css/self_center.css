@@ -1,0 +1,202 @@
+/*个人中心首页右侧*/
+.section-self-right:after{
+	display: block;content: '';clear: both;
+}
+/*右侧左边*/
+.right-self{
+	float: left !important;
+	width: 760px;
+	font-size: 12px;
+}
+.right-self-info{
+	height: 179px;
+	background: white;
+}
+.user-info{
+	height: 135px;
+	border: 1px solid #e3e3e3;
+	position: relative;
+}
+.user-info>a{
+	display: block;
+	width: 110px;
+	height: 110px;
+	/*padding-top: 17px;*/
+	margin: 17px 0px 0px 30px;
+	border-radius: 60%;
+	border: 2px solid #E3E3E3;
+	text-align: center;
+	line-height: 100px;
+	float: left;
+}
+.user-info>a>img{
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+}
+.user-icon{
+	background: url(../img/user_icon.png);
+	position: absolute;
+	width: 33px;
+	height: 33px;
+	left: 35px;
+	top: 10px;
+}
+.user-detal{
+	float: left;
+	margin:24px 0px 0px 20px;
+	/*font-size: 14px;*/
+	width: 500px;
+	color: #8f8f8f;
+}
+.user-detal b{
+	font-size: 14px;
+	color: black;
+}
+.detal{
+	margin-bottom: 8px;
+	height: 22px;
+}
+.detal *{
+	padding-left: 10px;
+}
+.detal .money{
+	background: #fff0f2;
+	height: 28px;
+	width: 90px;
+	color: #e50065;
+	line-height: 28px;
+	display: inline-block;
+}
+.money~span{
+	padding-left: 40px;
+}
+.shop-case li{
+	border-right: 1px dotted #cccccc;
+	float: left;
+	margin-top: 13px;
+	padding-left: 25px;
+	width: 163px;
+	font-size: 14px;
+	text-align: center;
+	height: 25px;
+}
+.shop-case a{
+	color: black;
+}
+.shop-case a:hover{
+	color: #e50065;
+}
+.li-1{
+	background: url(../img/shopcase_1.png) no-repeat scroll 53px 1px;
+}
+.li-2{
+	background: url(../img/shopcase_2.png) no-repeat scroll 53px 1px;
+}
+.li-3{
+	background: url(../img/shopcase_3.png) no-repeat scroll 53px 1px;
+}
+.li-4{
+	background: url(../img/shopcase_4.png) no-repeat scroll 53px 1px;
+}
+.right-self-bottom{
+	height: 346px;
+	margin-top: 10px;
+	background: white;
+	padding: 0px 27px;
+}
+.may{
+	font-size: 14px;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #e3e3e3;
+	font-weight: bold;
+}
+.may a{
+	float: right;
+}
+.may a img{
+	padding: 6px;
+}
+/*右侧右边*/
+.right-right{
+	width: 290px;
+	/*height: 900px;*/
+	margin-left: 10px;
+	float: right;
+}
+.part-1{
+	height: 164px;
+	background: white;
+}
+.signIn-title{
+	height: 38px;
+    font-weight: normal;
+    text-indent: 14px;
+    line-height: 38px;
+    border-bottom: 1px dotted #e3e3e3;
+    color: #999;
+    font-size: 12px;
+}
+.signIn-btn span{
+	margin: 20px 65px 0px;
+	display: block;
+	width: 160px;
+	height: 50px;
+	border-radius: 40%;
+	border: 1px deeppink solid;
+	text-align: center;
+	line-height: 50px;
+	color: deeppink;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 14px;
+}
+.signIn-btn span:hover{
+	color: white;
+	background: deeppink;
+}
+.today_gp{
+	font-size: 12px;
+	color: #8f8f8f;
+	text-align: center;
+	margin-top: 17px;
+}
+.part-2{
+	height: 150px;
+	background: white;
+	margin-top: 10px;
+	padding: 0px 15px;
+}
+.r-title{
+	height: 35px;
+	padding: 15px 10px 0px 0px;
+	border-bottom: 1px solid #e3e3e3;
+	font-size: 14px;
+}
+.details ul{
+	margin-top: 25px;
+}
+.details li{
+	display: inline;
+	padding: 0px 15px;
+	width: 47px;
+	height: 46px;
+	cursor: pointer;
+}
+.part-3{
+	margin-top: 10px;
+	background: white;
+	height: 353px;
+	padding-top: 10px;
+	text-align: center;
+}
+.part-3 h1{
+	text-align: left;
+	padding-left: 20px;
+	color: deeppink;
+}
+.part-3 img{
+	width: 150px;
+	padding-top: 10px;
+}

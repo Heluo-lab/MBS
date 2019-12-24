@@ -1,0 +1,255 @@
+.cardbody{
+	width: 1140px;
+}
+.cardbody .title{
+	width: 1140px;
+	height: 36px;
+	background: #ebebeb;
+	padding: 0px 80px;
+}
+.title .checkbox{
+	display: block;
+	margin: 12px 12px;
+	width: 13px;
+	height: 13px;
+}
+.title li{
+	float: left;
+	line-height: 34px;
+	font-size: 14px;
+}
+.title .all{
+	margin-left: 10px;
+	margin-right: 200px;
+}
+.title .pro{
+	margin-right: 170px;
+}
+.title .price{
+	margin-left: 60px;
+	margin-right: 60px;
+}
+.title .num{
+	margin: 0px 35px;
+}
+.title .cash{
+	margin: 0px 60px;
+}
+.title .option{
+	margin: 0px 15px;
+}
+.buygoods{
+	border: 1px solid #ebebeb;
+	width: 100%;
+	background: url(../img/shopcar.jpg) 300px 62px no-repeat;
+}
+.goods{
+	margin: 20px 0 0 30px;
+}
+.goods-title{
+	line-height: 30px;
+	font-size: 13px;
+	width: 1080px;
+	height: 30px;
+	background: #f5f5f5;
+	padding: 0px 80px;
+	color: #333333;
+}
+.buygoods .goods table{
+	margin: 0 0 0 60px;
+}
+.goods-line{
+	border: 1px solid #F5F5F5;
+	width: 1080px;
+	margin-bottom: 10px;
+}
+.cardbody .buygoods .goods table td{
+	border-bottom: 1px solid #EBEBEB;
+	padding: 8px;
+	
+}
+.buygoods .goods table .goods-img{
+	width: 54px;
+	padding: 0px 20px;
+}
+.buygoods .goods table .goods-content{
+	width: 404px;
+}
+.buygoods .goods table .goods-price{
+	width: 108px;
+}
+.buygoods .goods table .goods-nub{
+	width: 140px;
+}
+.buygoods .goods table .goods-nub button{
+	display: inline-block;
+	background: white;
+	border: 1px solid #EBEBEB;
+	height: 24px;
+	line-height: 24px;
+	width: 30px;
+	-webkit-appearance: textfield;
+
+}
+.buygoods .goods table .goods-nub a{
+	text-align: center;
+	display: inline-block;
+	width: 20px;
+	line-height: 24px;
+	border: 1px solid #EBEBEB;
+	height: 24px;
+}
+.buygoods .goods table .subtotal{
+	width: 130px;
+}
+table img{
+	width: 41px;
+}
+.goods-priceAll{
+	border: 1px solid #EBEBEB;
+	border-bottom: none;
+	border-top: none;
+	height: 190px;
+	padding-top: 20px;
+	color: #d60076;
+	font-weight: 700px;
+	font-size: 18px;
+}
+.goods-priceAll span{
+	font-size: 12px;
+	font-weight: bolder;
+	color: #555555;
+}
+.goods-priceAll-left{
+	margin: 20px;
+	float: left;
+}
+.goods-priceAll-right{
+	margin-top: 50px;
+	float: right;
+}
+.goods-priceAll-right button{
+	width: 226px;
+	height: 48px;
+	color: white;
+	background: #EB0067;
+	border: none;
+	margin-right: 20px;
+}
+.shopcar{
+	width: 687px;
+	margin: 0px auto;
+	padding: 89px 0 0 208px;
+	color: #333;
+	font-size: 25px;
+	line-height: 22px;
+
+}
+.shopcar p:first-child{
+	margin-top: 10px;
+}
+.shopcar p{
+	font-size: 16px;
+	color: #555555;
+}
+.shopcar a{
+	color: #d3023c;
+}
+.anthorshop-title{
+	width: 100%;
+	height: 36px;
+	border: 1px solid #ebebeb;
+	margin-top: 30px;
+	padding: 0px 50px;
+	font-size: 16px;
+	line-height: 36px;
+	color: #555555;
+	border-bottom: hidden;
+}
+.anthorshop-content{
+	border: 1px solid #ebebeb;
+	width: 1140px;
+	height: 417px;
+	padding: 0px 0px 20px 22px;
+}
+.anthorshop-content ul{
+	width: 175px;
+	height: 339px;
+	font-size: 12px;
+	color: #555555;
+	line-height: 22px;
+	text-align: center;
+	margin: 22px;
+	float: left;
+}
+.anthorshop-content img{
+	width: 175px;
+	height: 249px;
+}
+.container .anthorshop-content li{
+	background: #F5F5F5;
+}
+.container .anthorshop-content li:nth-child(3){
+	color: #D90077;
+	margin-bottom: 13px;
+	
+}
+.container .anthorshop-content li del{
+	color: #555555;
+}
+.anthorshop-content .join{
+	border: 1px solid #D90077;
+	color: #D90077;
+	padding: 3px 10px;
+	text-decoration: none;
+}
+.rxdot{
+	width: 200px;
+	height: 23px;
+	margin: 380px 499px 10px 499px;
+}
+.rxdot span{
+	display: block;
+	height: 10px;
+	width: 10px;
+	float: left;
+	margin: 5px;
+	line-height: 10px;
+}
+.rxdot img{
+	width: 100%;
+	height: 100%;
+}
+.rxdot .next{
+	float: left;
+
+	padding: 0px 15px;
+	line-height: 23px;
+	color: #666666;
+	border: 1px solid #E5E5E5;
+	padding: 0px 15px;
+}
+.collect-title{
+	width: 1140px;
+	height: 36px;
+	border: 1px solid #ebebeb;
+	padding: 0px 50px;
+	font-size: 16px;
+	line-height: 36px;
+	color: #555555;
+	border-bottom: hidden;
+	border-top: hidden;
+}
+.collect-content{
+	border: 1px solid #ebebeb;
+	width: 1140px;
+	height: 417px;
+	padding: 0px 0px 20px 22px;
+	text-align: center;
+}
+.footer{
+	width: 1200px;
+	height: 402px;
+	background: yellowgreen;
+	margin: 0px auto;
+}

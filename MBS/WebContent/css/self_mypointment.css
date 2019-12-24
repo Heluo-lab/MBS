@@ -1,0 +1,14 @@
+/*我的预订*/
+.section-self-right{
+	background: white;
+}
+.title{
+	padding: 10px 25px;
+	font-weight: bold;
+	font-size: 14px;
+	border-bottom: #e3e3e3 solid 1px
+}	
+.pointment-info{
+	padding: 115px;
+	text-align: center;
+}

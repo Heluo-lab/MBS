@@ -1,0 +1,48 @@
+/*门店订单*/
+.search{
+	padding: 14px 0px 12px 10px;
+	background: white;
+}
+.search span{
+	font-weight: bold;
+}
+.search span:nth-child(2){
+	margin-left: 600px;
+}
+.search input[type='text']{
+	height: 16px;
+	padding: 5px 15px;
+	border: 1px solid #D5D5D5;
+	color: #969696;
+}
+.search input[type='submit']{
+	background: #E50065;
+	border: none;
+	width: 67px;
+	height: 26px;
+	color: #fff;
+	cursor: pointer;
+}
+.all-shop table{
+	text-align: center;
+	width: 1060px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+}
+.all-shop table th,.all-shop table td{
+	background: #ececec;
+    height: 40px;
+    border: 1px solid #e3e3e3;
+}
+/*没有门店订单是显示的div*/
+.no-order{
+	height: 140px;
+	background: white;
+	text-align: center;
+	line-height: 140px;
+	font-size: 14px;
+}
+.no-order a{
+	color: red;
+}

@@ -1,0 +1,134 @@
+/*全局样式*/
+*{margin: 0px;padding: 0px;}
+li{list-style: none;}
+a{text-decoration: none;}
+img{ border: none; vertical-align: bottom;}
+
+/*顶部  顶部分三层 top category bottom*/
+.container{
+	margin: 0px auto;
+	width: 1200px;
+	padding: 0px;
+}
+.backtotop{
+	position: fixed;
+	bottom: 50%;
+	right: 10%;
+	display: none;
+}
+.nav{
+	background: url(../img/bg1.jpg) 0 28px repeat-x;
+}
+.container .logo{
+	float: left;
+}
+.container .headleft li{
+	float: left;
+	font-size: 12px;
+	color: #747474;
+}
+.container .headleft li span{
+	color: #E8E8E8;
+}
+.container .headright li span{
+	color: #E8E8E8;
+}
+.container .headright a{
+	text-decoration: none;
+}
+.container .headright a:hover{
+	color: #e50056;
+}
+.headright{
+	float: right;
+}
+.container .headright div,.container .headright .message{
+	float: left;
+}
+.container .headright .message-no{
+	display: block;
+}
+.container .headright .message-yes{
+	display: none;
+}
+.container .headright .message-border ul{
+	display: none;
+}
+.container .headright .message-yes .message-border:hover .myaccount{
+	border:  1px solid #E6E6E6;
+	border-top:  1px dashed #E6E6E6;
+	position: absolute;
+	top: 28px;
+	display: block;
+	width: 79px;
+	padding-left: 4px;
+	margin-left: -1px;
+	background: white;
+}
+.container .headright .message-border{
+	height: 20px;
+	border: 1px solid white;
+	padding-right: 8px;
+	margin-right: -8px;
+}
+.container .headright .message-border:hover{
+	height: 20px;
+	border: 1px solid #E6E6E6;
+	padding-right: 8px;
+	margin-right: -8px;
+}
+.container .headright .message-border:hover ul{
+	display: block;
+}
+.container .headright .message-border a{
+	margin-left: 2px;
+}
+.container .headright .message-yes .myaccount li{
+	line-height: 23px;
+}
+.container .wechat{
+	padding: 0px 10px 0px 20px;
+	background: url(../img/icon.jpg) no-repeat;
+}
+.container .wechat img{
+	display: none;
+}
+.container .wechat:hover img{
+	position: absolute;
+	display: block;
+	top: 30px;
+	
+}
+.container .phone img{
+	display: none;
+}
+.container .phone:hover img{
+	position: absolute;
+	display: block;
+	right: 17%;
+	top: 30px;
+	
+}
+.container .phone{
+	background: url(../img/icon.jpg) 0px -68px no-repeat;
+	padding: 0px 0px 0px 20px;
+}
+.container .headright li{
+	float: left;
+	margin: 0px 5px;
+	font-size: 12px;
+	color: #747474;
+}
+.container .headright a{
+		color: #747474;
+}
+.stepby{
+	width: 618px;
+	height: 25px;
+	background: url(../img/progressBar.gif);
+	float: right;
+	margin-top: 33px;
+}
+.footer-a-title{
+	padding:0px;
+}

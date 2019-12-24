@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>梦芭莎登录</title>
+		<link rel="stylesheet" href="css/login.css" />
+		<link rel="stylesheet" href="css/base.css" />
+	</head>
+	<body>
+		<!--头部添加图片-->
+		<div class="head">
+			<a href="index.html">
+				<img src="img/tubiao1.jpg" />
+			</a>
+		</div>
+		<!--身体内容-->
+		<div class="section">
+			<!--左边图片-->
+			<div class="left">
+				<img src="img/login.jpg" />
+			</div>
+			<!--右边内容-->
+			<div class="right">
+				<!--上边-->
+				<div class="login-header">
+					<span class="login-txt1 login-active">普通登录
+						<span class="login-txt1-line"></span>
+					</span>
+					<span class="login-txt2">无密码登录
+						<span class="login-txt2-line"></span>
+					</span>
+				</div>
+				<!--上边扫描块选项-->
+				<div class="login-header-scan">
+					<span class="login-txt1 login_active">普通登录</span>
+					<span class="login-txt-scan-line">|</span>
+					<span class="login-txt2">无密码登录</span>
+				</div>
+				<!--下边-->
+				<div class="login-form">
+					<form class="login_input_main" id="form">
+						<!--普通登录第一块输入部分-->
+						<div class="input_block_1">
+							<!--账号输入-->
+							<div class="user_item">
+								<label class="i_lable name-lable" for="txtLoginID"></label>
+								<input type="text" name="txtLoginID" title="请输入账号" placeholder="手机号/邮箱/会员卡号" class="i_text"  id="txtLoginID" />
+								<!--输入正确时图标-->
+								<label id="txtLoginIDCorrent"></label>
+								<!--账号为空，错误时图标文字解释-->
+								<div id="txtLoginIDTip"></div>
+							</div>
+							<!--密码输入-->
+							<div class="user_item">
+								<label class="i_lable pwd-lable" for="txtLoginPwd"></label>
+							    <input type="password" name="txtLoginPwd" title="请输入密码" placeholder="密码" class="i_text" id="txtLoginPwd" />
+								<!--输入正确时图标-->
+								<label id="txtLoginPwdCorrent"></label>
+								<!--密码为空，错误时图标文字解释-->
+								<div id="txtLoginPwdTip"></div>
+							</div>
+						</div>
+						<!--无密码登录第二块输入部分-->
+						<div class="input_block_2">
+							<!--手机号输入-->
+							<div class="user_item">
+								<label class="i_lable name-lable" for="txtLoginID"></label>
+								<input type="text" name="txtLoginMob" title="请输入手机号" class="i_text" id="txtLoginMob" placeholder="请输入手机号" />
+								<!--输入正确时图标-->
+								<label id="txtLoginMobCorrent"></label>
+								<!--手机号为空时的解释-->
+								<div id="txtLoginMobTip"></div>
+							</div>
+						</div>
+						<!--验证部分-->
+						<div class="code">
+							<!--换一张-->
+							<a href="javascript:;" class="changecode">换一张</a>
+							<!--验证码输入行-->
+							<div class="code-line">
+								<!--验证码输入框-->
+								<input type="text" name="member_login_code" class="i_text_checkcode" placeholder="验证码" />
+								<!--验证码图片内容-->
+								<div class="code-img">
+									<p>请选出红色字母：WDGF</p>
+								</div>
+							</div>
+							<!--验证码为空,错误时的解释-->
+							<div id="member_login_codeTip"></div>
+						</div>
+						<!--动态验证部分与密码输入一样-->
+						<div class="input_block_2 dymatic">
+							<!--动态输入框-->
+							<label class="i_lable pwd-lable" for="txtLoginDpwd"></label>
+							<input type="text" name="member_mobile_code" title="请输入动态口令" class="i_text" placeholder="动态口令" />
+							<!--动态按钮-->
+							<input type="button" value="获取手机动态口令" class="getDpwd" data-time="60" />
+						</div>
+						<!--两个链接和按钮-->
+						<div class="btn-a">
+							<a href="#" class="forget-pwd">忘记密码？</a>
+							<a href="register.html" class="login_reg">注册</a>
+							<!--按钮-->
+							<div class="btn">立即登录</div>
+						</div>
+					</form>
+					<!--右边内容下面其他方式-->
+					<div class="user_item_otherWay">
+						<span>其他登录方式：</span>
+						<a title="微信登录" href="#" class="login-wx">
+							<img src="img/wx.jpg" />
+						</a>
+						<a title="QQ登录" href="#" class="login-qq">
+							<img src="img/qqlogo.jpg" />
+						</a>
+						<a title="支付宝登录" href="#" class="login-alipay">
+							<img src="img/alipay.jpg" />
+						</a>
+						<a title="微博登录" href="#" class="login-weibo">
+							<img src="img/weibologo.jpg" />
+						</a>
+					</div>
+					<!--二维码扫描-->
+					<!--二维码扫描登录块-->
+					<div class="login_scan">
+						<!--左边图片-->
+						<div class="login_scan_code">
+							<img id="imgscanok" class="login_scan_code_pic" src="img/scantu.jpg" />
+							<img id="imgscanfailure" class="login_scan_code_pic cover" src="img/scaninvalid.png" />
+							<!--二维码失效-->
+							<div class="login_code_lose">
+								<p>二维码已失效</p>
+								<p><a href="javascript:;">请点击刷新</a></p>
+							</div>
+						</div>
+						<!--右边文字-->
+						<div class="login_scan_right">
+							<p class="title1">手机扫码　快速登录</p>
+							<!--中间-->
+							<p class="title2">使用
+								<span class="tip">梦芭莎APP</span>
+								扫描
+							</p>
+							<!--下边链接-->
+							<a class="login_scan_right_btn" href="#">点击下载APP</a>
+						</div>
+					</div>
+					<!--二维码扫描登录点击-->
+					<div class="login_scan_click"></div>
+				</div>
+			</div>
+		</div>
+		
+		<!--尾部内容-->
+		<!--<div class="footer-txt">
+			<a href="index.html">首页</a>
+			<a href="">旗下品牌</a>
+			<a href="">零售店址</a>
+			<a href="">梦芭莎网盟 </a>
+			<a href="">网店代理</a>
+			<a href="">网站地图</a>
+			<a href="">友情链接</a>
+			<a href="">关于我们</a>
+			<div class="footer-txt-copyright">
+                Copyright © 2010-2019 梦芭莎官方网站，广州摩拉网络科技有限公司 All Rights Reserved 粤B2-20080069号
+			</div>
+		</div>-->
+		<footer>
+			<div class="footer-a-bg">
+				<div class="footer-a">
+					<ul>
+						<li class="footer-a-title"><a href="">新手指南</a></li>
+						<li><a href="">注册新用户</a></li>
+						<li><a href="">如何订购</a></li>
+						<li><a href="">如何修改订单</a></li>
+						<li><a href="">尺码对照表</a></li>
+					</ul>
+					<ul>
+						<li class="footer-a-title"><a href="">支付方式</a></li>
+						<li><a href="">支付方式</a></li>
+						<li><a href="">账户提现及退款时限</a></li>
+						<li><a href="">查看账户余额</a></li>
+					</ul>
+					<ul>
+						<li class="footer-a-title"><a href="">配送方式</a></li>
+						<li><a href="">配送费收取标准</a></li>
+						<li><a href="">配送范围及配送时效</a></li>
+						<li><a href="">签收注意事项</a></li>
+						<li><a href="">海外订购</a></li>
+					</ul>
+					<ul>
+						<li class="footer-a-title"><a href="">退换货服务</a></li>
+						<li><a href="">退换货政策</a></li>
+						<li><a href="">退换货流程</a></li>
+						<li><a href="">隐私声明</a></li>
+					</ul>
+					<ul>
+						<li class="footer-a-title"><a href="">会员制度及优惠</a></li>
+						<li><a href="">优惠活动</a></li>
+						<li><a href="">VIP优惠尊享</a></li>
+						<li><a href="">大宗购物</a></li>
+						<li><a href="">积分制度</a></li>
+					</ul>
+					<ul>
+						<li class="footer-a-title"><a href="">帮助中心</a></li>
+						<li><a href="">忘记密码</a></li>
+						<li><a href="">常见问题</a></li>
+						<li><a href="">在线客服</a></li>
+						<li><a href="">联系我们</a></li>
+						<li><a href="">专利平台</a></li>
+					</ul>
+					<ul>
+						<li class="footer-a-title"><a href="">咨询订购</a></li>
+						<li><a href="">400-716-2828</a></li>
+						<li class="black"><a href="">客户服务</a></li>
+						<li><a href="">400-716-7878</a></li>
+						<li class="black"><a href="">招商热线</a></li>
+						<li><a href="">400-716-0266</a></li>
+					</ul>
+					<ul class="custom_pic">
+						<li><img src="img/Customer_service.png"/></li>
+					</ul>
+				</div>
+			</div>
+			<div class="footer-img">
+				<img src="img/footer_img01.jpg" />
+				<img src="img/footer_img02.jpg" />
+				<img src="img/footer_img03.jpg" />
+			</div>
+			<div class="footer-txt">
+				<a href="index.html">首页</a>
+				<a href="">旗下品牌</a>
+				<a href="">零售店址</a>
+				<a href="">梦芭莎网盟 </a>
+				<a href="">网店代理</a>
+				<a href="">网站地图</a>
+				<a href="">友情链接</a>
+				<div class="footer-txt-copyright">
+					Copyright © 2010-2019 梦芭莎官方网站，广州摩拉网络科技有限公司 All Rights Reserved 粤B2-20080069号 <img src="img/plice.png"/>粤公网安备44010302000075
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/login.js" ></script>

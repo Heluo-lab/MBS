@@ -1,0 +1,106 @@
+.section-self-right{
+	background: white;
+}
+.top{
+	padding: 14px 19px;
+	border-bottom: 1px solid #CCCCCC;
+	font-weight: bold;
+}
+.close,.open{
+	margin: 20px;
+	width: 190px;
+	height: 42px;
+	cursor: pointer;
+	text-align: center;
+	line-height: 42px;
+	font-family: '宋体';
+	border: 1px solid rgb(229, 0, 101) ;
+}
+.close{
+	background: rgb(229, 0, 101);
+	color: white;
+}
+.open{
+	color: rgb(229, 0, 101);
+	background: white;
+}
+.new-address table {
+	padding-bottom: 10px;
+}
+.new-address table tr{
+	height: 44px;
+}
+.new-address table td{
+	font-size: 12px;
+	color: #666666;
+	height: 44px;
+	padding-left: 10px;
+}
+.new-address tr td:first-child{
+	width: 88px;
+	padding-left: 40px;
+}
+.new-address table span{
+	color: red;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 34px;
+	padding-right: 10px;
+}
+.new-address select{
+	padding:0px 8px;
+	height: 24px;
+	margin-right: 10px;
+}
+.new-address input{
+	text-indent: 10px;
+	height: 20px;
+}
+.new-address input[name='useraddress']{
+	width: 360px;
+}
+.new-address input[type='button']{
+	background: white;
+	height: 40px;
+	width: 180px;
+	border: none;
+	color: rgb(229, 0, 101);
+	text-indent: 0;
+	cursor: pointer;
+	border: 1px solid rgb(229, 0, 101);
+	outline: none;
+}
+.my-address{
+	margin: 40px 0px 40px 20px;
+}
+.my-address table{
+	width: 1020px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 12px;
+}
+.my-address table th{
+	height: 40px;
+    color: #333;
+    border: 1px solid #e3e3e3;
+    font-weight: normal;
+    padding: 0 3px;
+    margin: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-family: "宋体";
+    background: #ececec
+}
+.my-address table td{
+	border: 1px solid #ccc;
+    height: 55px!important;
+    margin: 0;
+    padding: 0 5px;
+    vertical-align: middle;
+    min-width: 78px;
+    color: #666666;
+}
+.my-address table td a{
+	color: #E70A69;
+}

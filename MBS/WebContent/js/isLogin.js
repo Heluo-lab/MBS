@@ -1,0 +1,11 @@
+if(localStorage.getItem('username')&&localStorage.getItem('token')){
+	$('.no-user').hide();
+	$('#username').html('你好，'+localStorage.getItem('username'));
+	$('.yes-user').show();
+}
+$('#exitLogin').click(function(){
+	localStorage.removeItem('username');
+	localStorage.removeItem('token');
+	$('.yes-user').hide();
+	$('.no-user').show();
+});

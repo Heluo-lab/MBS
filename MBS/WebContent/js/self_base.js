@@ -1,0 +1,11 @@
+$('.option').each(function(){
+		$(this).click(function(){
+			if($(this).attr('status')==0){
+				$(this).removeClass('showoff').addClass('showon').siblings('ul').slideDown();
+				$(this).attr('status',1);
+				return;
+			}
+			$(this).removeClass('showon').addClass('showoff').siblings('ul').slideUp();
+			$(this).attr('status',0);
+		});
+	});

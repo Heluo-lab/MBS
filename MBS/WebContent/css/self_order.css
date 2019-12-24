@@ -1,0 +1,88 @@
+/*订单右侧*/
+/*上部*/
+.right-top{
+	background: white;
+}
+.menu{
+	border-bottom: 1px solid #E3E3E3;
+	height: 20px;
+	padding: 16px 8px 13px;
+}
+.menu li{
+	float: left;
+	border-right: 1px solid #8D8D8D;
+	padding: 0px 25px;
+	line-height: 14px;
+}
+.menu li a{
+	color: #595959;
+	font-size: 14px;
+}
+.menu .on a{
+	color: black;
+	font-weight: bold;
+}
+.menu li:last-child{
+	border: none;
+}
+.search{
+	border-bottom: 1px solid #E3E3E3;
+	padding: 24px 30px;
+}
+.search:after{
+	content: '';clear: both;display: block;
+}
+select{
+	width: 160px;
+	height: 29px;
+	padding: 5px 15px;
+	cursor: pointer;
+	border: 1px solid #d5d5d5;
+	color: #8e8e8e;
+}
+.order-time{
+	float: left;
+}
+.order-status{
+	float: left;
+	margin-left: 10px;
+}
+.order-search{
+	float: right;
+	margin-right: 20px;
+}
+.order-search input[type='text']{
+	height: 16px;
+	padding: 5px 15px;
+	border: 1px solid #D5D5D5;
+	color: #969696;
+}
+.order-search input[type='submit']{
+	background: #E50065;
+	border: none;
+	width: 67px;
+	height: 26px;
+	color: #fff;
+	cursor: pointer;
+}
+.right-bottom{
+	padding: 170px;
+	background: white;
+}
+/*无有效订单*/
+.order-info-no{
+	background: url(../img/nodata_01.jpg) no-repeat;
+	padding: 15px 0px 15px 80px;
+	margin: auto;
+	width: 260px;
+	font-size: 14px;
+	color: #ccc;
+}
+.order-info-no a{
+	color: #E50065;
+	font-size: 12px;
+}
+/*右有效订单*/
+.order-info-yes{
+	display: none;
+}
