@@ -110,7 +110,7 @@ body{
 	height: 65px;
 	position: relative;
 }
-/*账号，密码，确认密码输入框大小*/
+/*昵称，账号，密码，确认密码输入框大小*/
 .i_text{
 	width: 324px;
 	height: 40px;
@@ -162,20 +162,6 @@ body{
 	cursor: pointer;
 }
 
-/*验证码部分样式*/
-.code{
-	/*给验证码图片部分相对定位*/
-	position: relative;
-	height: 90px;
-}
-/*换一张样式*/
-.changecode{
-	font-size: 12px;
-	color: #797979;
-	height: 24px;
-	margin-left: 280px;
-	cursor: pointer;
-}
 /*验证码输入框样式*/
 input.i_text_checkcode{
 	width: 120px;
@@ -186,21 +172,6 @@ input.i_text_checkcode{
 	/*字母缩进*/
 	text-indent: 11px;
 }
-/*验证码图片部分*/
-.code-img{
-	width: 191px;
-	height: 40px;
-	border: 1px solid #C9C9C9;
-	border-radius: 4px;
-	display: inline-block;
-	/*绝对定位*/
-	position: absolute;
-	left: 37%;
-}
-.code-img>p{
-	font-size: 19px;
-}
-
 /*动态验证码样式*/
 .user_item.dymatic{
 	height: 65px;
@@ -208,7 +179,7 @@ input.i_text_checkcode{
 	position: relative;
 }
 /*动态框输入大小*/
-.user_item>input.code_i_text{
+input.code_i_text{
 	width: 165px;
 	height: 40px;
 	border: 1px solid #c9c9c9;
@@ -237,10 +208,14 @@ input.i_text_checkcode{
 
 /*错误*/
 /*为空时解释文本样式*/
-#txtRegisterIDTip, #txtRegisterPwdTip, #txtConfirmPwdTip, #member_register_codeTip, #txtCodeTip{
+#txtRegisterNameTip, #txtRegisterIDTip, #txtRegisterPwdTip, #txtConfirmPwdTip, #txtCodeTip{
 	color: #e20263;
 	text-indent: 20px;
 	font-size: 12px;
+}
+/*边框颜色改变*/
+input.i_text_error{
+	border: 1px solid #e60065;
 }
 /*未点击不可见无该类*/
 /*解释图标*/
@@ -258,6 +233,27 @@ label.i_correct{
 	position: absolute;
 	top: 10px;
 	left: 300px;
+}
+/*密码输入程度*/
+.pwd_level{
+	background: url(../img/pwd_level.png) no-repeat;
+	display: inline-block;
+	height: 14px;
+	width: 141px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+/*弱时*/
+.pwd_weak{
+	background-position: 0px -14px;
+}
+/*中*/
+.pwd_middle{
+	background-position: 0px -28px;
+}
+/*强*/
+.pwd_strong{
+	background-position: 0px -42px;
 }
 
 /*协议内容样式*/

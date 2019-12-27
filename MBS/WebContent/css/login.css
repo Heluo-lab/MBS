@@ -139,8 +139,12 @@ body{
 .btn-a{
 	/*height: auto;*/
 	width: 326px;
+	font-size: 12px;
 }
-
+/*记住密码和自动登录样式*/
+.btn-a>input[type=radio]{
+	vertical-align: bottom;
+}
 /*链接样式*/
 .forget-pwd{
 	color: #666;
@@ -213,46 +217,6 @@ body{
 	display: block;
 }
 
-/*验证码部分样式*/
-.code{
-	/*验证部分不可见*/
-	display: none;
-	/*给验证码图片部分相对定位*/
-	position: relative;
-	height: 90px;
-}
-/*换一张样式*/
-.changecode{
-	font-size: 12px;
-	color: #797979;
-	height: 24px;
-	margin-left: 280px;
-	cursor: pointer;
-}
-/*验证码输入框样式*/
-input.i_text_checkcode{
-	width: 120px;
-	height: 40px;
-	border: 1px solid #c9c9c9;
-	border-radius: 4px;
-	/*margin-top: 10px;*/
-	/*字母缩进*/
-	text-indent: 11px;
-}
-/*验证码图片部分*/
-.code-img{
-	width: 191px;
-	height: 40px;
-	border: 1px solid #C9C9C9;
-	border-radius: 4px;
-	display: inline-block;
-	/*绝对定位*/
-	position: absolute;
-	left: 37%;
-}
-.code-img>p{
-	font-size: 19px;
-}
 
 /*动态口令样式*/
 .input_block_2.dymatic{
@@ -280,7 +244,7 @@ input.i_text_checkcode{
 
 /*错误*/
 /*为空时解释文本样式*/
-#txtLoginIDTip, #txtLoginPwdTip, #txtLoginMobTip, #member_login_codeTip{
+#txtLoginIDTip, #txtLoginPwdTip, #txtLoginMobTip, #txtLoginDpwdTip{
 	color: #e20263;
 	text-indent: 20px;
 	font-size: 12px;
