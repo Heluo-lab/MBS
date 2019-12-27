@@ -188,7 +188,7 @@
 						</ul>
 					</div>
 					<div class="info">
-						<form  method="post">
+						<form id="self_form">
 							<div class="info-header">
 								<table>
 									<tr>
@@ -236,19 +236,21 @@
 									<tr>
 										<td><span>*</span>省/市/区县：</td>
 										<td>
-											<select>
+											<select id="prov" name="prov" onchange="showCity(this)">
 												<option>-请选择省份-</option>
-												<option>湖南省</option>
-												<option>湖北省</option>
-												<option>浙江省</option>
+												<!-- 
+													<option>湖南省</option>
+													<option>湖北省</option>
+													<option>浙江省</option>
+												 -->
 											</select>
-											<select>
+											<select id="city" onchange="showCountry(this)">
 												<option>-请选择城市-</option>
 												<option></option>
 												<option></option>
 												<option></option>
 											</select>
-											<select>
+											<select id="country" onchange="selectCountry(this)">
 												<option>-请选择地区-</option>
 												<option></option>
 												<option></option>
@@ -261,16 +263,12 @@
 										<td><input type="text" name="useraddress" value="延农大厦"/></td>
 									</tr>
 									<tr>
-										<td><span>*</span>邮政编码：</td>
-										<td><input type="text" name="usermail" value="410006"/></td>
-									</tr>
-									<tr>
 										<td><span>&nbsp;&nbsp;</span>电话：</td>
 										<td><input type="text" name="userphone" value="15697383242"/></td>
 									</tr>
 									<tr>
 										<td></td>
-										<td><input type="button" value="提交"/></td>
+										<td><input type="button" value="提交" id="form_submit"/></td>
 									</tr>
 								</table>
 							</div>
@@ -361,6 +359,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/self_base.js"></script>
 <script src="js/isLogin.js"></script>
+<script src="js/province.js"></script>
 <script>
 //	获取响应后的结果
 //  alert(result);	
@@ -369,5 +368,17 @@
 	});
 	$(':button').click(function(){
 		alert('已提交')
+	});
+	
+</script>
+<script>
+	$("#form_submit").click(function(){
+		var self_form = $("#self_form");
+		var form_prov = $("#prov").find('option:selected').html();
+		var form_city = $("#city").find('option:selected').html();
+		var form_country = $("#country").find('option:selected').html();
+		self_form.method="get";
+		self_form.action="userInfo?prov="+form_prov+"&city="+form_city+"&country="+form_country;
+		console.log(self_form.action);
 	});
 </script>
