@@ -104,3 +104,10 @@
 .my-address table td a{
 	color: #E70A69;
 }
+
+select#city {
+	display: none;
+}
+select#country {
+	display: none;
+}	

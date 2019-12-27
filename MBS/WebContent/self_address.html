@@ -194,23 +194,14 @@
 								<tr>
 									<td><span>*</span>省/市/区县：</td>
 									<td>
-										<select>
+										<select id="prov" onchange="showCity(this)">
 											<option>-请选择省份-</option>
-											<option>湖南省</option>
-											<option>湖北省</option>
-											<option>浙江省</option>
 										</select>
-										<select>
+										<select id="city" onchange="showCountry(this)">
 											<option>-请选择城市-</option>
-											<option></option>
-											<option></option>
-											<option></option>
 										</select>
-										<select>
-											<option>-请选择地区-</option>
-											<option></option>
-											<option></option>
-											<option></option>
+										<select id="country" onchange="selectCountry(this)">
+											<option>-请选择区域-</option>
 										</select>
 									</td>
 								</tr>
@@ -340,6 +331,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/self_base.js"></script>
 <script src="js/isLogin.js"></script>
+<script src="js/province.js"></script>
 <script>
 	$('#add').click(function(){
 		if($('.new-address').css('display') == 'none'){
