@@ -8,6 +8,7 @@ $('.articles').click(function(){
 //公共的前缀
 var URL ='http://www.wjian.top/shop/';
 
+var isName =false;
 var isUser = false;
 var isPwd = false;
 var isCode =false;
@@ -39,54 +40,101 @@ $('.i_text').each(function(i){
 	})
 });
 //验证码输入框聚焦时无默认颜色
-$('.i_text_checkcode').focus(function(){
+/*$('.i_text_checkcode').focus(function(){
 	$(this).css('outline', 'none');
-});
+});*/
 //动态验证输入框无默认颜色
 $('.code_i_text').focus(function(){
 	$(this).css('outline', 'none');
 });
 
 //失焦事件
-//注册账号输入框失焦时判断
+//注册昵称输入框失焦时判断
+$('#txtRegisterName').blur(function(){
+	//获取昵称账号输入框填的值
+	var registername =$(this).val().trim();
+	//输入框为空时
+	if (registername =='') {
+		//注册昵称输入框#txtRegisterName添加类.i_text_error，边框为红色
+		$(this).addClass('i_text_error');
+		//提示内容#txtRegisterNameTip昵称不能为空,文本解释添加类.f-explain
+		$('#txtRegisterNameTip').addClass('f_explain').html('昵称不能为空');
+		//设置不能注册
+        isName = false;
+		return;
+	}
+	//昵称格式匹配
+	var re =/^[a-z0-9A-Z\u4e00-\u9fa5]+$/g;
+	if (!re.test(registername)) {
+		//文本解释
+		$('#txtRegisterNameTip').addClass('f_explain').html('昵称格式错误,必须为数字或字母或中文');
+		//注册账号输入框#txtLoginID添加类.i_text_error，边框为红色
+		$(this).addClass('i_text_error');
+		//设置不能注册
+        isName = false;
+		return;
+	}
+	//昵称格式正确，但是后台已存在
+    $.post(URL +'api_user.php', {'status':'check','username':registername},function(re){
+    	var obj =JSON.parse(re);
+    	//昵称存在
+    	if (obj.code ==2001) {
+    		//文本解释
+			$('#txtRegisterNameTip').addClass('f_explain').html('昵称已存在');
+			//注册昵称输入框#txtLoginName添加类.i_text_error，边框为红色
+			$(this).addClass('i_text_error');
+			//设置不能注册
+            isName = false;
+			return;
+    	}else{
+    		//注册昵称输入框#txtRegisterName去掉类.i_text_error
+			$(this).removeClass('i_text_error');
+			//文本解释去掉类.f-explain
+			$('#txtRegisterNameTip').removeClass('f_explain').html('');
+			//设置能注册
+            isName = true;
+    	}
+    });
+});
+//注册邮箱输入框失焦时判断
 $('#txtRegisterID').blur(function(){
-	//获取注册账号输入框填的值
+	//获取注册邮箱输入框填的值
 	var registerid =$(this).val().trim();
 	//输入框为空时
 	if (registerid =='') {
 		//注册账号输入框#txtRegisterID添加类.i_text_error，边框为红色
 		$(this).addClass('i_text_error');
 		//提示内容#txtRegisterIDTip邮箱/手机号/会员卡号不能为空,文本解释添加类.f-explain
-		$('#txtRegisterIDTip').addClass('f_explain').html('邮箱/手机号不能为空');
+		$('#txtRegisterIDTip').addClass('f_explain').html('邮箱不能为空');
 		//设置不能注册
         isUser = false;
 		return;
 	}
-	//用户名格式匹配
-	var re =/^[a-z0-9_]{3,20}/g;
+	//邮箱格式匹配
+	var re =/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/g;
 	if (!re.test(registerid)) {
 		//文本解释
-		$('#txtRegisterIDTip').addClass('f_explain').html('用户名格式错误,必须为3-20位数字字母下划线');
+		$('#txtRegisterIDTip').addClass('f_explain').html('邮箱格式错误');
 		//注册账号输入框#txtLoginID添加类.i_text_error，边框为红色
 		$(this).addClass('i_text_error');
 		//设置不能注册
         isUser = false;
 		return;
 	}
-	//用户名格式正确，但是后台已存在
+	//邮箱格式正确，但是后台已存在
     $.post(URL +'api_user.php', {'status':'check','username':registerid},function(re){
     	var obj =JSON.parse(re);
     	//用户存在
     	if (obj.code ==2001) {
     		//文本解释
-			$('#txtRegisterIDTip').addClass('f_explain').html('账号已存在');
-			//注册账号输入框#txtLoginID添加类.i_text_error，边框为红色
+			$('#txtRegisterIDTip').addClass('f_explain').html('该邮箱已注册');
+			//注册邮箱输入框#txtLoginID添加类.i_text_error，边框为红色
 			$(this).addClass('i_text_error');
 			//设置不能注册
             isUser = false;
 			return;
     	}else{
-    		//注册账号输入框#txtRegisterID去掉类.i_text_error
+    		//注册邮箱输入框#txtRegisterID去掉类.i_text_error
 			$(this).removeClass('i_text_error');
 			//文本解释去掉类.f-explain
 			$('#txtRegisterIDTip').removeClass('f_explain').html('');
@@ -96,63 +144,22 @@ $('#txtRegisterID').blur(function(){
     });
 });
 
-//验证码输入框失去焦点
-$('.i_text_checkcode').blur(function(){
-	//获取验证码输入框填的值
-	var checkcode =$(this).val();
-	//输入框为空时
-	if (checkcode =='') {
-		//验证码输入框.i_text_checkcode添加类.i_text_error
-		$(this).addClass('i_text_error');
-		//提示内容#member_register_codeTip验证码不能为空,文本解释添加类.f-explain
-		$('#member_register_codeTip').addClass('f_explain').html('请输入验证码');
-		//设置不能注册
-        isCode = false;
-		return;
-	}
-	//验证码不是四位
-	if (checkcode.length != 4) {
-		//验证码输入框.i_text_checkcode添加类.i_text_error
-		$(this).addClass('i_text_error');
-		//提示内容#member_login_codeTip请输入四位验证码,文本解释添加类.f-explain
-		$('#member_register_codeTip').addClass('f_explain').html('请输入四位验证码');
-		//设置不能注册
-        isCode = false;
-		return;
-		}
-	//输入四位验证码错误
-	if (checkcode.length == 4 && checkcode !='WDGF') {
-		//验证码输入框.i_text_checkcode添加类.i_text_error
-		$(this).addClass('i_text_error');
-		//文本解释添加类.f-explain，提示内容请输入正确的验证码
-		$('#member_register_codeTip').addClass('f_explain').html('请输入正确的验证码');
-		//设置不能注册
-        isCode = false;
-		return;
-	}
-	if (checkcode =='WDGF') {
-		//验证码输入框.i_text_checkcode去掉类.i_text_error
-		$(this).removeClass('i_text_error');
-		//文本解释去掉类.f-explain
-		$('#member_register_codeTip').removeClass('f_explain').html('');
-		//设置能注册
-        isCode = true;
-		return;
-	}
-});
 
 //动态验证码输入框失焦事件
-$('.code_i_text').blur(function(){
+$('#txtCode').blur(function(){
 	//获取动态验证码输入框的值
-	var dyncode =$(this).val().trim();
+	var dyncode =$(this).val();
 	//输入框为空时
 	if (dyncode =='') {
-		//动态验证码输入框.code_i_text添加类.i_text_error
+		//动态验证码输入框#txtCode添加类.i_text_error
 		$(this).addClass('i_text_error');
 		//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
 		$('#txtCodeTip').addClass('f_explain').html('请输入动态验证码');
 		return;
 	}
+	//动态验证码输入错误
+	
+	
 	//动态验证码输入框.code_i_text去掉类.i_text_error
 	$(this).removeClass('i_text_error');
 	//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
@@ -168,7 +175,9 @@ $('#txtRegisterPwd').blur(function(){
 		//密码输入框#txtRegisterPwd添加类.i_text_error
 		$(this).addClass('i_text_error');
 		//提示内容#txtRegisterPwdTip密码不能为空,文本解释添加类.f-explain
-		$('#txtRegisterPwdTip').addClass('f_explain').html('请输入6-20位数字');
+		$('#txtRegisterPwdTip').addClass('f_explain').html('请输入8-20位数字和字母,区分大小写');
+		//去掉强弱程度图片
+		$('#txtRegisterPwdTip').removeChild('.pwd_level');
 		//去掉正确图标
 		$('#txtRegisterPwdCorrent').removeClass('i_correct');
 		//设置不能注册
@@ -176,33 +185,51 @@ $('#txtRegisterPwd').blur(function(){
 		return;
 	}
 	//输入格式错误
-	//6-20位数字  定正则
-    var re = /^[0-9]{6,20}$/g;
+	//8-20位数字和字母  定正则
+    var re = /^[a-z0-9A-Z]{8,20}$/g;
 	if (registerpwd !='' && !re.test(registerpwd)) {
 		//密码输入框#txtRegisterPwd添加类.i_text_error
 		$(this).addClass('i_text_error');
 		//文本解释添加类.f-explain,
-		$('#txtRegisterPwdTip').addClass('f_explain').html('密码设置错误，请输入6-20位数字');
+		$('#txtRegisterPwdTip').addClass('f_explain').html('请输入8-20位数字和字母,区分大小写');
 		//去掉正确图标
 		$('#txtRegisterPwdCorrent').removeClass('i_correct');
 		//设置不能注册
         isPwd = false;
 		return;
-		}
+	}
 
-//输入正确
-//	alert(re.test(registerpwd));
-//	if (re.test(registerpwd)) {
-		//密码输入框#txtRegisterPwd去掉类.i_text_error
+	//输入正确
+	//密码程度判断
+	//密码为单个样式，且为8位,弱
+    var re_weak =/^(([a-z]{8,10}$)|([A-Z]{8,10}$)|([0-9]{8,10}$))/g;
+    if (re_weak.test(registerpwd)) {
+    	//密码输入框#txtRegisterPwd去掉类.i_text_error
 		$(this).removeClass('i_text_error');
 		//文本解释去掉类.f-explain
 		$('#txtRegisterPwdTip').removeClass('f_explain').html('');
-		//加上正确图标
-		$('#txtRegisterPwdCorrent').addClass('i_correct');
-		//设置能注册
-        isPwd = true;
-//		return;
-//	}
+		//#txtRegisterPwdTip添加儿子.pwd_weak图标
+		$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_weak'></div>")
+		return;
+    }
+    var re_middle =/^(([a-z]{11,20}$)|([A-Z]{11,20}$)|([0-9]{11,20}$))/g
+     if (re_middle.test(registerpwd)) {
+    	//密码输入框#txtRegisterPwd去掉类.i_text_error
+		$(this).removeClass('i_text_error');
+		//文本解释去掉类.f-explain
+		$('#txtRegisterPwdTip').removeClass('f_explain').html('');
+		//#txtRegisterPwdTip添加儿子.pwd_middle图标
+		$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_middle'></div>")
+		return;
+    }
+	//密码输入框#txtRegisterPwd去掉类.i_text_error
+	$(this).removeClass('i_text_error');
+	//文本解释去掉类.f-explain
+	$('#txtRegisterPwdTip').removeClass('f_explain').html('');
+	//#txtRegisterPwdTip添加儿子.pwd_strong图标
+	$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_strong'></div>")
+	//设置能注册
+    isPwd = true;
 });
 
 //再次输入密码输入框失焦事件
