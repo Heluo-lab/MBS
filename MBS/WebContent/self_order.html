@@ -215,13 +215,116 @@
 							</form>
 						</div>
 					</div>
-					<div class="right-bottom">
+					<div class="right-bottom-no">
 						<div class="order-info-no">
 							<p>没有效订单，快去挑选心仪的产品吧！</p>
 							<a href="base.html">去首页逛逛</a>
 						</div>
+					</div>
+					<div class="right-bottom-yes">
 						<!--展示订单详情-->
 						<div class="order-info-yes">
+							<!-- 每个订单项 -->
+							<div class="order-item">
+								<div class="order-id">订单编号：89898</div>
+								<!-- 订单项中的单一数据 -->
+								<div class="item-pro">
+									<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;">
+										<tr>
+											<th style="width:340px">宝贝</th>
+											<th>宝贝属性</th>
+											<th class="item-smart">状态</th>
+											<th class="item-smart">服务</th>
+											<th class="item-smart">单价</th>
+											<th class="item-smart">数量</th>
+											<th class="item-smart">优惠</th>
+											<th class="item-smart price-total" total="999">商品总价</th>
+										</tr>
+										<tr>
+											<td>
+												<img src="img/060122303-035-01-L.jpg"/>
+												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
+											</td>
+											<td>
+												<p>颜色分类：白色</p>
+												<p>尺寸：大尺寸</p>
+											</td>
+											<td>未发货</td>
+											<td></td>
+											<td>99.0</td>
+											<td>1</td>
+											<td>无</td>
+											<td class="showTotal" rowspan="2"></td>
+										</tr>
+										<tr>
+											<td>
+												<img src="img/060122303-035-01-L.jpg"/>
+												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
+											</td>
+											<td>
+												<p>颜色分类：白色</p>
+												<p>尺寸：大尺寸</p>
+											</td>
+											<td>未发货</td>
+											<td></td>
+											<td>99.0</td>
+											<td>1</td>
+											<td>无</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							
+							<!-- 每个订单项 -->
+							<div class="order-item">
+								<div class="order-id">订单编号：89898</div>
+								<!-- 订单项中的单一数据 -->
+								<div class="item-pro">
+									<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;">
+										<tr>
+											<th style="width:340px">宝贝</th>
+											<th>宝贝属性</th>
+											<th class="item-smart">状态</th>
+											<th class="item-smart">服务</th>
+											<th class="item-smart">单价</th>
+											<th class="item-smart">数量</th>
+											<th class="item-smart">优惠</th>
+											<th class="item-smart price-total" total="888">商品总价</th>
+										</tr>
+										<tr>
+											<td>
+												<img src="img/060122303-035-01-L.jpg"/>
+												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
+											</td>
+											<td>
+												<p>颜色分类：白色</p>
+												<p>尺寸：大尺寸</p>
+											</td>
+											<td>未发货</td>
+											<td></td>
+											<td>99.0</td>
+											<td>1</td>
+											<td>无</td>
+											<td class="showTotal" rowspan="2"></td>
+										</tr>
+										<tr>
+											<td>
+												<img src="img/060122303-035-01-L.jpg"/>
+												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
+											</td>
+											<td>
+												<p>颜色分类：白色</p>
+												<p>尺寸：大尺寸</p>
+											</td>
+											<td>未发货</td>
+											<td></td>
+											<td>99.0</td>
+											<td>1</td>
+											<td>无</td>
+										</tr>
+									</table>
+								</div>
+							</div>
 							
 						</div>
 					</div>
@@ -317,4 +420,10 @@
 			//ajax向服务器请求数据  设置$('.order-info-no').css('display','none').siblings('div').css('display','block');
 		});
 	});
+	$(function(){
+		$("table").each(function(){
+			$(this).find('.showTotal').html($(this).find('.price-total').attr("total"));
+		});
+	})
+	
 </script>

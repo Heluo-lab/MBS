@@ -1,5 +1,5 @@
-/*è®¢å•å³ä¾§*/
-/*ä¸Šéƒ¨*/
+/*¶©µ¥ÓÒ²à*/
+/*ÉÏ²¿*/
 .right-top{
 	background: white;
 }
@@ -65,13 +65,15 @@ select{
 	color: #fff;
 	cursor: pointer;
 }
-.right-bottom{
+.right-bottom-no{
+	display: none;
 	padding: 170px;
 	background: white;
 }
-/*æ— æœ‰æ•ˆè®¢å•*/
+/*ÎÞÓÐÐ§¶©µ¥*/
 .order-info-no{
 	background: url(../img/nodata_01.jpg) no-repeat;
+	margin: 170px;
 	padding: 15px 0px 15px 80px;
 	margin: auto;
 	width: 260px;
@@ -82,7 +84,37 @@ select{
 	color: #E50065;
 	font-size: 12px;
 }
-/*å³æœ‰æ•ˆè®¢å•*/
-.order-info-yes{
+/*ÓÒÓÐÐ§¶©µ¥*/
+.right-bottom-yes{
+	display: block;
+	background: white;
+	color: gray;
+}
+/*.order-info-yes{
 	display: none;
+}*/
+.order-item{
+	padding: 20px 0px 0px 50px;
+}
+.item-pro>table tr{
+	height: 30px;
+}
+.item-pro>table th{
+	color: #404040;
+    font-weight: normal;
+}
+.item-smart{
+	width: 80px;
+}
+.item-pro>table img{
+	height: 60px;
+	float: left;
+	padding: 5px 10px;
+}
+.item-pro-info{
+	padding: 10px 0px 0px 10px;
+    float: left;
+    width: 240px;
+    color: gray;
+    font-size: 14px;
 }
