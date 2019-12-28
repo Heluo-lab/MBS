@@ -93,17 +93,36 @@ public class StringParse {
 		return dataList;
 	}
 	
-	public static void main(String[] args) {
-		List<DataMapping> data = new ArrayList<>();
-		data.add(new DataMapping("黑色","GBK","M,S,L,S"));
-		data.add(new DataMapping("白色","UTF","SP01,SP02"));
-		data.add(new DataMapping("枣红","GB32","001,002"));
-		data.add(new DataMapping("分红","DDDD","M,JJL,S"));
-		String colorData = getColorDataJSON(data);
-		System.out.println(colorData);
-		List<DataMapping> colorDataObj = getColorDataObj(colorData);
-		for (DataMapping dataMapping : colorDataObj) {
-			System.out.println(dataMapping.getColorName()+"==="+dataMapping.getColorCode()+"==="+dataMapping.getSizes());
+	/**
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String getHugePic(String str){
+		String regex = "largeimage: '([^']*)'";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(str);
+		String hugePic = null;
+		while(m.find()){
+			hugePic = m.group(1);
 		}
+		return hugePic;
+	}
+	
+	public static void main(String[] args) {
+//		List<DataMapping> data = new ArrayList<>();
+//		data.add(new DataMapping("黑色","GBK","M,S,L,S"));
+//		data.add(new DataMapping("白色","UTF","SP01,SP02"));
+//		data.add(new DataMapping("枣红","GB32","001,002"));
+//		data.add(new DataMapping("分红","DDDD","M,JJL,S"));
+//		String colorData = getColorDataJSON(data);
+//		System.out.println(colorData);
+//		List<DataMapping> colorDataObj = getColorDataObj(colorData);
+//		for (DataMapping dataMapping : colorDataObj) {
+//			System.out.println(dataMapping.getColorName()+"==="+dataMapping.getColorCode()+"==="+dataMapping.getSizes());
+//		}
+		String hugePic = "{gallery: 'gal1', smallimage: 'http://images.monteamor.com/ProductImg/3/1803/large/062618310-903-01-L.jpg',largeimage: 'http://images.monteamor.com/ProductImg/3/1803/huge/062618310-903-01-H.jpg'}";
+		System.out.println(getHugePic(hugePic));
+		
 	}
 }
