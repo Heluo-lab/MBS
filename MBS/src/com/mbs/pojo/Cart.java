@@ -9,6 +9,7 @@ public class Cart implements Serializable{
 	
 	private String cartId;
 	private String usersId;
+	
 	public String getCartId() {
 		return cartId;
 	}
