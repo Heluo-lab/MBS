@@ -2,6 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Resource"/>
+	<classpathentry kind="src" path="hh"/>
+	<classpathentry kind="src" path="gjn"/>
+	<classpathentry kind="src" path="yjy"/>
+	<classpathentry kind="src" path="djh"/>
+	<classpathentry kind="src" path="ljq"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
