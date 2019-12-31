@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -183,8 +185,10 @@
 					<div class="menu">
 						<ul>
 							<li class="on"><a href="javascript:void(0)">基本资料</a></li>
-							<li><a href="javascript:void(0)">个人资料</a></li>
-							<li><a href="javascript:void(0)">个人尺码资料</a></li>
+							<!-- 
+								<li><a href="javascript:void(0)">个人资料</a></li>
+								<li><a href="javascript:void(0)">个人尺码资料</a></li>
+							 -->
 						</ul>
 					</div>
 					<div class="info">
