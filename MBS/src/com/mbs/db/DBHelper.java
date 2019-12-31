@@ -28,8 +28,8 @@ public class DBHelper {
 	}
 	
 	public static Connection getConnection(){
-		Connection conn = null;
-		if(tl.get()==null){
+		Connection conn = tl.get();
+		if(conn==null){
 			try {
 				conn = ds.getConnection();
 				tl.set(conn);
