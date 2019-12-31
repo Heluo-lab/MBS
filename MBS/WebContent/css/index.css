@@ -218,23 +218,75 @@ body{
 	padding-inline-start: 40px;
 	margin-left: 231px;
 }
-.nav-right li{
+.nav-right>li{
 	float: left;
 	margin-right: 32px;
+	position: relative;
 }
-.nav-right a{
+.nav-right .nav-right-li>a{
 	color: #727272;
 	text-decoration: none;
-	font-family: 微软雅黑;
+	font-family: "微软雅黑";
 	font-size: 14px;
 	line-height: 34px;
 	border-bottom: 2px solid transparent;
 }
-.nav-right .list-active{
+.nav-right .nav-right-li .list-active{
 	color: rgb(230, 0, 99);
 }
-.nav-right a:hover{
+.nav-right .nav-right-li>a:hover{
 	color: rgb(230, 0, 99);
+}
+/* 子菜单部分 */
+.nav-right .nav-right-li .sublist{
+	width: 456px;
+	padding: 0 0 0 0;
+	background: white;
+	/*background: black;*/
+	position: absolute;
+	top:34px;
+	display:none;
+	z-index: 100000;
+}
+.left{
+	left: 0px;
+}
+.right{
+	right: 0px;
+}
+.nav-right .nav-right-li .sublist ul{
+	width: 456px;
+}
+.nav-right .nav-right-li .sublist ul:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.nav-right .nav-right-li .sublist ul>li{
+	width: 64px;
+	height: 15px;
+	font-size: 12px;
+	line-height: 15px;
+	text-align: center;
+	border-right: 1px solid #f3f3f3;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float: left;
+} 
+.nav-right .nav-right-li .sublist li>a{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	font-size: 12px;
+	color: #727272;
+	font-family: "微软雅黑";
+}
+.nav-right .nav-right-li .sublist li>a:hover{
+	color: rgb(230, 0, 99);
+}
+.nav-right>li:hover .sublist{
+	/* 显示子菜单 */
+	display: block;
 }
 /* 轮播图 */
 .banner{
