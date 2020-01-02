@@ -14,4 +14,20 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
+  <servlet>
+  	<servlet-name>hotgoods</servlet-name>
+  	<servlet-class>com.mbs.web.servlet.HotGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>hotgoods</servlet-name>
+	<url-pattern>/hotgoods</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>addcart</servlet-name>
+  	<servlet-class>com.mbs.web.servlet.AddCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addcart</servlet-name>
+	<url-pattern>/addcart</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -209,100 +209,85 @@ $(function(){
 
 var id = 69;
 function shop(id){
-  //请求当前分类 下的商品
-  $.get(URL + 'api_goods.php', {'cat_id':id, 'page':1, 'pagesize':5}, function(re){
-    var obj = JSON.parse(re);
-    console.log(obj);
-    //验证数据
-    if(obj.code == 1){
-      console.log(obj.message);
-      //当前分类下面没有商品
-      return;
-    };
-    if(obj.code != 0){
-      console.log(obj.message);
-      return;
-    };
-    //有商品，渲染到页面
-    var listArr = obj.data;
-    
-    //清空.hot
-    $('.hot').empty('ul');
-    //数据渲染
-    for(var i = 0; i < listArr.length; i++){
-      var str = `
-      	<ul>
-			<li><a href="product.html?goods_id=${listArr[i].goods_id}" target="_blank">
-				<img src="img/loading.gif" lazyLoadSrc="${listArr[i].goods_thumb}" />
-				</a>
-			</li>
-			<li>${listArr[i].goods_name}</li>
-			<li>${listArr[i].price}</li>
-			<a href="javascript:;" class="join">加入购物车</a>
-		</ul>
-      `;
-      
-      //内部组装一个添加一个
-      $('.hot').append(str);         
-    };
-    
-    //马上做图片预加载
-    $('.hot [lazyLoadSrc]').YdxLazyLoad(); 
-    
-    //热门商品添加购物车
-    $(".join").click(function(){
-		$.get(URL + 'api_goods.php', {'goods_id':listArr[$('.hot .join').index(this)].goods_id, 'page':1, 'pagesize':1}, function(re){
-	    var obj = JSON.parse(re);
-	    console.log(obj);
-	    //验证数据
-	    if(obj.code == 1){
-	      console.log(obj.message);
-	      //当前分类下面没有商品
-	      return;
-	    };
-	    if(obj.code != 0){
-	      console.log(obj.message);
-	      return;
-	    };
-	    //有商品，渲染到页面
-	    var listArr = obj.data;
-	    
-	    //数据渲染
-	    for(var i = 0; i < listArr.length; i++){
-	      var str = `
-	      	<tr>
-				<td><input type="checkbox" class="check" /></td>
-				<td class="goods-img"><img lazyLoadSrc="${listArr[i].goods_thumb}" src="img/loading.gif" /></td>
-				<td class="goods-content"><a href="javascript:;">${listArr[i].goods_name}</a></td>
-				<td class="goods-price">${listArr[i].price}</td>
-				<td class="goods-nub">
-					<a href="javascript:;" class="minus">-</a><button class="goods-num">1</button><a href="javascript:;" class="add">+</a>
-				</td>
-				<td class="subtotal">${listArr[i].price}</td>
-				<td><a href="javascript:;" class="del-btn">删除</a></td>
-			</tr>
-	      `;
-	      //内部组装一个添加一个
-	      $('#table').append(str);         
-	    };
-	    cartEvent();
-	    //马上做图片预加载
-	    $('#table [lazyLoadSrc]').YdxLazyLoad(); 
-	    $(function(){
-			if ($('#table').children().length != 0) {
-		   			$('.has-goods').show();
-		   			$('.no-sign').hide();
-		   			$('.had-sign').hide();
-		   			$('.buygoods').css('background','white');
-		
-		   		} else{
-					$('.has-goods').hide();
-		   		}
-			});
+	  //请求当前分类 下的商品
+	  $.get({
+		  type:"post",
+		  url:"hotgoods",
+		  data:"count="+id,
+		  success:function(result){
+			  var obj = JSON.parse(result);
+			  console.log(obj.id);
+			  //清空.hot
+			  $('.hot').empty('ul');
+			  //数据渲染
+				  var str = `
+			      	<ul>
+						<li><a href="product.html?goods_id=${obj.goodsId}" target="_blank">
+							<img src="img/loading.gif" lazyLoadSrc="${obj.showImage}" />
+							</a>
+						</li>
+						<li>${obj.goodsName}</li>
+						<li>${obj.price}</li>
+						<a href="javascript:;" class="join">加入购物车</a>
+					</ul>
+			      `;
+			      
+			      //内部组装一个添加一个
+			      $('.hot').append(str);         
+			    
+			    //马上做图片预加载
+			    $('.hot [lazyLoadSrc]').YdxLazyLoad(); 
+			    $(".join").click(function(){
+					$.get({
+						type:"post",
+						url:"addcart",
+						data:"id="+obj.id,
+						success:function(result){
+							var obj = JSON.parse(result);
+							var str = `
+						      	<tr>
+						      		<input type="hidden" id="cartgoodsid" value="${obj.goodsId}" />
+									<td><input type="checkbox" class="check" /></td>
+									<td class="goods-img"><img lazyLoadSrc="${obj.showImage}" src="img/loading.gif" /></td>
+									<td class="goods-content"><a href="javascript:;">${obj.goodsName}</a></td>
+									<td class="goods-price">${obj.price}</td>
+									<td class="goods-nub">
+										<a href="javascript:;" class="minus">-</a><button class="goods-num">1</button><a href="javascript:;" class="add">+</a>
+									</td>
+									<td class="subtotal">${obj.price}</td>
+									<td><a href="javascript:;" class="del-btn">删除</a></td>
+								</tr>
+						      `;
+							if ($('#cartgoodsid').val()==obj.goodsId) {
+								var num = $('#cartgoodsid').siblings(".goods-nub").children('.goods-num').html();
+								num++;
+								$('#cartgoodsid').siblings(".goods-nub").children('.goods-num').html(num);
+								var unitPrice = parseInt($('#cartgoodsid').siblings('.goods-price').html());
+								var subtotal = $('#cartgoodsid').siblings('.subtotal');
+							    subtotal.html(num * unitPrice + '.00');
+							}else{
+								//内部组装一个添加一个
+								$('#table').append(str);         
+							}
+						    cartEvent();
+						    //马上做图片预加载
+						    $('#table [lazyLoadSrc]').YdxLazyLoad(); 
+						    $(function(){
+								if ($('#table').children().length != 0) {
+							   			$('.has-goods').show();
+							   			$('.no-sign').hide();
+							   			$('.had-sign').hide();
+							   			$('.buygoods').css('background','white');
+							
+							   		} else{
+										$('.has-goods').hide();
+							   		}
+								});
+						}
+					});
+			    });
+		  }
 	  });
-    });
-    
-  });
 }
 
 $('.point2').click(function(){
