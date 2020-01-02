@@ -57,7 +57,7 @@ public class SelfDAOImpl implements SelfDAO{
 		pstmt.setString(1, usersId);
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()){
-			
+			rs.getString(1);
 		}
 		return null;
 	}
