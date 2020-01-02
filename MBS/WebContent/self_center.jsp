@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -120,7 +122,7 @@
 		<section>
 			<!--<div class="section_bg">-->
 			<div class="member-label">
-				<a href="self_center.html">首页</a>>
+				<a href="self?method=querySingleUser">首页</a>>
 				<a href="self_center.html">个人中心</a>
 			</div>
 			<div class="section-self">
@@ -188,14 +190,14 @@
 								<span class="user-icon"></span>
 								<div class="user-detal">
 									<div class="detal">
-										<b id="uname">何落</b> 
-										<span>(34318431@moonbasagroup.com)</span>
+										<b id="uname">${usersInfo.accountName }</b> 
+										<span>(${usersInfo.accountEmail })</span>
 									</div>
 									<div class="detal">
 										<span>会员等级：</span><b>普通会员</b> （成长值：0) 
-										<span>注册时间：2019-11-16</span>
+										<span>注册时间：${usersInfo.accountBirth }</span>
 										<!--34318431-->
-										<span id="uId">客户编号：-------</span>
+										<span id="uId">客户编号：${usersInfo.accountId }</span>
 									</div>
 									<div class="detal">
 										<span class="money">现金金额￥0.00</span>

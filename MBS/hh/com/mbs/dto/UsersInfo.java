@@ -1,5 +1,9 @@
 package com.mbs.dto;
-
+/**
+ * 储存个人信息的DTO对象
+ * @author heluo
+ *
+ */
 public class UsersInfo {
 	
 	private String accountId;
