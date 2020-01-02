@@ -192,12 +192,12 @@
 									<div class="detal">
 										<b id="uname">${usersInfo.accountName }</b> 
 										<span>(${usersInfo.accountEmail })</span>
+										<span id="uId">客户编号：${usersInfo.accountId }</span>
 									</div>
 									<div class="detal">
 										<span>会员等级：</span><b>普通会员</b> （成长值：0) 
 										<span>注册时间：${usersInfo.accountBirth }</span>
 										<!--34318431-->
-										<span id="uId">客户编号：${usersInfo.accountId }</span>
 									</div>
 									<div class="detal">
 										<span class="money">现金金额￥0.00</span>

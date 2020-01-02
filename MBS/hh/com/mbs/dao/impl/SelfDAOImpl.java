@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mbs.dao.SelfDAO;
 import com.mbs.db.DBHelper;
 import com.mbs.dto.UsersInfo;
+import com.mbs.pojo.Goods;
 /**
  * 个人信息具体实现类
  * @author heluo
@@ -47,9 +49,18 @@ public class SelfDAOImpl implements SelfDAO{
 	}
 
 	@Override
-	public List<Integer> queryCollectGoodsByUsersId(String usersId) throws SQLException {
-		// TODO Auto-generated method stub
+	public List<Goods> queryCollectGoodsByUsersId(String usersId) throws SQLException {
+		List<Goods> goodsList = new ArrayList<>();
+		Connection conn = DBHelper.getConnection();
+		String sql = "select id,goodsName,showImage,price  from goods where id in (select goodsId from collect where usersId = 2)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, usersId);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			
+		}
 		return null;
 	}
+
 
 }

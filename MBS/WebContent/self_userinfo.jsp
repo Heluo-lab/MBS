@@ -121,8 +121,8 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self_center.html">首页</a>>
-				<a href="self_center.html">个人中心</a>
+				<a href="self?method=querySingleUser">首页</a>>
+				<a href="self?method=querySingleUser">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
