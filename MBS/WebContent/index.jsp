@@ -210,7 +210,7 @@
 			<li class="nav-right-li"><a href="" class="list-active">首页</a></li>
 			<c:forEach items="${goodsTopTypeList}" var="type">
 				<li class="nav-right-li">
-				<a href="javascript:void(0)" id="${type.id}">${type.typeName}</a>
+				<a href="product_list?tyid=${type.id}" id="${type.id}">${type.typeName}</a>
 				<div class="sublist left">
 					<ul>
 					</ul>

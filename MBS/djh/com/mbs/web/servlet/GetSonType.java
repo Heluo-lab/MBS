@@ -31,7 +31,7 @@ public class GetSonType extends HttpServlet {
 		List<Type> sonTypeList = typeservice.getSonType(parentId);
 		response.setContentType("application/html;charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		System.out.println(JsonParseUtil.GetJson(sonTypeList));
+		//System.out.println(JsonParseUtil.GetJson(sonTypeList));
 		writer.print(JsonParseUtil.GetJson(sonTypeList));
 	}
 
