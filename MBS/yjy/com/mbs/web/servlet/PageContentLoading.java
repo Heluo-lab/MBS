@@ -13,14 +13,14 @@ import com.mbs.dao.impl.ProductDaoimpl;
 /**
  * Servlet implementation class Test
  */
-@WebServlet("/testyjy")
-public class Test extends HttpServlet {
+@WebServlet("/pageConetentLoading")
+public class PageContentLoading extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test() {
+    public PageContentLoading() {
         super();
         // TODO Auto-generated constructor stub
     }
