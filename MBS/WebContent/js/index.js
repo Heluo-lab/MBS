@@ -107,7 +107,7 @@ $(function(){
 			success:function(result){
 				var arrayType =JSON.parse(result);
 				$.each(arrayType,function(i,type){
-						var str =`<li><a href="${type.id}">${type.typeName}</a></li>`;
+						var str =`<li><a href="product_list?typeid=${type.id}">${type.typeName}</a></li>`;
 						navli.siblings(".sublist").children("ul").append(str);
 					});
 			},

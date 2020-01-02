@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html >
 <html>
 	<head>
@@ -209,8 +209,6 @@
 				</div>
 				<!-- 内容部分 -->
 				<div class="sku_content">
-					<!-- <link href="http://c0.mbscss.com?p=css/list/1.0.1/list.css,css/search/1.0.3/search.css?v=2017042701" rel="stylesheet"
-					 type="text/css" /> -->
 					 <link rel="stylesheet" type="text/css" href="css/product_list4.css"/>
 					<style>
 						.tm_now { margin: 10px; }
@@ -232,25 +230,16 @@
 							<div class="left">
 								<div class="list_l_c">
 									<div class="list_l_dt">
+									  
+									
 										<dl>
-											<dt><a href="/255508-1-40-0.html" class="select">大站-男装 (220)</a></dt>
+											<dt><a href="/255508-1-40-0.html" class="select">大站-男装 </a></dt>
 											<dd style="display:block" class="css_255508">
-												<a rel="nofollow" class="" href="/25550801-1-40-0.html">热销推荐-当季新品(44)</a>
-												<a rel="nofollow" class="" href="/25550802-1-40-0.html">热销推荐-短袖T恤(134)</a>
-												<a rel="nofollow" class="" href="/25550803-1-40-0.html">热销推荐-短袖衬衫(23)</a>
-												<a rel="nofollow" class="" href="/25550804-1-40-0.html">热销推荐-长裤(16)</a>
-												<a rel="nofollow" class="" href="/25550806-1-40-0.html">热销推荐-帽子(13)</a>
-												<a rel="nofollow" class="" href="/25550807-1-40-0.html">热销推荐-断码清仓(53)</a>
-												<a rel="nofollow" class="" href="/25550808-1-40-0.html">上装-短袖T恤(160)</a>
-												<a rel="nofollow" class="" href="/25550809-1-40-0.html">上装-短袖衬衫(23)</a>
-												<a rel="nofollow" class="" href="/25550810-1-40-0.html">上装-长袖T恤(13)</a>
-												<a rel="nofollow" class="" href="/25550811-1-40-0.html">上装-长袖衬衫(14)</a>
-												<a rel="nofollow" class="" href="/25550812-1-40-0.html">上装-外套(6)</a>
-												<a rel="nofollow" class="" href="/25550814-1-40-0.html">裤装-牛仔裤(3)</a>
-												<a rel="nofollow" class="" href="/25550815-1-40-0.html">裤装-休闲裤(13)</a>
 											</dd>
 										</dl>
-										<dl>
+									
+									
+										<!--<dl>
 											<dt><a href="/255509-1-40-0.html" class="select">大站-女装 (826)</a></dt>
 											<dd style="display:block" class="css_255509">
 												<a rel="nofollow" class="" href="/25550912-1-40-0.html">热销推荐-当季新品(96)</a>
@@ -394,7 +383,7 @@
 												<a rel="nofollow" class="" href="/25551327-1-40-0.html">男装-断码清仓(53)</a>
 												<a rel="nofollow" class="" href="/25551330-1-40-0.html">鞋包-饰品(7)</a>
 											</dd>
-										</dl>
+										</dl>-->
 									</div>
 								</div>
 								<div class="clear"></div>
