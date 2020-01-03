@@ -18,4 +18,5 @@ public interface SelfDAO {
 	//根据用户ID查询用户收藏商品
 	public List<Goods> queryCollectGoodsByUsersId(String usersId) throws SQLException;
 	
+	//根据
 }

@@ -48,18 +48,27 @@ public class SelfDAOImpl implements SelfDAO{
 		return users;
 	}
 
+	/**
+	 * 根据用户Id查询该用户所有收藏的商品
+	 */
 	@Override
 	public List<Goods> queryCollectGoodsByUsersId(String usersId) throws SQLException {
 		List<Goods> goodsList = new ArrayList<>();
 		Connection conn = DBHelper.getConnection();
-		String sql = "select id,goodsName,showImage,price  from goods where id in (select goodsId from collect where usersId = 2)";
+		String sql = "select id,goodsName,showImage,price  from goods where id in (select goodsId from collect where usersId = ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, usersId);
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()){
-			rs.getString(1);
+			Goods goods = new Goods();
+			goods.setId(rs.getInt("id"));
+			goods.setGoodsName(rs.getString("goodsName"));
+			goods.setShowImage(rs.getString("showImage"));
+			goods.setPrice(rs.getInt("price"));
+			goodsList.add(goods);
 		}
-		return null;
+		DBHelper.release();
+		return goodsList;
 	}
 
 

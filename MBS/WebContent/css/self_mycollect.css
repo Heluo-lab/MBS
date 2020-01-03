@@ -45,14 +45,16 @@
 	display: none;
 }
 /*有收藏*/
-.collection-yes li{
+.collect-list{
 	float: left;
 	width: 23%;
 	margin: 10px 10px 0px 0px;
 	/*height: 340px;*/
 	border: 1px solid white;
+	position: relative;
+	text-align:center;
 }
-.collection-yes li img{
+.collect-list img{
 	width: 190px;
 	height: 260px;
 }
@@ -68,21 +70,47 @@
 	width: 190px;
 	text-indent: 4px;
 }
-.collection-yes li span:nth-child(3){
+.collect-list span:nth-child(3){
 	color:#E50067;
 	font-family: simsun;
     font-size: 14px;
     margin: 2px 0px 0px 45px;
     font-weight: bold;
 }
-.collection-yes li span:nth-child(4){
+.collect-list span:nth-child(4){
 	color:#CDCBCD;
 	font-family: simsun;
     margin: 2px 0px 0px 12px;
     font-weight: bold;
     text-decoration: line-through;
 }
-.collection-yes li:hover{
+.collect-list:hover{
 	border: 1px deeppink solid;
 	cursor: pointer;
+}
+.collect-list:hover .collect-operation{
+	display: block;
+}
+/*删除 键*/
+.collect-operation{
+	position: absolute;
+	left: 0px;
+	top: 230px;
+	display: none;
+}
+.collect-operation div{
+	text-align: center;
+	line-height: 30px;
+	width: 110px;
+	height: 30px;
+	cursor: pointer;
+}
+.collect-operation div:nth-child(1){
+	background: deeppink;
+	float: left;
+}
+.collect-operation div:nth-child(2){
+	background: black;
+	color: white;
+	float: right;
 }

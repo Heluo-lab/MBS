@@ -41,7 +41,6 @@
 .buygoods{
 	border: 1px solid #ebebeb;
 	width: 100%;
-	background: url(../img/shopcar.jpg) 300px 62px no-repeat;
 }
 .goods{
 	margin: 20px 0 0 30px;
@@ -143,7 +142,6 @@ table img{
 	color: #333;
 	font-size: 25px;
 	line-height: 22px;
-
 }
 .shopcar p:first-child{
 	margin-top: 10px;
