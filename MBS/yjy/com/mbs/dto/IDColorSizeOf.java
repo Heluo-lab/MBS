@@ -4,7 +4,7 @@ import java.util.List;
 
 public class IDColorSizeOf{
 //	商品ID
-	private int goodsId;
+	private int id;
 //	商品名字
 	private String goodsName;
 //	商品价格
@@ -27,17 +27,19 @@ public class IDColorSizeOf{
 	private int goodStatus;
 //	商品热度
 	private int goodsHot;
+//	商品编号
+	private String goodsid;
 
 	public IDColorSizeOf() {
 	
 	}
 
-	public int getGoodsId() {
-		return goodsId;
+	public int getId() {
+		return id;
 	}
 
-	public void setGoodsId(int goodsId) {
-		this.goodsId = goodsId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getColour() {
@@ -126,6 +128,14 @@ public class IDColorSizeOf{
 
 	public void setGoodsCode(String goodsCode) {
 		this.goodsCode = goodsCode;
+	}
+
+	public String getGoodsid() {
+		return goodsid;
+	}
+
+	public void setGoodsid(String goodsid) {
+		this.goodsid = goodsid;
 	}
 	
 }

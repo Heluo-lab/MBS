@@ -35,13 +35,24 @@ img{border: none; vertical-align: bottom;}
 .clear{
 	width: 100%;height: 22px;
 }
-/*å•†å“*/
+.addmsg{
+	width: 120px;height: 22px;
+	background: chartreuse;
+	position: absolute;
+	right:40px;top: 100px;
+	display: none;
+}
+.addmsg span{
+	font-size: 16px;
+	font-family: "Î¢ÈíÑÅºÚ";
+}
+/*ÉÌÆ·*/
 .myShopping{
 	width: 1280px;height:682px;
 	/*background: brown;*/ 
 	margin: 0 auto;
 }
-/*å•†å“å·¦*/
+/*ÉÌÆ·×ó*/
 .Shopping-zuo{
 	width: 431px;
 	/*background: greenyellow;*/
@@ -205,7 +216,7 @@ img{border: none; vertical-align: bottom;}
     background: url(../img/p01.png) no-repeat;
 }
 .ppp{
-	font: "å¾®è½¯é›…é»‘";
+	font: "Î¢ÈíÑÅºÚ";
 	font-size: 12px;
 	
 }
@@ -225,6 +236,23 @@ img{border: none; vertical-align: bottom;}
 	position: relative;
 }
 .gouwu-top{height: 172px;}
+.xyd{
+	position: absolute;
+	left: 300px;top: 160px;
+	display: none;
+}
+.xyd span img{
+	width: 30px;height: 30px;
+	margin: 0 2px;
+	display: inline-block;
+	border-radius:50% ;
+}
+.gouwu-xyd{
+	color: white;
+	font-size: 14px;
+	text-align: center;
+	font-family: 'Microsoft Yahei';
+}
 .licolork{float: left;}
 .color{width: 543px;height: 47px;}
 .licolork p {
@@ -352,6 +380,7 @@ img{border: none; vertical-align: bottom;}
     margin-right: 10px;
     color: #fff;
     border: 1px solid #e50065;
+    
 }
 .mainland{position: relative;}
 .mainland .ms-list{
@@ -398,7 +427,7 @@ img{border: none; vertical-align: bottom;}
 .jzjg{
     text-align: center;
     font-size: 14px;
-    font-family: "å¾®è½¯é›…é»‘";
+    font-family: "Î¢ÈíÑÅºÚ";
     margin: 5px 0 10px;	
 }
 .nr-btool{

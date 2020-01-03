@@ -45,6 +45,8 @@ public class ProductDaoimpl implements ProductDao{
 				idcolorsizeof.setGoodStatus(rs.getInt("goodStatus"));
 //				商品热度 直接拿
 				idcolorsizeof.setGoodsHot(rs.getInt("goodsHot"));
+//				商品编号 直接拿
+				idcolorsizeof.setId(rs.getInt("id"));
 				
 //				JSONObject.fromObject(idcolorsizeof);
 			}
