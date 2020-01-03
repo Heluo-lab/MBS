@@ -190,79 +190,90 @@
 							<a href="javascript:void(0)">收藏的品牌</a>
 							
 						 -->
-						<input type="text" name=""  />
-						<input type="submit" value="查询"/>
+						 <form action="self.power?method=queryCollectGoodsByUsersIdAndGoodsName" method="post">
+							<input type="text" name="goodsName" value="${goodsName }" />
+							<input type="submit" value="查询"/>
+						 </form>
 					</div>
 					<div class="collection">
-						<div class="collection-no">
-							<img src="img/nodata_03.jpg" />
-						</div>
+						<!-- 没收藏的时候 -->
+						<c:if test="${empty goodsList }">
+							<div class="collection-no">
+								<img src="img/nodata_03.jpg" />
+							</div>
+						</c:if>
+						<div class="collection-no-always">
+								<img src="img/nodata_03.jpg" />
+							</div>
 						<!--有收藏的时候-->
-						<div class="collection-yes">
-							<ul>
-								<c:forEach items="${goodsList }" var="goods">
-									<li class="collect-list">
-										<a href="#">	
-											<img src="${goods.showImage }"/>
-											<div class="pro_title">${goods.goodsName }</div>
-											<span class="afterDiscount">￥${goods.price*0.7 }</span>
-											<span>￥${goods.price }</span>	
-										</a>
-										<div class="collect-operation">
-											<div class="collect-joincart">加入购物车</div>
-											<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
-											<input type="hidden" value="${goods.id }" />
-										</div>
-									</li>
-								</c:forEach>
-								<!-- 
-									<li class="collect-list">
-										<a>	
-											
+						<c:if test="${!empty goodsList }">
+							<div class="collection-yes">
+								<ul id="collect-ul">
+									<c:forEach items="${goodsList }" var="goods">
+										<li class="collect-list">
+											<a href="#">	
+												<img src="${goods.showImage }"/>
+												<div class="pro_title">${goods.goodsName }</div>
+												<span class="afterDiscount">￥${goods.price*0.7 }</span>
+												<span>￥${goods.price }</span>	
+											</a>
+											<div class="collect-operation">
+												<div class="collect-joincart" onclick="toCart(this)">加入购物车</div>
+												<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
+												<input type="hidden" value="${goods.id }" />
+											</div>
+										</li>
+									</c:forEach>
+									<!-- 
+										<li class="collect-list">
+											<a>	
+												
+												<img src="img/nodata_01.jpg"/>
+												<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+												<span>￥169</span>
+												<span>￥339</span>	
+											</a>
+											<div class="collect-operation">
+												<div class="collect-joincart">加入购物车</div>
+												<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
+												<input type="hidden" value="1" />
+											</div>
+										</li>
+										<li>
 											<img src="img/nodata_01.jpg"/>
 											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
 											<span>￥169</span>
-											<span>￥339</span>	
-										</a>
-										<div class="collect-operation">
-											<div class="collect-joincart">加入购物车</div>
-											<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
-											<input type="hidden" value="1" />
-										</div>
-									</li>
-									<li>
-										<img src="img/nodata_01.jpg"/>
-										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-										<span>￥169</span>
-										<span>￥339</span>
-									</li>
-									<li>
-										<img src="img/nodata_01.jpg"/>
-										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-										<span>￥169</span>
-										<span>￥339</span>
-									</li>
-									<li>
-										<img src="img/nodata_01.jpg"/>
-										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-										<span>￥169</span>
-										<span>￥339</span>
-									</li>
-									<li>
-										<img src="img/nodata_01.jpg"/>
-										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-										<span>￥169</span>
-										<span>￥339</span>
-									</li>
-									<li>
-										<img src="img/nodata_01.jpg"/>
-										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-										<span>￥169</span>
-										<span>￥339</span>
-									</li>
-								 -->
-							</ul>
-						</div>
+											<span>￥339</span>
+										</li>
+										<li>
+											<img src="img/nodata_01.jpg"/>
+											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+											<span>￥169</span>
+											<span>￥339</span>
+										</li>
+										<li>
+											<img src="img/nodata_01.jpg"/>
+											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+											<span>￥169</span>
+											<span>￥339</span>
+										</li>
+										<li>
+											<img src="img/nodata_01.jpg"/>
+											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+											<span>￥169</span>
+											<span>￥339</span>
+										</li>
+										<li>
+											<img src="img/nodata_01.jpg"/>
+											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+											<span>￥169</span>
+											<span>￥339</span>
+										</li>
+									 -->
+								</ul>
+							</div>
+							
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -356,13 +367,19 @@
 			//进行ajax请求 对数据进行渲染
 		});
 	});
-	$(function(){
+	function checkDiscount(){
 		$(".afterDiscount").each(function(){
 			var price = $(this).html();
 			price = price.substr(1);
 			price = Math.round(price);
-			$(this).html(price);
+			$(this).html("￥"+price);
 		});
+	}
+	function toCart(obj) {
+		location.href="product?id="+$(obj).siblings("input").val();
+	}
+	$(function(){
+		checkDiscount();
 	});
 	function deleteCollect(obj){
 		if(confirm("您确定要从收藏中移除该商品吗？")){
@@ -371,10 +388,19 @@
 				url:"self.power",
 				data:{"method":"deleteCollectByGoodsId","id":$(obj).siblings("input").val()},
 				success:function(data){
-					alert("success");
+					var arr = JSON.parse(data);
+					$("#collect-ul").html("");
+					for(var i = 0; i < arr.length ; i++){
+						var str = "<li class='collect-list'><a href='#'><img src='"+arr[i].showImage+"'/><div class='pro_title'>"+arr[i].goodsName+"</div><span class='afterDiscount'>￥"+(arr[i].price*0.7)+"</span><span>￥"+arr[i].price+"</span>	</a><div class='collect-operation'><div class='collect-joincart' onclick='toCart(this)'>加入购物车</div><div class='collect-delete' onclick='deleteCollect(this)'>删除</div><input type='hidden' value='"+arr[i].id+"' /></div></li>";
+						$(str).appendTo($("#collect-ul"));
+					}
+					if(""==$("#collect-ul").html()){
+						$(".collection-no-always").css("display","block");
+					}
+					checkDiscount();
 				},
 				error:function(){
-					alert("fail");
+					//alert("fail");
 				}
 			});
 		}

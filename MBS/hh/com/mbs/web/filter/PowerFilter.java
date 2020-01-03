@@ -32,9 +32,9 @@ public class PowerFilter implements Filter{
 		HttpServletRequest Hrequest = (HttpServletRequest)request;
 		HttpServletResponse Hresponse = (HttpServletResponse)response;
 		HttpSession session = Hrequest.getSession();
-//		Account acc = new Account();
-//		acc.setAccountId("2");
-//		session.setAttribute("account",acc);
+		Account acc = new Account();
+		acc.setAccountId("2");
+		session.setAttribute("account",acc);
 		Account account = (Account)session.getAttribute("account");
 		if(account!=null){
 			chain.doFilter(Hrequest, Hresponse);

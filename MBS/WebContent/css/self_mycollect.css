@@ -42,6 +42,11 @@
 .collection-no{
 	padding: 115px;
 	text-align: center;
+	display: block;
+}
+.collection-no-always{
+	padding: 115px;
+	text-align: center;
 	display: none;
 }
 /*有收藏*/

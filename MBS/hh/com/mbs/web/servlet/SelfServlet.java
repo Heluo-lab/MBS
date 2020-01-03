@@ -15,6 +15,8 @@ import com.mbs.pojo.Account;
 import com.mbs.pojo.Goods;
 import com.mbs.service.SelfService;
 import com.mbs.service.impl.SelfServiceImpl;
+
+import net.sf.json.JSONArray;
 /**
  * 封装对个人信息请求的处理的方法 等待SelfServletDispatcher的调用
  * @author heluo
@@ -56,9 +58,38 @@ public class SelfServlet extends SelfServletDispatcher{
 	 * 根据商品ID从收藏表删除该收藏的商品
 	 */
 	public void deleteCollectByGoodsId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		String id = request.getParameter("id");
-		System.out.println(id);
 		SelfService service = new SelfServiceImpl();
-//		request.getRequestDispatcher("self_mycollect.jsp").forward(request, response);
+		String id = request.getParameter("id");
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		List<Goods> goodsList = service.deleteCollectByGoodsIdAndReturnGoodsList(usersId, Integer.parseInt(id));
+		response.setCharacterEncoding("UTF-8");
+		JSONArray array = JSONArray.fromObject(goodsList);
+		response.getWriter().print(array.toString());
+	}
+	
+	/**
+	 * 根据用户ID与商品ID添加收藏
+	 * 返回 success 为添加成功 , fail添加失败,exit表示该商品已被收藏 
+s	 */
+	public void addCollect(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+//		String goodsId = request.getParameter("goodsId");
+		String goodsId = "100";
+		String result = service.addCollect(usersId, Integer.parseInt(goodsId));
+		response.getWriter().print(result);
+	}
+	
+	public void queryCollectGoodsByUsersIdAndGoodsName(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		String goodsName = request.getParameter("goodsName");
+		List<Goods> goodsList = service.queryCollectGoodsByUsersId(usersId, goodsName);
+		request.setAttribute("goodsList", goodsList);
+		request.setAttribute("goodsName", goodsName);
+		request.getRequestDispatcher("self_mycollect.jsp").forward(request, response);;
 	}
 }
