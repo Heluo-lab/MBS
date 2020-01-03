@@ -43,7 +43,7 @@ public class PageContentLoading extends HttpServlet {
 		
 		String[] imgUrls =  imgUrl.split("@l@");
 		
-		request.setAttribute("goods", dao.LoadingfoGoodsID(4));
+		request.setAttribute("goods", dao.LoadingfoGoodsID(flag));
 		
 		request.setAttribute("imgurl", imgUrls);
 		
