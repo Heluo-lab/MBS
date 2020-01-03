@@ -1,6 +1,8 @@
 package com.mbs.web.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +33,22 @@ public class PageContentLoading extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProductDaoimpl dao = new ProductDaoimpl();
-		System.out.println(dao.LoadingfoGoodsID(5));
-		System.out.println(dao.GidColorSizeOfRepositoryCount(2, "009", "34"));
+		
+		
+		String imgUrl =  dao.LoadingfoGoodsID(4).getGoodsInfoImage();
+		String[] imgUrls =  imgUrl.split("@l@");
+		
+//		for (int i = 0; i < imgUrls.length; i++) {
+//			System.out.println(imgUrls[i]);
+//		}
+		
+		request.setAttribute("goods", dao.LoadingfoGoodsID(4));
+		
+		request.setAttribute("imgurl", imgUrls);
+		
+		request.setAttribute("instock", dao.GidColorSizeOfRepositoryCount(4, "052", "32"));
+		
+		request.getRequestDispatcher("product.jsp").forward(request, response);
 	}
 
 	/**
