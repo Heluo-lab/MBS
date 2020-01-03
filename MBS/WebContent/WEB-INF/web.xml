@@ -30,4 +30,14 @@
     <servlet-name>addcart</servlet-name>
     <url-pattern>/addcart</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+  	<filter-name>Power</filter-name>
+  	<filter-class>com.mbs.web.filter.PowerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Power</filter-name>
+  	<url-pattern>*.power</url-pattern>
+  </filter-mapping>
+  
 </web-app>

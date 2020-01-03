@@ -122,8 +122,8 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self?method=querySingleUser">首页</a>>
-				<a href="self?method=querySingleUser">个人中心</a>
+				<a href="self.power?method=querySingleUser">首页</a>>
+				<a href="self.power?method=querySingleUser">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
@@ -201,21 +201,34 @@
 						<div class="collection-yes">
 							<ul>
 								<c:forEach items="${goodsList }" var="goods">
-									<li>
-										<a href="#">
+									<li class="collect-list">
+										<a href="#">	
 											<img src="${goods.showImage }"/>
 											<div class="pro_title">${goods.goodsName }</div>
 											<span class="afterDiscount">￥${goods.price*0.7 }</span>
-											<span>￥${goods.price }</span>
+											<span>￥${goods.price }</span>	
 										</a>
+										<div class="collect-operation">
+											<div class="collect-joincart">加入购物车</div>
+											<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
+											<input type="hidden" value="${goods.id }" />
+										</div>
 									</li>
 								</c:forEach>
 								<!-- 
-									<li>
-										<img src="img/nodata_01.jpg"/>
-										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-										<span>￥169</span>
-										<span>￥339</span>
+									<li class="collect-list">
+										<a>	
+											
+											<img src="img/nodata_01.jpg"/>
+											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+											<span>￥169</span>
+											<span>￥339</span>	
+										</a>
+										<div class="collect-operation">
+											<div class="collect-joincart">加入购物车</div>
+											<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
+											<input type="hidden" value="1" />
+										</div>
 									</li>
 									<li>
 										<img src="img/nodata_01.jpg"/>
@@ -350,5 +363,20 @@
 			price = Math.round(price);
 			$(this).html(price);
 		});
-	})
+	});
+	function deleteCollect(obj){
+		if(confirm("您确定要从收藏中移除该商品吗？")){
+			$.ajax({
+				type:"post",
+				url:"self.power",
+				data:{"method":"deleteCollectByGoodsId","id":$(obj).siblings("input").val()},
+				success:function(data){
+					alert("success");
+				},
+				error:function(){
+					alert("fail");
+				}
+			});
+		}
+	}
 </script>

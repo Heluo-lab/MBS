@@ -18,9 +18,9 @@ import com.mbs.service.impl.SelfServiceImpl;
 /**
  * 封装对个人信息请求的处理的方法 等待SelfServletDispatcher的调用
  * @author heluo
- *
+ *	power后缀目录表示只有在登录后才能访问
  */
-@WebServlet("/self")
+@WebServlet("*.power")
 public class SelfServlet extends SelfServletDispatcher{
 
 	private static final long serialVersionUID = 6367079502427622830L;
@@ -49,7 +49,16 @@ public class SelfServlet extends SelfServletDispatcher{
 		SelfService service = new SelfServiceImpl();
 		List<Goods> goodsList = service.queryCollectGoodsByUsersId(userInfo.getAccountId());
 		request.setAttribute("goodsList", goodsList);
-		System.out.println(goodsList.size());
 		request.getRequestDispatcher("self_mycollect.jsp").forward(request, response);
+	}
+	
+	/**
+	 * 根据商品ID从收藏表删除该收藏的商品
+	 */
+	public void deleteCollectByGoodsId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		String id = request.getParameter("id");
+		System.out.println(id);
+		SelfService service = new SelfServiceImpl();
+//		request.getRequestDispatcher("self_mycollect.jsp").forward(request, response);
 	}
 }
