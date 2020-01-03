@@ -133,7 +133,7 @@
 								<li><a href="self_order.html">我的订单</a></li>
 								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="self_mypointment.html">我的预约</a></li>
-								<li><a href="self_mycollect.html">我的收藏</a></li>
+								<li><a href="self?method=queryCollectGoodsByUsersId">我的收藏</a></li>
 								<li><a href="shop_apply.html">商家申请</a></li>
 							</ul>
 						</div>

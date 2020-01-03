@@ -21,6 +21,7 @@ public class SelfServletDispatcher extends HttpServlet{
 			String methodName = request.getParameter("method");
 			Class clz = this.getClass();
 			Method method = clz.getMethod(methodName, HttpServletRequest.class,HttpServletResponse.class);
+			System.out.println(methodName);
 			method.invoke(this, request,response);
 		} catch(Exception e) {
 			e.printStackTrace();
