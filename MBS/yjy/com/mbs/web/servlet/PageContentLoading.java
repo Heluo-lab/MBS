@@ -34,19 +34,20 @@ public class PageContentLoading extends HttpServlet {
 		// TODO Auto-generated method stub
 		ProductDaoimpl dao = new ProductDaoimpl();
 		
+		String str =  request.getParameter("id");
+		int flag = Integer.parseInt(str);
 		
-		String imgUrl =  dao.LoadingfoGoodsID(4).getGoodsInfoImage();
+//		request.getParameter("");
+		
+		String imgUrl =  dao.LoadingfoGoodsID(flag).getGoodsInfoImage();
+		
 		String[] imgUrls =  imgUrl.split("@l@");
-		
-//		for (int i = 0; i < imgUrls.length; i++) {
-//			System.out.println(imgUrls[i]);
-//		}
 		
 		request.setAttribute("goods", dao.LoadingfoGoodsID(4));
 		
 		request.setAttribute("imgurl", imgUrls);
 		
-		request.setAttribute("instock", dao.GidColorSizeOfRepositoryCount(4, "052", "32"));
+		request.setAttribute("instock", dao.GidColorSizeOfRepositoryCount(flag, "052", "32"));
 		
 		request.getRequestDispatcher("product.jsp").forward(request, response);
 	}
