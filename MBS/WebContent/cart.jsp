@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -87,33 +90,48 @@
 						<li class="option">操作</li>
 					</ul>
 				</div>
-				<div class="buygoods">
-					<div class="no-sign shopcar">
-						您的购物车中没有商品，您可以：
-						<p>1. 如果您还未登录，可能导致购物车为空，请 <a href="">登录</a></p>
-						<p>2. <a href="">立即选购商品>></a>></p>
-					</div>
-					<div class="had-sign shopcar">
-						您的购物车中没有商品，您可以：
-						<p><a href="index.html">立即选购商品>></a>></p>
-					</div>
-					
-					<div class="has-goods">
-						<div class="goods">
-							<div class="goods-title">以下商品由 梦芭莎 发货　免配送费</div>
-							<table id="table">
-							</table>
+					<!-- 没有商品 -->
+					<c:if test="${empty goodslist }">
+						<div class="buygoods" id="buygoods" style="background: url(img/shopcar.jpg) 200px 62px no-repeat;">
+						<div class="had-sign shopcar" style="height: 217px;">
+							您的购物车中没有商品，您可以：
+							<p><a href="index.html">立即选购商品>></a>></p>
 						</div>
-						<div class="goods-priceAll">
-							<div class="goods-priceAll-left">
-								<img src="img/qrcodecreate.png" />
+					</c:if>
+					<!-- 有商品 -->
+					<c:if test="${!empty goodslist }">
+						<div class="buygoods" id="buygoods">
+						<div class="has-goods">
+							<div class="goods">
+								<div class="goods-title">以下商品由 梦芭莎 发货　免配送费</div>
+								<table id="table">
+									<c:forEach items="${goodslist }" var="goods">
+										<tr>
+								      		<input type="hidden" id="cartgoodsid" value="${goods.goodsId}" />
+											<td><input type="checkbox" class="check" /></td>
+											<td class="goods-img"><img src="img/loading.gif" lazyLoadSrc="${goods.showImage}"  /></td>
+											<td class="goods-content"><a href="javascript:;">${goods.goodsName}</a></td>
+											<td class="goods-price">${goods.price}</td>
+											<td class="goods-nub">
+												<a href="javascript:;" class="minus">-</a><button class="goods-num">1</button><a href="javascript:;" class="add">+</a>
+											</td>
+											<td class="subtotal">${goods.price}</td>
+											<td><a href="javascript:;" class="del-btn">删除</a></td>
+										</tr>
+									</c:forEach>
+								</table>
 							</div>
-							<div class="goods-priceAll-right">
-								<p class="price-all"><span>折后商品金额总计：</span>¥0.00</p>
-								<a href="order.html"><button class="buy">去结算</button></a>
+							<div class="goods-priceAll">
+								<div class="goods-priceAll-left">
+									<img src="img/qrcodecreate.png" />
+								</div>
+								<div class="goods-priceAll-right">
+									<p class="price-all"><span>折后商品金额总计：</span>¥0.00</p>
+									<a href="order.html"><button class="buy">去结算</button></a>
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:if>
 					
 				</div>
 				

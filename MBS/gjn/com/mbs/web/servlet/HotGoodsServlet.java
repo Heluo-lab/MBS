@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,11 +13,12 @@ import com.mbs.pojo.Goods;
 
 import net.sf.json.JSONObject;
 
+@WebServlet("/hotgoods")
 public class HotGoodsServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doGet(req, resp);
+		this.doPost(req, resp);
 	}
 
 	@Override
