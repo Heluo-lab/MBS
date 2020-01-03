@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -119,8 +122,8 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self_center.html">首页</a>>
-				<a href="self_center.html">个人中心</a>
+				<a href="self.power?method=querySingleUser">首页</a>>
+				<a href="self.power?method=querySingleUser">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
@@ -182,8 +185,11 @@
 				<div class="section-self-right">
 					<div class="top">
 						<a href="javascript:void(0)" class="on">收藏的商品</a>
-						<span>|</span>
-						<a href="javascript:void(0)">收藏的品牌</a>
+						<!-- 
+							<span>|</span>
+							<a href="javascript:void(0)">收藏的品牌</a>
+							
+						 -->
 						<input type="text" name=""  />
 						<input type="submit" value="查询"/>
 					</div>
@@ -194,42 +200,67 @@
 						<!--有收藏的时候-->
 						<div class="collection-yes">
 							<ul>
-								<li>
-									<img src="img/nodata_01.jpg"/>
-									<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-									<span>￥169</span>
-									<span>￥339</span>
-								</li>
-								<li>
-									<img src="img/nodata_01.jpg"/>
-									<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-									<span>￥169</span>
-									<span>￥339</span>
-								</li>
-								<li>
-									<img src="img/nodata_01.jpg"/>
-									<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-									<span>￥169</span>
-									<span>￥339</span>
-								</li>
-								<li>
-									<img src="img/nodata_01.jpg"/>
-									<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-									<span>￥169</span>
-									<span>￥339</span>
-								</li>
-								<li>
-									<img src="img/nodata_01.jpg"/>
-									<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-									<span>￥169</span>
-									<span>￥339</span>
-								</li>
-								<li>
-									<img src="img/nodata_01.jpg"/>
-									<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
-									<span>￥169</span>
-									<span>￥339</span>
-								</li>
+								<c:forEach items="${goodsList }" var="goods">
+									<li class="collect-list">
+										<a href="#">	
+											<img src="${goods.showImage }"/>
+											<div class="pro_title">${goods.goodsName }</div>
+											<span class="afterDiscount">￥${goods.price*0.7 }</span>
+											<span>￥${goods.price }</span>	
+										</a>
+										<div class="collect-operation">
+											<div class="collect-joincart">加入购物车</div>
+											<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
+											<input type="hidden" value="${goods.id }" />
+										</div>
+									</li>
+								</c:forEach>
+								<!-- 
+									<li class="collect-list">
+										<a>	
+											
+											<img src="img/nodata_01.jpg"/>
+											<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+											<span>￥169</span>
+											<span>￥339</span>	
+										</a>
+										<div class="collect-operation">
+											<div class="collect-joincart">加入购物车</div>
+											<div class="collect-delete" onclick="deleteCollect(this)">删除</div>
+											<input type="hidden" value="1" />
+										</div>
+									</li>
+									<li>
+										<img src="img/nodata_01.jpg"/>
+										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+										<span>￥169</span>
+										<span>￥339</span>
+									</li>
+									<li>
+										<img src="img/nodata_01.jpg"/>
+										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+										<span>￥169</span>
+										<span>￥339</span>
+									</li>
+									<li>
+										<img src="img/nodata_01.jpg"/>
+										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+										<span>￥169</span>
+										<span>￥339</span>
+									</li>
+									<li>
+										<img src="img/nodata_01.jpg"/>
+										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+										<span>￥169</span>
+										<span>￥339</span>
+									</li>
+									<li>
+										<img src="img/nodata_01.jpg"/>
+										<div class="pro_title">梦芭莎精裁格纹拼接优雅收腰A摆连衣裙式中长款马甲</div>
+										<span>￥169</span>
+										<span>￥339</span>
+									</li>
+								 -->
 							</ul>
 						</div>
 					</div>
@@ -325,4 +356,27 @@
 			//进行ajax请求 对数据进行渲染
 		});
 	});
+	$(function(){
+		$(".afterDiscount").each(function(){
+			var price = $(this).html();
+			price = price.substr(1);
+			price = Math.round(price);
+			$(this).html(price);
+		});
+	});
+	function deleteCollect(obj){
+		if(confirm("您确定要从收藏中移除该商品吗？")){
+			$.ajax({
+				type:"post",
+				url:"self.power",
+				data:{"method":"deleteCollectByGoodsId","id":$(obj).siblings("input").val()},
+				success:function(data){
+					alert("success");
+				},
+				error:function(){
+					alert("fail");
+				}
+			});
+		}
+	}
 </script>

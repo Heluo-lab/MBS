@@ -122,8 +122,8 @@
 		<section>
 			<!--<div class="section_bg">-->
 			<div class="member-label">
-				<a href="self?method=querySingleUser">首页</a>>
-				<a href="self_center.html">个人中心</a>
+				<a href="javascript:void(0)">首页</a>>
+				<a href="javascript:void(0)">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
@@ -134,7 +134,7 @@
 								<li><a href="self_order.html">我的订单</a></li>
 								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="self_mypointment.html">我的预约</a></li>
-								<li><a href="self_mycollect.html">我的收藏</a></li>
+								<li><a href="power/self?method=queryCollectGoodsByUsersId">我的收藏</a></li>
 								<li><a href="shop_apply.html">商家申请</a></li>
 							</ul>
 						</div>

@@ -133,4 +133,13 @@ public class Goods {
     this.createTime = createTime;
   }
 
+@Override
+public String toString() {
+	return "Goods [id=" + id + ", goodsId=" + goodsId + ", goodsName=" + goodsName + ", tyId=" + tyId + ", typeId="
+			+ typeId + ", showImage=" + showImage + ", price=" + price + ", goodsInfoImage=" + goodsInfoImage
+			+ ", goodsCode=" + goodsCode + ", goodsHot=" + goodsHot + ", isShow=" + isShow + ", goodStatus="
+			+ goodStatus + ", createTime=" + createTime + "]";
+}
+
+  
 }

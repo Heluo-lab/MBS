@@ -54,4 +54,11 @@ public class Type {
     this.parentName = parentName;
   }
 
+@Override
+public String toString() {
+	return "Type [id=" + id + ", typeId=" + typeId + ", typeName=" + typeName + ", parentId=" + parentId
+			+ ", parentName=" + parentName + "]";
+}
+
+  
 }
