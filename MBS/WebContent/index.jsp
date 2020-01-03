@@ -620,64 +620,19 @@
 			-->
 		</ul>
 		<ul class="goods">
-			<!-- <li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li> -->
+		<c:forEach items="${goodsList}" var="goods">
+			<li>
+				<img src="${goods.showImage }" >
+				<p>${goods.goodsName}</p>
+				<h3>￥${goods.price}</h3>
+				<div class="goods-top">
+					<h2><a href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}">${goods.goodsName}</a></h2>
+				</div>
+			</li>
+		</c:forEach>	
 		</ul>
 	</div>
+	
 	<!--底部-->
 	<footer>
 		<div class="footer-a-bg">
@@ -814,7 +769,6 @@
 		}
 	});
 </script>
-<script src="js/base.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/ydxLazyLoad.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/isLogin.js"></script>

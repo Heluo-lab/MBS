@@ -705,7 +705,7 @@
 							<c:forEach items="${Goodslist}" var="goods">
 								<dl>
 									<dt>
-										<a rel="nofollow" id="" href="${goods.id}" target="_blank"
+										<a rel="nofollow" id="" href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}" target="_blank"
 											rel="nofollow"> <img id="plist_img361116408"
 											alt="${goods.goodsName}" src="${goods.showImage}" />
 										</a>
@@ -717,8 +717,8 @@
 									</dt>
 									<dd>
 										<span> <font>￥${goods.price}</font> <del></del></span> <a
-											href="${goods.id}" target="_blank">${goods.goodsName}</a> <a
-											href="${goods.id}" rel="nofollow" target="_blank"> <strong>热度<b>${goods.goodsHot }</b></strong>
+											href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}" target="_blank">${goods.goodsName}</a> <a
+											href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}" rel="nofollow" target="_blank"> <strong>热度<b>${goods.goodsHot }</b></strong>
 										</a>
 									</dd>
 								</dl>

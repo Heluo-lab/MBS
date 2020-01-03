@@ -34,43 +34,43 @@ var scrollLock = false;
 
 
 //请求热门商品
-function hotGoods(){
-  $.get(URL + 'api_goods.php', {'page':page, 'pagesize':5}, function(result){
-    var obj = JSON.parse(result);
-    //验证
-    if(obj.code != 0){
-//    console.log(obj.message);
-      return;
-    };
-    //OK的数据
-//  console.log(obj);
-    var listArr = obj.data;
-    //数据渲染
-    for(var i = 0; i < listArr.length; i++){
-      var str = `
-		<li>
-			<a href="product.html?goods_id=${listArr[i].goods_id}" target="_blank">
-			<img src="img/loading.gif" lazyLoadSrc="${listArr[i].goods_thumb}" >
-			<p>${listArr[i].goods_name}</p>
-			<h3>￥${listArr[i].price}</h3>
-			<div class="goods-top">
-				<h2>${listArr[i].goods_desc}</h2>
-			</div>
-			</a>
-		</li>
-      `;
-      //console.log(str)
-      //内部组装一个添加一个
-      $('.goods').append(str);
-      //马上做图片预加载
-      $('.goods [lazyLoadSrc]').YdxLazyLoad();
-      //商品添加到页面去增加了高度之后才能放开锁
-      scrollLock = false;
-    };
-    
-  })
-};
-hotGoods();
+//function hotGoods(){
+//  $.get(URL + 'api_goods.php', {'page':page, 'pagesize':5}, function(result){
+//    var obj = JSON.parse(result);
+//    //验证
+//    if(obj.code != 0){
+////    console.log(obj.message);
+//      return;
+//    };
+//    //OK的数据
+////  console.log(obj);
+//    var listArr = obj.data;
+//    //数据渲染
+//    for(var i = 0; i < listArr.length; i++){
+//      var str = `
+//		<li>
+//			<a href="product.html?goods_id=${listArr[i].goods_id}" target="_blank">
+//			<img src="img/loading.gif" lazyLoadSrc="${listArr[i].goods_thumb}" >
+//			<p>${listArr[i].goods_name}</p>
+//			<h3>￥${listArr[i].price}</h3>
+//			<div class="goods-top">
+//				<h2>${listArr[i].goods_desc}</h2>
+//			</div>
+//			</a>
+//		</li>
+//      `;
+//      //console.log(str)
+//      //内部组装一个添加一个
+//      $('.goods').append(str);
+//      //马上做图片预加载
+//      $('.goods [lazyLoadSrc]').YdxLazyLoad();
+//      //商品添加到页面去增加了高度之后才能放开锁
+//      scrollLock = false;
+//    };
+//    
+//  })
+//};
+//hotGoods();
 
 //页面卷动到底部加载更多
 //$(function(){
