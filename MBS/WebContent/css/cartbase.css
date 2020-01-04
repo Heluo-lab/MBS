@@ -1,7 +1,7 @@
 /*全局样式*/
 *{margin: 0px;padding: 0px;}
 li{list-style: none;}
-a{text-decoration: none;}
+a{text-decoration:none;}
 img{ border: none; vertical-align: bottom;}
 
 /*顶部  顶部分三层 top category bottom*/

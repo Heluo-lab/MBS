@@ -107,16 +107,16 @@
 								<table id="table">
 									<c:forEach items="${goodslist }" var="goods">
 										<tr>
-								      		<input type="hidden" id="cartgoodsid" value="${goods.goodsId}" />
+								      		<input type="hidden" class="cartgoodsid" value="${goods.goodsId}" />
 											<td><input type="checkbox" class="check" /></td>
 											<td class="goods-img"><img src="img/loading.gif" lazyLoadSrc="${goods.showImage}"  /></td>
-											<td class="goods-content"><a href="javascript:;">${goods.goodsName}</a></td>
+											<td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${goods.goodsName}</a></td>
 											<td class="goods-price">${goods.price}</td>
 											<td class="goods-nub">
-												<a href="javascript:;" class="minus">-</a><button class="goods-num">1</button><a href="javascript:;" class="add">+</a>
+												<a href="javascript:;" class="minus" style="text-decoration:none;">-</a><button class="goods-num">${goods.goodsNum }</button><a href="javascript:;" class="add" style="text-decoration:none;">+</a>
 											</td>
-											<td class="subtotal">${goods.price}</td>
-											<td><a href="javascript:;" class="del-btn">删除</a></td>
+											<td class="subtotal">${goods.price }</td>
+											<td><a href="javascript:;" class="del-btn" style="text-decoration:none;">删除</a></td>
 										</tr>
 									</c:forEach>
 								</table>

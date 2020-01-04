@@ -15,6 +15,7 @@ import com.mbs.dao.CartDao;
 import com.mbs.dao.ProductDao;
 import com.mbs.dao.impl.CartDaoImpl;
 import com.mbs.dao.impl.ProductDaoimpl;
+import com.mbs.dto.GoodsMsg;
 import com.mbs.dto.IDColorSizeOf;
 import com.mbs.pojo.CartItem;
 import com.mbs.pojo.Goods;
@@ -39,13 +40,19 @@ public class CartServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		CartDao cd = new CartDaoImpl();
 		List<CartItem> list = cd.selectAllCartId(req.getParameter("usersid"));
-		List<IDColorSizeOf> goodslist = new ArrayList<IDColorSizeOf>();
+		List<GoodsMsg> msglist = new ArrayList<GoodsMsg>();
 		for (CartItem cart : list) {
 			ProductDao pd = new ProductDaoimpl();
+			GoodsMsg goodsmsg = new GoodsMsg();
 			IDColorSizeOf goods = pd.LoadingfoGoodsID(cart.getGoodsId());
-			goodslist.add(goods);
+			goodsmsg.setGoodsName(goods.getGoodsName());
+			goodsmsg.setGoodsId(cart.getGoodsId());
+			goodsmsg.setGoodsNum(cart.getGoodsNum());
+			goodsmsg.setPrice(goods.getPrice());
+			goodsmsg.setShowImage(goods.getShowImage());
+			msglist.add(goodsmsg);
 		}
-		req.getSession().setAttribute("goodslist", goodslist);
+		req.getSession().setAttribute("goodslist", msglist);
 		resp.sendRedirect("cart.jsp");
 	}
 
