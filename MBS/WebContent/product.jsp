@@ -425,7 +425,26 @@
 		</div>
 </body>
 </html>
-	<script src="js/isLogin.js"></script>
-	<script type="text/javascript" src="js/product.js" ></script>
-	<script src="js/jquery-1.8.3.min.js"></script>
-	<script src="js/addcar.js"></script>
+<script src="js/isLogin.js"></script>
+<script type="text/javascript" src="js/product.js" ></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/addcar.js"></script>
+<script src="js/jquery.mousewheel.min.js" type="text/javascript"
+charset="utf-8"></script>
+<!-- 回到顶部 -->
+<script type="text/javascript">
+	$('.return-top').click(function() {
+		//闪现到顶部
+		// $(document).scrollTop(0);
+		$('body , html').animate({
+			'scrollTop' : 0
+		}, 2000);
+	});
+	$(document).scroll(function() {
+		if ($(document).scrollTop() > 300) {
+			$('.return-top').fadeIn();
+		} else {
+			$('.return-top').fadeOut();
+		}
+	});
+</script>
