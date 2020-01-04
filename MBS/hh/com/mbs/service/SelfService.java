@@ -19,4 +19,12 @@ public interface SelfService {
 	//根据用户ID查询用户收藏商品
 	public List<Goods> queryCollectGoodsByUsersId(String usersId);
 
+	//根据用户ID与商品ID删除用户收藏的商品并返回剩余收藏
+	public List<Goods> deleteCollectByGoodsIdAndReturnGoodsList(String usersId , int goodsId);
+	
+	//根据用户ID与商品ID添加收藏返回 success 为添加成功 , fail添加失败,exit表示该商品已被收藏 
+	public String addCollect(String usersId,int goodsId);
+	
+	//根据用户Id,商品名称在收藏商品查询相关商品
+	public List<Goods> queryCollectGoodsByUsersId(String usersId,String goodsName);
 }

@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="css/product_list2.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/product_list3.css" />
 <link rel="stylesheet" type="text/css" href="css/index.css" />
-<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"
+	charset="utf-8"></script>
 <script src="js/product_list.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
@@ -100,12 +101,12 @@
 }
 </style>
 	</p>
+	<input id="tyid" value="${id}" type="hidden">
 	<input id="hdKeywordDefaultValue" type="hidden"
 		ame="hdKeywordDefaultValue" value="秋新品震撼上新，千万精品低至9元" />
 	<input id="hdKeywordDefaultUrl" type="hidden"
 		name="hdKeywordDefaultUrl" value="http://www.moonbasa.com/" />
 	<div style="clear: both;"></div>
-	<!-- <link href="http://c0.mbscss.com/?p=css/item/1.0.0/loginInfo_wrap.css&v=2016012815" rel="stylesheet" type="text/css" /> -->
 	<div class="loginInfo_wrap">
 		<div class="loginInfo_out">
 			<!-- 顶部导航栏 -->
@@ -241,11 +242,10 @@
 				<div class="list_content">
 					<!--导航-->
 					<div class="tm_now">
-						<a rel="nofollow" href="/">首页</a> > <a
-							href='http://list.moonbasa.com/2555-1-40-0.html'>大站频道</a> <span
-							id="listRecordCount">(共1724件)</span>
+						<a rel="nofollow" href="${pageContext.request.contextPath }/index">首页</a>
+						> <a href="${pageContext.request.contextPath }/product_list">大站频道</a>
+						<span id="listRecordCount">(共1724件)</span>
 					</div>
-
 					<!--左侧-->
 					<div class="list_left">
 						<div class="left">
@@ -254,157 +254,13 @@
 									<c:forEach items="${TypeList}" var="toptype">
 										<dl>
 											<dt>
-												<a href="product_list?tyid=${toptype.id}" class="select" id="${toptype.id}">${toptype.parentName}--${toptype.typeName}</a>
+												<a
+													href="${pageContext.request.contextPath }/product_list?tyid=${toptype.id}"
+													class="select" id="${toptype.id}">${toptype.parentName}--${toptype.typeName}</a>
 											</dt>
-											<dd style="display: block" class="css_255508">
-											</dd>
+											<dd style="display: block" class="css_255508"></dd>
 										</dl>
 									</c:forEach>
-									<!--<dl>
-											<dt><a href="/255509-1-40-0.html" class="select">大站-女装 (826)</a></dt>
-											<dd style="display:block" class="css_255509">
-												<a rel="nofollow" class="" href="/25550912-1-40-0.html">热销推荐-当季新品(96)</a>
-												<a rel="nofollow" class="" href="/25550913-1-40-0.html">热销推荐-连衣裙(142)</a>
-												<a rel="nofollow" class="" href="/25550914-1-40-0.html">热销推荐-衬衫(41)</a>
-												<a rel="nofollow" class="" href="/25550915-1-40-0.html">热销推荐-小衫(79)</a>
-												<a rel="nofollow" class="" href="/25550916-1-40-0.html">热销推荐-针织衫(6)</a>
-												<a rel="nofollow" class="" href="/25550917-1-40-0.html">热销推荐-T恤(37)</a>
-												<a rel="nofollow" class="" href="/25550918-1-40-0.html">热销推荐-薄外套(8)</a>
-												<a rel="nofollow" class="" href="/25550920-1-40-0.html">热销推荐-短裤(11)</a>
-												<a rel="nofollow" class="" href="/25550921-1-40-0.html">热销推荐-断码清仓(55)</a>
-												<a rel="nofollow" class="" href="/25550922-1-40-0.html">热销推荐-裤装(38)</a>
-												<a rel="nofollow" class="" href="/25550923-1-40-0.html">裙装-连衣裙(248)</a>
-												<a rel="nofollow" class="" href="/25550924-1-40-0.html">裙装-蕾丝裙(48)</a>
-												<a rel="nofollow" class="" href="/25550925-1-40-0.html">裙装-雪纺裙(28)</a>
-												<a rel="nofollow" class="" href="/25550926-1-40-0.html">裙装-印花裙(99)</a>
-												<a rel="nofollow" class="" href="/25550927-1-40-0.html">裙装-半身裙(133)</a>
-												<a rel="nofollow" class="" href="/25550928-1-40-0.html">裙装-百褶裙(9)</a>
-												<a rel="nofollow" class="" href="/25550929-1-40-0.html">裙装-欧美风(52)</a>
-												<a rel="nofollow" class="" href="/25550930-1-40-0.html">裙装-文艺风(51)</a>
-												<a rel="nofollow" class="" href="/25550932-1-40-0.html">上装-衬衫(68)</a>
-												<a rel="nofollow" class="" href="/25550933-1-40-0.html">上装-雪纺衫(22)</a>
-												<a rel="nofollow" class="" href="/25550934-1-40-0.html">上装-小衫(118)</a>
-												<a rel="nofollow" class="" href="/25550935-1-40-0.html">上装-T恤(66)</a>
-												<a rel="nofollow" class="" href="/25550936-1-40-0.html">上装-针织衫(8)</a>
-												<a rel="nofollow" class="" href="/25550937-1-40-0.html">上装-背心/无袖(14)</a>
-												<a rel="nofollow" class="" href="/25550938-1-40-0.html">上装-马甲(6)</a>
-												<a rel="nofollow" class="" href="/25550939-1-40-0.html">上装-套装(11)</a>
-												<a rel="nofollow" class="" href="/25550940-1-40-0.html">上装-西装(9)</a>
-												<a rel="nofollow" class="" href="/25550941-1-40-0.html">裤装-短裤(36)</a>
-												<a rel="nofollow" class="" href="/25550942-1-40-0.html">裤装-阔腿裤(40)</a>
-												<a rel="nofollow" class="" href="/25550943-1-40-0.html">裤装-哈伦裤(1)</a>
-												<a rel="nofollow" class="" href="/25550944-1-40-0.html">裤装-牛仔裤(10)</a>
-												<a rel="nofollow" class="" href="/25550945-1-40-0.html">裤装-西装裤(2)</a>
-												<a rel="nofollow" class="" href="/25550946-1-40-0.html">裤装-小脚裤(8)</a>
-												<a rel="nofollow" class="" href="/25550947-1-40-0.html">裤装-九分裤(24)</a>
-												<a rel="nofollow" class="" href="/25550948-1-40-0.html">裤装-裤裙(5)</a>
-												<a rel="nofollow" class="" href="/25550949-1-40-0.html">裤装-打底裤(3)</a>
-												<a rel="nofollow" class="" href="/25550950-1-40-0.html">裙装-a字裙(52)</a>
-											</dd>
-										</dl>
-										<dl>
-											<dt><a href="/255510-1-40-0.html" class="select">大站-内衣 (623)</a></dt>
-											<dd style="display:block" class="css_255510">
-												<a rel="nofollow" class="" href="/25551011-1-40-0.html">热销推荐-春夏尚新(74)</a>
-												<a rel="nofollow" class="" href="/25551012-1-40-0.html">热销推荐-文胸(191)</a>
-												<a rel="nofollow" class="" href="/25551013-1-40-0.html">热销推荐-泳装(44)</a>
-												<a rel="nofollow" class="" href="/25551014-1-40-0.html">热销推荐-家居服(55)</a>
-												<a rel="nofollow" class="" href="/25551015-1-40-0.html">热销推荐-内裤(135)</a>
-												<a rel="nofollow" class="" href="/25551016-1-40-0.html">热销推荐-运动产品(14)</a>
-												<a rel="nofollow" class="" href="/25551017-1-40-0.html">文胸-无钢圈(93)</a>
-												<a rel="nofollow" class="" href="/25551018-1-40-0.html">文胸-抹胸(16)</a>
-												<a rel="nofollow" class="" href="/25551019-1-40-0.html">文胸-美背(23)</a>
-												<a rel="nofollow" class="" href="/25551020-1-40-0.html">文胸-光面无痕(28)</a>
-												<a rel="nofollow" class="" href="/25551021-1-40-0.html">文胸-蕾丝刺绣(120)</a>
-												<a rel="nofollow" class="" href="/25551022-1-40-0.html">文胸-轻薄(28)</a>
-												<a rel="nofollow" class="" href="/25551023-1-40-0.html">文胸-集中聚拢(110)</a>
-												<a rel="nofollow" class="" href="/25551024-1-40-0.html">文胸-高包容(51)</a>
-												<a rel="nofollow" class="" href="/25551025-1-40-0.html">文胸-运动款(14)</a>
-												<a rel="nofollow" class="" href="/25551026-1-40-0.html">文胸-AB杯(136)</a>
-												<a rel="nofollow" class="" href="/25551027-1-40-0.html">文胸-CD杯(50)</a>
-												<a rel="nofollow" class="" href="/25551028-1-40-0.html">文胸-套装(10)</a>
-												<a rel="nofollow" class="" href="/25551029-1-40-0.html">文胸-少女款(58)</a>
-												<a rel="nofollow" class="" href="/25551030-1-40-0.html">文胸-内衣配饰(4)</a>
-												<a rel="nofollow" class="" href="/25551031-1-40-0.html">内裤-无痕(28)</a>
-												<a rel="nofollow" class="" href="/25551032-1-40-0.html">内裤-棉质(48)</a>
-												<a rel="nofollow" class="" href="/25551033-1-40-0.html">内裤-网纱(11)</a>
-												<a rel="nofollow" class="" href="/25551034-1-40-0.html">内裤-盒装内裤(2)</a>
-												<a rel="nofollow" class="" href="/25551035-1-40-0.html">内裤-蕾丝(59)</a>
-												<a rel="nofollow" class="" href="/25551036-1-40-0.html">内裤-少女款(61)</a>
-												<a rel="nofollow" class="" href="/25551037-1-40-0.html">内裤-三角(68)</a>
-												<a rel="nofollow" class="" href="/25551038-1-40-0.html">内裤-平角(64)</a>
-												<a rel="nofollow" class="" href="/25551039-1-40-0.html">家居服-吊带(21)</a>
-												<a rel="nofollow" class="" href="/25551040-1-40-0.html">家居服-春夏睡裙(21)</a>
-												<a rel="nofollow" class="" href="/25551041-1-40-0.html">家居服-春夏套装(30)</a>
-												<a rel="nofollow" class="" href="/25551042-1-40-0.html">家居服-棉质(38)</a>
-												<a rel="nofollow" class="" href="/25551043-1-40-0.html">家居服-丝质(6)</a>
-												<a rel="nofollow" class="" href="/25551044-1-40-0.html">家居服-秋冬款(11)</a>
-												<a rel="nofollow" class="" href="/25551045-1-40-0.html">家居服-套装(34)</a>
-												<a rel="nofollow" class="" href="/25551046-1-40-0.html">家居服-裙装(23)</a>
-												<a rel="nofollow" class="" href="/25551047-1-40-0.html">家居服-睡袍(6)</a>
-												<a rel="nofollow" class="" href="/25551048-1-40-0.html">泳装-女士连体(19)</a>
-												<a rel="nofollow" class="" href="/25551049-1-40-0.html">泳装-女士分体(14)</a>
-												<a rel="nofollow" class="" href="/25551050-1-40-0.html">泳装-比基尼(9)</a>
-												<a rel="nofollow" class="" href="/25551051-1-40-0.html">泳装-男士泳裤(1)</a>
-												<a rel="nofollow" class="" href="/25551052-1-40-0.html">泳装-女童泳衣(4)</a>
-												<a rel="nofollow" class="" href="/25551053-1-40-0.html">泳装-少女泳衣(17)</a>
-												<a rel="nofollow" class="" href="/25551054-1-40-0.html">打底/保暖-吊带(2)</a>
-												<a rel="nofollow" class="" href="/25551055-1-40-0.html">打底/保暖-背心(3)</a>
-												<a rel="nofollow" class="" href="/25551056-1-40-0.html">打底/保暖-无痕打底(2)</a>
-												<a rel="nofollow" class="" href="/25551057-1-40-0.html">打底/保暖-短袖(3)</a>
-												<a rel="nofollow" class="" href="/25551058-1-40-0.html">打底/保暖-棉/竹纤维(18)</a>
-												<a rel="nofollow" class="" href="/25551059-1-40-0.html">打底/保暖-莫代尔(3)</a>
-												<a rel="nofollow" class="" href="/25551060-1-40-0.html">打底/保暖-V领(13)</a>
-												<a rel="nofollow" class="" href="/25551061-1-40-0.html">打底/保暖-圆领(23)</a>
-												<a rel="nofollow" class="" href="/25551062-1-40-0.html">打底/保暖-秋冬款(47)</a>
-												<a rel="nofollow" class="" href="/25551063-1-40-0.html">袜品-丝袜(7)</a>
-												<a rel="nofollow" class="" href="/25551064-1-40-0.html">袜品--薄款(5)</a>
-												<a rel="nofollow" class="" href="/25551065-1-40-0.html">袜品-厚款(3)</a>
-												<a rel="nofollow" class="" href="/25551066-1-40-0.html">袜品-连裤袜(13)</a>
-												<a rel="nofollow" class="" href="/25551067-1-40-0.html">袜品-压力袜(2)</a>
-												<a rel="nofollow" class="" href="/25551069-1-40-0.html">塑身美体-塑身衣(2)</a>
-												<a rel="nofollow" class="" href="/25551070-1-40-0.html">塑身美体-塑身裤(1)</a>
-												<a rel="nofollow" class="" href="/25551071-1-40-0.html">塑身美体-塑身连体衣(1)</a>
-												<a rel="nofollow" class="" href="/25551072-1-40-0.html">塑身美体-腰封(1)</a>
-												<a rel="nofollow" class="" href="/25551073-1-40-0.html">男士商品-男士内裤(3)</a>
-												<a rel="nofollow" class="" href="/25551074-1-40-0.html">男士商品-男士家居(3)</a>
-												<a rel="nofollow" class="" href="/25551075-1-40-0.html">男士商品-男士内衣(6)</a>
-												<a rel="nofollow" class="" href="/25551076-1-40-0.html">樱桃派-文胸(58)</a>
-												<a rel="nofollow" class="" href="/25551077-1-40-0.html">樱桃派-内裤(61)</a>
-												<a rel="nofollow" class="" href="/25551078-1-40-0.html">樱桃派-家居/休闲(65)</a>
-											</dd>
-										</dl>
-										<dl>
-											<dt><a href="/255513-1-40-0.html" class="select">大站-左边栏目 (1652)</a></dt>
-											<dd style="display:block" class="css_255513">
-												<a rel="nofollow" class="" href="/25551301-1-40-0.html">女装-当季新品(105)</a>
-												<a rel="nofollow" class="" href="/25551302-1-40-0.html">女装--连衣裙(235)</a>
-												<a rel="nofollow" class="" href="/25551303-1-40-0.html">女装-衬衫/小衫(222)</a>
-												<a rel="nofollow" class="" href="/25551304-1-40-0.html">女装-T恤(69)</a>
-												<a rel="nofollow" class="" href="/25551305-1-40-0.html">女装-薄外套(44)</a>
-												<a rel="nofollow" class="" href="/25551306-1-40-0.html">女装-半裙(123)</a>
-												<a rel="nofollow" class="" href="/25551307-1-40-0.html">女装-短裤(36)</a>
-												<a rel="nofollow" class="" href="/25551308-1-40-0.html">女装-断码清仓(221)</a>
-												<a rel="nofollow" class="" href="/25551309-1-40-0.html">女装-裤装(84)</a>
-												<a rel="nofollow" class="" href="/25551310-1-40-0.html">内衣-当季新品(118)</a>
-												<a rel="nofollow" class="" href="/25551311-1-40-0.html">内衣-无钢圈文胸(87)</a>
-												<a rel="nofollow" class="" href="/25551312-1-40-0.html">内衣-光面文胸(28)</a>
-												<a rel="nofollow" class="" href="/25551313-1-40-0.html">内衣-轻薄文胸(52)</a>
-												<a rel="nofollow" class="" href="/25551316-1-40-0.html">内衣-内裤(135)</a>
-												<a rel="nofollow" class="" href="/25551317-1-40-0.html">内衣-家居服(66)</a>
-												<a rel="nofollow" class="" href="/25551318-1-40-0.html">内衣-泳装(44)</a>
-												<a rel="nofollow" class="" href="/25551319-1-40-0.html">内衣-打底保暖(54)</a>
-												<a rel="nofollow" class="" href="/25551320-1-40-0.html">内衣-袜品(15)</a>
-												<a rel="nofollow" class="" href="/25551321-1-40-0.html">内衣-少女系列(200)</a>
-												<a rel="nofollow" class="" href="/25551322-1-40-0.html">男装-当季新品(44)</a>
-												<a rel="nofollow" class="" href="/25551323-1-40-0.html">男装-T恤(186)</a>
-												<a rel="nofollow" class="" href="/25551324-1-40-0.html">男装-衬衫(37)</a>
-												<a rel="nofollow" class="" href="/25551325-1-40-0.html">男装-裤装(16)</a>
-												<a rel="nofollow" class="" href="/25551326-1-40-0.html">男装-外套(6)</a>
-												<a rel="nofollow" class="" href="/25551327-1-40-0.html">男装-断码清仓(53)</a>
-												<a rel="nofollow" class="" href="/25551330-1-40-0.html">鞋包-饰品(7)</a>
-											</dd>
-										</dl>-->
 								</div>
 							</div>
 							<div class="clear"></div>
@@ -693,10 +549,13 @@
 							</div>
 							<!--分页控件-->
 							<div class="page_list">
-								<strong>共<b>1727</b>个商品
-								</strong><span><b>1</b>/18</span><a rel="nofollow" class="pageNext on"
-									href="?page=1">&lt;</a><a rel="nofollow" class="pageNext"
-									href="?page=2">&gt;</a>
+								<strong>共<b>${goodsCount}</b>个商品
+								</strong><span><b>${pageNo}</b>/${maxNo}</span> <a rel="nofollow"
+									class="pageNext" <c:if test="${pageNo==1 }">disabled</c:if>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}"</c:if>>&lt;</a>
+								<a rel="nofollow" class="pageNext"
+									<c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if>
+									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}"</c:if>>&gt;</a>
 							</div>
 						</div>
 
@@ -705,9 +564,11 @@
 							<c:forEach items="${Goodslist}" var="goods">
 								<dl>
 									<dt>
-										<a rel="nofollow" id="" href="${goods.id}" target="_blank"
-											rel="nofollow"> <img id="plist_img361116408"
-											alt="${goods.goodsName}" src="${goods.showImage}" />
+										<a rel="nofollow" id=""
+											href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}"
+											target="_blank" rel="nofollow"> <img
+											id="plist_img361116408" alt="${goods.goodsName}"
+											src="${goods.showImage}" />
 										</a>
 										<div class="sizebox">
 											<p></p>
@@ -717,9 +578,10 @@
 									</dt>
 									<dd>
 										<span> <font>￥${goods.price}</font> <del></del></span> <a
-											href="${goods.id}" target="_blank">${goods.goodsName}</a> <a
-											href="${goods.id}" rel="nofollow" target="_blank"> <strong>热度<b>${goods.goodsHot }</b></strong>
-										</a>
+											href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}"
+											target="_blank">${goods.goodsName}</a> <a
+											href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}"
+											rel="nofollow" target="_blank"> <strong>热度<b>${goods.goodsHot }</b></strong></a>
 									</dd>
 								</dl>
 							</c:forEach>
@@ -728,14 +590,63 @@
 						<!--页面page number-->
 						<div class="pageNum">
 							<div class="page_list">
-								<a class='paginationCurrentIndex'>1</a><a
-									class='paginationIndex' href='?page=2'>2</a><a
-									class='paginationIndex' href='?page=3'>3</a><a
-									class='paginationIndex' href='?page=4'>4</a><a
-									class='paginationIndex' href='?page=5'>5</a><a
-									class='paginationIndex' href='?page=6'>...</a><span
-									class='paginationSimplifyInfo'>1/18</span><a
-									class='paginationNext' href='?page=2'>下一页>></a>
+								<a class='paginationIndex'
+									<c:if test="${pageNo==1 }">disabled</c:if>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?tyid=${id}&pageNo=1"</c:if>>首页</a>
+								<a class='paginationNext'
+									<c:if test="${pageNo==1 }">disabled</c:if>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}"</c:if>>&#60;&#60;上一页
+								</a> 
+								
+								<c:if test="${pageNo eq 1 }">
+									<c:forEach var="i" begin="${pageNo}" end="${pageNo+2}">
+										<c:if test="${i ne pageNo }">
+											<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+										</c:if>
+										<c:if test="${i eq pageNo}">
+											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+										</c:if>
+									</c:forEach>
+								</c:if>
+								
+								<c:if test="${pageNo eq maxNo and pageNo ne 1}">
+									<c:if test="${pageNo-2 > 0}">
+										<c:forEach var="i" begin="${pageNo-2}" end="${maxNo}">
+											<c:if test="${i ne pageNo}">
+												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											</c:if>
+											<c:if test="${i eq pageNo}">
+												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											</c:if>
+										</c:forEach>
+									</c:if>
+									<c:if test="${pageNo-2 < 0}">
+										<c:forEach var="i" begin="${1}" end="${maxNo}">
+											<c:if test="${i ne pageNo}">
+												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											</c:if>
+											<c:if test="${i eq pageNo}">
+												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											</c:if>
+										</c:forEach>
+									</c:if>		
+								</c:if>
+								
+								<c:if test="${pageNo ne maxNo and pageNo ne 1}">
+									<c:forEach var="i" begin="${pageNo-1}" end="${pageNo+1 }">
+										<c:if test="${i ne pageNo}">
+											<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+										</c:if>
+										<c:if test="${i eq pageNo}">
+											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+										</c:if>
+									</c:forEach>
+								</c:if>
+								
+								
+								<span class='paginationSimplifyInfo'>${pageNo}/${maxNo}</span>
+								<a class='paginationNext' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}"</c:if>>下一页&#62;&#62;</a>
+								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${maxNo}&tyid=${id}"</c:if>>尾页</a>
 							</div>
 						</div>
 					</div>

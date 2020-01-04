@@ -57,6 +57,64 @@ public class TypeServiceImpl implements TypeService{
 		}
 		return list;
 	}
+
+	//获取六条男装的子分类
+	public List<Type> getManlist() {
+		Connection conn = DBHelper.getConnection();
+		ArrayList<Type> list = null;
+		try {
+			 list = (ArrayList<Type>) dao.getTypeByParentIdTen(1,6, conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return list;
+	}
+
+	//获取十条女装的子分类
+	public List<Type> getWomenlist() {
+		Connection conn = DBHelper.getConnection();
+		ArrayList<Type> list = null;
+		try {
+			 list = (ArrayList<Type>) dao.getTypeByParentIdTen(15,10, conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return list;
+	}
+
+	//获取十条内衣的子分类
+	public List<Type> getUnderWearlist() {
+		Connection conn = DBHelper.getConnection();
+		ArrayList<Type> list = null;
+		try {
+			 list = (ArrayList<Type>) dao.getTypeByParentIdTen(54,10, conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return list;
+	}
+
+	//获取鞋包的子分类
+	public List<Type> getShoesBaglist() {
+		Connection conn = DBHelper.getConnection();
+		ArrayList<Type> list = null;
+		try {
+			 list = (ArrayList<Type>) dao.getTypeByParentIdAndName(122, "女包", conn);
+			 List<Type> list2 = dao.getTypeByParentIdAndName(125, "鞋包", conn);
+			 list.addAll(list2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return list;
+	}
 		
 	
 }

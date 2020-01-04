@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set value="${goods}" var="WindowPicture" scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +10,11 @@
 	<link rel="stylesheet" href="css/base.css" />
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	<link rel="stylesheet" href="css/mbs-spxq.css" />
-	
-	
-	<script src="js/isLogin.js"></script>
-	<script type="text/javascript" src="js/product.js" ></script>
-	<script src="js/jquery-1.8.3.min.js"></script>
-	<script src="js/addcar.js"></script>
-	
-	
 </head>
 <body>
-				<div class="header-top-bg">
+<!--头部-->
+		<header>
+			<div class="header-top-bg">
 				<div class="header-top">
 					<div class="header-top-aboutUs">
 						㊣ 100%正品保证&nbsp;&nbsp;创立于2006年
@@ -164,9 +160,12 @@
 						<span class="count">0</span>
 					</a>
 				</div>
-				<div class="gwc">
-					<img src="img/gwc.png">
-			    </div>
+				
+				<div class="addmsg">
+					<span>添加购物车成功</span>
+				</div>
+				
+				
 				<div class="menu-heart">
 					<a href="">
 						<img src="img/heart.png" >
@@ -192,6 +191,7 @@
 				</a>
 			</div>
 		</div>
+			<!--信息-->
 
 			<div class="clear"></div>
 			<div class="myShopping">
@@ -211,38 +211,30 @@
 						<!--滚动图-->
 						<ul>
 							<div class="zoomPad">
+						<c:forEach items="${colorImage}" var="falg" varStatus="img">
+							<li>
+								<c:if test="${img.count eq 1}">
+									<img class="current" src="${falg}"/>
+								</c:if>
+							</li>
+						</c:forEach>
 								<!--滑块-->
 								<div class="slide"></div>
 							</div>						
 						</ul>
 						<!--滚动小图界面-->
 						<div class="tp-xiaomianb">
-							<ul>
-								<li>
-									<img src="img/430917402-116-01-H.jpg"/>
-								</li>
-								
-								<li>
-									<img src="img/430917402-116-02-H.jpg"/>
-								</li>
-								
-								<li>
-									<img src="img/430917402-116-03-H.jpg"/>
-								</li>
-								
-								<li>
-									<img src="img/430917402-116-04-H.jpg"/>
-								</li>
-								
-								<li>
-									<img src="img/430917402-116-05-H.jpg"/>
-								</li>
-								<!--<a class="next"><img src="img/next.png"</a>
-								<a class="sron"><img src="img/sron.png"</a>-->
-							</ul>
+						<ul>
+						<c:forEach items="${colorImage}" var="falg" varStatus="img">
+							<li>
+								<img src="${falg}"/>
+							</li>
+						</c:forEach>
+						</ul> 
+
 						</div>
 						<div class="Shopping-zuo-xia">
-							<p>商品编码：430917402</p>
+							<p>商品编码：${goods.id}</p>
 							<a href="" class="shoucang"><span>收藏</span></a>
 						</div>
 						<div class="tu-big">
@@ -252,7 +244,7 @@
 				</div>
 				<div class="Shopping-zhong">
 					<!--<h2>韩伊儿日韩时尚休闲趣味绣花带帽大衣</h2>-->
-					<h2>---------</h2>
+					<h2>${goods.goodsName}</h2>
 				<div class="lookp">
 					<div class="shouji">
 						<img class="ewm-dt" src="img/move01.gif"/>	
@@ -268,7 +260,7 @@
 						<span class="jiage">
 							<i class="renBox">￥</i>
 							<!--<b>398</b>-->
-							<b>---</b>
+							<b>${goods.price}</b>
 							<p class="ppp"></canvas> <a href="">评论|梦芭莎自营</a></p>
 						</span>
 						
@@ -278,7 +270,7 @@
 							<span class="discountBox">7.0折</span>
 							<span class="marketBox">
 								<!--￥<del>569</del>-->
-								￥<del>---</del>
+								￥<del>${goods.price}</del>
 							</span>
 						</div>
 						
@@ -416,81 +408,15 @@
 							<div class="Itemtb-tl">
 								<img src="img/t_02.png"/>
 							</div>
-							<div class="bodywork">
-								<div class="p-attribute">
-									<dl class="attrList">
-										<dt>版型：</dt>
-										<dd>标准形</dd>
-									</dl>
-									<dl class="attrList">
-										<dt>厚薄：</dt>
-										<dd>厚款</dd>
-									</dl>
-									<dl class="attrList">
-										<dt>领型：</dt>
-										<dd>连帽</dd>
-									</dl>
-									<dl class="attrList">
-										<dt>衣长：</dt>
-										<dd>中长款</dd>
-									</dl>
-									<dl class="attrList">
-										<dt>袖长：</dt>
-										<dd>长袖</dd>
-									</dl>
-									<dl class="attrList">
-										<dt>面料：</dt>
-										<dd title="大身面料：50%腈纶40%聚酯纤维10%羊毛里布：100%聚酯纤维">50%腈纶40%聚酯纤维10%羊毛里布：100%聚酯纤维</dd>
-									</dl>	
-								</div>
-							</div>
-							<div class="product_show">
-								<div class="Itemtb-tl">
-									<img src="img/t_03.png" />
-								</div>
-								<div class="pro_info">
-									<div class="picDetail">
-										<div class="ProductDetails">
-											<span>
-												<img src="img/tp.jpg"/>
-											</span>
-										</div>
-										<div class="detali_destrct">
-											<span>
-											<img src="img/430917402-116-01-H.jpg" />
-											</span>	
-											<span>
-											<img src="img/430917402-479-01-L.jpg" />
-											</span>	
-											<span>
-											<img src="img/430917402-116-01-H.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-116-02-H.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-479-04-H.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-116-04-H.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-479-05-L.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-116-05-H.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-479-06-H.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-116-06-L.jpg" />
-											</span>	
-											<span class="smallimg">
-											<img src="img/430917402-479-07-L.jpg" />
-											</span>	
-											
-										</div>
+							
+					<div class="detali_destrct">
+						<c:forEach items="${imgurl}" var="falg" varStatus="img">
+							<span>
+								<img src="${falg}"/>
+							</span>
+						</c:forEach>
+					</div>
+										
 									</div>
 								</div>
 							</div>
@@ -498,7 +424,29 @@
 					</div>
 				</div>
 			</div>
-		
 		</div>
 </body>
 </html>
+<script src="js/isLogin.js"></script>
+<script type="text/javascript" src="js/product.js" ></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/addcar.js"></script>
+<script src="js/jquery.mousewheel.min.js" type="text/javascript"
+charset="utf-8"></script>
+<!-- 回到顶部 -->
+<script type="text/javascript">
+	$('.return-top').click(function() {
+		//闪现到顶部
+		// $(document).scrollTop(0);
+		$('body , html').animate({
+			'scrollTop' : 0
+		}, 2000);
+	});
+	$(document).scroll(function() {
+		if ($(document).scrollTop() > 300) {
+			$('.return-top').fadeIn();
+		} else {
+			$('.return-top').fadeOut();
+		}
+	});
+</script>

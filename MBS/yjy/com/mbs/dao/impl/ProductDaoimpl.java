@@ -45,6 +45,8 @@ public class ProductDaoimpl implements ProductDao{
 				idcolorsizeof.setGoodStatus(rs.getInt("goodStatus"));
 //				商品热度 直接拿
 				idcolorsizeof.setGoodsHot(rs.getInt("goodsHot"));
+//				商品编号 直接拿
+				idcolorsizeof.setId(rs.getInt("id"));
 				
 //				JSONObject.fromObject(idcolorsizeof);
 			}
@@ -79,4 +81,48 @@ public class ProductDaoimpl implements ProductDao{
 		}
 		return repository;
 	}
+
+	@Override
+	public IDColorSizeOf IdColorOfImg(int Gid, String colorCode) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+		IDColorSizeOf idcolorsizeof = null;
+//		sql语句
+		String sql = "select colorImage from color where gid=? and colorCode=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,Gid);
+			ps.setString(2, colorCode);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				idcolorsizeof = new IDColorSizeOf();
+				idcolorsizeof.setColorimage(rs.getString("colorimage"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return idcolorsizeof;
+	}
+
+	@Override
+	public IDColorSizeOf IdToColor(int Gid) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+		IDColorSizeOf idcolorsizeof = null;
+//		sql语句
+		String sql = "select colorCode from color where gid=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,Gid);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				idcolorsizeof = new IDColorSizeOf();
+				idcolorsizeof.setColorCode(rs.getString("colorCode"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return idcolorsizeof;
+	}
+	
 }

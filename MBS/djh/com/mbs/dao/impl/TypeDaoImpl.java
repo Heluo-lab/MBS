@@ -35,6 +35,29 @@ public class TypeDaoImpl implements TypeDao {
 		}
 		return null;
 	}
+	// 查询所有的子类类型，通过父类id(只拿十条)
+	public List<Type> getTypeByParentIdTen(int ParentId, int count,Connection conn) throws Exception {
+		List<Type> list = new ArrayList<Type>();
+		String sql = "select * from type where parentId=? limit 0,?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, ParentId);
+			ps.setInt(2, count);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Type type = new Type();
+				type.setId(rs.getInt("id"));
+				type.setTypeName(rs.getString("typeName"));
+				type.setParentId(rs.getInt("parentId"));
+				type.setParentName(rs.getString("parentName"));
+				list.add(type);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	// 查询所有的子类类型，通过父类id,name
 	public List<Type> getTypeByParentIdAndName(int ParentId, String name, Connection conn) throws Exception {

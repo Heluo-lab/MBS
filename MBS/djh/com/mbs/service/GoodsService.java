@@ -11,4 +11,8 @@ public interface GoodsService {
 	public int selectMaxPage(int typeid, int pageSize);
 	//通过商品类型和商品页面展示数商品信息集合
 	public List<Goods> selectAllStudent(int typeid, int pageSize, int pageNo);
+	//获取推荐商品集合
+	public List<Goods> selectReconmmendGoods();
+	//通过tyid得到商品数
+	public int getTypeCount(int tyid);
 }

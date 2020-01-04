@@ -14,5 +14,8 @@ public interface GoodsDao {
 	
 	//通过商品tyid和pageNo和pageSize查询商品信息集合
 	public List<Goods> selectAllGoods(int tyid, int pageNo,int pageSize,Connection conn) throws SQLException;
+	
+	//查询此类型商品条数
+	public int getTypeCount(int tyid, Connection conn) throws SQLException;
 
 }

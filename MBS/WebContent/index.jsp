@@ -114,8 +114,9 @@
 			</div>
 			<div class="menu-car">
 				<div class="list-car">购物车</div>
-				<a href=""> <img src="img/cart.png"> <span>购物车</span> <span
-					class="count">0</span>
+				<a href=""> <img src="img/cart.png"> 
+				<span>购物车</span>
+				 <span class="count">0</span>
 				</a>
 			</div>
 			<div class="menu-heart">
@@ -146,229 +147,84 @@
 			<li>
 				<div class="licon">
 					<h3>
-						<a target="_blank" href="#">女装</a>
+						<a href="javascript:void(0)">女装</a>
 					</h3>
 					<h4>
-						<a target="_blank" href="#" class="haveborder">当季新品</a> 
-						<a target="_blank" href="#">连衣裙</a>
-					    <a target="_blank" href="#" class="haveborder">衬衫/小衫</a> 
-					    <a target="_blank" href="#">T恤</a>
-					    <a target="_blank" href="#" class="haveborder">薄外套</a>
-					    <a target="_blank" href="#">半裙</a>
-					    <a target="_blank" href="#" class="haveborder">短裤</a>
-					    <a target="_blank" href="#">断码清仓</a>
-					    <a target="_blank" href="#">裤装</a>
+						<c:forEach items="${womanList}" var="type" varStatus="i">
+							<c:if test="${i.index%2==0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+							</c:if>
+							<c:if test="${i.index%2!=0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+							</c:if>
+						</c:forEach>
 					</h4>
 				</div>
 			</li>
 			<li>
 				<div class="licon">
 					<h3>
-						<a target="_blank" href="#">内衣</a>
+						<a href="javascript:void(0)">内衣</a>
 					</h3>
 					<h4>
-						<a target="_blank" href="#" class="haveborder">当季新品</a> <a
-							target="_blank" href="#" r>无钢圈文胸</a> <a target="_blank" href="#"
-							class="haveborder">光面文胸</a> <a target="_blank" href="#">轻薄文胸</a>
-						<a target="_blank" href="#" class="haveborder">内裤</a> <a
-							target="_blank" href="#">家居服</a> <a target="_blank" href="#"
-							class="haveborder">泳装</a> <a target="_blank" href="#">打底/保暖</a> <a
-							target="_blank" href="#" class="haveborder">袜品</a> <a
-							target="_blank" href="#">少女系列</a>
+						<c:forEach items="${underwearList}" var="type" varStatus="i">
+							<c:if test="${i.index%2==0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+							</c:if>
+							<c:if test="${i.index%2!=0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+							</c:if>
+						</c:forEach>
 					</h4>
 				</div>
 			</li>
 			<li>
 				<div class="licon">
 					<h3>
-						<a target="_blank" href="#">男装</a>
+						<a href="javascript:void(0)">男装</a>
 					</h3>
 					<h4>
-						<a target="_blank" href="#" class="haveborder">当季新品</a> <a
-							target="_blank" href="#" r>T恤</a> <a target="_blank" href="#"
-							class="haveborder">衬衫</a> <a target="_blank" href="#">裤装</a> <a
-							target="_blank" href="#" class="haveborder">外套</a> <a
-							target="_blank" href="#">断码清仓</a>
+						<c:forEach items="${manList}" var="type" varStatus="i">
+							<c:if test="${i.index%2==0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+							</c:if>
+							<c:if test="${i.index%2!=0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+							</c:if>
+						</c:forEach>
 					</h4>
 				</div>
 			</li>
 			<li>
 				<div class="licon">
 					<h3>
-						<a target="_blank" href="#">鞋包</a>
+						<a href="javascript:void(0)">鞋包</a>
 					</h3>
 					<h4>
-						<a target="_blank" href="#" class="haveborder">鞋履</a> <a
-							target="_blank" href="#" r>箱包</a> <a target="_blank" href="#"
-							class="haveborder">饰品</a> <a target="_blank" href="#">化妆品</a>
+						<c:forEach items="${shoesBagList}" var="type" varStatus="i">
+							<c:if test="${i.index%2==0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+							</c:if>
+							<c:if test="${i.index%2!=0}">
+								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+							</c:if>
+						</c:forEach>
 					</h4>
 				</div>
 			</li>
 
 		</ul>
 		<ul class="nav-right">
-			<li class="nav-right-li"><a href="" class="list-active">首页</a></li>
+			<li class="nav-right-li"><a href="${pageContext.request.contextPath}/index" class="list-active">首页</a></li>
 			<c:forEach items="${goodsTopTypeList}" var="type">
 				<li class="nav-right-li">
-				<a href="product_list?tyid=${type.id}" id="${type.id}">${type.typeName}</a>
+				<a href="${pageContext.request.contextPath}/product_list?tyid=${type.id}" id="${type.id}">${type.typeName}</a>
 				<div class="sublist left">
 					<ul>
 					</ul>
 				</div>
 				</li>
 			</c:forEach>
-			<!--<li class="nav-right-li">
-					<a href="" class="">双十一</a>
-					<div class="sublist left">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">女装</a>
-					<div class="sublist left">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">内衣</a>
-					<div class="sublist left">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">男装</a>
-					<div class="sublist left">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">发现潮流</a>
-					<div class="sublist left">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">美国馆</a>
-					<div class="sublist left">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">名品馆</a>
-					<div class="sublist right">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>
-				<li class="nav-right-li">
-					<a href="">原创荟</a>
-					<div class="sublist right">
-						<ul>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-							<li><a href="">公司简介</a></li>
-						</ul>
-					</div>
-				</li>-->
 		</ul>
 	</div>
 	<!-- 轮播 -->
@@ -749,7 +605,7 @@
 		<img src="img/好货推荐.jpg">
 		<ul class="goods-list">
 			<c:forEach items="${goodsRecommendTypeList}" var="typ">
-				<li><a href="" id="${typ.id}">${typ.typeName}</a></li>
+				<li><a href="${pageContext.request.contextPath }/product_list?tyid=${typ.id}" id="${typ.id}">${typ.typeName}</a></li>
 			</c:forEach>
 
 			<!--<li><a href="">优雅女装</a></li>
@@ -765,64 +621,19 @@
 			-->
 		</ul>
 		<ul class="goods">
-			<!-- <li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li>
-				<li>
-					<img src="img/461618304-014-01-L.jpg" >
-					<p>商品名商品名商品名商品名商品名商品名商品名商品名</p>
-					<h3>￥330.00</h3>
-					<div class="goods-top">
-						<h2>商品名商品名商品名商品名商品名商品名商品名商品名</h2>
-					</div>
-				</li> -->
+		<c:forEach items="${goodsList}" var="goods">
+			<li>
+				<img src="${goods.showImage }" >
+				<p>${goods.goodsName}</p>
+				<h3>￥${goods.price}</h3>
+				<div class="goods-top">
+					<h2><a href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}">${goods.goodsName}</a></h2>
+				</div>
+			</li>
+		</c:forEach>	
 		</ul>
 	</div>
+	
 	<!--底部-->
 	<footer>
 		<div class="footer-a-bg">
@@ -886,7 +697,7 @@
 			<img src="img/footer_img03.jpg" />
 		</div>
 		<div class="footer-txt">
-			<a href="index.html">首页</a> <a href="">旗下品牌</a> <a href="">零售店址</a> <a
+			<a href="index">首页</a> <a href="">旗下品牌</a> <a href="">零售店址</a> <a
 				href="">梦芭莎网盟 </a> <a href="">网店代理</a> <a href="">网站地图</a> <a
 				href="">友情链接</a>
 			<div class="footer-txt-copyright">
@@ -959,7 +770,6 @@
 		}
 	});
 </script>
-<script src="js/base.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/ydxLazyLoad.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/isLogin.js"></script>

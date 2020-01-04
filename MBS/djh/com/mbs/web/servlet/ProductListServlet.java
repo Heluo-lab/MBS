@@ -30,16 +30,24 @@ public class ProductListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GoodsService gs = new GoodsServiceImpl();
 		TypeService ts = new TypeServiceImpl();
-		int tyid = Integer.parseInt(request.getParameter("tyid"));
+		String id = request.getParameter("tyid");
+		int tyid = 1;
+		//判断是否有参数id,默认为1;
+		if(id!=null) {
+			tyid = Integer.parseInt(id);
+		}
 		//顶级分类集合
 		List<Type> TopTypeList = ts.getGoodsTopType();
-		System.out.print(TopTypeList);
+		//通过tyid得到商品数
+		int goodsCount = gs.getTypeCount(tyid);
+		
+		//获取页面商品数
 		String size = request.getParameter("pageSize");
-		int pageSize = 50;
+		int pageSize = 100;
 		
 		if (size == null) {
 			// 表示第一次进入页面
-			pageSize = 30;
+			pageSize = 100;
 		} else {
 			pageSize = Integer.parseInt(size);
 		}
@@ -75,6 +83,8 @@ public class ProductListServlet extends HttpServlet {
 			}
 			if (pageNo > maxNo) {
 				pageNo = maxNo;
+				System.out.println(pageNo);
+				System.out.println(maxNo);
 			}
 		}
 
@@ -90,6 +100,10 @@ public class ProductListServlet extends HttpServlet {
 		request.setAttribute("pageSize", pageSize);
 		// 存储最大的页码
 		request.setAttribute("maxNo", maxNo);
+		//存储商品类型id
+		request.setAttribute("id", tyid);
+		//此类型商品数
+		request.setAttribute("goodsCount", goodsCount);
 		// 存入最大价和最小价到请求
 		request.setAttribute("min", min);
 		request.setAttribute("max", max);

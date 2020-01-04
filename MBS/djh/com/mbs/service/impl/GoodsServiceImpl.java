@@ -39,5 +39,34 @@ public class GoodsServiceImpl implements GoodsService{
 		}
 		return null;
 	}
+	
+	//获取推荐商品集合
+	@Override
+	public List<Goods> selectReconmmendGoods() {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.selectAllGoods(16, 1, 60, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBHelper.release();
+		}
+		return null;
+	}
+
+	//通过tyid得到商品数
+	public int getTypeCount(int tyid) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.getTypeCount(tyid,conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBHelper.release();
+		}
+		return 0;
+	}
 
 }

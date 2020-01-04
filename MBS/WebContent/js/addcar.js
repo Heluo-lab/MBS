@@ -13,13 +13,12 @@ jQuery("#addshoppingcart").click(function(){
 		width:'30px',
 		height:'30px',
 		opacity:'0.7'
-	},1200,function(){
-		jQuery(".gwc").animate({"width":"66px","height":"66px","top":"23%"},"fast");
-		jQuery(".gwc").animate({"width":"60px","height":"60px","top":"24%"},"fast");
+	},1000,function(){
+		jQuery(".menu-car").animate({"width":"38px","height":"137px","top":"30%"},"fast");
+		jQuery(".menu-car").animate({"width":"36px","height":"127px","top":"24%"},"fast");
 		lock = false;
 		$(this).remove();
 		jsq=jsq+1;
 		jQuery(".count").html(jsq);
-		
 	})
 })
