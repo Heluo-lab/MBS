@@ -17,5 +17,8 @@ public interface GoodsDao {
 	
 	//查询此类型商品条数
 	public int getTypeCount(int tyid, Connection conn) throws SQLException;
+	
+	//模糊查询商品
+	public List<Object> findProductByWord(String word, Connection conn) throws SQLException ;
 
 }

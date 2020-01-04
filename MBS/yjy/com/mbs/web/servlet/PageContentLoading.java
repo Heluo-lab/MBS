@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.ProductDao;
 import com.mbs.dao.impl.ProductDaoimpl;
-import com.mbs.util.ImgUrlSegmentation;
+
 
 /**
  * Servlet implementation class Test

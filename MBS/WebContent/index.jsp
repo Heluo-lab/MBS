@@ -95,8 +95,11 @@
 			<div class="logo">
 				<a href="index.html"><img src="img/logo.jpg" /></a>
 			</div>
-			<div class="header-bottom-search">
-				<input type="text" placeholder="请输入宝贝" name="search" />
+			<div class="header-bottom-search" style="position:relative">
+				<input type="text" placeholder="请输入宝贝" name="search" id="search" onkeyup="searchWord(this)"/>
+					<div id="showDiv" style="display:none;left: 60px;top: 67px;position:absolute;z-index:1000;background:#fff;width: 451px;border: 1px solid deeppink;">
+						
+					</div>
 				<button value="">搜索</button>
 			</div>
 			<div class="header-bottom-recommend">
@@ -258,8 +261,7 @@
 				</li>
 			</ul>
 			<div class="dot">
-				<span class="current"></span> <span></span> <span></span> <span></span>
-				<span></span>
+				<span class="current"></span> <span></span> <span></span> <span></span> <span></span>
 			</div>
 		</div>
 	</div>
@@ -769,6 +771,47 @@
 			$('.return-top').fadeOut();
 		}
 	});
+</script>
+<script type="text/javascript">
+	function overFn(obj){
+		$(obj).css("background","deeppink");
+	}
+	function outFn(obj){
+		$(obj).css("background","#fff");
+	}
+	
+	function clickFn(obj){
+		$("#search").val($(obj).html());
+		$("#showDiv").css("display","none");
+	}
+	function clickFnDle(obj){
+		$("#showDiv").css("display","none");
+	}
+	//键盘抬起事件
+	function searchWord(obj){
+		//1、获得输入框的输入的内容
+		var word = $(obj).val();
+		//2、根据输入框的内容去数据库中模糊查询---List<Product>
+		var content = "";
+		$.post(
+			"${pageContext.request.contextPath}/searchWord",
+			{"word":word},
+			function(data){
+				//3、将返回的商品的名称 现在showDiv中
+				if(data.length>0){
+					for(var i=0;i<data.length;i++){
+						content+="<div style='padding:5px;cursor:pointer;width: 441px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"+data[i]+"</div>";
+					}
+					content+="<div style='padding:5px;cursor:pointer;width: 441px;height:12px;position:relative'><span style='display:inline-block;border:solid deeppink 1px;border-radius:5px;text:center;color:deeppink;font-size:15px;position:absolute;left:404px;top:-3px' onclick='clickFnDle(this)'>关闭✘</span></div>"
+					$("#showDiv").html(content);
+					$("#showDiv").css("display","block");
+				}
+				
+			},
+			"json"
+		);
+		
+	}
 </script>
 <script src="js/ydxLazyLoad.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>

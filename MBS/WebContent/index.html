@@ -118,8 +118,11 @@
 				<div class="logo">
 					<a href="index.html"><img src="img/logo.jpg" /></a>
 				</div>
-				<div class="header-bottom-search">
-					<input type="text" placeholder="请输入宝贝" name="search" />
+				<div class="header-bottom-search" style="position:relative">
+					<input type="text" placeholder="请输入宝贝" name="search" id="search"/>
+					<div id="showDiv" style="display:block;left: 60px;top: 67px;position:absolute;z-index:1000;background:#fff;width: 451px;border: 1px solid #ccc;">
+						<div style='padding:5px;cursor:pointer;width: 442px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>呵呵呵呵呵</div>		
+					</div>
 					<button value="">搜索</button>
 				</div>
 				<div class="header-bottom-recommend">
@@ -1202,3 +1205,44 @@
 <script src="js/ydxLazyLoad.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/isLogin.js"></script>
+<!-- 完成异步搜索 -->
+<script type="text/javascript">
+
+	function overFn(obj){
+		$(obj).css("background","#DBEAF9");
+	}
+	function outFn(obj){
+		$(obj).css("background","#fff");
+	}
+	
+	function clickFn(obj){
+		$("#search").val($(obj).html());
+		$("#showDiv").css("display","none");
+	}
+	//键盘抬起事件
+	function searchWord(obj){
+		//1、获得输入框的输入的内容
+		var word = $(obj).val();
+		//2、根据输入框的内容去数据库中模糊查询---List<Product>
+		var content = "";
+		$.post(
+			"${pageContext.request.contextPath}/searchWord",
+			{"word":word},
+			function(data){
+				//3、将返回的商品的名称 现在showDiv中
+				//[{"pid":"1","pname":"小米 4c 官方版","market_price":8999.0,"shop_price":8999.0,"pimage":"products/1/c_0033.jpg","pdate":"2016-08-14","is_hot":1,"pdesc":"小米 4c 标准版 全网通 白色 移动联通电信4G手机 双卡双待 官方好好","pflag":0,"cid":"1"}]
+				
+				if(data.length>0){
+					for(var i=0;i<data.length;i++){
+						content+="<div style='padding:5px;cursor:pointer;width: 442px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"+data[i]+"</div>";
+					}
+					$("#showDiv").html(content);
+					$("#showDiv").css("display","block");
+				}
+				
+			},
+			"json"
+		);
+		
+	}
+</script>

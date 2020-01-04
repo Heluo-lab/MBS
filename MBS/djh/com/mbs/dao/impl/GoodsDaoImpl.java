@@ -59,4 +59,17 @@ public class GoodsDaoImpl implements GoodsDao {
 		return total;
 	}
 
+	@Override
+	public List<Object> findProductByWord(String word, Connection conn) throws SQLException {
+		List<Object> list = new ArrayList<Object>();
+		String sql = "select goodsName from goods where goodsName like ? limit 0,8";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, "%"+word+"%");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			list.add(rs.getString("goodsName"));
+		}
+		return list;
+	}
+
 }

@@ -69,4 +69,18 @@ public class GoodsServiceImpl implements GoodsService{
 		return 0;
 	}
 
+	//通过字符串模糊查询商品信息
+	public List<Object> findProductByWord(String word) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.findProductByWord(word,conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBHelper.release();
+		}
+		return null;
+	}
+
 }

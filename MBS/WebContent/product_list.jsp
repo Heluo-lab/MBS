@@ -610,6 +610,7 @@
 								</c:if>
 								
 								<c:if test="${pageNo eq maxNo and pageNo ne 1}">
+								
 									<c:if test="${pageNo-2 > 0}">
 										<c:forEach var="i" begin="${pageNo-2}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
@@ -620,7 +621,8 @@
 											</c:if>
 										</c:forEach>
 									</c:if>
-									<c:if test="${pageNo-2 < 0}">
+									
+									<c:if test="${pageNo-2 <= 0}">
 										<c:forEach var="i" begin="${1}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
 												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
@@ -629,7 +631,8 @@
 												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
 											</c:if>
 										</c:forEach>
-									</c:if>		
+									</c:if>	
+										
 								</c:if>
 								
 								<c:if test="${pageNo ne maxNo and pageNo ne 1}">

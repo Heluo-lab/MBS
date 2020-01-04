@@ -15,4 +15,6 @@ public interface GoodsService {
 	public List<Goods> selectReconmmendGoods();
 	//通过tyid得到商品数
 	public int getTypeCount(int tyid);
+	//通过字符串模糊查询商品信息
+	public List<Object> findProductByWord(String word);
 }
