@@ -24,6 +24,10 @@ public class ProductServiceimpl implements ProductService{
 		Repository repository = dao.GidColorSizeOfRepositoryCount(Gid, ColorCode, sizes);
 		return repository;
 	}
+	public IDColorSizeOf IdColorOfImg(int Gid, String colorCode) {
+		IDColorSizeOf idcolorsizeof = dao.IdColorOfImg(Gid, colorCode);
+		return idcolorsizeof;
+	}
 	
 }
 

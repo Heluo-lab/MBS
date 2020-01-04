@@ -29,6 +29,10 @@ public class IDColorSizeOf{
 	private int goodsHot;
 //	商品编号
 	private String goodsid;
+//	商品橱窗图
+	private String colorimage;
+//	颜色编码 
+	private String colorCode;
 
 	public IDColorSizeOf() {
 	
@@ -136,6 +140,22 @@ public class IDColorSizeOf{
 
 	public void setGoodsid(String goodsid) {
 		this.goodsid = goodsid;
+	}
+
+	public String getColorimage() {
+		return colorimage;
+	}
+
+	public void setColorimage(String colorimage) {
+		this.colorimage = colorimage;
+	}
+
+	public String getColorCode() {
+		return colorCode;
+	}
+
+	public void setColorCode(String colorCode) {
+		this.colorCode = colorCode;
 	}
 	
 }

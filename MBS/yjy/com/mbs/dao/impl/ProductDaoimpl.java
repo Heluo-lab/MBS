@@ -81,4 +81,27 @@ public class ProductDaoimpl implements ProductDao{
 		}
 		return repository;
 	}
+
+	@Override
+	public IDColorSizeOf IdColorOfImg(int Gid, String colorCode) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+
+		IDColorSizeOf idcolorsizeof = null;
+//		sql语句
+		String sql = "select colorimage from color where gid=? and colorCode=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,Gid);
+			ps.setString(2, colorCode);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				idcolorsizeof = new IDColorSizeOf();
+				idcolorsizeof.setColorCode(rs.getString("colorCode"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return idcolorsizeof;
+	}
 }
