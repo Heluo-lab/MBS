@@ -1,4 +1,5 @@
 $(function(){
+	var tyid = $("#tyid").val();
 	var tyli = $(".list_left .left .list_l_c .list_l_dt dl dt>a");
 	tyli.each(function(){
 			var mid=$(this).attr("id");
@@ -13,13 +14,13 @@ $(function(){
 			data:{id:mid},
 			success:function(result){
 				var arrayType =JSON.parse(result);
-				$.each(arrayType,function(i,type){
-						//alert(type.typeName+"====="+type.id);
+				$.each(arrayType,function(i,type){	
+					if(type.id==tyid){
+						var str =`<a rel="nofollow" class="" style="color:#e50056;" href="product_list?tyid=${type.id}">${type.parentName}--${type.typeName}</a>`;
+					}else{
 						var str =`<a rel="nofollow" class="" href="product_list?tyid=${type.id}">${type.parentName}--${type.typeName}</a>`;
-						//alert(str);
-						//navli.siblings('.sublist').append(str);
+					}
 						navli.parent("dt").siblings("dd").append(str);
-						//console.log(navli);
 					});
 			},
 			error:function(){

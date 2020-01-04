@@ -46,4 +46,17 @@ public class GoodsDaoImpl implements GoodsDao {
 		return list;
 	}
 
+	//查询此类型商品条数
+	public int getTypeCount(int tyid, Connection conn) throws SQLException {
+		String sql = "select count(*) from goods where tyid=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, tyid);
+		ResultSet rs = ps.executeQuery();
+		int total = 0;
+		if (rs.next()) {
+			total = rs.getInt("count(*)");
+		}
+		return total;
+	}
+
 }

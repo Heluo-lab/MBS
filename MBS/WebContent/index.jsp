@@ -114,8 +114,9 @@
 			</div>
 			<div class="menu-car">
 				<div class="list-car">购物车</div>
-				<a href=""> <img src="img/cart.png"> <span>购物车</span> <span
-					class="count">0</span>
+				<a href=""> <img src="img/cart.png"> 
+				<span>购物车</span>
+				 <span class="count">0</span>
 				</a>
 			</div>
 			<div class="menu-heart">

@@ -55,4 +55,18 @@ public class GoodsServiceImpl implements GoodsService{
 		return null;
 	}
 
+	//通过tyid得到商品数
+	public int getTypeCount(int tyid) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.getTypeCount(tyid,conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBHelper.release();
+		}
+		return 0;
+	}
+
 }

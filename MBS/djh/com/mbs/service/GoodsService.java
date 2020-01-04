@@ -13,4 +13,6 @@ public interface GoodsService {
 	public List<Goods> selectAllStudent(int typeid, int pageSize, int pageNo);
 	//获取推荐商品集合
 	public List<Goods> selectReconmmendGoods();
+	//通过tyid得到商品数
+	public int getTypeCount(int tyid);
 }
