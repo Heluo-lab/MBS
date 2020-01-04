@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.ProductDao;
 import com.mbs.dao.impl.ProductDaoimpl;
+import com.mbs.util.ImgUrlSegmentation;
 
 /**
  * Servlet implementation class Test
@@ -33,21 +34,29 @@ public class PageContentLoading extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProductDaoimpl dao = new ProductDaoimpl();
-		
+
 		String str =  request.getParameter("id");
 		int flag = Integer.parseInt(str);
 		
-//		request.getParameter("");
+		String colorCode = dao.IdToColor(flag).getColorCode();
 		
 		String imgUrl =  dao.LoadingfoGoodsID(flag).getGoodsInfoImage();
+		String[] imgUrls = imgUrl.split("@l@");
 		
-		String[] imgUrls =  imgUrl.split("@l@");
+		
+		String Shopwindow = dao.IdColorOfImg(flag,colorCode).getColorimage();
+		
+		String[] colorImage = Shopwindow.split("@l@");
 		
 		request.setAttribute("goods", dao.LoadingfoGoodsID(flag));
 		
 		request.setAttribute("imgurl", imgUrls);
 		
 		request.setAttribute("instock", dao.GidColorSizeOfRepositoryCount(flag, "052", "32"));
+		
+		request.setAttribute("color", dao.IdColorOfImg(flag, colorCode));
+		
+		request.setAttribute("colorImage",colorImage);
 		
 		request.getRequestDispatcher("product.jsp").forward(request, response);
 	}

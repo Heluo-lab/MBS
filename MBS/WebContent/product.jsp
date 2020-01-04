@@ -211,24 +211,26 @@
 						<!--滚动图-->
 						<ul>
 							<div class="zoomPad">
-						<!--<c:forEach items="${imgurl}" var="falg" varStatus="img">
+						<c:forEach items="${colorImage}" var="falg" varStatus="img">
 							<li>
-								<img src="${falg}"/>
+								<c:if test="${img.count eq 1}">
+									<img class="current" src="${falg}"/>
+								</c:if>
 							</li>
-						</c:forEach>-->
+						</c:forEach>
 								<!--滑块-->
 								<div class="slide"></div>
 							</div>						
 						</ul>
 						<!--滚动小图界面-->
 						<div class="tp-xiaomianb">
-				<!--	<ul>
-						<c:forEach items="${imgurl}" var="falg" varStatus="img">
+						<ul>
+						<c:forEach items="${colorImage}" var="falg" varStatus="img">
 							<li>
 								<img src="${falg}"/>
 							</li>
 						</c:forEach>
-						</ul> -->
+						</ul> 
 
 						</div>
 						<div class="Shopping-zuo-xia">

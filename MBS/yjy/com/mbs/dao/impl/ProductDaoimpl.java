@@ -86,14 +86,34 @@ public class ProductDaoimpl implements ProductDao{
 	public IDColorSizeOf IdColorOfImg(int Gid, String colorCode) {
 //		建立连接
 		Connection conn = DBHelper.getConnection();
-
 		IDColorSizeOf idcolorsizeof = null;
 //		sql语句
-		String sql = "select colorimage from color where gid=? and colorCode=?";
+		String sql = "select colorImage from color where gid=? and colorCode=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,Gid);
 			ps.setString(2, colorCode);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				idcolorsizeof = new IDColorSizeOf();
+				idcolorsizeof.setColorimage(rs.getString("colorimage"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return idcolorsizeof;
+	}
+
+	@Override
+	public IDColorSizeOf IdToColor(int Gid) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+		IDColorSizeOf idcolorsizeof = null;
+//		sql语句
+		String sql = "select colorCode from color where gid=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,Gid);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				idcolorsizeof = new IDColorSizeOf();
@@ -104,4 +124,5 @@ public class ProductDaoimpl implements ProductDao{
 		}		
 		return idcolorsizeof;
 	}
+	
 }
