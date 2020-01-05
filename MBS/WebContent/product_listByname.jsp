@@ -115,8 +115,8 @@
 <script src="js/product_list.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-	<p>
-		<style type="text/css">
+<p>
+<style type="text/css">
 .loginboxleft {
 	width: 301px !important;
 	height: 26px !important;
@@ -196,7 +196,7 @@
 }
 </style>
 	</p>
-	<input id="tyid" value="${id}" type="hidden">
+	<input id="tyid" value="${name}" type="hidden">
 	<input id="hdKeywordDefaultValue" type="hidden"
 		ame="hdKeywordDefaultValue" value="秋新品震撼上新，千万精品低至9元" />
 	<input id="hdKeywordDefaultUrl" type="hidden"
@@ -271,7 +271,7 @@
 				</p>
 			</ul>
 			<!-- 搜索框 -->
-			<div class="Bhs">
+			<div class="Bhs" style="position:relative">
 				<div class="BhCon">
 					<div class="brandLogo">
 						<div class="logoPic fl">
@@ -289,31 +289,18 @@
 					<div class="BhSearch fr" style="margin-right: 40px;">
 						<div class="search_keywv1">
 							<div class="searchv1">
-								<div class="fsearchv1" mola="suggest"
-									data-templateid="suggesttemplate">
-									<span class="inpv1"> <input type="text"
-										class="sinpv1 ac_inputv1" size="100" maxlength="20"
-										autocomplete="off" mola="keyword">
-									</span> <span class="subv1"> <input type="button"
-										style="cursor: pointer;" class="s" value="搜全站" mola="search">
+								<div class="fsearchv1" mola="suggest" data-templateid="suggesttemplate">
+									<span class="inpv1">
+									 <input type="text" class="sinpv1 ac_inputv1" size="100" maxlength="20" value="${name}" autocomplete="off" mola="keyword" id="search" onkeyup="searchWord(this)" onblur="clear(this)">
+									</span> 
+									<span class="subv1">
+									 <input type="button" style="cursor: pointer;" class="s" value="搜全站" mola="search" onclick="search()">
 									</span>
-									<div class="hidv1" id="headhid" mola="display"
-										style="display: none;">
-										<ul>
-											<li mola="item"><a href="javascript:void(0)"><span
-													mola="txt" class="kskey">蜗</span><span class="ksfrequency">约5件</span></a></li>
-											<li mola="item"><a href="javascript:void(0)"><span
-													mola="txt" class="kskey">蜗牛</span><span class="ksfrequency">约4件</span></a></li>
-											<li mola="item"><a href="javascript:void(0)"><span
-													mola="txt" class="kskey">涡轮</span><span class="ksfrequency">约1件</span></a></li>
-										</ul>
-										<b class="scloseBtn" mola="close">关闭</b>
-									</div>
+									<div id="showDiv" style="display:block;left: 638px;top: 82px;position:absolute;z-index:1000;background:#fff;width: 431px;border: 1px solid #E40462;"></div>
 								</div>
 								<div class="hot_keywords">
 									<span class="kwVessel" id="txthotkey" style="float: left;">
-										<div id="zngjz" name="SmartAdRecommend" columnid="46"
-											model="1"></div>
+										<div id="zngjz" name="SmartAdRecommend" columnid="46" model="1"></div>
 									</span>
 								</div>
 							</div>
@@ -598,7 +585,7 @@
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="好评从高到底" href="?sort=2" rel="nofollow"> <span>好评</span>
+										<a title="好评从高到底" href="?sort=2" rel="nofollow"> <span>热度</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
@@ -647,10 +634,10 @@
 								<strong>共<b>${goodsCount}</b>个商品
 								</strong><span><b>${pageNo}</b>/${maxNo}</span> <a rel="nofollow"
 									class="pageNext" <c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}"</c:if>>&lt;</a>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo-1}&name=${name}"</c:if>>&lt;</a>
 								<a rel="nofollow" class="pageNext"
 									<c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if>
-									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}"</c:if>>&gt;</a>
+									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo+1}&name=${name}"</c:if>>&gt;</a>
 							</div>
 						</div>
 
@@ -687,19 +674,19 @@
 							<div class="page_list">
 								<a class='paginationIndex'
 									<c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?tyid=${id}&pageNo=1"</c:if>>首页</a>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?name=${name}&pageNo=1"</c:if>>首页</a>
 								<a class='paginationNext'
 									<c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}"</c:if>>&#60;&#60;上一页
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo-1}&name=${name}"</c:if>>&#60;&#60;上一页
 								</a> 
 								
 								<c:if test="${pageNo eq 1 }">
 									<c:forEach var="i" begin="${pageNo}" end="${pageNo+2}">
 										<c:if test="${i ne pageNo }">
-											<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
 										</c:if>
 										<c:if test="${i eq pageNo}">
-											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
@@ -709,10 +696,10 @@
 									<c:if test="${pageNo-2 > 0}">
 										<c:forEach var="i" begin="${pageNo-2}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
-												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
 											</c:if>
 											<c:if test="${i eq pageNo}">
-												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
 											</c:if>
 										</c:forEach>
 									</c:if>
@@ -720,10 +707,10 @@
 									<c:if test="${pageNo-2 <= 0}">
 										<c:forEach var="i" begin="${1}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
-												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
 											</c:if>
 											<c:if test="${i eq pageNo}">
-												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
 											</c:if>
 										</c:forEach>
 									</c:if>	
@@ -733,18 +720,18 @@
 								<c:if test="${pageNo ne maxNo and pageNo ne 1}">
 									<c:forEach var="i" begin="${pageNo-1}" end="${pageNo+1 }">
 										<c:if test="${i ne pageNo}">
-											<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
 										</c:if>
 										<c:if test="${i eq pageNo}">
-											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
 								
 								
 								<span class='paginationSimplifyInfo'>${pageNo}/${maxNo}</span>
-								<a class='paginationNext' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}"</c:if>>下一页&#62;&#62;</a>
-								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${maxNo}&tyid=${id}"</c:if>>尾页</a>
+								<a class='paginationNext' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo+1}&name=${name}"</c:if>>下一页&#62;&#62;</a>
+								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${maxNo}&name=${name}"</c:if>>尾页</a>
 							</div>
 						</div>
 					</div>
@@ -1061,4 +1048,53 @@
 			$('.return-top').fadeOut();
 		}
 	});
+</script>
+<script type="text/javascript">
+	function overFn(obj){
+		$(obj).css("background","#E40462");
+	}
+	function outFn(obj){
+		$(obj).css("background","#fff");
+	}
+	
+	function clickFn(obj){
+		$("#search").val($(obj).html());
+		$("#showDiv").css("display","none");
+	}
+	function clickFnDle(obj){
+		$("#showDiv").css("display","none");
+	}
+	function clear(obj){
+		$("#showDiv").css("display","none");
+	}
+	function search(){
+		var word =$("#search").val();
+		window.location.href = '${pageContext.request.contextPath}/searchList?name='+word;
+	}
+	
+	//键盘抬起事件
+	function searchWord(obj){
+		//1、获得输入框的输入的内容
+		var word = $(obj).val();
+		//2、根据输入框的内容去数据库中模糊查询---List<Product>
+		var content = "";
+		$.post(
+			"${pageContext.request.contextPath}/searchWord",
+			{"word":word},
+			function(data){
+				//3、将返回的商品的名称 现在showDiv中
+				if(data.length>0){
+					for(var i=0;i<data.length;i++){
+						content+="<div style='padding:5px;cursor:pointer;width: 421px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"+data[i]+"</div>";
+					}
+					content+="<div style='padding:5px;cursor:pointer;width: 421px;height:12px;position:relative'><span style='display:inline-block;border:solid deeppink 1px;border-radius:5px;text:center;color:deeppink;font-size:15px;position:absolute;left:382px;top:-3px' onclick='clickFnDle(this)'>关闭✘</span></div>"
+					$("#showDiv").html(content);
+					$("#showDiv").css("display","block");
+				}
+				
+			},
+			"json"
+		);
+		
+	}
 </script>

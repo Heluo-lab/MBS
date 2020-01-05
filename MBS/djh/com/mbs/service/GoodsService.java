@@ -17,4 +17,10 @@ public interface GoodsService {
 	public int getTypeCount(int tyid);
 	//通过字符串模糊查询商品信息
 	public List<Object> findProductByWord(String word);
+	//通过商品名查询商品
+	public List<Goods> selectGoodsByName(String goodsName, int pageSize, int pageNo);
+	//通过商品名查询商品数量
+	public int getGoodsCount(String goodsName);
+	//通过商品名和商品页面展示数查询总页数
+	public int selectMaxPageByname(String goodsName, int pageSize);
 }

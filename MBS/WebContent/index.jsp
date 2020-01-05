@@ -8,6 +8,101 @@
 <title>首页</title>
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+.menu-car .header-cart-no {
+	position: absolute;
+	width: 358px;
+	height: 646px;
+	padding: 45px 0px;
+	left: -358px;
+	top: -145px;
+	background: #FFF;
+	text-align: center;
+	font-size: 32px;
+	display: none;
+}
+
+.menu-car:hover .header-cart-no {
+	display: block;
+}
+
+.list-car ul>li {
+	padding: 5px 10px 2px;
+	height: 70px;
+	background: white;
+	border-bottom: 1px solid #f3f3f3
+}
+
+.list-car li * {
+	float: left;
+}
+
+.list-car .pro_info {
+	padding-left: 5px;
+	width: 130px;
+	float: left;
+	color: black;
+	font-size: 12px;
+}
+
+.list-car li span {
+	color: deeppink;
+	font-size: 12px;
+	line-height: 50px;
+	font-weight: bold;
+	width: 70px;
+}
+
+.list-car li label {
+	margin: 0px 10px;
+	line-height: 50px;
+	font-size: 14px;
+}
+
+.list-car .del {
+	font-size: 14px;
+	color: black;
+	float: right;
+	line-height: 50px;
+	padding-left: 20px;
+}
+
+.list-car .checkout_box {
+	background: #f2f2f2;
+	height: 80px;
+	font-size: 12px;
+}
+
+.list-car .checkout_box p {
+	padding: 10px 0px 0px 15px;
+	display: block;
+}
+
+.list-car .checkout_box span:first-child {
+	float: left;
+}
+
+.list-car .checkout_box span:last-child {
+	float: right;
+}
+
+.list-car .checkout_box strong {
+	color: deeppink;
+}
+
+.list-car .checkout_box .checkout_btn {
+	display: block;
+	position: absolute;
+	bottom: 40px;
+	right: 10px;
+	background: #e50065;
+	color: white;
+	width: 70px;
+	height: 28px;
+	text-align: center;
+	line-height: 28px;
+}
+</style>
 </head>
 
 <body>
@@ -95,12 +190,12 @@
 			<div class="logo">
 				<a href="index.html"><img src="img/logo.jpg" /></a>
 			</div>
-			<div class="header-bottom-search" style="position:relative">
-				<input type="text" placeholder="请输入宝贝" name="search" id="search" onkeyup="searchWord(this)"/>
-					<div id="showDiv" style="display:none;left: 60px;top: 67px;position:absolute;z-index:1000;background:#fff;width: 451px;border: 1px solid deeppink;">
-						
-					</div>
-				<button value="">搜索</button>
+			<div class="header-bottom-search" style="position: relative">
+				<input type="text" placeholder="请输入宝贝" name="search" id="search"
+					onkeyup="searchWord(this)" onblur="clear(this)" />
+				<div id="showDiv"
+					style="display: none; left: 60px; top: 67px; position: absolute; z-index: 1000; background: #fff; width: 451px; border: 1px solid deeppink;"></div>
+				<button value="" onclick="search()">搜索</button>
 			</div>
 			<div class="header-bottom-recommend">
 				<a><img src="img/recommend.gif" /></a>
@@ -116,10 +211,41 @@
 				</a>
 			</div>
 			<div class="menu-car">
-				<div class="list-car">购物车</div>
-				<a href=""> <img src="img/cart.png"> 
-				<span>购物车</span>
-				 <span class="count">0</span>
+				<!-- <div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div> -->
+				<div class="list-car">
+						<ul>
+							<li>
+								<a href="#" target="_blank"> <img width="40" height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫" src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
+								</a>
+								<a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
+								<span>￥198.00</span>
+								<div>
+									<label type="text" class="minicart_num">×1</label>
+									<a href="javascript:void(0)" class="del" style="color: black;">删除</a>
+								</div>
+							</li>
+							<li>
+								<a href="#" target="_blank"> <img width="40" height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫" src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
+								</a>
+								<a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
+								<span>￥198.00</span>
+								<div>
+									<label type="text" class="minicart_num">×1</label>
+									<a href="javascript:void(0)" class="del" style="color: black;">删除</a>
+								</div>
+							</li>
+						</ul>
+						<div class="checkout_box">
+							<br>
+							<p>
+								<span class="fl">共<strong>1</strong>件商品
+									</span> <span>合计：<strong>¥198.00</strong></span>
+							</p>
+							<a class="checkout_btn" href="#">去结算</a>
+						</div>
+					</div>
+				<a href=""> <img src="img/cart.png"> <span>购物车</span> <span
+					class="count">0</span>
 				</a>
 			</div>
 			<div class="menu-heart">
@@ -155,10 +281,13 @@
 					<h4>
 						<c:forEach items="${womanList}" var="type" varStatus="i">
 							<c:if test="${i.index%2==0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"
+									class="haveborder">${type.typeName}</a>
 							</c:if>
 							<c:if test="${i.index%2!=0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
 							</c:if>
 						</c:forEach>
 					</h4>
@@ -172,10 +301,13 @@
 					<h4>
 						<c:forEach items="${underwearList}" var="type" varStatus="i">
 							<c:if test="${i.index%2==0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"
+									class="haveborder">${type.typeName}</a>
 							</c:if>
 							<c:if test="${i.index%2!=0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
 							</c:if>
 						</c:forEach>
 					</h4>
@@ -189,10 +321,13 @@
 					<h4>
 						<c:forEach items="${manList}" var="type" varStatus="i">
 							<c:if test="${i.index%2==0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"
+									class="haveborder">${type.typeName}</a>
 							</c:if>
 							<c:if test="${i.index%2!=0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
 							</c:if>
 						</c:forEach>
 					</h4>
@@ -206,10 +341,13 @@
 					<h4>
 						<c:forEach items="${shoesBagList}" var="type" varStatus="i">
 							<c:if test="${i.index%2==0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"  class="haveborder">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}"
+									class="haveborder">${type.typeName}</a>
 							</c:if>
 							<c:if test="${i.index%2!=0}">
-								<a target="_blank" href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
+								<a target="_blank"
+									href="${pageContext.request.contextPath }/product_list?tyid=${type.id}">${type.typeName}</a>
 							</c:if>
 						</c:forEach>
 					</h4>
@@ -218,15 +356,16 @@
 
 		</ul>
 		<ul class="nav-right">
-			<li class="nav-right-li"><a href="${pageContext.request.contextPath}/index" class="list-active">首页</a></li>
+			<li class="nav-right-li"><a
+				href="${pageContext.request.contextPath}/index" class="list-active">首页</a></li>
 			<c:forEach items="${goodsTopTypeList}" var="type">
-				<li class="nav-right-li">
-				<a href="${pageContext.request.contextPath}/product_list?tyid=${type.id}" id="${type.id}">${type.typeName}</a>
-				<div class="sublist left">
-					<ul>
-					</ul>
-				</div>
-				</li>
+				<li class="nav-right-li"><a
+					href="${pageContext.request.contextPath}/product_list?tyid=${type.id}"
+					id="${type.id}">${type.typeName}</a>
+					<div class="sublist left">
+						<ul>
+						</ul>
+					</div></li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -261,7 +400,8 @@
 				</li>
 			</ul>
 			<div class="dot">
-				<span class="current"></span> <span></span> <span></span> <span></span> <span></span>
+				<span class="current"></span> <span></span> <span></span> <span></span>
+				<span></span>
 			</div>
 		</div>
 	</div>
@@ -607,7 +747,9 @@
 		<img src="img/好货推荐.jpg">
 		<ul class="goods-list">
 			<c:forEach items="${goodsRecommendTypeList}" var="typ">
-				<li><a href="${pageContext.request.contextPath }/product_list?tyid=${typ.id}" id="${typ.id}">${typ.typeName}</a></li>
+				<li><a
+					href="${pageContext.request.contextPath }/product_list?tyid=${typ.id}"
+					id="${typ.id}">${typ.typeName}</a></li>
 			</c:forEach>
 
 			<!--<li><a href="">优雅女装</a></li>
@@ -623,19 +765,20 @@
 			-->
 		</ul>
 		<ul class="goods">
-		<c:forEach items="${goodsList}" var="goods">
-			<li>
-				<img src="${goods.showImage }" >
-				<p>${goods.goodsName}</p>
-				<h3>￥${goods.price}</h3>
-				<div class="goods-top">
-					<h2><a href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}">${goods.goodsName}</a></h2>
-				</div>
-			</li>
-		</c:forEach>	
+			<c:forEach items="${goodsList}" var="goods">
+				<li><img src="${goods.showImage }">
+					<p>${goods.goodsName}</p>
+					<h3>￥${goods.price}</h3>
+					<div class="goods-top">
+						<h2>
+							<a
+								href="${pageContext.request.contextPath }/pageConetentLoading?id=${goods.id}">${goods.goodsName}</a>
+						</h2>
+					</div></li>
+			</c:forEach>
 		</ul>
 	</div>
-	
+
 	<!--底部-->
 	<footer>
 		<div class="footer-a-bg">
@@ -773,44 +916,55 @@
 	});
 </script>
 <script type="text/javascript">
-	function overFn(obj){
-		$(obj).css("background","deeppink");
+	function overFn(obj) {
+		$(obj).css("background", "deeppink");
 	}
-	function outFn(obj){
-		$(obj).css("background","#fff");
+	function outFn(obj) {
+		$(obj).css("background", "#fff");
 	}
-	
-	function clickFn(obj){
+
+	function clickFn(obj) {
 		$("#search").val($(obj).html());
-		$("#showDiv").css("display","none");
+		$("#showDiv").css("display", "none");
 	}
-	function clickFnDle(obj){
-		$("#showDiv").css("display","none");
+	function clickFnDle(obj) {
+		$("#showDiv").css("display", "none");
 	}
+	function clear(obj) {
+		$("#showDiv").css("display", "none");
+	}
+	function search() {
+		var word = $("#search").val();
+		window.location.href = '${pageContext.request.contextPath}/searchList?name='
+				+ word;
+	}
+
 	//键盘抬起事件
-	function searchWord(obj){
+	function searchWord(obj) {
 		//1、获得输入框的输入的内容
 		var word = $(obj).val();
 		//2、根据输入框的内容去数据库中模糊查询---List<Product>
 		var content = "";
-		$.post(
-			"${pageContext.request.contextPath}/searchWord",
-			{"word":word},
-			function(data){
-				//3、将返回的商品的名称 现在showDiv中
-				if(data.length>0){
-					for(var i=0;i<data.length;i++){
-						content+="<div style='padding:5px;cursor:pointer;width: 441px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"+data[i]+"</div>";
-					}
-					content+="<div style='padding:5px;cursor:pointer;width: 441px;height:12px;position:relative'><span style='display:inline-block;border:solid deeppink 1px;border-radius:5px;text:center;color:deeppink;font-size:15px;position:absolute;left:404px;top:-3px' onclick='clickFnDle(this)'>关闭✘</span></div>"
-					$("#showDiv").html(content);
-					$("#showDiv").css("display","block");
-				}
-				
-			},
-			"json"
-		);
-		
+		$
+				.post(
+						"${pageContext.request.contextPath}/searchWord",
+						{
+							"word" : word
+						},
+						function(data) {
+							//3、将返回的商品的名称 现在showDiv中
+							if (data.length > 0) {
+								for (var i = 0; i < data.length; i++) {
+									content += "<div style='padding:5px;cursor:pointer;width: 441px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"
+											+ data[i] + "</div>";
+								}
+								content += "<div style='padding:5px;cursor:pointer;width: 441px;height:12px;position:relative'><span style='display:inline-block;border:solid deeppink 1px;border-radius:5px;text:center;color:deeppink;font-size:15px;position:absolute;left:404px;top:-3px' onclick='clickFnDle(this)'>关闭✘</span></div>"
+								$("#showDiv").html(content);
+								$("#showDiv").css("display", "block");
+							}
+
+						}, "json");
+
 	}
 </script>
 <script src="js/ydxLazyLoad.js" type="text/javascript" charset="utf-8"></script>

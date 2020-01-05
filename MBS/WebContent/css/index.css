@@ -70,12 +70,12 @@ body{
 	position: relative;
 }
 .menu-car .list-car{
-	width: 280px;
+	width: 368px;
 	height:646px;
 	background:#EEEEEE;
 	position: absolute;
-	left: -280px;
-	top:-145px;
+	left: -368px;
+	top:-140px;
 	display: none;
 }
 .menu-car:hover .list-car{

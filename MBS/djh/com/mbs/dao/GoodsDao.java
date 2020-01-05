@@ -20,5 +20,11 @@ public interface GoodsDao {
 	
 	//模糊查询商品
 	public List<Object> findProductByWord(String word, Connection conn) throws SQLException ;
+	//模糊查询商品
+	public List<Goods> findProductByName(String word, int pageSize, int pageNo, Connection conn) throws SQLException ;
+	//模糊查询商品得到商品数量
+	public int getGoodsCount(String goodsName, Connection conn)throws SQLException;
+	//通过商品名和商品页面展示数查询总页数
+	public int selectMaxPageByName(String goodsName, int pageSize, Connection conn) throws SQLException;
 
 }

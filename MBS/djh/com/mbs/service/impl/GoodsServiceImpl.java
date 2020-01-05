@@ -83,4 +83,48 @@ public class GoodsServiceImpl implements GoodsService{
 		return null;
 	}
 
+	@Override
+	//通过商品名查询商品
+	public List<Goods> selectGoodsByName(String goodsName,int pageSize, int pageNo) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.findProductByName(goodsName,pageSize, pageNo,conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBHelper.release();
+		}
+		return null;
+	}
+
+	//通过商品名查询商品数量
+	@Override
+	public int getGoodsCount(String goodsName) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.getGoodsCount(goodsName,conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBHelper.release();
+		}
+		return 0;
+	}
+
+	//通过商品名和商品页面展示数查询总页数
+	public int selectMaxPageByname(String goodsName, int pageSize) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.selectMaxPageByName(goodsName, pageSize, conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return 0;
+	}
+
 }
