@@ -1,7 +1,6 @@
 package com.mbs.web.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,25 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.CartDao;
+import com.mbs.dao.OrderDao;
 import com.mbs.dao.ProductDao;
 import com.mbs.dao.impl.CartDaoImpl;
+import com.mbs.dao.impl.OrderDaoImpl;
 import com.mbs.dao.impl.ProductDaoimpl;
-import com.mbs.dto.DataMapping;
 import com.mbs.dto.GoodsMsg;
 import com.mbs.dto.IDColorSizeOf;
 import com.mbs.pojo.CartItem;
-import com.mbs.pojo.Goods;
+import com.mbs.pojo.Receivinggoods;
 
-import net.sf.json.JSONArray;
-
-/**
- * 访问购物车页面
- * 通过usersid判断
- * @author 高嘉楠
- *
- */
-@WebServlet("/cart")
-public class CartServlet extends HttpServlet{
+@WebServlet("/order")
+public class OrderServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,8 +31,20 @@ public class CartServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//获得地址信息
+		OrderDao od = new OrderDaoImpl();
+		List<Receivinggoods> recelist = od.selectAddress("1");
+		for (Receivinggoods regoods : recelist) {
+			if (regoods.getIsDefault()==1) {
+				req.getSession().setAttribute("hasmsg", true);
+				req.getSession().setAttribute("receivinggoods", regoods);
+			}
+		}
+		//获得购物车商品
+		double money = 0;
 		CartDao cd = new CartDaoImpl();
-		List<CartItem> list = cd.selectAllCartId(req.getParameter("usersid"));
+		//usersid
+		List<CartItem> list = cd.selectAllCartId("1");
 		List<GoodsMsg> msglist = new ArrayList<GoodsMsg>();
 		for (CartItem cart : list) {
 			ProductDao pd = new ProductDaoimpl();
@@ -51,11 +55,14 @@ public class CartServlet extends HttpServlet{
 			goodsmsg.setGoodsNum(cart.getGoodsNum());
 			goodsmsg.setPrice(goods.getPrice());
 			goodsmsg.setShowImage(goods.getShowImage());
-			List<DataMapping> colorlist = goods.getColourSizesList();
+			money = money + goodsmsg.getPrice()*goodsmsg.getGoodsNum();
 			msglist.add(goodsmsg);
 		}
+		req.getSession().setAttribute("money", money);
 		req.getSession().setAttribute("goodslist", msglist);
-		resp.sendRedirect("cart.jsp");
+		String usersId = req.getParameter("usersid");
+		req.getSession().setAttribute("usersId", usersId);
+		resp.sendRedirect("order.jsp");
 	}
 
 }

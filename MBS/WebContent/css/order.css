@@ -77,7 +77,6 @@ body .order-title>a{
 	color: #333333;
 }
 .address{
-	height: 58px;
 	line-height: 58px;
 	padding: 0px 123px;
 }
@@ -130,6 +129,7 @@ body .order-title>a{
 	font-size: 12px;
 	padding-right: 60px;
 	padding-top: 5px;
+	width: 400px;
 }
 .firsttd>div p{
 	color: ##5B5B5B;
@@ -262,4 +262,28 @@ table img{
 	background: #EB0067;
 	border: none;
 	margin-right: 20px;
+}
+.recemsg{
+	height:30px;
+}
+.selectArea{
+	height:60px;
+}
+.province{
+	float:left;
+}
+.city{
+	margin-left:20px;
+	float:left;
+}
+.submitaddress{
+	border:none;
+	color:white;
+	display: block;
+	background:#DB0060;
+	height:38px;
+	width:148px;
+	line-height: 38px;
+	font-size:18px;
+	margin:20px 0px;
 }

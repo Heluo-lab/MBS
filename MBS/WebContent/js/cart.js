@@ -96,7 +96,7 @@ $(function(){
 							  var str = `
 								  <tr>
 									  <input type="hidden" class="cartgoodsid" value="${goods}" />
-									  <td><input type="checkbox" class="check" /></td>
+									  <td><input type="checkbox" class="check"checked data-check="active"/></td>
 									  <td class="goods-img"><img lazyLoadSrc="${obj.showImage}" src="img/loading.gif" /></td>
 									  <td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${obj.goodsName}</a></td>
 									  <td class="goods-price">${obj.price}</td>
@@ -222,7 +222,7 @@ function shop(id){
 							  var str = `
 								  <tr>
 									  <input type="hidden" class="cartgoodsid" value="${goods}" />
-									  <td><input type="checkbox" class="check" /></td>
+									  <td><input type="checkbox" class="check" checked data-check="active"/></td>
 									  <td class="goods-img"><img lazyLoadSrc="${obj.showImage}" src="img/loading.gif" /></td>
 									  <td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${obj.goodsName}</a></td>
 									  <td class="goods-price">${obj.price}</td>
@@ -340,13 +340,31 @@ function cartEvent(){
   
   //点击单选
   $('.check').click(function(){
-	//先判断锁状态
     if($(this).prop('checked')){
       //给选中的元素设置一个标识
       $(this).attr('data-check', 'active');
+      var nowNum = parseInt($(this).parent().siblings('.goods-nub').children(".goods-num").html());
+      var goods = $(this).parent().siblings('.cartgoodsid').val();
+      $.ajax({
+  		  type:"post",
+  		  url:"addcartdata",
+  		  data:"goodsid="+goods+"&goodsnum="+nowNum,
+  		  success:function(result){
+  			  console.log("success");
+  		  }
+  	  });
     }else{
       //删除标识
       $(this).attr('data-check', '');
+      var goods = $(this).parent().siblings('.cartgoodsid').val();
+      $.ajax({
+  		  type:"post",
+  		  url:"deletecart",
+  		  data:"goodsid="+goods,
+  		  success:function(result){
+  			  console.log("success");
+  		  }
+  	  });
     };
     //求总价
     priceAll();
@@ -483,4 +501,3 @@ function priceAll(){
   //给到总价元素
   $('.price-all').html('<span>折后商品金额总计：</span>¥' + priceSum + '.00');
 };
-

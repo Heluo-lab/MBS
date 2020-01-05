@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,7 +16,7 @@
 		<!--头部-->
 		<div class="nav">
 			<div class="container">
-				<a href="" class="logo"><img src="img/logo.jpg"/></a>
+				<a href="" class="logo"><img src="img/cartlogo.jpg"/></a>
 				<div class="headleft">
 					<ul>
 						<li>　9年品质保证<span>　|　</span></li>
@@ -77,10 +80,32 @@
 			<div class="order-body">
 				<div class="order-title">
 					<span class="title-address"></span>
-					<a href="javascript:;">[修改]</a>
+					<a href="javascript:;" onclick="changeAddress()">[修改]</a>
 				</div>
 				<div class="address">
-					XXX 湖南省  长沙市   岳麓区  延农创业大厦   410006   17346967713
+					<c:if test="${!empty hasmsg }">
+						${receivinggoods.receName } ${receivinggoods.receAddressProv } ${receivinggoods.receAddressCity } ${receivinggoods.receAddressDetaile } ${receivinggoods.recePhone }
+					</c:if>
+					<c:if test="${empty hasmsg }">
+						<form action="javascript:;" onsubmit="javascript:return submitAll();" id="allrecemsg">
+							<div class="receiver">收货人：<input type="text" id="receName" class="recemsg" placeholder="请输入姓名"/></div>
+							<div class="selectArea">
+								<div class="province">
+									选择地区：<select class="receAddressProv" id="input_province">
+										<option value="">--请选择省份--</option>
+									</select>
+								</div>
+								<div class="city">
+									<select class="receAddressCity" id="input_city">
+										<option value="">--请选择城市--</option>
+									</select>
+								</div>
+							</div>
+							<div class="detaile">详细地址：<input type="text" id="receAddressDetaile" class="recemsg" placeholder="请输入详细地址"/></div>
+							<div class="addphone">电话：<input type="text" id="recePhone" class="recemsg" placeholder="请输入电话"/></div>
+							<input type="submit" class="submitaddress" value="确定"/>
+						</form>
+					</c:if>
 				</div>
 				
 				
@@ -101,7 +126,7 @@
 				<div class="buygoods">
 					<span>以下商品由 梦芭莎 发货 配送费10.00元</span>
 					<div class="paygoods">
-						<table border="1 ">
+						<table border="1">
 							<tr class="firsttr">
 								<td>
 									商品名称
@@ -116,30 +141,21 @@
 									小计
 								</td>
 							</tr>
-							<tr>
-								<td class="firsttd">
-									<img src="img/462017314-070-01-L.jpg" />
-									<div>
-										<p>简约时尚倒梯形宽松款立体蕾丝和金属环装饰七分袖T恤（462118302）</p>
-										<p>品牌：梦芭莎　尺寸：S　颜色：黑色</p>
-									</div>
-								</td>
-								<td class="othertd"><span>￥99.00</span></td>
-								<td class="othertd"><span>1</span></td>
-								<td class="othertd"><span>￥99.00</span></td>
-							</tr>
-							<tr>
-								<td class="firsttd">
-									<img src="img/462017314-070-01-L.jpg" />
-									<div>
-										<p>简约时尚倒梯形宽松款立体蕾丝和金属环装饰七分袖T恤（462118302）</p>
-										<p>品牌：梦芭莎　尺寸：S　颜色：黑色</p>
-									</div>
-								</td>
-								<td class="othertd"><span>￥99.00</span></td>
-								<td class="othertd"><span>1</span></td>
-								<td class="othertd"><span>￥99.00</span></td>
-							</tr>
+							<c:forEach items="${goodslist }" var="goods">
+								<tr>
+									<input type="hidden" class="cartgoodsid" value="${goods.goodsId}" />
+									<td class="firsttd">
+										<img src="${goods.showImage} " />
+										<div>
+											<p>${goods.goodsName}</p>
+											<p>品牌：梦芭莎　尺寸：S　颜色：黑色</p>
+										</div>
+									</td>
+									<td class="othertd"><span>${goods.price}</span></td>
+									<td class="othertd"><span>${goods.goodsNum}</span></td>
+									<td class="othertd"><span>${goods.goodsNum*goods.price}</span></td>
+								</tr>
+							</c:forEach>
 						</table>
 						<div class="order-price-all">
 							<div class="order-price-all-left">
@@ -151,15 +167,15 @@
 								<table>
 									<tr>
 										<td>商品总价：</td>
-										<td>￥ 178.00</td>
+										<td>￥${money }</td>
 									</tr>
 									<tr>
 										<td>配送费：</td>
-										<td>￥ 178.00</td>
+										<td>￥10.00</td>
 									</tr>
 									<tr>
 										<td>应付金额：</td>
-										<td id="price-all">￥ 178.00</td>
+										<td id="price-all">￥ ${money+10 }</td>
 									</tr>
 								</table>
 							</div>
@@ -259,5 +275,6 @@
 	
 </html>
 <script type="text/javascript" src="js/jquery.min.js" ></script>
+<script type="text/javascript" src="js/city.js" ></script>
 <script type="text/javascript" src="js/order.js" ></script>
 <script type="text/javascript" src="js/ydxLazyLoad.js" ></script>

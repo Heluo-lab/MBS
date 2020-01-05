@@ -108,7 +108,7 @@
 									<c:forEach items="${goodslist }" var="goods">
 										<tr>
 								      		<input type="hidden" class="cartgoodsid" value="${goods.goodsId}" />
-											<td><input type="checkbox" class="check" /></td>
+											<td><input type="checkbox" class="check" checked data-check="active"/></td>
 											<td class="goods-img"><img src="img/loading.gif" lazyLoadSrc="${goods.showImage}"  /></td>
 											<td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${goods.goodsName}</a></td>
 											<td class="goods-price">${goods.price}</td>
