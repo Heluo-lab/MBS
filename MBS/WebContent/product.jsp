@@ -408,11 +408,11 @@
 							<ul class="c-ul">
 								<li class="txt">颜色</li>
 								<li class="licolork">
-						<c:forEach items="${colorNameandimg}" var="falg" varStatus="img">
+						<c:forEach items="${Cnimgcodelist}" var="falg" varStatus="img">
 							<p>
 								<c:if test="${img.count eq 1}">
-									<img class="current" src="${falg.colorImage}"/>
-									${falg.colorName}
+									<img class="current" src="${Cnimgcodelist.colorImage}"/>
+									${Cnimgcodelist.colorName}
 								</c:if>
 							</p>
 						</c:forEach>									
