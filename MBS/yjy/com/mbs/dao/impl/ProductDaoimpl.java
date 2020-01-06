@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mbs.dao.ProductDao;
 import com.mbs.db.DBHelper;
+import com.mbs.dto.DataMapping;
 import com.mbs.dto.IDColorSizeOf;
 import com.mbs.pojo.Goods;
 import com.mbs.pojo.Repository;
@@ -105,24 +108,76 @@ public class ProductDaoimpl implements ProductDao{
 	}
 
 	@Override
-	public IDColorSizeOf IdToColor(int Gid) {
+	public IDColorSizeOf IdToColor(int id) {
 //		建立连接
 		Connection conn = DBHelper.getConnection();
-		IDColorSizeOf idcolorsizeof = null;
+		IDColorSizeOf idcolorsizeof = new IDColorSizeOf();
 //		sql语句
-		String sql = "select colorCode from color where gid=?";
+		String sql = "select goodsCode from goods where id=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1,Gid);
+			ps.setInt(1,id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				idcolorsizeof = new IDColorSizeOf();
-				idcolorsizeof.setColorCode(rs.getString("colorCode"));
+				String codestring=rs.getString("goodsCode");
+				List<DataMapping> colorCode = StringParse.getColorDataObj(codestring);
+				idcolorsizeof.setColorCode(colorCode);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 		return idcolorsizeof;
+	}
+
+	@Override
+	public IDColorSizeOf IdColoridOfColorNameandimg(int Gid, String colorCode) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+		IDColorSizeOf idcolorsizeof = null;
+//		sql语句
+		String sql = "select colorName,colorImage FROM color where gid=? and colorCode=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,Gid);
+			ps.setString(2, colorCode);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				idcolorsizeof = new IDColorSizeOf();
+				idcolorsizeof.setColorName(rs.getString("colorName"));
+				idcolorsizeof.setColorimage(rs.getString("colorImage"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return idcolorsizeof;
+	}
+
+	@Override
+	public List<String> IdOfColorandsize(int id,String colorCode) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+		List<String> sizelist = new ArrayList<String>();
+//		sql语句
+		String sql = "select goodsCode FROM color where id=? ";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				List<DataMapping> colorDataObj = StringParse.getColorDataObj(rs.getString("goodsCode"));
+				for (DataMapping dataMapping : colorDataObj) {
+					if(dataMapping.getColorCode()==colorCode) {
+						String[] sizistu = dataMapping.getSizes().split(",");
+						for (String string : sizistu) {
+							sizelist.add(string);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sizelist;
 	}
 	
 }

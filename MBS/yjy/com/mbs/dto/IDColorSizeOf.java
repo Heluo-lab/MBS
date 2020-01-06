@@ -11,7 +11,7 @@ public class IDColorSizeOf{
 	private Double price;
 //	商品图片 
 	private String ShowImage;
-//	商品颜色尺寸
+//	商品颜色
 	private String goodsCode;
 //	商品颜色
 	private String colour;
@@ -32,8 +32,9 @@ public class IDColorSizeOf{
 //	商品橱窗图
 	private String colorimage;
 //	颜色编码 
-	private String colorCode;
-
+	private List<DataMapping> colorCode;
+//	颜色名
+	private String colorName;
 	public IDColorSizeOf() {
 	
 	}
@@ -150,12 +151,29 @@ public class IDColorSizeOf{
 		this.colorimage = colorimage;
 	}
 
-	public String getColorCode() {
+	public List<DataMapping> getColorCode() {
 		return colorCode;
 	}
 
-	public void setColorCode(String colorCode) {
+	public void setColorCode(List<DataMapping> colorCode) {
 		this.colorCode = colorCode;
+	}
+
+	public String getColorName() {
+		return colorName;
+	}
+
+	public void setColorName(String colorName) {
+		this.colorName = colorName;
+	}
+
+	@Override
+	public String toString() {
+		return "IDColorSizeOf [id=" + id + ", goodsName=" + goodsName + ", price=" + price + ", ShowImage=" + ShowImage
+				+ ", goodsCode=" + goodsCode + ", colour=" + colour + ", sizes=" + sizes + ", repositoryCount="
+				+ repositoryCount + ", ColourSizesList=" + ColourSizesList + ", goodsInfoImage=" + goodsInfoImage
+				+ ", goodStatus=" + goodStatus + ", goodsHot=" + goodsHot + ", goodsid=" + goodsid + ", colorimage="
+				+ colorimage + ", colorCode=" + colorCode + ", colorName=" + colorName + "]";
 	}
 	
 }

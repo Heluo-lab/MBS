@@ -408,8 +408,14 @@
 							<ul class="c-ul">
 								<li class="txt">颜色</li>
 								<li class="licolork">
-									<p class="dq"><img src="img/430917402-116-01-H.jpg"/>  卡其色</p>
-									<p><img src="img/430917402-479-01-L.jpg"/>  卡其色</p>
+						<c:forEach items="${colorNameandimg}" var="falg" varStatus="img">
+							<p>
+								<c:if test="${img.count eq 1}">
+									<img class="current" src="${falg.colorImage}"/>
+									${falg.colorName}
+								</c:if>
+							</p>
+						</c:forEach>									
 								</li>
 							</ul>
 						</div>
