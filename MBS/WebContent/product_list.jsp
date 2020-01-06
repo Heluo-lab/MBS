@@ -7,8 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="description"
-	content="【梦芭莎特价】为您提供大站频道搭配图片、大站频道新款图片，大站频道搭配图片，大站频道细节图，买大站频道，选择梦芭莎，货到付款，7天无理由退换货" />
+<meta name="description" content="【梦芭莎特价】为您提供大站频道搭配图片、大站频道新款图片，大站频道搭配图片，大站频道细节图，买大站频道，选择梦芭莎，货到付款，7天无理由退换货" />
 <meta name="keywords" content="大站频道" />
 <title>大站频道_【热卖大站频道】_大站频道新款|搭配|图片_梦芭莎特价</title>
 <link rel="stylesheet" href="css/product_list1.css" type="text/css" />
@@ -117,18 +116,17 @@
 <body>
 	<p>
 		<style type="text/css">
-.loginboxleft {
-	width: 301px !important;
-	height: 26px !important;
-}
-
-.s_banner {
-	z-index: 13;
-	top: 0;
-	width: 100%;
-	float: left;
-	height: 60px;
-}
+		.loginboxleft {
+			width: 301px !important;
+			height: 26px !important;
+		}
+		.s_banner {
+			z-index: 13;
+			top: 0;
+			width: 100%;
+			float: left;
+		height: 60px;
+		}
 /*ipad兼容问题*/
 .body_bg2 {
 	min-width: 1200px !important;
@@ -244,14 +242,13 @@
 						<ul style="float: left">
 							<p>
 								<style type="text/css">
-.sort_main {
-	width: 1200px;
-}
-
-.H_icon .H_icon_2 {
-	padding: 10px 0 0px 18px;
-}
-</style>
+									.sort_main {
+										width: 1200px;
+									}
+									.H_icon .H_icon_2 {
+										padding: 10px 0 0px 18px;
+									}
+								</style>
 							</p>
 							<li class="lw_separator lineHeight">|</li>
 							<li class="lw_sort_li"><i class="i lw_sort_icon"
@@ -325,15 +322,15 @@
 			<div class="sku_content">
 				<link rel="stylesheet" type="text/css" href="css/product_list4.css" />
 				<style>
-.tm_now {
-	margin: 10px;
-}
-
-.sku_content {
-	height: auto;
-	overflow: auto;
-}
-</style>
+					.tm_now {
+						margin: 10px;
+					}
+					
+					.sku_content {
+						height: auto;
+						overflow: auto;
+					}
+				</style>
 				<div class="list_content">
 					<!--导航-->
 					<div class="tm_now">
@@ -586,37 +583,37 @@
 							<div class="topdiv">
 								<div class="shping">
 									<div class="topdiv_on down">
-										<a title="默认排序" href="?sort=0" class="on" rel="nofollow">
+										<a title="默认排序" href="${pageContext.request.contextPath }/product_list?tyid=${id}" <c:if test="${empty order}">class="on"</c:if> rel="nofollow">
 											<span>默认</span> <img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down_h.png" />
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="销量从高到低" href="?sort=1" rel="nofollow"> <span>销量</span>
+										<a title="销量从高到低" href="#" rel="nofollow"> <span>销量</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="好评从高到底" href="?sort=2" rel="nofollow"> <span>好评</span>
+										<a title="好评从高到底" <c:if test="${'hot' eq order}">class="on"</c:if> href="${pageContext.request.contextPath }/product_list?tyid=${id}&order=hot&sort=desc" rel="nofollow"> <span>热度</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="最新发布" href="?sort=3" rel="nofollow"> <span>最新</span>
+										<a title="最新发布" href="${pageContext.request.contextPath }/product_list?tyid=${id}" rel="nofollow"> <span>最新</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
 									</div>
 									<div class="topdiv_on up">
-										<a title="价格从低到高" href="?sort=4" rel="nofollow"> <span>价格</span>
+										<a title="价格从低到高" <c:if test="${('price' eq order) && (empty sort)}">class="on"</c:if> href="${pageContext.request.contextPath }/product_list?tyid=${id}&order=price" rel="nofollow"> <span>价格</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_up.png" />
 										</a>
 									</div>
 									<div class="topdiv_on up">
-										<a title="价格从高到低" href="?sort=5" rel="nofollow"> <span>价格</span>
+										<a title="价格从高到低" <c:if test="${('price' eq order) && (!empty sort)}">class="on"</c:if> href="${pageContext.request.contextPath }/product_list?tyid=${id}&order=price&sort=desc" rel="nofollow"> <span>价格</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
@@ -647,10 +644,10 @@
 								<strong>共<b>${goodsCount}</b>个商品
 								</strong><span><b>${pageNo}</b>/${maxNo}</span> <a rel="nofollow"
 									class="pageNext" <c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}"</c:if>>&lt;</a>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}&order=${order}&sort=${sort}"</c:if>>&lt;</a>
 								<a rel="nofollow" class="pageNext"
 									<c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if>
-									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}"</c:if>>&gt;</a>
+									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}&order=${order}&sort=${sort}"</c:if>>&gt;</a>
 							</div>
 						</div>
 
@@ -687,64 +684,76 @@
 							<div class="page_list">
 								<a class='paginationIndex'
 									<c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?tyid=${id}&pageNo=1"</c:if>>首页</a>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?tyid=${id}&pageNo=1&order=${order}&sort=${sort}"</c:if>>首页</a>
 								<a class='paginationNext'
 									<c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}"</c:if>>&#60;&#60;上一页
-								</a> 
-								
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo-1}&tyid=${id}&order=${order}&sort=${sort}"</c:if>>&#60;&#60;上一页
+								</a>
+
 								<c:if test="${pageNo eq 1 }">
 									<c:forEach var="i" begin="${pageNo}" end="${pageNo+2}">
 										<c:if test="${i ne pageNo }">
-											<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class="paginationIndex"
+												href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 										<c:if test="${i eq pageNo}">
-											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class='paginationCurrentIndex'
+												href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
-								
+
 								<c:if test="${pageNo eq maxNo and pageNo ne 1}">
-								
+
 									<c:if test="${pageNo-2 > 0}">
 										<c:forEach var="i" begin="${pageNo-2}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
-												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class="paginationIndex"
+													href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 											<c:if test="${i eq pageNo}">
-												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class='paginationCurrentIndex'
+													href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 										</c:forEach>
 									</c:if>
-									
+
 									<c:if test="${pageNo-2 <= 0}">
 										<c:forEach var="i" begin="${1}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
-												<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class="paginationIndex"
+													href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 											<c:if test="${i eq pageNo}">
-												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+												<a class='paginationCurrentIndex'
+													href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 										</c:forEach>
-									</c:if>	
-										
+									</c:if>
+
 								</c:if>
-								
+
 								<c:if test="${pageNo ne maxNo and pageNo ne 1}">
 									<c:forEach var="i" begin="${pageNo-1}" end="${pageNo+1 }">
 										<c:if test="${i ne pageNo}">
-											<a class="paginationIndex" href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class="paginationIndex"
+												href="${pageContext.request.contextPath}/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 										<c:if test="${i eq pageNo}">
-											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}">${i}</a>
+											<a class='paginationCurrentIndex'
+												href="${pageContext.request.contextPath }/product_list?pageNo=${i}&tyid=${id}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
-								
-								
-								<span class='paginationSimplifyInfo'>${pageNo}/${maxNo}</span>
-								<a class='paginationNext' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}"</c:if>>下一页&#62;&#62;</a>
-								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${maxNo}&tyid=${id}"</c:if>>尾页</a>
+
+
+								<span class='paginationSimplifyInfo'>${pageNo}/${maxNo}</span> <a
+									class='paginationNext'
+									<c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if>
+									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${pageNo+1}&tyid=${id}&order=${order}&sort=${sort}"</c:if>>下一页&#62;&#62;</a>
+								<a class='paginationIndex'
+									<c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if>
+									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/product_list?pageNo=${maxNo}&tyid=${id}&order=${order}&sort=${sort}"</c:if>>尾页</a>
 							</div>
 						</div>
 					</div>
@@ -984,37 +993,35 @@
 			<div class="menu-car">
 				<!-- <div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div> -->
 				<div class="list-car">
-						<ul>
-							<li>
-								<a href="#" target="_blank"> <img width="40" height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫" src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
-								</a>
-								<a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
-								<span>￥198.00</span>
-								<div>
-									<label type="text" class="minicart_num">×1</label>
-									<a href="javascript:void(0)" class="del" style="color: black;">删除</a>
-								</div>
-							</li>
-							<li>
-								<a href="#" target="_blank"> <img width="40" height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫" src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
-								</a>
-								<a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
-								<span>￥198.00</span>
-								<div>
-									<label type="text" class="minicart_num">×1</label>
-									<a href="javascript:void(0)" class="del" style="color: black;">删除</a>
-								</div>
-							</li>
-						</ul>
-						<div class="checkout_box">
-							<br>
-							<p>
-								<span class="fl">共<strong>1</strong>件商品
-									</span> <span>合计：<strong>¥198.00</strong></span>
-							</p>
-							<a class="checkout_btn" href="#">去结算</a>
-						</div>
+					<ul>
+						<li><a href="#" target="_blank"> <img width="40"
+								height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫"
+								src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
+						</a> <a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
+							<span>￥198.00</span>
+							<div>
+								<label type="text" class="minicart_num">×1</label> <a
+									href="javascript:void(0)" class="del" style="color: black;">删除</a>
+							</div></li>
+						<li><a href="#" target="_blank"> <img width="40"
+								height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫"
+								src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
+						</a> <a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
+							<span>￥198.00</span>
+							<div>
+								<label type="text" class="minicart_num">×1</label> <a
+									href="javascript:void(0)" class="del" style="color: black;">删除</a>
+							</div></li>
+					</ul>
+					<div class="checkout_box">
+						<br>
+						<p>
+							<span class="fl">共<strong>1</strong>件商品
+							</span> <span>合计：<strong>¥198.00</strong></span>
+						</p>
+						<a class="checkout_btn" href="#">去结算</a>
 					</div>
+				</div>
 				<a href=""> <img src="img/cart.png"> <span>购物车</span> <span
 					class="count">0</span>
 				</a>

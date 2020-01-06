@@ -28,6 +28,9 @@ public class ProductListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//排序规则:order=hot;time;price;
+		//升序降序参数:sort=desc;
+		
 		GoodsService gs = new GoodsServiceImpl();
 		TypeService ts = new TypeServiceImpl();
 		String id = request.getParameter("tyid");
@@ -40,7 +43,6 @@ public class ProductListServlet extends HttpServlet {
 		List<Type> TopTypeList = ts.getGoodsTopType();
 		//通过tyid得到商品数
 		int goodsCount = gs.getTypeCount(tyid);
-		
 		//获取页面商品数
 		String size = request.getParameter("pageSize");
 		int pageSize = 100;
@@ -48,10 +50,9 @@ public class ProductListServlet extends HttpServlet {
 		if (size == null) {
 			// 表示第一次进入页面
 			pageSize = 100;
-		} else {
+		}else {
 			pageSize = Integer.parseInt(size);
 		}
-
 		// 准备一个集合
 		Map<String, String> param = new HashMap<String, String>();
 		// 获得提交过来的值
@@ -63,7 +64,16 @@ public class ProductListServlet extends HttpServlet {
 		if (max != null && !"".equals(max.trim())) {
 			param.put("max", max);
 		}
-		
+		//按啥排序
+		String order = request.getParameter("order");
+		if (order!= null && !"".equals(order.trim())) {
+			param.put("order", order);
+		}
+		//升序还是降序
+		String sort = request.getParameter("sort");
+		if (sort!= null && !"".equals(sort.trim())) {
+			param.put("sort", sort);
+		}
 		// 根据页面显示条数pageSize求出最大页码数
 		int maxNo = gs.selectMaxPage(tyid, pageSize);
 
@@ -83,12 +93,11 @@ public class ProductListServlet extends HttpServlet {
 			}
 			if (pageNo > maxNo) {
 				pageNo = maxNo;
-				System.out.println(pageNo);
-				System.out.println(maxNo);
 			}
 		}
 
-		List<Goods> Goodslist = gs.selectAllStudent(tyid ,pageSize, pageNo);
+		//List<Goods> Goodslist = gs.selectAllStudent(tyid ,pageSize, pageNo);
+		List<Goods> Goodslist = gs.selectAllStudent(tyid ,param,pageSize, pageNo);
 		
 		//存储低级分类集合
 		request.setAttribute("TypeList", TopTypeList);
@@ -104,6 +113,9 @@ public class ProductListServlet extends HttpServlet {
 		request.setAttribute("id", tyid);
 		//此类型商品数
 		request.setAttribute("goodsCount", goodsCount);
+		//存储排序方式
+		request.setAttribute("order",order);
+		request.setAttribute("sort", sort);
 		// 存入最大价和最小价到请求
 		request.setAttribute("min", min);
 		request.setAttribute("max", max);

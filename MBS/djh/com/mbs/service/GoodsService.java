@@ -1,6 +1,7 @@
 package com.mbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mbs.pojo.Goods;
 
@@ -23,4 +24,6 @@ public interface GoodsService {
 	public int getGoodsCount(String goodsName);
 	//通过商品名和商品页面展示数查询总页数
 	public int selectMaxPageByname(String goodsName, int pageSize);
+	//多条件查询
+	public List<Goods> selectAllStudent(int tyid, Map<String, String> param, int pageSize, int pageNo);
 }

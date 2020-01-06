@@ -3,6 +3,7 @@ package com.mbs.service.impl;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.mbs.dao.GoodsDao;
 import com.mbs.dao.impl.GoodsDaoImpl;
@@ -125,6 +126,20 @@ public class GoodsServiceImpl implements GoodsService{
 			DBHelper.release();
 		}
 		return 0;
+	}
+
+	//多条件查询
+	public List<Goods> selectAllStudent(int tyid, Map<String, String> param, int pageSize, int pageNo) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.selectAllGoods(tyid,param,pageNo, pageSize, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return null;
 	}
 
 }
