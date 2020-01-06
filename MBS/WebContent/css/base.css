@@ -69,6 +69,7 @@ header{
 	position: absolute;
 	right: 17px;
 	top: 27px;
+	z-index:10000;
 	background: #FFF;
 	width: 358px;
 }
