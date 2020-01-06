@@ -1,6 +1,7 @@
 package com.mbs.web.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.ProductDao;
 import com.mbs.dao.impl.ProductDaoimpl;
+import com.mbs.dto.ColorNameAndImgAndCode;
 import com.mbs.dto.DataMapping;
 
 
@@ -41,10 +43,10 @@ public class PageContentLoading extends HttpServlet {
 //		得到颜色编码
 		List<DataMapping> colorCodelist = dao.IdToColor(flag).getColorCode();
 		for (DataMapping dataMapping : colorCodelist) {
-			System.out.println(dataMapping);
+//			System.out.println(dataMapping);
 		}
 		String colorCode = colorCodelist.get(0).getColorCode();
-		System.out.println("=========="+colorCode);
+//		System.out.println("=========="+colorCode);
 //		解析img长字段
 		String imgUrl =  dao.LoadingfoGoodsID(flag).getGoodsInfoImage();
 		String[] imgUrls = imgUrl.split("@l@");
@@ -54,11 +56,11 @@ public class PageContentLoading extends HttpServlet {
 		
 		
 //		展示颜色名字和对应颜色图片
-		String colorimg = dao.IdColoridOfColorNameandimg(flag, colorCode).getColorimage();
-		String[] colorimgs = colorimg.split("@l@");
-		request.setAttribute("colorimg",colorimgs);
-		request.setAttribute("colorName", dao.IdColoridOfColorNameandimg(flag, colorCode).getColorName());
-		System.out.println(dao.IdColoridOfColorNameandimg(flag, colorCode).toString());
+//		String colorimg = dao.IdColoridOfColorNameandimg(flag, colorCode).getColorimage();
+//		String[] colorimgs = colorimg.split("@l@");
+//		request.setAttribute("colorimg",colorimgs);
+//		request.setAttribute("colorName", dao.IdColoridOfColorNameandimg(flag, colorCode).getColorName());
+//		System.out.println(dao.IdColoridOfColorNameandimg(flag, colorCode).toString());
 		
 //		根据id和颜色编码 查询对应颜色图片
 		String Shopwindow = dao.IdColorOfImg(flag,colorCode).getColorimage();
@@ -74,6 +76,21 @@ public class PageContentLoading extends HttpServlet {
 		request.setAttribute("color", dao.IdColorOfImg(flag, colorCode));
 		
 		request.setAttribute("colorImage",colorImage);
+//======================================================================
+//		根据颜色编码和商品id查询颜色名和对应图片
+		List<ColorNameAndImgAndCode> Cnimgcodelist = new ArrayList<ColorNameAndImgAndCode>();
+		dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag, colorCode).getColorImg().split("@l@");
+		request.setAttribute("Cnimgcodelist", Cnimgcodelist);
+		for (ColorNameAndImgAndCode colorNameAndImgAndCode : Cnimgcodelist) {
+			System.out.println("======="+colorNameAndImgAndCode.getColorImg());
+			System.out.println("======="+colorNameAndImgAndCode.getColorName());
+		}
+		
+//		String[] colorimgs = dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag, colorCode).getColorImg().split("@l@");
+//		String colorName =  dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag, colorCode).getColorName();
+//		request.setAttribute("colorimgs",colorimgs);
+//		request.setAttribute("colorName", colorName);
+		
 		
 		
 		request.getRequestDispatcher("product.jsp").forward(request, response);

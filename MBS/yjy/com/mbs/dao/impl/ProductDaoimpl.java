@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.mbs.dao.ProductDao;
 import com.mbs.db.DBHelper;
+import com.mbs.dto.ColorNameAndImgAndCode;
 import com.mbs.dto.DataMapping;
 import com.mbs.dto.IDColorSizeOf;
 import com.mbs.pojo.Goods;
@@ -178,6 +179,29 @@ public class ProductDaoimpl implements ProductDao{
 			e.printStackTrace();
 		}
 		return sizelist;
+	}
+
+	@Override
+	public ColorNameAndImgAndCode ColorCodeAndGoodsIdOfColorNameAndColorImg(int id, String colorCode) {
+//		建立连接
+		Connection conn = DBHelper.getConnection();
+		ColorNameAndImgAndCode cNameAndImgAndCode = new ColorNameAndImgAndCode();
+//		sql语句
+		String sql = "select colorName,colorImage FROM color where gid=? and colorCode=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,id);
+			ps.setString(2, colorCode);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				cNameAndImgAndCode.setColorName(rs.getString("colorName"));
+				cNameAndImgAndCode.setColorImg(rs.getString("colorImage"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cNameAndImgAndCode;
 	}
 	
 }
