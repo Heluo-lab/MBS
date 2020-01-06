@@ -136,5 +136,11 @@ public class SelfDAOImpl implements SelfDAO{
 		return goodsList;
 	}
 
+	//修改用户信息
+	@Override
+	public int updateUsersInfo(UsersInfo usersInfo) throws SQLException {
+		return 0;
+	}
+
 
 }

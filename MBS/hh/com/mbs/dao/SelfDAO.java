@@ -29,4 +29,7 @@ public interface SelfDAO {
 	
 	//根据用户Id,商品名称在收藏商品查询相关商品
 	public List<Goods> queryCollectGoodsByUsersId(String usersId,String goodsName) throws SQLException;
+	
+	//修改用户信息
+	public int updateUsersInfo(UsersInfo usersInfo) throws SQLException;
 }

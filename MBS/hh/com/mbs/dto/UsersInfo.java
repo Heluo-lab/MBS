@@ -94,6 +94,15 @@ public class UsersInfo {
 	public void setUsersPic(String usersPic) {
 		this.usersPic = usersPic;
 	}
+
+	@Override
+	public String toString() {
+		return "UsersInfo [accountId=" + accountId + ", accountName=" + accountName + ", accountEmail=" + accountEmail
+				+ ", accountPass=" + accountPass + ", accountBirth=" + accountBirth + ", usersSex=" + usersSex
+				+ ", usersPhone=" + usersPhone + ", usersBirth=" + usersBirth + ", usersAddressProv=" + usersAddressProv
+				+ ", usersAddressCity=" + usersAddressCity + ", usersAddressCountry=" + usersAddressCountry
+				+ ", usersPic=" + usersPic + "]";
+	}
 	
 	
 }

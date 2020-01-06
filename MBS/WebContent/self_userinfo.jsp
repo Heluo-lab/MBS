@@ -192,18 +192,21 @@
 						</ul>
 					</div>
 					<div class="info">
-						<form id="self_form">
+						<form id="self_form" method="post" action="upload" enctype="multipart/form-data">
 							<div class="info-header">
 								<table>
 									<tr>
-										<td rowspan="3" class="in-img"> <img src="img/headPic/defaultHead.jpg" class="header-img"/></td>
+										<td rowspan="3" class="in-img"  style="position:relative">
+										  <img src="${usersInfo.usersPic }" class="header-img" id="img" style="width:100px;height:100px;border-radius:50%;position:absolute;left:20px;top:20px"/>
+										  <input type="file" id="file" name="usersPic" onchange="show(this)" style="width:100px;height:100px;;border-radius:50%;position:absolute;left:20px;top:20px;opacity:0">
+										</td>
 										<td><span>*</span>邮件：</td>
-										<td>34318431@moonbasagroup.com<a>点击修改</a></td>
+										<td>${usersInfo.accountEmail }<a>点击修改</a></td>
 									</tr>
 									<tr>
 										<!--<td></td>-->
 										<td><span>*</span>手机：</td>
-										<td>15697383242 <a>点击修改</a></td>
+										<td>${usersInfo.usersPhone } <a>点击修改</a></td>
 									</tr>
 									<tr>
 										<!--<td></td>-->
@@ -229,7 +232,7 @@
 												<option>21日</option>
 											</select>
 										 -->
-										 <input type="date" name="usersBirth">
+										 <input type="date" name="usersBirth" value="${usersInfo.usersBirth }">
 										</td>
 									</tr>
 								</table>
@@ -237,13 +240,14 @@
 							<div class="info-body">
 								<table>
 									<tr>
-										<td><span>*</span>真实姓名：</td>
-										<td><input type="text" name="username" value="何落"/></td>
+										<td><span>*</span>账号昵称：</td>
+										<td><input type="text" name="accountName" value="${usersInfo.accountName }"/></td>
 									</tr>
 									<tr>
 										<td><span>*</span>省/市/区县：</td>
 										<td>
-											<select id="prov" name="prov" onchange="showCity(this)">
+											<input type="hidden" id="info" sex="${usersInfo.usersSex }" prov="${usersInfo.usersAddressProv }" city="${usersInfo.usersAddressCity }" country="${usersInfo.usersAddressCountry }">
+											<select id="prov" onchange="showCity(this)">
 												<option>-请选择省份-</option>
 												<!-- 
 													<option>湖南省</option>
@@ -267,15 +271,21 @@
 													<option></option>
 												 -->
 											</select>
+											<input type="hidden" name="usersAddressProv" value="">
+											<input type="hidden" name="usersAddressCity" value="">
+											<input type="hidden" name="usersAddressCountry" value="">
 										</td>
 									</tr>
 									<tr>
-										<td><span>*</span>联系地址：</td>
-										<td><input type="text" name="useraddress" value="延农大厦"/></td>
+										<td><span>*</span>性别：</td>
+										<td style="font-size: 16px;">
+											<label style="margin-right: 10px;">男：<input type="radio" name="usersSex" value="男"/></label>
+											<label>女：<input type="radio" name="usersSex" value="女"/></label>
+										</td>
 									</tr>
 									<tr>
 										<td><span>&nbsp;&nbsp;</span>电话：</td>
-										<td><input type="text" name="userphone" value="15697383242"/></td>
+										<td><input type="text" name="usersPhone" value="${usersInfo.usersPhone }"/></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -372,24 +382,59 @@
 <script src="js/isLogin.js"></script>
 <script src="js/province.js"></script>
 <script>
-//	获取响应后的结果
-//  alert(result);	
-	$(':submit').click(function(){
-		alert('已提交')
-	});
-	$(':button').click(function(){
-		alert('已提交')
-	});
-	
-</script>
-<script>
 	$("#form_submit").click(function(){
 		var self_form = $("#self_form");
 		var form_prov = $("#prov").find('option:selected').html();
 		var form_city = $("#city").find('option:selected').html();
 		var form_country = $("#country").find('option:selected').html();
-		self_form.method="get";
-		self_form.action="userInfo?prov="+form_prov+"&city="+form_city+"&country="+form_country;
-		console.log(self_form.action);
+		$("[name='usersAddressProv']").val(form_prov);
+		$("[name='usersAddressCity']").val(form_city);
+		$("[name='usersAddressCountry']").val(form_country);
+		$("#self_form").submit();
 	});
+	//将查询到的用户信息展示
+	$(function(){
+		var prov = $("#info").attr("prov");
+		var city = $("#info").attr("city");
+		var country = $("#info").attr("country");
+		var sex = $("#info").attr("sex");
+		$("[name='usersSex']").each(function(){
+			if($(this).val()==sex){
+				$(this).prop("checked",true);
+				return;
+			}
+		});
+		//$("#city").css("display","inline-block");
+		//$("#country").css("display","inline-block");
+		$("#prov option").each(function(i){
+			if($(this).html()==prov){
+				$(this).prop("selected",true);
+				showCity($(this).parent().get(0));
+				return;
+			}
+		});
+		$("#city option").each(function(i){
+			if($(this).html()==city){
+				$(this).prop("selected",true);
+				showCountry($(this).parent().get(0));
+				return;
+			}
+		});
+		$("#country option").each(function(i){
+			if($(this).html()==country){
+				$(this).prop("selected",true);
+				return;
+			}
+		});
+	})
+	//头像本地加载
+	function show(o){
+		var read = new FileReader();
+		var file = o.files[0];
+		read.readAsDataURL(file);
+		read.onload = function(e){
+			var content = e.target.result;
+			document.getElementById("img").src=content;
+		};
+	}
 </script>
