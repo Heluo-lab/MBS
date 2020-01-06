@@ -97,40 +97,4 @@ s	 */
 		request.setAttribute("goodsName", goodsName);
 		request.getRequestDispatcher("self_mycollect.jsp").forward(request, response);;
 	}
-//	//根据用户ID更新用户信息
-//	public void updateUsersInfoByUsersId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-//		SmartUpload su = new SmartUpload();
-//		su.initialize(this.getServletConfig(), request, response);
-//		try {
-//			su.upload();
-//		} catch (SmartUploadException e) {
-//			e.printStackTrace();
-//		}
-//		String usersBirth = su.getRequest().getParameter("usersBirth");
-//		String usersName = su.getRequest().getParameter("usersName");
-//		//usersName = DecoderToUTF8.toUTF8(usersName);
-//		String prov = su.getRequest().getParameter("prov");
-//		//prov = DecoderToUTF8.toUTF8(prov);
-//		String city = su.getRequest().getParameter("city");
-//		//city = DecoderToUTF8.toUTF8(city);
-//		String country = su.getRequest().getParameter("country");
-//		//country = DecoderToUTF8.toUTF8(country);
-//		String usersSex = su.getRequest().getParameter("usersSex");
-//		//usersSex = DecoderToUTF8.toUTF8(usersSex);
-//		Files files = su.getFiles();
-//		int count = files.getCount();
-//		String path = null;
-//		for(int i = 0 ; i < count ; i++){
-//			File f = files.getFile(i);
-//			String fileName = DecoderToUTF8.toUTF8(f.getFileName());
-//			path = "img/headPic/"+fileName;
-//			try {
-//				f.saveAs("/img/headPic/"+fileName, SmartUpload.SAVE_AUTO);
-//			} catch (SmartUploadException e) {
-//				e.printStackTrace();
-//				//用户没替换默认头像,向数据库存入默认头像或空
-//			}
-//		}
-//		System.out.println(usersBirth+"==="+usersName+prov+"==="+city+"==="+country+"==="+path);
-//	}
 }

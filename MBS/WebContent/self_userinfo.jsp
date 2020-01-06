@@ -192,7 +192,7 @@
 						</ul>
 					</div>
 					<div class="info">
-						<form id="self_form" method="post" action="upload" enctype="multipart/form-data">
+						<form id="self_form" method="post" action="upload" enctype="multipart/form-data" status="1">
 							<div class="info-header">
 								<table>
 									<tr>
@@ -200,13 +200,13 @@
 										  <img src="${usersInfo.usersPic }" class="header-img" id="img" style="width:100px;height:100px;border-radius:50%;position:absolute;left:20px;top:20px"/>
 										  <input type="file" id="file" name="usersPic" onchange="show(this)" style="width:100px;height:100px;;border-radius:50%;position:absolute;left:20px;top:20px;opacity:0">
 										</td>
-										<td><span>*</span>邮件：</td>
-										<td>${usersInfo.accountEmail }<a>点击修改</a></td>
+										<td><span></span>邮件：</td>
+										<td>${usersInfo.accountEmail }</td>
 									</tr>
 									<tr>
 										<!--<td></td>-->
-										<td><span>*</span>手机：</td>
-										<td>${usersInfo.usersPhone } <a>点击修改</a></td>
+										<td><span></span>手机：</td>
+										<td>${usersInfo.usersPhone } </td>
 									</tr>
 									<tr>
 										<!--<td></td>-->
@@ -240,8 +240,12 @@
 							<div class="info-body">
 								<table>
 									<tr>
-										<td><span>*</span>账号昵称：</td>
-										<td><input type="text" name="accountName" value="${usersInfo.accountName }"/></td>
+										<td><span>*</span>用户名：</td>
+										<%-- begin 表示初始账号呢称 --%>
+										<td>
+											<input type="text" name="accountName" value="${usersInfo.accountName }" id="accountName" begin="${usersInfo.accountName }"/>
+											<span style="dispaly:none" id="checkNameSpan"></span>
+										</td>
 									</tr>
 									<tr>
 										<td><span>*</span>省/市/区县：</td>
@@ -285,11 +289,14 @@
 									</tr>
 									<tr>
 										<td><span>&nbsp;&nbsp;</span>电话：</td>
-										<td><input type="text" name="usersPhone" value="${usersInfo.usersPhone }"/></td>
+										<td>
+											<input type="text" name="usersPhone" value="${usersInfo.usersPhone }" id="usersPhone" begin="${usersInfo.usersPhone }"/>
+											<span id="checkPhoneSpan"></span>
+										</td>
 									</tr>
 									<tr>
 										<td></td>
-										<td><input type="button" value="提交" id="form_submit"/></td>
+										<td><input type="button" value="提交" id="form_submit"/><span id="no-submit"></span></td>
 									</tr>
 								</table>
 							</div>
@@ -382,7 +389,62 @@
 <script src="js/isLogin.js"></script>
 <script src="js/province.js"></script>
 <script>
+	$("#accountName").blur(function(){
+		var begin = $(this).attr("begin");
+		var val = $(this).val().trim();
+		if(val==""){
+			$("#checkNameSpan").css("color","red");
+			$("#checkNameSpan").html("请填写用户名");
+			return;
+		}
+		$("#self_form").attr("status","1");
+		if(begin != val){
+			$.ajax({
+				url:"accountName",
+				type:"post",
+				data:"registername="+val,
+				success:function(result){
+					$("#checkNameSpan").css("display","inline-block");
+					if(result==true){
+						$("#checkNameSpan").css("color","red");
+						$("#checkNameSpan").html("此用户名已存在");
+						$("#self_form").attr("status","0");
+					}
+					if(result==false){
+						$("#checkNameSpan").css("color","green");
+						$("#checkNameSpan").html("用户名可用");
+					}
+				}
+			});
+		}else{
+			$("#checkNameSpan").html("");
+		}
+	});
+	$("#usersPhone").blur(function(){
+		//11位的电话号码
+		$("#self_form").attr("status","1");
+		var regex = /^\d{11}$/g;
+		var begin = $(this).attr("begin");
+		var val = $(this).val().trim();
+		if(begin == val){
+			$("#checkPhoneSpan").html("");
+			return;
+		}
+		if(!regex.test(val)){
+			$("#checkPhoneSpan").html("请填写正确的手机号");
+			$("#self_form").attr("status","0");
+		}else{
+			$("#checkPhoneSpan").html("");
+		}
+	});
 	$("#form_submit").click(function(){
+		var status = $("#self_form").attr("status");
+		if(status=="0"){
+			$("#no-submit").css("color","red");
+			$("#no-submit").html("请确定信息是否填写正确");
+			return;
+		}
+		$("#no-submit").html("");
 		var self_form = $("#self_form");
 		var form_prov = $("#prov").find('option:selected').html();
 		var form_city = $("#city").find('option:selected').html();

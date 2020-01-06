@@ -186,7 +186,7 @@
 					<div class="right-self">
 						<div class="right-self-info">
 							<div class="user-info">
-								<a href = "javascript:void(0)"><img src="img/headPic/defaultHead.jpg" id="uPic"/></a>
+								<a href = "javascript:void(0)"><img src="${usersInfo.usersPic	 }" id="uPic"/></a>
 								<span class="user-icon"></span>
 								<div class="user-detal">
 									<div class="detal">

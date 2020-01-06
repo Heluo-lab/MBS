@@ -84,5 +84,19 @@ public class SelfServiceImpl implements SelfService{
 		}
 		return goodsList;
 	}
+	//修改用户与账号表信息,成功返回 true ,失败则返回false
+	@Override
+	public boolean updateUsersAndAccountByAccountId(UsersInfo usersInfo) {
+		boolean flag = false;
+		try {
+			dao.updateAccountByUsersId("accountName", usersInfo.getAccountName(),usersInfo.getAccountId());
+			dao.updateUsersByUsersId(usersInfo);
+			flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			flag = false;
+		}
+		return flag;
+	}
 	
 }

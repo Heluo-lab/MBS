@@ -27,4 +27,7 @@ public interface SelfService {
 	
 	//根据用户Id,商品名称在收藏商品查询相关商品
 	public List<Goods> queryCollectGoodsByUsersId(String usersId,String goodsName);
+	
+	//根据账号ID修改账号和用户信息
+	public boolean updateUsersAndAccountByAccountId(UsersInfo usersInfo);
 }

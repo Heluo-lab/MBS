@@ -136,10 +136,36 @@ public class SelfDAOImpl implements SelfDAO{
 		return goodsList;
 	}
 
-	//修改用户信息
+	//修改用户表信息
 	@Override
-	public int updateUsersInfo(UsersInfo usersInfo) throws SQLException {
-		return 0;
+	public int updateUsersByUsersId(UsersInfo usersInfo) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "update users set usersSex = ? ,usersPhone = ? , usersBirth = ? ,usersAddressProv = ? ,usersAddressCity = ? ,usersAddressCountry = ? , usersPic = ? where usersId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, usersInfo.getUsersSex());
+		pstmt.setString(2, usersInfo.getUsersPhone());
+		pstmt.setString(3, usersInfo.getUsersBirth());
+		pstmt.setString(4, usersInfo.getUsersAddressProv());
+		pstmt.setString(5, usersInfo.getUsersAddressCity());
+		pstmt.setString(6, usersInfo.getUsersAddressCountry());
+		pstmt.setString(7, usersInfo.getUsersPic());
+		pstmt.setString(8, usersInfo.getAccountId());
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
+	}
+	
+	//根据用户ID修改账号表信息(key表示要修改的信息 accountName ,accoutPass,accountEmail) value表示要修改的值
+	@Override
+	public int updateAccountByUsersId(String key,String value,String accountId) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "update account set "+key+" = ? where accountId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, value);
+		pstmt.setString(2, accountId);
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
 	}
 
 

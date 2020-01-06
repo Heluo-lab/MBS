@@ -31,5 +31,8 @@ public interface SelfDAO {
 	public List<Goods> queryCollectGoodsByUsersId(String usersId,String goodsName) throws SQLException;
 	
 	//修改用户信息
-	public int updateUsersInfo(UsersInfo usersInfo) throws SQLException;
+	public int updateUsersByUsersId(UsersInfo usersInfo) throws SQLException;
+	
+	//根据用户ID修改账号表信息(key表示要修改的信息 accountName ,accoutPass,accountEmail) value表示要修改的值
+	public int updateAccountByUsersId(String key,String value,String accountId) throws SQLException;
 }

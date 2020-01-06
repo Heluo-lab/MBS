@@ -22,6 +22,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.mbs.dto.UsersInfo;
+import com.mbs.service.SelfService;
+import com.mbs.service.impl.SelfServiceImpl;
 
 /**
  * 用户文件上传servlet
@@ -42,6 +44,7 @@ public class UploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SelfService service = new SelfServiceImpl();
 		//request.setCharacterEncoding("UTF-8");
 		try {
 			//接受上传文件
@@ -68,25 +71,31 @@ public class UploadServlet extends HttpServlet {
 					Field field = clz.getDeclaredField((fieldName));
 					field.setAccessible(true);
 					field.set(usersInfo, fieldValue);
-					System.out.println(fieldName+":"+fieldValue);
+					//System.out.println(fieldName+":"+fieldValue);
 				}else{
 					try {
 						//文件上传项
 						//获得上传文件的名称
 						fileName = item.getName();
+						if("".equals(fileName)){
+							//当用户没有上传图片时，跳出循环，使用用户当前头像
+							break;
+						}
 //						System.out.println(fileName+"===");
 						//clz.getDeclaredField("");
 						//获得上传文件的内容
 						InputStream in = item.getInputStream();
 						//将in中的数据拷贝服务器上
+						long date = new Date().getTime();
 						String path = this.getServletContext().getRealPath("headPic");
-						OutputStream out = new FileOutputStream(path+"/"+fileName);
+						path = path+"/"+date+fileName;
+						OutputStream out = new FileOutputStream(path);
 						int len = 0;
 						byte[] buffer = new byte[1024];
 						while((len=in.read(buffer))>0){
 							out.write(buffer, 0, len);
 						}
-						usersInfo.setUsersPic("headPic/"+fileName+new Date().getTime());
+						usersInfo.setUsersPic("headPic/"+date+fileName);
 						in.close();
 						out.close();
 					} catch (Exception e) {
@@ -94,8 +103,9 @@ public class UploadServlet extends HttpServlet {
 					}
 				}
 			}
-			System.out.println(usersInfo);
-			
+			service.updateUsersAndAccountByAccountId(usersInfo);
+			response.sendRedirect("self_userinfo.jsp");
+			//System.out.println(usersInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
