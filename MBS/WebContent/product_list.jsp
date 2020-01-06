@@ -268,7 +268,7 @@
 				</p>
 			</ul>
 			<!-- 搜索框 -->
-			<div class="Bhs">
+			<div class="Bhs" style="position:relative">
 				<div class="BhCon">
 					<div class="brandLogo">
 						<div class="logoPic fl">
@@ -288,24 +288,13 @@
 							<div class="searchv1">
 								<div class="fsearchv1" mola="suggest"
 									data-templateid="suggesttemplate">
-									<span class="inpv1"> <input type="text"
-										class="sinpv1 ac_inputv1" size="100" maxlength="20"
-										autocomplete="off" mola="keyword">
-									</span> <span class="subv1"> <input type="button"
-										style="cursor: pointer;" class="s" value="搜全站" mola="search">
+									<span class="inpv1">
+									 <input type="text" class="sinpv1 ac_inputv1" size="100" maxlength="20" value="${name}" autocomplete="off" mola="keyword" id="search" onkeyup="searchWord(this)" onblur="clear(this)">
+									</span> 
+									<span class="subv1"> 
+									<input type="button" style="cursor: pointer;" class="s" value="搜全站" mola="search" onclick="search()">
 									</span>
-									<div class="hidv1" id="headhid" mola="display"
-										style="display: none;">
-										<ul>
-											<li mola="item"><a href="javascript:void(0)"><span
-													mola="txt" class="kskey">蜗</span><span class="ksfrequency">约5件</span></a></li>
-											<li mola="item"><a href="javascript:void(0)"><span
-													mola="txt" class="kskey">蜗牛</span><span class="ksfrequency">约4件</span></a></li>
-											<li mola="item"><a href="javascript:void(0)"><span
-													mola="txt" class="kskey">涡轮</span><span class="ksfrequency">约1件</span></a></li>
-										</ul>
-										<b class="scloseBtn" mola="close">关闭</b>
-									</div>
+									<div id="showDiv" style="display:block;left: 638px;top: 82px;position:absolute;z-index:1000;background:#fff;width: 431px;border: 1px solid #E40462;"></div>
 								</div>
 								<div class="hot_keywords">
 									<span class="kwVessel" id="txthotkey" style="float: left;">
@@ -595,7 +584,7 @@
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="好评从高到底" <c:if test="${'hot' eq order}">class="on"</c:if> href="${pageContext.request.contextPath }/product_list?tyid=${id}&order=hot&sort=desc" rel="nofollow"> <span>热度</span>
+										<a title="热度从高到底" <c:if test="${'hot' eq order}">class="on"</c:if> href="${pageContext.request.contextPath }/product_list?tyid=${id}&order=hot&sort=desc" rel="nofollow"> <span>热度</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
@@ -1068,4 +1057,53 @@
 			$('.return-top').fadeOut();
 		}
 	});
+</script>
+<script type="text/javascript">
+	function overFn(obj){
+		$(obj).css("background","#E40462");
+	}
+	function outFn(obj){
+		$(obj).css("background","#fff");
+	}
+	
+	function clickFn(obj){
+		$("#search").val($(obj).html());
+		$("#showDiv").css("display","none");
+	}
+	function clickFnDle(obj){
+		$("#showDiv").css("display","none");
+	}
+	function clear(obj){
+		$("#showDiv").css("display","none");
+	}
+	function search(){
+		var word =$("#search").val();
+		window.location.href = '${pageContext.request.contextPath}/searchList?name='+word;
+	}
+	
+	//键盘抬起事件
+	function searchWord(obj){
+		//1、获得输入框的输入的内容
+		var word = $(obj).val();
+		//2、根据输入框的内容去数据库中模糊查询---List<Product>
+		var content = "";
+		$.post(
+			"${pageContext.request.contextPath}/searchWord",
+			{"word":word},
+			function(data){
+				//3、将返回的商品的名称 现在showDiv中
+				if(data.length>0){
+					for(var i=0;i<data.length;i++){
+						content+="<div style='padding:5px;cursor:pointer;width: 421px' onclick='clickFn(this)' onmouseover='overFn(this)' onmouseout='outFn(this)'>"+data[i]+"</div>";
+					}
+					content+="<div style='padding:5px;cursor:pointer;width: 421px;height:12px;position:relative'><span style='display:inline-block;border:solid deeppink 1px;border-radius:5px;text:center;color:deeppink;font-size:15px;position:absolute;left:382px;top:-3px' onclick='clickFnDle(this)'>关闭✘</span></div>"
+					$("#showDiv").html(content);
+					$("#showDiv").css("display","block");
+				}
+				
+			},
+			"json"
+		);
+		
+	}
 </script>

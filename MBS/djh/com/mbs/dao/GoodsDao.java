@@ -30,4 +30,6 @@ public interface GoodsDao {
 	//多条件查询
 	public List<Goods> selectAllGoods(int tyid, Map<String, String> map,int pageNo,  int pageSize, Connection conn) throws SQLException;
 
+	public List<Goods> selectGoodsByName(String goodsName, Map<String, String> map, int pageNo, int pageSize,Connection conn)throws SQLException;
+
 }

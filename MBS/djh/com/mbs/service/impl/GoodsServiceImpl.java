@@ -142,4 +142,18 @@ public class GoodsServiceImpl implements GoodsService{
 		return null;
 	}
 
+	//模糊搜索多条件查询
+	public List<Goods> selectGoodsByName(String goodsName, Map<String, String> param, int pageSize, int pageNo) {
+		Connection conn = DBHelper.getConnection();
+		GoodsDao gdao = new GoodsDaoImpl();
+		try {
+			return gdao.selectGoodsByName(goodsName,param,pageNo, pageSize, conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return null;
+	}
+
 }

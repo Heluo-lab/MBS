@@ -573,37 +573,37 @@
 							<div class="topdiv">
 								<div class="shping">
 									<div class="topdiv_on down">
-										<a title="默认排序" href="?sort=0" class="on" rel="nofollow">
+										<a title="默认排序" href="${pageContext.request.contextPath }/searchList?name=${name}" <c:if test="${empty order}">class="on"</c:if> rel="nofollow">
 											<span>默认</span> <img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down_h.png" />
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="销量从高到低" href="?sort=1" rel="nofollow"> <span>销量</span>
+										<a title="销量从高到低" href="#" rel="nofollow"> <span>销量</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="好评从高到底" href="?sort=2" rel="nofollow"> <span>热度</span>
+										<a title="热度从高到底" <c:if test="${'hot' eq order}">class="on"</c:if> href="${pageContext.request.contextPath }/searchList?name=${name}&order=hot&sort=desc" rel="nofollow"> <span>热度</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
 									</div>
 									<div class="topdiv_on down">
-										<a title="最新发布" href="?sort=3" rel="nofollow"> <span>最新</span>
+										<a title="最新发布" href="${pageContext.request.contextPath }/searchList?name=${name}" rel="nofollow"> <span>最新</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
 									</div>
 									<div class="topdiv_on up">
-										<a title="价格从低到高" href="?sort=4" rel="nofollow"> <span>价格</span>
+										<a title="价格从低到高" <c:if test="${('price' eq order) && (empty sort)}">class="on"</c:if> href="${pageContext.request.contextPath }/searchList?name=${name}&order=price" rel="nofollow"> <span>价格</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_up.png" />
 										</a>
 									</div>
 									<div class="topdiv_on up">
-										<a title="价格从高到低" href="?sort=5" rel="nofollow"> <span>价格</span>
+										<a title="价格从高到低" <c:if test="${('price' eq order) && (!empty sort)}">class="on"</c:if> href="${pageContext.request.contextPath }/searchList?name=${name}&order=price&sort=desc" rel="nofollow"> <span>价格</span>
 											<img alt=""
 											src="http://i2.mbscss.com/img/search/20140226/c_down.png" />
 										</a>
@@ -634,10 +634,10 @@
 								<strong>共<b>${goodsCount}</b>个商品
 								</strong><span><b>${pageNo}</b>/${maxNo}</span> <a rel="nofollow"
 									class="pageNext" <c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo-1}&name=${name}"</c:if>>&lt;</a>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo-1}&name=${name}&order=${order}&sort=${sort}"</c:if>>&lt;</a>
 								<a rel="nofollow" class="pageNext"
 									<c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if>
-									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo+1}&name=${name}"</c:if>>&gt;</a>
+									<c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo+1}&name=${name}&order=${order}&sort=${sort}"</c:if>>&gt;</a>
 							</div>
 						</div>
 
@@ -674,19 +674,19 @@
 							<div class="page_list">
 								<a class='paginationIndex'
 									<c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?name=${name}&pageNo=1"</c:if>>首页</a>
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?name=${name}&pageNo=1&order=${order}&sort=${sort}"</c:if>>首页</a>
 								<a class='paginationNext'
 									<c:if test="${pageNo==1 }">disabled</c:if>
-									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo-1}&name=${name}"</c:if>>&#60;&#60;上一页
+									<c:if test="${pageNo!=1 }">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo-1}&name=${name}&order=${order}&sort=${sort}"</c:if>>&#60;&#60;上一页
 								</a> 
 								
 								<c:if test="${pageNo eq 1 }">
 									<c:forEach var="i" begin="${pageNo}" end="${pageNo+2}">
 										<c:if test="${i ne pageNo }">
-											<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
+											<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 										<c:if test="${i eq pageNo}">
-											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
+											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
@@ -696,10 +696,10 @@
 									<c:if test="${pageNo-2 > 0}">
 										<c:forEach var="i" begin="${pageNo-2}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
-												<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
+												<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 											<c:if test="${i eq pageNo}">
-												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
+												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 										</c:forEach>
 									</c:if>
@@ -707,10 +707,10 @@
 									<c:if test="${pageNo-2 <= 0}">
 										<c:forEach var="i" begin="${1}" end="${maxNo}">
 											<c:if test="${i ne pageNo}">
-												<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
+												<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 											<c:if test="${i eq pageNo}">
-												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
+												<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 											</c:if>
 										</c:forEach>
 									</c:if>	
@@ -720,18 +720,18 @@
 								<c:if test="${pageNo ne maxNo and pageNo ne 1}">
 									<c:forEach var="i" begin="${pageNo-1}" end="${pageNo+1 }">
 										<c:if test="${i ne pageNo}">
-											<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}">${i}</a>
+											<a class="paginationIndex" href="${pageContext.request.contextPath}/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 										<c:if test="${i eq pageNo}">
-											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}">${i}</a>
+											<a class='paginationCurrentIndex' href="${pageContext.request.contextPath }/searchList?pageNo=${i}&name=${name}&order=${order}&sort=${sort}">${i}</a>
 										</c:if>
 									</c:forEach>
 								</c:if>
 								
 								
 								<span class='paginationSimplifyInfo'>${pageNo}/${maxNo}</span>
-								<a class='paginationNext' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo+1}&name=${name}"</c:if>>下一页&#62;&#62;</a>
-								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${maxNo}&name=${name}"</c:if>>尾页</a>
+								<a class='paginationNext' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${pageNo+1}&name=${name}&order=${order}&sort=${sort}"</c:if>>下一页&#62;&#62;</a>
+								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${maxNo}&name=${name}&order=${order}&sort=${sort}"</c:if>>尾页</a>
 							</div>
 						</div>
 					</div>

@@ -26,4 +26,6 @@ public interface GoodsService {
 	public int selectMaxPageByname(String goodsName, int pageSize);
 	//多条件查询
 	public List<Goods> selectAllStudent(int tyid, Map<String, String> param, int pageSize, int pageNo);
+	//模糊搜索多条件查询
+	public List<Goods> selectGoodsByName(String goodsName, Map<String, String> param, int pageSize, int pageNo);
 }

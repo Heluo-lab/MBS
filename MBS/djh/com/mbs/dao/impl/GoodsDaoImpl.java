@@ -75,7 +75,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		return list;
 	}
 
-	// 模糊查询商品(固定条数)
+	// 模糊查询商品
 	@Override
 	public List<Goods> findProductByName(String goodsName, int pageSize, int pageNo, Connection conn)
 			throws SQLException {
@@ -178,6 +178,87 @@ public class GoodsDaoImpl implements GoodsDao {
 		int index = 1;
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(index, tyid);
+		if (map != null) {
+			Set<Map.Entry<String, String>> line = map.entrySet();
+			for (Map.Entry<String, String> entry : line) {
+				if ("min".equals(entry.getKey())) {
+					ps.setString(++index, entry.getValue());
+				}
+				if ("max".equals(entry.getKey())) {
+					ps.setString(++index, entry.getValue());
+				}
+			}
+
+		}
+		ps.setInt(++index, (pageNo - 1) * pageSize);
+		ps.setInt(++index, pageSize);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Goods goods = new Goods();
+			goods.setId(rs.getInt("id"));
+			goods.setTyId(rs.getInt("tyId"));
+			goods.setGoodsName(rs.getString("goodsName"));
+			goods.setShowImage(rs.getString("showImage"));
+			goods.setPrice(rs.getDouble("price"));
+			goods.setGoodsHot(rs.getInt("goodsHot"));
+			list.add(goods);
+		}
+		return list;
+	}
+
+	//模糊搜索多条件查询
+	public List<Goods> selectGoodsByName(String goodsName, Map<String, String> map, int pageNo, int pageSize,
+			Connection conn) throws SQLException {
+		List<Goods> list = new ArrayList<Goods>();
+		String sql = "select * from goods where goodsName like ? ";
+		StringBuffer sb = new StringBuffer(sql);
+		if (map != null) {
+			String sort=map.get("sort");
+			System.out.println(sort);
+			Set<Map.Entry<String, String>> line = map.entrySet();
+			for (Map.Entry<String, String> entry : line) {
+				
+				if ("order".equals(entry.getKey())) {
+					//order=hot;time;price;
+					if("hot".equals(entry.getValue())) {
+						sb.append(" order by goodsHot ");
+						
+							if("desc".equals(sort)) {
+								sb.append(" desc");
+							}
+						
+					}
+					if("time".equals(entry.getValue())) {
+						sb.append(" order by createTime ");
+						
+						if("desc".equals(sort)) {
+							sb.append(" desc");
+						}
+					}
+					if("price".equals(entry.getValue())) {
+						sb.append(" order by price ");
+						
+						if("desc".equals(sort)) {
+							sb.append(" desc");
+						}
+					}
+				}
+				
+				if ("min".equals(entry.getKey())) {
+					
+				}
+				if ("max".equals(entry.getKey())) {
+					
+				}
+			}
+		}
+		sb.append(" limit ? , ?");
+		// 根据条件构建sql语句
+		sql = sb.toString();
+		System.out.println(sql);
+		int index = 1;
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, "%" + goodsName + "%");
 		if (map != null) {
 			Set<Map.Entry<String, String>> line = map.entrySet();
 			for (Map.Entry<String, String> entry : line) {
