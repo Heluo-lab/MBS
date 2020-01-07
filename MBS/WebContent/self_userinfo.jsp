@@ -499,4 +499,5 @@
 			document.getElementById("img").src=content;
 		};
 	}
+
 </script>
