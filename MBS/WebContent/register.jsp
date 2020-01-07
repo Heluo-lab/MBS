@@ -34,6 +34,8 @@
 				<!--下边-->
 				<div class="register-form">
 					<form class="register_input_main" id="form">
+						<!-- 判断是否注册成功 -->
+						<div class="user_item" id="registerMsg">注册失败，请重新注册！</div>
 						<!--注册昵称-->
 						<div class="user_item">
 							<label class="i_lable name-lable" for="txtLoginID"></label>
