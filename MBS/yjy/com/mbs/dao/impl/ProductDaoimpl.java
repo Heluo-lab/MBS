@@ -12,6 +12,7 @@ import com.mbs.db.DBHelper;
 import com.mbs.dto.ColorNameAndImgAndCode;
 import com.mbs.dto.DataMapping;
 import com.mbs.dto.IDColorSizeOf;
+import com.mbs.pojo.Color;
 import com.mbs.pojo.Goods;
 import com.mbs.pojo.Repository;
 import com.mbs.util.StringParse;
@@ -159,18 +160,24 @@ public class ProductDaoimpl implements ProductDao{
 		Connection conn = DBHelper.getConnection();
 		List<String> sizelist = new ArrayList<String>();
 //		sql语句
-		String sql = "select goodsCode FROM color where id=? ";
+		String sql = "select goodsCode FROM goods where id=? ";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,id);
 			ResultSet rs = ps.executeQuery();
+			System.out.println(1+"==========");
 			if(rs.next()) {
 				List<DataMapping> colorDataObj = StringParse.getColorDataObj(rs.getString("goodsCode"));
 				for (DataMapping dataMapping : colorDataObj) {
+					System.out.println(2+"==========");
 					if(dataMapping.getColorCode()==colorCode) {
+						System.out.println(3+"==========");	
 						String[] sizistu = dataMapping.getSizes().split(",");
+						System.out.println(4+"==========");
 						for (String string : sizistu) {
+							System.out.println(5+"==========");
 							sizelist.add(string);
+							System.out.println(6+"==========");		
 						}
 					}
 				}
@@ -182,26 +189,30 @@ public class ProductDaoimpl implements ProductDao{
 	}
 
 	@Override
-	public ColorNameAndImgAndCode ColorCodeAndGoodsIdOfColorNameAndColorImg(int id, String colorCode) {
+	public List<Color> ColorCodeAndGoodsIdOfColorNameAndColorImg(int id) {
 //		建立连接
 		Connection conn = DBHelper.getConnection();
-		ColorNameAndImgAndCode cNameAndImgAndCode = new ColorNameAndImgAndCode();
+		Color cNameAndImgAndCode = new Color();
+		
+		List<Color> list =new ArrayList<Color>();
 //		sql语句
-		String sql = "select colorName,colorImage FROM color where gid=? and colorCode=?";
+		String sql = "select * FROM color where gid=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1,id);
-			ps.setString(2, colorCode);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
-				cNameAndImgAndCode.setColorName(rs.getString("colorName"));
-				cNameAndImgAndCode.setColorImg(rs.getString("colorImage"));
+			while(rs.next()) {
+				Color color = new Color();
+				color.setColorCode(rs.getString("colorCode"));
+				color.setColorImage(rs.getString("ColorImage").split("@l@")[0]);
+				color.setColorName(rs.getString("colorName"));
+				list.add(color);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return cNameAndImgAndCode;
+		return list;
 	}
 	
 }

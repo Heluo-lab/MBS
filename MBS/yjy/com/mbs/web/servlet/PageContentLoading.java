@@ -14,6 +14,7 @@ import com.mbs.dao.ProductDao;
 import com.mbs.dao.impl.ProductDaoimpl;
 import com.mbs.dto.ColorNameAndImgAndCode;
 import com.mbs.dto.DataMapping;
+import com.mbs.pojo.Color;
 
 
 /**
@@ -40,13 +41,13 @@ public class PageContentLoading extends HttpServlet {
 //		得到从详情传入的id
 		String str =  request.getParameter("id");
 		int flag = Integer.parseInt(str);
-//		得到颜色编码
+//		得到颜色编码数组对象
 		List<DataMapping> colorCodelist = dao.IdToColor(flag).getColorCode();
 		for (DataMapping dataMapping : colorCodelist) {
-//			System.out.println(dataMapping);
+			System.out.println(dataMapping);
 		}
 		String colorCode = colorCodelist.get(0).getColorCode();
-//		System.out.println("=========="+colorCode);
+		System.out.println("=========="+colorCode);
 //		解析img长字段
 		String imgUrl =  dao.LoadingfoGoodsID(flag).getGoodsInfoImage();
 		String[] imgUrls = imgUrl.split("@l@");
@@ -78,13 +79,13 @@ public class PageContentLoading extends HttpServlet {
 		request.setAttribute("colorImage",colorImage);
 //======================================================================
 //		根据颜色编码和商品id查询颜色名和对应图片
-		List<ColorNameAndImgAndCode> Cnimgcodelist = new ArrayList<ColorNameAndImgAndCode>();
-		dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag, colorCode).getColorImg().split("@l@");
-		request.setAttribute("Cnimgcodelist", Cnimgcodelist);
-		for (ColorNameAndImgAndCode colorNameAndImgAndCode : Cnimgcodelist) {
-			System.out.println("======="+colorNameAndImgAndCode.getColorImg());
-			System.out.println("======="+colorNameAndImgAndCode.getColorName());
-		}
+		List<Color> Cnimgcodelist = null;
+		//颜色集合
+		List<Color> colorlist = dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag);
+		request.setAttribute("colorlist", colorlist);
+//		尺码集合
+		String colorsize = colorCodelist.get(0).getSizes();
+		request.setAttribute("colorsize",colorsize);
 		
 //		String[] colorimgs = dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag, colorCode).getColorImg().split("@l@");
 //		String colorName =  dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag, colorCode).getColorName();
