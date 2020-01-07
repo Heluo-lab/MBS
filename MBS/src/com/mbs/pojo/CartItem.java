@@ -11,6 +11,20 @@ public class CartItem implements Serializable{
 	private int goodsId;
 	private int goodsNum;
 	private String CartId;
+	private String color;
+	private String size;
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
 	public String getCartItemId() {
 		return cartItemId;
 	}

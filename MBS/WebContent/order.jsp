@@ -80,13 +80,13 @@
 			<div class="order-body">
 				<div class="order-title">
 					<span class="title-address"></span>
-					<a href="javascript:;" onclick="changeAddress()">[修改]</a>
+					<a href="javascript:;" id="changeaddress" onclick="changeAddress()">[修改]</a>
 				</div>
 				<div class="address">
-					<c:if test="${!empty hasmsg }">
-						${receivinggoods.receName } ${receivinggoods.receAddressProv } ${receivinggoods.receAddressCity } ${receivinggoods.receAddressDetaile } ${receivinggoods.recePhone }
+					<c:if test="${ param.hasmsg==true }">
+						${receName } ${receAddressProv } ${receAddressCity } ${receAddressDetaile } ${recePhone }
 					</c:if>
-					<c:if test="${empty hasmsg }">
+					<c:if test="${ param.hasmsg==false }">
 						<form action="javascript:;" onsubmit="javascript:return submitAll();" id="allrecemsg">
 							<div class="receiver">收货人：<input type="text" id="receName" class="recemsg" placeholder="请输入姓名"/></div>
 							<div class="selectArea">
@@ -120,7 +120,7 @@
 				</div>
 				<div class="order-title">
 					<span class="shop-message"></span>
-					<a href="cart.html" class="backtoshop">返回修改购物车》</a>
+					<a href="cart" class="backtoshop">返回修改购物车》</a>
 				</div>
 
 				<div class="buygoods">
@@ -148,7 +148,7 @@
 										<img src="${goods.showImage} " />
 										<div>
 											<p>${goods.goodsName}</p>
-											<p>品牌：梦芭莎　尺寸：S　颜色：黑色</p>
+											<p>尺寸：${goods.size}　颜色：${goods.color}</p>
 										</div>
 									</td>
 									<td class="othertd"><span>${goods.price}</span></td>
@@ -186,7 +186,7 @@
 				</div>
 				<div class="order-last">
 					请核对以上信息，确认无误后点击"提交订单"
-					<a href="javascript:;">提交订单</a>
+					<a href="submitoreder" a{text-decoration:none;}>提交订单</a>
 				</div>
 			</div>
 				

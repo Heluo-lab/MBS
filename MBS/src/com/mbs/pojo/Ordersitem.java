@@ -2,14 +2,31 @@ package com.mbs.pojo;
 
 
 public class Ordersitem {
-
+	
   private String ordersItemId;
   private long goodsId;
   private long goodsNum;
   private String ordersId;
+  private String color;
+  private String size;
 
+  public String getColor() {
+	return color;
+}
 
-  public String getOrdersItemId() {
+public void setColor(String color) {
+	this.color = color;
+}
+
+public String getSize() {
+	return size;
+}
+
+public void setSize(String size) {
+	this.size = size;
+}
+
+public String getOrdersItemId() {
     return ordersItemId;
   }
 

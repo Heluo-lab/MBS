@@ -35,6 +35,8 @@ public class CartDaoImpl implements CartDao{
 					ci.setCartItemId(rs1.getString("cartItemId"));
 					ci.setGoodsId(rs1.getInt("goodsId"));
 					ci.setGoodsNum(rs1.getInt("goodsNum"));
+					ci.setColor(rs1.getString("color"));
+					ci.setSize(rs1.getString("size"));
 					list.add(ci);
 				}
 			}
@@ -51,12 +53,19 @@ public class CartDaoImpl implements CartDao{
 	
 	
 	@Override
-	public void addCartItem(String usersId, int goodsId ,int goodsNum) {
+	public void addCartItem(String usersId, int goodsId ,int goodsNum,String color,String size) {
+		if (color.equals("undefined")||color.equals("")) {
+			color = "0";
+		}
+		if (size.equals("undefined")||size.equals("")) {
+			size = "0";
+		}
 		Connection connection = DBHelper.getConnection();
 		String sql1 = "insert into cart (cartId,usersId) value (?,?) ";
 		String sql2 = "select * from cart where usersId="+usersId;
-		String sql3 = "insert into cartItem (cartItemId,goodsId,goodsNum,cartId) value (?,?,?,?)";
+		String sql3 = "insert into cartItem (cartItemId,goodsId,goodsNum,cartId,color,size) value (?,?,?,?,?,?)";
 		String sqlci = "select * from cartItem where cartId=?";
+		String sql = "select * from cartItem";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql2);
 			ResultSet rs = ps.executeQuery();
@@ -70,12 +79,21 @@ public class CartDaoImpl implements CartDao{
 				ps.setString(2, usersId+"");
 				ps.executeUpdate();
 				//插入购物车项
-				ps = connection.prepareStatement(sql3);
+				ps = connection.prepareStatement(sql);
+				ResultSet rsall = ps.executeQuery();
 				cartItemId++;
+				if (rsall.next()) {
+					if (rsall.getString("cartItemId").equals(cartItemId+"")) {
+						cartItemId++;
+					}
+				}
+				ps = connection.prepareStatement(sql3);
 				ps.setString(1, cartItemId+"");
 				ps.setInt(2, goodsId);
 				ps.setInt(3, goodsNum);
 				ps.setString(4, cartId+"");
+				ps.setString(5, color);
+				ps.setString(6, size);
 				ps.executeUpdate();
 				
 			}else {
@@ -87,14 +105,15 @@ public class CartDaoImpl implements CartDao{
 				ps1 = connection.prepareStatement(sqlci);
 				ps1.setString(1,cid+"");
 				ResultSet rsci = ps1.executeQuery();
+				cartItemId++;
 				while(rsci.next()) {
 					int comparecartItemId = Integer.parseInt(rsci.getString("cartItemId"));
-					System.out.println(comparecartItemId);
-					cartItemId++;
+					if (comparecartItemId==cartItemId) {
+						cartItemId++;
+					}
 				}
-				cartItemId++;
 				//查询购物车中是否已经有了商品
-				String sql5 = "select * from cartItem where goodsId="+goodsId+" and cartId="+cid;
+				String sql5 = "select * from cartItem where goodsId="+goodsId+" and cartId="+cid+" and color="+color+" and size="+size;
 				ps1 = connection.prepareStatement(sql5);
 				rs = ps1.executeQuery();
 				rs.next();
@@ -104,6 +123,8 @@ public class CartDaoImpl implements CartDao{
 					ps1.setInt(2, goodsId);
 					ps1.setInt(3, goodsNum);
 					ps1.setString(4, cid+"");
+					ps1.setString(5, color);
+					ps1.setString(6, size);
 					ps1.executeUpdate();
 				}else {
 					String sql4 = "update cartItem set goodsNum=? where cartId="+cid+" and goodsId="+goodsId;
@@ -121,10 +142,16 @@ public class CartDaoImpl implements CartDao{
 
 
 	@Override
-	public void deleteCart(String usersId, int goodsId) {
+	public void deleteCart(String usersId, int goodsId,String color,String size) {
+		if (color.equals("undefined")||color.equals("")) {
+			color = "0";
+		}
+		if (size.equals("undefined")||size.equals("")) {
+			size = "0";
+		}
 		Connection connection = DBHelper.getConnection();
 		int cid = 0;
-		String sql1 = "delete from cartItem where cartId=? and goodsId="+goodsId;
+		String sql1 = "delete from cartItem where cartId=? and goodsId="+goodsId+" and color="+color+" and size="+size;
 		String sql2 = "select * from cart where usersId="+usersId;
 		try {
 			//查询cartId
@@ -145,9 +172,15 @@ public class CartDaoImpl implements CartDao{
 
 
 	@Override
-	public void minusCart(String usersId, int goodsId, int goodsNum) {
+	public void minusCart(String usersId, int goodsId, int goodsNum,String color,String size) {
+		if (color.equals("undefined")||color.equals("")) {
+			color = "0";
+		}
+		if (size.equals("undefined")||size.equals("")) {
+			size = "0";
+		}
 		Connection connection = DBHelper.getConnection();
-		String sql = "update cart set goodsNum="+goodsNum+"where cartId = ? and goodsId = "+goodsId;
+		String sql = "update cart set goodsNum="+goodsNum+"where cartId = ? and goodsId = "+goodsId+" and color="+color+" and size="+size;
 		String sql1 = "select * from cart where usersId ="+usersId;
 		try {
 			//查cartId
@@ -163,6 +196,47 @@ public class CartDaoImpl implements CartDao{
 		}finally {
 			DBHelper.release();
 		}
+	}
+
+
+	@Override
+	public void deleteCart(String usersId) {
+		Connection connection = DBHelper.getConnection();
+		String sql1 = "delete from cartItem where cartId=?";
+		String sql2 = "select * from cart where usersId="+usersId;
+		try {
+			//查询cartId
+			PreparedStatement ps = connection.prepareStatement(sql2);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			String cid = rs.getString("cartId");
+			ps = connection.prepareStatement(sql1);
+			ps.setString(1, cid);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+	}
+
+
+	@Override
+	public int selectGoodsId(int goodsHot) {
+		Connection connection = DBHelper.getConnection();
+		String sql = "select * from goods where goodsHot="+goodsHot;
+		int goodsId = 0;
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			goodsId = rs.getInt("id");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.release();
+		}
+		return goodsId;
 	}
 
 }

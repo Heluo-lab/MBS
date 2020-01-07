@@ -9,4 +9,12 @@ public interface OrderDao {
 	public List<Receivinggoods> selectAddress(String usersId);
 	//增加地址
 	public void addAddress(String receMsg);
+	//删除地址
+	public void deleteAddress(String receId);
+	//改变默认
+	public void changeDefault(String receId,String usersId);
+	//更新地址
+	public void updateAddress(String receMsg);
+	//提交订单GoodsMsg
+	public void submitOrder(String usersId);
 }

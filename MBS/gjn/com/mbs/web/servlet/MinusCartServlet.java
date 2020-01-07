@@ -24,7 +24,9 @@ public class MinusCartServlet extends HttpServlet{
 		CartDao cd = new CartDaoImpl();
 		int goodsId = Integer.parseInt(req.getParameter("goodsid"));
 		int goodsNum = Integer.parseInt(req.getParameter("goodsnum"));
-		cd.minusCart("1", goodsId, goodsNum);
+		String color = req.getParameter("color");
+		String size = req.getParameter("size");
+		cd.minusCart("1", goodsId, goodsNum,color,size);
 	}
 
 }

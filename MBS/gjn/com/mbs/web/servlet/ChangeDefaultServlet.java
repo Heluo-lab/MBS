@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mbs.dao.CartDao;
-import com.mbs.dao.impl.CartDaoImpl;
+import com.mbs.dao.OrderDao;
+import com.mbs.dao.impl.OrderDaoImpl;
 
-@WebServlet("/addcartdata")
-public class AddCartDataServlet extends HttpServlet{
+@WebServlet("/changedefault")
+public class ChangeDefaultServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,12 +21,9 @@ public class AddCartDataServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int goodsId = Integer.parseInt(req.getParameter("goodsid"));
-		int goodsNum = Integer.parseInt(req.getParameter("goodsnum"));
-		String color = req.getParameter("color");
-		String size = req.getParameter("size");
-		CartDao cd = new CartDaoImpl();
-		cd.addCartItem("1", goodsId,goodsNum,color,size);
+		OrderDao od = new OrderDaoImpl();
+		String receId = req.getParameter("receId");
+		od.changeDefault(receId, "1");
 	}
 
 }

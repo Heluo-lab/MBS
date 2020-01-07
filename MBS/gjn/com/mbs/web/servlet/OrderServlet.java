@@ -34,10 +34,12 @@ public class OrderServlet extends HttpServlet{
 		//获得地址信息
 		OrderDao od = new OrderDaoImpl();
 		List<Receivinggoods> recelist = od.selectAddress("1");
+		boolean hasmsg = false;
+		Receivinggoods recegoods = new Receivinggoods();
 		for (Receivinggoods regoods : recelist) {
 			if (regoods.getIsDefault()==1) {
-				req.getSession().setAttribute("hasmsg", true);
-				req.getSession().setAttribute("receivinggoods", regoods);
+				hasmsg = true;
+				recegoods = regoods;
 			}
 		}
 		//获得购物车商品
@@ -60,9 +62,18 @@ public class OrderServlet extends HttpServlet{
 		}
 		req.getSession().setAttribute("money", money);
 		req.getSession().setAttribute("goodslist", msglist);
-		String usersId = req.getParameter("usersid");
-		req.getSession().setAttribute("usersId", usersId);
-		resp.sendRedirect("order.jsp");
+		req.getSession().setAttribute("usersId", "1");
+		String receName = recegoods.getReceName();
+		String receAddressCity = recegoods.getReceAddressCity();
+		String receAddressDetaile = recegoods.getReceAddressDetaile();
+		String receAddressProv = recegoods.getReceAddressProv();
+		String recePhone = recegoods.getRecePhone();
+		req.setAttribute("receName", receName);
+		req.setAttribute("receAddressCity", receAddressCity);
+		req.setAttribute("receAddressProv", receAddressProv);
+		req.setAttribute("receAddressDetaile", receAddressDetaile);
+		req.setAttribute("recePhone", recePhone);
+		req.getRequestDispatcher("order.jsp?hasmsg="+hasmsg).forward(req, resp);
 	}
 
 }

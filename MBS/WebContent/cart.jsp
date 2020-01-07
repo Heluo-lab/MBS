@@ -110,7 +110,10 @@
 								      		<input type="hidden" class="cartgoodsid" value="${goods.goodsId}" />
 											<td><input type="checkbox" class="check" checked data-check="active"/></td>
 											<td class="goods-img"><img src="img/loading.gif" lazyLoadSrc="${goods.showImage}"  /></td>
-											<td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${goods.goodsName}</a></td>
+											<td class="goods-content">
+											<a href="javascript:;" style="text-decoration:none;">${goods.goodsName}</a>
+											<p>尺寸：<span class="size">${goods.size}</span> 颜色：<span class="color">${goods.color }</span></p>
+											</td>
 											<td class="goods-price">${goods.price}</td>
 											<td class="goods-nub">
 												<a href="javascript:;" class="minus" style="text-decoration:none;">-</a><button class="goods-num">${goods.goodsNum }</button><a href="javascript:;" class="add" style="text-decoration:none;">+</a>
@@ -127,7 +130,7 @@
 								</div>
 								<div class="goods-priceAll-right">
 									<p class="price-all"><span>折后商品金额总计：</span>¥0.00</p>
-									<a href="order.html"><button class="buy">去结算</button></a>
+									<a href="order"><button class="buy">去结算</button></a>
 								</div>
 							</div>
 						</div>

@@ -24,7 +24,9 @@ public class DeleteCartServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int goodsId = Integer.parseInt(req.getParameter("goodsid"));
 		CartDao cd = new CartDaoImpl();
-		cd.deleteCart("1", goodsId);
+		String color = req.getParameter("color");
+		String size = req.getParameter("size");
+		cd.deleteCart("1", goodsId,color,size);
 	}
 
 }

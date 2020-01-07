@@ -44,6 +44,7 @@ $(function(){
 		  url:"hotgoods",
 		  data:"count="+id,
 		  success:function(result){
+			  console.log("hot");
 			  var re = JSON.parse(result);
 			  $('.hot').empty('ul');
 			  $.each(re,function(i,obj){
@@ -51,7 +52,7 @@ $(function(){
 				  //数据渲染
 				  var str = `
 					  <ul>
-					  <li><a href="product.html?goods_id=${obj.id}" id="${obj.id}" target="_blank">
+					  <li><a href="product.html?goods_id=${obj.goodsId}" id="${obj.goodsId}" target="_blank">
 					  <img src="img/loading.gif" lazyLoadSrc="${obj.showImage}" />
 					  </a>
 					  </li>
@@ -88,7 +89,7 @@ $(function(){
 								  </div>
 								  <div class="goods-priceAll-right">
 								  <p class="price-all"><span>折后商品金额总计：</span>¥0.00</p>
-								  <a href="order.html"><button class="buy">去结算</button></a>
+								  <a href="order"><button class="buy">去结算</button></a>
 								  </div>
 								  </div>
 								  </div>
@@ -98,7 +99,7 @@ $(function(){
 									  <input type="hidden" class="cartgoodsid" value="${goods}" />
 									  <td><input type="checkbox" class="check"checked data-check="active"/></td>
 									  <td class="goods-img"><img lazyLoadSrc="${obj.showImage}" src="img/loading.gif" /></td>
-									  <td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${obj.goodsName}</a></td>
+									  <td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${obj.goodsName}<p>尺寸：<span class="size">${obj.sizes}</span> 颜色：<span class="color">${obj.colour }</span></p></a></td>
 									  <td class="goods-price">${obj.price}</td>
 									  <td class="goods-nub">
 									  <a href="javascript:;" class="minus" style="text-decoration:none;" onclick="">-</a><button class="goods-num">1</button><a href="javascript:;" class="add" style="text-decoration:none;">+</a>
@@ -113,21 +114,23 @@ $(function(){
 							  //判断有无商品有则获得fff为true并且拿到它
 							  var fff = false;
 							  var g;
-							  for (var i = 0; i < $("#table").children().length; i++) {
+							  for (var i = 0; i < $("#table").children().children().length; i++) {
 								  if ( $('.cartgoodsid').eq(i).val()==goods) {
 									  fff = true;
 									  g = $('.cartgoodsid').eq(i);
 								  }
 							  }
 							  //存在则num++否则添加新的
+							  var num;
 							  if (fff) {
-								  var num = g.siblings(".goods-nub").children('.goods-num').html();
+								  num = g.siblings(".goods-nub").children('.goods-num').html();
 								  num++;
 								  g.siblings(".goods-nub").children('.goods-num').html(num);
 								  var unitPrice = parseInt(g.siblings('.goods-price').html());
 								  var subtotal = g.siblings('.subtotal');
 								  subtotal.html(num * unitPrice + '.00');
 							  }else{
+								  num=1;
 								  //内部组装一个添加一个
 								  $('#table').append(str);         
 							  }
@@ -145,15 +148,15 @@ $(function(){
 									  $('.has-goods').hide();
 								  }
 							  });
-							  console.log(goods);
 							  $.ajax({
 								  type:"post",
 								  url:"addcartdata",
-								  data:"goodsid="+goods+"&goodsnum=1",
+								  data:"goodsid="+goods+"&goodsnum="+num+"&size="+obj.size+"&color="+obj.color,
 								  success:function(result){
 									  console.log("success");
 								  }
 							  });
+							  $(priceAll());
 						  }
 					  });
 				});
@@ -174,10 +177,10 @@ function shop(id){
 			  $.each(re,function(i,obj){
 				  //清空.hot
 				  //数据渲染
-				  console.log(obj.id);
+				  console.log(obj.goodsId);
 				  var str = `
 					  <ul>
-					  <li><a href="product.html?goods_id=${obj.id}" id="${obj.id}" target="_blank">
+					  <li><a href="product.html?goods_id=${obj.goodsId}" id="${obj.goodsId}" target="_blank">
 					  <img src="img/loading.gif" lazyLoadSrc="${obj.showImage}" />
 					  </a>
 					  </li>
@@ -214,7 +217,7 @@ function shop(id){
 								  </div>
 								  <div class="goods-priceAll-right">
 								  <p class="price-all"><span>折后商品金额总计：</span>¥0.00</p>
-								  <a href="order.html"><button class="buy">去结算</button></a>
+								  <a href="order"><button class="buy">去结算</button></a>
 								  </div>
 								  </div>
 								  </div>
@@ -224,7 +227,7 @@ function shop(id){
 									  <input type="hidden" class="cartgoodsid" value="${goods}" />
 									  <td><input type="checkbox" class="check" checked data-check="active"/></td>
 									  <td class="goods-img"><img lazyLoadSrc="${obj.showImage}" src="img/loading.gif" /></td>
-									  <td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${obj.goodsName}</a></td>
+									  <td class="goods-content"><a href="javascript:;" style="text-decoration:none;">${obj.goodsName}</a><p>尺寸：<span class="size">${obj.sizes}</span> 颜色：<span class="color">${obj.colour }</span></p></td>
 									  <td class="goods-price">${obj.price}</td>
 									  <td class="goods-nub">
 									  <a href="javascript:;" class="minus" style="text-decoration:none;" onclick="">-</a><button class="goods-num">1</button><a href="javascript:;" class="add" style="text-decoration:none;">+</a>
@@ -246,14 +249,16 @@ function shop(id){
 								  }
 							  }
 							  //存在则num++否则添加新的
+							  var num;
 							  if (fff) {
-								  var num = g.siblings(".goods-nub").children('.goods-num').html();
+								  num = g.siblings(".goods-nub").children('.goods-num').html();
 								  num++;
 								  g.siblings(".goods-nub").children('.goods-num').html(num);
 								  var unitPrice = parseInt(g.siblings('.goods-price').html());
 								  var subtotal = g.siblings('.subtotal');
 								  subtotal.html(num * unitPrice + '.00');
 							  }else{
+								  num=1;
 								  //内部组装一个添加一个
 								  $('#table').append(str);         
 							  }
@@ -275,13 +280,15 @@ function shop(id){
 							  $.ajax({
 								  type:"post",
 								  url:"addcartdata",
-								  data:"goodsid="+goods+"&goodsnum=1",
+								  data:"goodsid="+goods+"&goodsnum="+num+"&size="+obj.size+"&color="+obj.color,
 								  success:function(result){
 									  console.log("success");
 								  }
 							  });
+							  $(priceAll());
 						  }
 					  });
+					  $(priceAll());
 				});
 		  	}
 	  });
@@ -345,10 +352,12 @@ function cartEvent(){
       $(this).attr('data-check', 'active');
       var nowNum = parseInt($(this).parent().siblings('.goods-nub').children(".goods-num").html());
       var goods = $(this).parent().siblings('.cartgoodsid').val();
+      var size = $(this).parent().siblings('.goods-content').children("p").children(".size").html();
+      var color = $(this).parent().siblings('.goods-content').children("p").children(".color").html();
       $.ajax({
   		  type:"post",
   		  url:"addcartdata",
-  		  data:"goodsid="+goods+"&goodsnum="+nowNum,
+  		  data:"goodsid="+goods+"&goodsnum="+nowNum+"&size="+size+"&color="+color,
   		  success:function(result){
   			  console.log("success");
   		  }
@@ -357,10 +366,12 @@ function cartEvent(){
       //删除标识
       $(this).attr('data-check', '');
       var goods = $(this).parent().siblings('.cartgoodsid').val();
+      var size = $(this).parent().siblings('.goods-content').children("p").children(".size").html();
+      var color = $(this).parent().siblings('.goods-content').children("p").children(".color").html();
       $.ajax({
   		  type:"post",
   		  url:"deletecart",
-  		  data:"goodsid="+goods,
+  		  data:"goodsid="+goods+"&size="+size+"&color="+color,
   		  success:function(result){
   			  console.log("success");
   		  }
@@ -392,10 +403,12 @@ function cartEvent(){
     //求总价
     priceAll();
     var goods = $(this).parent().siblings('.cartgoodsid').val();
+    var size = $(this).parent().siblings('.goods-content').children("p").children(".size").html();
+    var color = $(this).parent().siblings('.goods-content').children("p").children(".color").html();
     $.ajax({
 		  type:"post",
 		  url:"addcartdata",
-		  data:"goodsid="+goods+"&goodsnum="+nowNum,
+		  data:"goodsid="+goods+"&goodsnum="+nowNum+"&size="+size+"&color="+color,
 		  success:function(result){
 			  console.log("success");
 		  }
@@ -429,11 +442,12 @@ function cartEvent(){
     //求总价
     priceAll();
     var goods = $(this).parent().siblings('.cartgoodsid').val();
-    console.log(goods);
+    var size = $(this).parent().siblings('.goods-content').children("p").children(".size").html();
+    var color = $(this).parent().siblings('.goods-content').children("p").children(".color").html();
     $.ajax({
 		  type:"post",
 		  url:"addcartdata",
-		  data:"goodsid="+goods+"&goodsnum="+nowNum,
+		  data:"goodsid="+goods+"&goodsnum="+nowNum+"&size="+size+"&color="+color,
 		  success:function(result){
 			  console.log("success");
 		  }
@@ -455,33 +469,34 @@ function cartEvent(){
 	  lock = true;
     //删除接口  有number
     //一定是等到请求完成并且后台显示删除成功之后，才能把节点删除   
-	if(!confirm("你确定提交吗？")){
-		return;
-	}
-    var tr = $(this).parent().parent();
-    tr.remove();
-    //求总价
-    priceAll();
-    var patt1=new RegExp("^\\s+\\s$");
-    if($('#table').children().length==0||patt1.test($('#table').children().html())){
-    	str=`
-    		<div class="had-sign shopcar" style="height: 217px;">
+	if(confirm("你确定提交吗？")){
+		var tr = $(this).parent().parent();
+		tr.remove();
+		//求总价
+		priceAll();
+		var patt1=new RegExp("^\\s+\\s$");
+		if($('#table').children().length==0||patt1.test($('#table').children().html())){
+			str=`
+				<div class="had-sign shopcar" style="height: 217px;">
 				您的购物车中没有商品，您可以：
 				<p><a href="index.html">立即选购商品>></a>></p>
-			</div>
-    	`;
-    		$('#buygoods').html(str);
-    		$('#buygoods').css("background","url(img/shopcar.jpg) 200px 62px no-repeat");
-    }
-    var goods = $(this).parent().siblings('.cartgoodsid').val();
-    $.ajax({
-		  type:"post",
-		  url:"deletecart",
-		  data:"goodsid="+goods,
-		  success:function(result){
-			  console.log("success");
-		  }
-	  });
+				</div>
+				`;
+			$('#buygoods').html(str);
+			$('#buygoods').css("background","url(img/shopcar.jpg) 200px 62px no-repeat");
+		}
+		var goods = $(this).parent().siblings('.cartgoodsid').val();
+		var size = $(this).parent().siblings('.goods-content').children("p").children(".size").html();
+		var color = $(this).parent().siblings('.goods-content').children("p").children(".color").html();
+		$.ajax({
+			type:"post",
+			url:"deletecart",
+			data:"goodsid="+goods+"&size="+size+"&color="+color,
+			success:function(result){
+				console.log("success");
+			}
+		});
+	}
     setTimeout(function(){
         //oBtn.disabled = false;
         //开锁
@@ -501,3 +516,4 @@ function priceAll(){
   //给到总价元素
   $('.price-all').html('<span>折后商品金额总计：</span>¥' + priceSum + '.00');
 };
+$(priceAll());
