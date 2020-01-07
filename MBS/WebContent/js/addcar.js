@@ -8,7 +8,7 @@ jQuery("#addshoppingcart").click(function(){
 	var fly = $(".xyd").clone().css("display","block");
 	fly.appendTo(".gouwu");
 	fly.animate({
-		top:((document.documentElement.clientHeight/2+80-$(this).offset().top+$(document).scrollTop())),
+		top:((document.documentElement.clientHeight/2-$(this).offset().top+$(document).scrollTop())),
 		left:((document.documentElement.clientWidth+180-$(this).offset().left)),
 		width:'30px',
 		height:'30px',
