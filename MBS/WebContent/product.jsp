@@ -573,9 +573,9 @@
 <script src="js/isLogin.js"></script>
 <script type="text/javascript" src="js/product.js" ></script>
 <script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/addcar.js"></script>
 <script src="js/jquery.mousewheel.min.js" type="text/javascript"
 charset="utf-8"></script>
+<script src="js/addcar.js"></script>
 <!-- 回到顶部 -->
 <script type="text/javascript">
 	$('.return-top').click(function() {
