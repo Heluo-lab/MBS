@@ -3,6 +3,7 @@ package com.mbs.web.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jspsmart.upload.File;
-import com.jspsmart.upload.Files;
-import com.jspsmart.upload.SmartUpload;
-import com.jspsmart.upload.SmartUploadException;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Account;
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Receivinggoods;
 import com.mbs.service.SelfService;
 import com.mbs.service.impl.SelfServiceImpl;
 
@@ -80,8 +78,8 @@ s	 */
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
-		String goodsId = request.getParameter("id");
-//		String goodsId = "100";
+//		String goodsId = request.getParameter("goodsId");
+		String goodsId = "100";
 		String result = service.addCollect(usersId, Integer.parseInt(goodsId));
 		response.getWriter().print(result);
 	}
@@ -96,5 +94,85 @@ s	 */
 		request.setAttribute("goodsList", goodsList);
 		request.setAttribute("goodsName", goodsName);
 		request.getRequestDispatcher("self_mycollect.jsp").forward(request, response);;
+	}
+	
+	//根据用户Id查询该用户所有录入的收货地址
+	public void queryReceAddress(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		List<Receivinggoods> receList = service.queryReceAddress(usersId);
+		request.setAttribute("receList", receList);
+		request.getRequestDispatcher("self_address.jsp").forward(request, response);
+	}
+	
+	//根据用户Id增加用户的收货地址并返回新的所有地址信息
+	public void insertReceAddressByUsersId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Receivinggoods rece = new Receivinggoods();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		String receName = request.getParameter("receName");
+		String recePhone = request.getParameter("recePhone");
+		String receAddressProv = request.getParameter("receAddressProv");
+		String receAddressCity = request.getParameter("receAddressCity");
+		String receAddressCountry = request.getParameter("receAddressCountry");
+		String receAddressDetaile = request.getParameter("receAddressDetaile");
+		rece.setReceId(UUID.randomUUID().toString());
+		rece.setReceName(receName);
+		rece.setRecePhone(recePhone);
+		rece.setReceAddressProv(receAddressProv);
+		rece.setReceAddressCity(receAddressCity);
+		rece.setReceAddressCountry(receAddressCountry);
+		rece.setReceAddressDetaile(receAddressDetaile);
+		rece.setUsersId(usersId);
+		service.insertReceAddressByUsersId(rece);
+		List<Receivinggoods> receList = service.queryReceAddress(usersId);
+		response.setCharacterEncoding("UTF-8");
+		JSONArray array = JSONArray.fromObject(receList);
+		response.getWriter().print(array.toString());
+	}
+	
+	//根据收货信息ID删除该收获地址
+	public void deleteReceAddressByUsersIdAndReceId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		String receId = request.getParameter("receId");
+		service.deleteReceAddressByUsersIdAndReceId(receId);
+	}
+	
+	//根据用户Id与收货信息ID修改该收获地址
+	public void updateReceAddressByUsersIdAndReceId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Receivinggoods rece = new Receivinggoods();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		String receId = request.getParameter("receId");
+		String receName = request.getParameter("receName");
+		String recePhone = request.getParameter("recePhone");
+		String receAddressProv = request.getParameter("receAddressProv");
+		String receAddressCity = request.getParameter("receAddressCity");
+		String receAddressCountry = request.getParameter("receAddressCountry");
+		String receAddressDetaile = request.getParameter("receAddressDetaile");
+		rece.setReceId(receId);
+		rece.setReceName(receName);
+		rece.setRecePhone(recePhone);
+		rece.setReceAddressProv(receAddressProv);
+		rece.setReceAddressCity(receAddressCity);
+		rece.setReceAddressCountry(receAddressCountry);
+		rece.setReceAddressDetaile(receAddressDetaile);
+		rece.setUsersId(usersId);
+		service.updateReceAddressByUsersIdAndReceId(rece);
+		List<Receivinggoods> receList = service.queryReceAddress(usersId);
+		response.setCharacterEncoding("UTF-8");
+		JSONArray array = JSONArray.fromObject(receList);
+		response.getWriter().print(array.toString());
+	}
+	
+	//根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败
+	public void setDefaultAddressByUsersIdAndReceId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		String beforeReceId = request.getParameter("beforeReceId");
+		String afterReceId = request.getParameter("afterReceId");
+		service.setDefaultAddressByUsersIdAndReceId(beforeReceId, afterReceId);
 	}
 }

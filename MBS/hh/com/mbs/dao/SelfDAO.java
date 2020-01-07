@@ -10,6 +10,7 @@ import com.mbs.dto.UsersInfo;
  *
  */
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Receivinggoods;
 public interface SelfDAO {
 	
 	//根据用户ID查询用户
@@ -35,4 +36,23 @@ public interface SelfDAO {
 	
 	//根据用户ID修改账号表信息(key表示要修改的信息 accountName ,accoutPass,accountEmail) value表示要修改的值
 	public int updateAccountByUsersId(String key,String value,String accountId) throws SQLException;
+	
+	//根据用户Id查询该用户所有录入的收货地址
+	public List<Receivinggoods> queryReceAddress(String usersId)throws SQLException;
+	
+	//根据用户Id增加用户的收货地址
+	public int insertReceAddressByUsersId(Receivinggoods rece) throws SQLException;
+	
+	//根据收货信息ID删除该收获地址
+	public int deleteReceAddressByUsersIdAndReceId(String receId) throws SQLException;
+	
+	//根据用户Id与收货信息ID修改该收获地址
+	public int updateReceAddressByUsersIdAndReceId(Receivinggoods rece) throws SQLException;
+	
+	//根据收货信息ID将此收货信息取消默认地址
+	public int removeDefaultAddressByUsersIdAndReceId(String receId) throws SQLException;
+	
+	//根据收货信息ID将此收货信息设置为默认地址
+	public int setDefaultAddressByUsersIdAndReceId(String receId) throws SQLException;
+	
 }

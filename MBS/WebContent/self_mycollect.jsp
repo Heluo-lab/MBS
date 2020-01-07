@@ -169,7 +169,7 @@
 							<h1 class="showoff option" status='0'>个人信息</h1>
 							<ul>
 								<li><a href="self_userinfo.jsp">基本信息</a></li>
-								<li><a href="self_address.html">收获地址</a></li>
+								<li><a href="self.power?method=queryReceAddress">收获地址</a></li>
 								<li><a href="privilege_security.html">安全验证</a></li>
 							</ul>
 						</div>

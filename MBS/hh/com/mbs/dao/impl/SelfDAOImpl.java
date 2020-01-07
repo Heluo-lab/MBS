@@ -12,6 +12,7 @@ import com.mbs.dao.SelfDAO;
 import com.mbs.db.DBHelper;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Receivinggoods;
 /**
  * 个人信息具体实现类
  * @author heluo
@@ -163,6 +164,105 @@ public class SelfDAOImpl implements SelfDAO{
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, value);
 		pstmt.setString(2, accountId);
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
+	}
+	//根据用户Id查询该用户所有录入的收货地址
+	@Override
+	public List<Receivinggoods> queryReceAddress(String usersId) throws SQLException {
+		List<Receivinggoods> receList = new ArrayList<>();
+		Connection conn = DBHelper.getConnection();
+		String sql = "select * from receivinggoods where usersId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, usersId);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			Receivinggoods rece = new Receivinggoods();
+			rece.setReceId(rs.getString("receId"));
+			rece.setReceName(rs.getString("receName"));
+			rece.setRecePhone(rs.getString("recePhone"));
+			rece.setReceAddressProv(rs.getString("receAddressProv"));
+			rece.setReceAddressCity(rs.getString("receAddressCity"));
+			rece.setReceAddressCountry(rs.getString("receAddressCountry"));
+			rece.setReceAddressDetaile(rs.getString("receAddressDetaile"));
+			rece.setIsDefault(rs.getLong("isDefault"));
+			rece.setUsersId(rs.getString("usersId"));
+			receList.add(rece);
+		}
+		DBHelper.release();
+		return receList;
+	}
+
+	//根据用户Id增加用户的收货地址
+	@Override
+	public int insertReceAddressByUsersId(Receivinggoods rece) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "insert into receivinggoods value(?,?,?,?,?,?,?,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, rece.getReceId());
+		pstmt.setString(2, rece.getReceName());
+		pstmt.setString(3, rece.getRecePhone());
+		pstmt.setString(4, rece.getReceAddressProv());
+		pstmt.setString(5, rece.getReceAddressCity());
+		pstmt.setString(6, rece.getReceAddressCountry());
+		pstmt.setString(7, rece.getReceAddressDetaile());
+		pstmt.setLong(8, rece.getIsDefault());
+		pstmt.setString(9, rece.getUsersId());
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
+	}
+
+	//根据收货信息ID删除该收获地址
+	@Override
+	public int deleteReceAddressByUsersIdAndReceId(String receId) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "delete from receivinggoods where receId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, receId);
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
+	}
+
+	//根据用户Id与收货信息ID修改该收获地址
+	@Override
+	public int updateReceAddressByUsersIdAndReceId(Receivinggoods rece) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "update receivinggoods set receName = ?, recePhone = ? , receAddressProv = ?, receAddressCity = ?, receAddressCountry = ?, receAddressDetaile = ? where receId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, rece.getReceName());
+		pstmt.setString(2, rece.getRecePhone());
+		pstmt.setString(3, rece.getReceAddressProv());
+		pstmt.setString(4, rece.getReceAddressCity());
+		pstmt.setString(5, rece.getReceAddressCountry());
+		pstmt.setString(6, rece.getReceAddressDetaile());
+		pstmt.setString(7, rece.getReceId());
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
+	}
+
+	//根据用户Id与收货信息ID将此收货信息取消默认地址
+	@Override
+	public int removeDefaultAddressByUsersIdAndReceId(String receId) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "update receivinggoods set isDefault = 0 where receId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, receId);
+		int rows = pstmt.executeUpdate();
+		DBHelper.release();
+		return rows;
+	}
+
+	//根据用户Id与收货信息ID将此收货信息设置为默认地址
+	@Override
+	public int setDefaultAddressByUsersIdAndReceId(String receId) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String sql = "update receivinggoods set isDefault = 1 where receId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, receId);
 		int rows = pstmt.executeUpdate();
 		DBHelper.release();
 		return rows;
