@@ -133,7 +133,6 @@ public class GoodsDaoImpl implements GoodsDao {
 		StringBuffer sb = new StringBuffer(sql);
 		if (map != null) {
 			String sort=map.get("sort");
-			System.out.println(sort);
 			Set<Map.Entry<String, String>> line = map.entrySet();
 			for (Map.Entry<String, String> entry : line) {
 				
@@ -174,7 +173,6 @@ public class GoodsDaoImpl implements GoodsDao {
 		sb.append(" limit ? , ?");
 		// 根据条件构建sql语句
 		sql = sb.toString();
-		System.out.println(sql);
 		int index = 1;
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(index, tyid);

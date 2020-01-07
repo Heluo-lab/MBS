@@ -670,6 +670,7 @@
 						</div>
 
 						<!--页面page number-->
+						<c:if test="${maxNo gt 1 }">
 						<div class="pageNum">
 							<div class="page_list">
 								<a class='paginationIndex'
@@ -734,6 +735,7 @@
 								<a class='paginationIndex' <c:if test="${maxNo==0 || pageNo==maxNo}">disabled</c:if> <c:if test="${pageNo!=maxNo}">href="${pageContext.request.contextPath }/searchList?pageNo=${maxNo}&name=${name}&order=${order}&sort=${sort}"</c:if>>尾页</a>
 							</div>
 						</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
