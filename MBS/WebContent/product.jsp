@@ -409,16 +409,18 @@
 								<li class="txt">颜色</li>
 								<li class="licolork">
 						<c:forEach items="${colorlist}" var="color" varStatus="img">
-							<p>
 								<c:if test="${img.count eq 1}">
-									<img class="dq" src="${color.colorImage}"/>
+							<p class="dq" >
+									<img src="${color.colorImage}"/>
 									${color.colorName}
+							</p>
 								</c:if>
 								<c:if test="${img.count ne 1}">
+							<p>	
 									<img class="current" src="${color.colorImage}"/>
 									${color.colorName}
+							</p>	
 								</c:if>
-							</p>
 						</c:forEach>									
 								</li>
 							</ul>
@@ -453,7 +455,9 @@
 						
 						<div class="xyd">
 							<span class="gouwu-xyd">
-								<img src="img/430917402-116-01-H.jpg" />
+							<c:forEach items="${colorlist}" var="color" varStatus="img">
+								<img src="${color.colorImage}"/>
+							</c:forEach>
 							</span>
 						</div>
 						
