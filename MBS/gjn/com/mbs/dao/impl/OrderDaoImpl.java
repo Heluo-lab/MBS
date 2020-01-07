@@ -146,7 +146,7 @@ public class OrderDaoImpl implements OrderDao{
 	private static int ordersItemId = 0;
 	@Override
 	public void submitOrder(String usersId) {
-		String sql1 = "insert into orders value(?,?,?,?,?)";
+		String sql1 = "insert into orders value(?,?,?,?,?,?)";
 		String sql2 = "insert into ordersitem value(?,?,?,?,?,?)";
 		String sql3 = "select * from orders";
 		String sql4 = "select * from ordersitem";
@@ -194,6 +194,7 @@ public class OrderDaoImpl implements OrderDao{
 				total += goodsMsg2.getGoodsNum()*goodsMsg2.getPrice();
 			}
 			ps.setDouble(5, total);
+			ps.setInt(6, 1);
 			ps.executeUpdate();
 			ps = connection.prepareStatement(sql2);
 			ps1 = connection.prepareStatement(sql4);
