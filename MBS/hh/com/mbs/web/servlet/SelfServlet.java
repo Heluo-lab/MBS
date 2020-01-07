@@ -80,8 +80,8 @@ s	 */
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
-//		String goodsId = request.getParameter("goodsId");
-		String goodsId = "100";
+		String goodsId = request.getParameter("id");
+//		String goodsId = "100";
 		String result = service.addCollect(usersId, Integer.parseInt(goodsId));
 		response.getWriter().print(result);
 	}

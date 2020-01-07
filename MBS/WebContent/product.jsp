@@ -287,10 +287,6 @@
 					</a>
 				</div>
 				
-				<div class="addmsg">
-					<span>添加购物车成功</span>
-				</div>
-				
 				
 				<div class="menu-heart">
 					<a href="">
@@ -335,7 +331,7 @@
 					<!--商品图片-->
 					<div class="Shopping-zuo-tu">
 						<!--滚动图-->
-						<ul>
+						<ul class="bk">
 							<div class="zoomPad">
 						<c:forEach items="${colorImage}" var="falg" varStatus="img">
 							<li>
@@ -361,7 +357,7 @@
 						</div>
 						<div class="Shopping-zuo-xia">
 							<p>商品编码：${goods.id}</p>
-							<a href="" class="shoucang"><span>收藏</span></a>
+							<a href="javascript:void(0)" class="shoucang" onclick="addCollect('${goods.id}')"><span>收藏</span></a>
 						</div>
 						<div class="tu-big">
 						<!--<img class="big-img" src="img/430917402-116-01-H.jpg" />-->
@@ -409,16 +405,18 @@
 								<li class="txt">颜色</li>
 								<li class="licolork">
 						<c:forEach items="${colorlist}" var="color" varStatus="img">
-							<p>
 								<c:if test="${img.count eq 1}">
-									<img class="dq" src="${color.colorImage}"/>
+							<p class="dq" >
+									<img src="${color.colorImage}"/>
 									${color.colorName}
+							</p>
 								</c:if>
 								<c:if test="${img.count ne 1}">
+							<p>	
 									<img class="current" src="${color.colorImage}"/>
 									${color.colorName}
+							</p>	
 								</c:if>
-							</p>
 						</c:forEach>									
 								</li>
 							</ul>
@@ -453,7 +451,9 @@
 						
 						<div class="xyd">
 							<span class="gouwu-xyd">
-								<img src="img/430917402-116-01-H.jpg" />
+							<c:forEach items="${colorlist}" var="color" varStatus="img">
+								<img src="${color.colorImage}"/>
+							</c:forEach>
 							</span>
 						</div>
 						
@@ -569,9 +569,9 @@
 <script src="js/isLogin.js"></script>
 <script type="text/javascript" src="js/product.js" ></script>
 <script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/addcar.js"></script>
 <script src="js/jquery.mousewheel.min.js" type="text/javascript"
 charset="utf-8"></script>
+<script src="js/addcar.js"></script>
 <!-- 回到顶部 -->
 <script type="text/javascript">
 	$('.return-top').click(function() {
@@ -636,5 +636,21 @@ charset="utf-8"></script>
 			"json"
 		);
 		
+	}
+	function addCollect(val){
+		$.ajax({
+			url:"self.power",
+			data:{"method":"addCollect","id":val},
+			type:"post",
+			success:function(result){
+				if(result=="success"){
+					alert("添加成功");
+				}else if(result=="fail"){
+					alert("添加失败");
+				}else if(result=="exit"){
+					alert("此商品已被收藏");
+				}
+			}
+		});
 	}
 </script>

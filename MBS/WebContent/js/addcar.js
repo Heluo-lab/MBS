@@ -9,7 +9,7 @@ jQuery("#addshoppingcart").click(function(){
 	fly.appendTo(".gouwu");
 	fly.animate({
 		top:((document.documentElement.clientHeight/2-$(this).offset().top+$(document).scrollTop())),
-		left:((document.documentElement.clientWidth-$(this).offset().left)),
+		left:((document.documentElement.clientWidth+180-$(this).offset().left)),
 		width:'30px',
 		height:'30px',
 		opacity:'0.7'
