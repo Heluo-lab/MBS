@@ -8,7 +8,7 @@ public class Orders {
   private String usersId;
   private String ordersTime;
   private double ordersTotalMoney;
-  private String ordersStatus;
+  private int ordersStatus;
 
 
   public String getOrdersId() {
@@ -56,11 +56,11 @@ public class Orders {
   }
 
 
-  public String getOrdersStatus() {
+  public int getOrdersStatus() {
     return ordersStatus;
   }
 
-  public void setOrdersStatus(String ordersStatus) {
+  public void setOrdersStatus(int ordersStatus) {
     this.ordersStatus = ordersStatus;
   }
 
