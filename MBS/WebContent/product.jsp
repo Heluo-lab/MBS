@@ -408,11 +408,15 @@
 							<ul class="c-ul">
 								<li class="txt">颜色</li>
 								<li class="licolork">
-						<c:forEach items="${Cnimgcodelist}" var="falg" varStatus="img">
+						<c:forEach items="${colorlist}" var="color" varStatus="img">
 							<p>
 								<c:if test="${img.count eq 1}">
-									<img class="current" src="${Cnimgcodelist.colorImage}"/>
-									${Cnimgcodelist.colorName}
+									<img class="dq" src="${color.colorImage}"/>
+									${color.colorName}
+								</c:if>
+								<c:if test="${img.count ne 1}">
+									<img class="current" src="${color.colorImage}"/>
+									${color.colorName}
 								</c:if>
 							</p>
 						</c:forEach>									
@@ -425,10 +429,10 @@
 								<li class="txt">尺码</li>
 								<li class="sizebtn">
 									<span>
-										<a>S</a>
-										<a>M</a>
-										<a>L</a>
-										<a>XL</a>
+									<c:forEach items="${colorsize}" var="size" varStatus="img">
+											<a>${size}</a>
+									</c:forEach>
+										
 									</span>
 								</li>
 							</ul>		
@@ -544,6 +548,9 @@
 					<div class="detali_destrct">
 						<c:forEach items="${imgurl}" var="falg" varStatus="img">
 							<span>
+								<c:if test="${empty falg}">
+									<img src="img/zwxq.jpg">
+								</c:if>
 								<img src="${falg}"/>
 							</span>
 						</c:forEach>
