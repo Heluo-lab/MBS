@@ -335,7 +335,7 @@
 					<!--商品图片-->
 					<div class="Shopping-zuo-tu">
 						<!--滚动图-->
-						<ul>
+						<ul class="bk">
 							<div class="zoomPad">
 						<c:forEach items="${colorImage}" var="falg" varStatus="img">
 							<li>
