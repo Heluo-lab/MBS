@@ -40,12 +40,14 @@
 				<!--下边-->
 				<div class="login-form">
 					<form class="login_input_main" id="form">
+						<!-- 判断是否登录成功 -->
+						<div class="user_item" id="loginMsg">用户名或密码不正确，请重新登录！</div>
 						<!--普通登录第一块输入部分-->
 						<div class="input_block_1">
 							<!--邮箱输入-->
 							<div class="user_item">
 								<label class="i_lable name-lable" for="txtLoginID"></label>
-								<input type="text" name="txtLoginMail" title="请输入邮箱" placeholder="邮箱" class="i_text"  id="txtLoginID" />
+								<input type="text" name="txtLoginMail" title="请输入邮箱" placeholder="邮箱" class="i_text"  id="txtLoginID"/>
 								<!--输入正确时图标-->
 								<label id="txtLoginIDCorrent"></label>
 								<!--账号为空，错误时图标文字解释-->
@@ -73,7 +75,6 @@
 								<div id="txtLoginMobTip"></div>
 							</div>
 						</div>
-						<!--验证部分-->
 						<!--动态验证部分与密码输入一样-->
 						<div class="input_block_2 dymatic">
 							<!--动态输入框-->
@@ -87,13 +88,16 @@
 						<!--两个链接和按钮-->
 						<div class="btn-a">
 							<a href="#" class="forget-pwd">忘记密码？</a>
-							<input type="radio" id="remember_pwd" name="remember_pwd" value="记住密码" checked/>
-							<label for="remember_pwd">记住密码</label>
-							<input type="radio"  id="auto_login" name="auto_login" value="自动登录" checked/>
-							<label for="auto_login">自动登录</label>
+							<input type="radio" id="remember_pwd" name="remember_pwd" value="记住密码"/>
+							<label for="remember_pwd" id="txt_remember">记住密码</label>
+							<input type="radio"  id="auto_login" name="auto_login" value="自动登录"/>
+							<label for="auto_login" id="txt_auto">自动登录</label>
 							<a href="register.jsp" class="login_reg">注册</a>
 							<!--按钮-->
-							<div class="btn">立即登录</div>
+							<div class="btn">
+								<input type="button" name="btnLogin" id="btnLogin" class="i_btn_ok" value="立即登录"/>
+								<input type="button" name="btnLogin" id="btnSmsLogin" class="i_btn_ok" value="立即登录"/>
+							</div>
 						</div>
 					</form>
 					<!--右边内容下面其他方式-->
