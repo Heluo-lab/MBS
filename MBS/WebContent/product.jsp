@@ -287,10 +287,6 @@
 					</a>
 				</div>
 				
-				<div class="addmsg">
-					<span>添加购物车成功</span>
-				</div>
-				
 				
 				<div class="menu-heart">
 					<a href="">
@@ -361,7 +357,7 @@
 						</div>
 						<div class="Shopping-zuo-xia">
 							<p>商品编码：${goods.id}</p>
-							<a href="" class="shoucang"><span>收藏</span></a>
+							<a href="javascript:void(0)" class="shoucang" onclick="addCollect('${goods.id}')"><span>收藏</span></a>
 						</div>
 						<div class="tu-big">
 						<!--<img class="big-img" src="img/430917402-116-01-H.jpg" />-->
@@ -640,5 +636,21 @@ charset="utf-8"></script>
 			"json"
 		);
 		
+	}
+	function addCollect(val){
+		$.ajax({
+			url:"self.power",
+			data:{"method":"addCollect","id":val},
+			type:"post",
+			success:function(result){
+				if(result=="success"){
+					alert("添加成功");
+				}else if(result=="fail"){
+					alert("添加失败");
+				}else if(result=="exit"){
+					alert("此商品已被收藏");
+				}
+			}
+		});
 	}
 </script>
