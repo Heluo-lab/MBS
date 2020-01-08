@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.mbs.dao.CartDao;
 import com.mbs.dao.OrderDao;
@@ -142,7 +143,7 @@ public class OrderDaoImpl implements OrderDao{
 	
 	}
 	
-	private static int ordersId = 0;
+	private static String ordersId = UUID.randomUUID().toString().replaceAll("-","");
 	private static int ordersItemId = 0;
 	@Override
 	public void submitOrder(String usersId) {
@@ -178,15 +179,14 @@ public class OrderDaoImpl implements OrderDao{
 		try {
 			PreparedStatement ps1 = connection.prepareStatement(sql3);
 			ResultSet rs = ps1.executeQuery();
-			ordersId++;
 			while(rs.next()){
 				if (rs.getString("ordersId").equals(ordersId+"")) {
-					ordersId++;
+					ordersId = UUID.randomUUID().toString().replaceAll("-","");
 				}
 			}
 			PreparedStatement ps = connection.prepareStatement(sql1);
 			double total = 0;
-			ps.setString(1, ordersId+"");
+			ps.setString(1, ordersId);
 			ps.setString(2, "");
 			ps.setString(3, usersId);
 			ps.setString(4, time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
