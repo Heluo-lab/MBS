@@ -11,7 +11,10 @@ import java.util.List;
 import org.apache.commons.collections.map.StaticBucketMap;
 
 import com.mbs.dao.CartDao;
+import com.mbs.dao.ProductDao;
 import com.mbs.db.DBHelper;
+import com.mbs.dto.GoodsMsg;
+import com.mbs.dto.IDColorSizeOf;
 import com.mbs.pojo.CartItem;
 
 public class CartDaoImpl implements CartDao{
@@ -237,6 +240,29 @@ public class CartDaoImpl implements CartDao{
 			DBHelper.release();
 		}
 		return goodsId;
+	}
+
+
+	@Override
+	public List<GoodsMsg> selectGoodsMsg(String usersId) {
+		Connection connection = DBHelper.getConnection();
+		List<CartItem> list = selectAllCartId("1");
+		List<GoodsMsg> msglist = new ArrayList<GoodsMsg>();
+		for (CartItem cart : list) {
+			ProductDao pd = new ProductDaoimpl();
+			GoodsMsg goodsmsg = new GoodsMsg();
+			IDColorSizeOf goods = pd.LoadingfoGoodsID(cart.getGoodsId());
+			goodsmsg.setCartItemId(cart.getCartItemId());
+			goodsmsg.setGoodsName(goods.getGoodsName());
+			goodsmsg.setGoodsId(cart.getGoodsId());
+			goodsmsg.setGoodsNum(cart.getGoodsNum());
+			goodsmsg.setPrice(goods.getPrice());
+			goodsmsg.setShowImage(goods.getShowImage());
+			goodsmsg.setColor(goods.getColour());
+			goodsmsg.setSize(goods.getSizes());
+			msglist.add(goodsmsg);
+		}
+		return msglist;
 	}
 
 }

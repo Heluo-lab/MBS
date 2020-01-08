@@ -3,6 +3,7 @@ package com.mbs.dao;
 
 import java.util.List;
 
+import com.mbs.dto.GoodsMsg;
 import com.mbs.pojo.Cart;
 import com.mbs.pojo.CartItem;
 
@@ -19,4 +20,6 @@ public interface CartDao {
 	public void deleteCart(String usersId);
 	//通过goodsHot获得goodsId
 	public int selectGoodsId(int goodsHot);
+	//通过usersId查GoodsMsg
+	public List<GoodsMsg> selectGoodsMsg(String usersId);
 }
