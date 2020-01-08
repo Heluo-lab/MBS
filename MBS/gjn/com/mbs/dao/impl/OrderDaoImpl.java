@@ -194,7 +194,7 @@ public class OrderDaoImpl implements OrderDao{
 				total += goodsMsg2.getGoodsNum()*goodsMsg2.getPrice();
 			}
 			ps.setDouble(5, total);
-			ps.setInt(6, 1);
+			ps.setInt(6, 2);
 			ps.executeUpdate();
 			ps = connection.prepareStatement(sql2);
 			ps1 = connection.prepareStatement(sql4);
