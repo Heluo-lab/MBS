@@ -29,21 +29,21 @@ public class SelfServlet extends SelfServletDispatcher{
 
 	private static final long serialVersionUID = 6367079502427622830L;
 		
-	/**
-	 * 根据用户ID查询用户所有信息
-	 */
-	public void querySingleUser(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		HttpSession session = request.getSession();
-		Account acc = new Account();
-		acc.setAccountId("2");
-		session.setAttribute("account",acc);
-		Account account = (Account)session.getAttribute("account");
-		String accountId = account.getAccountId();
-		SelfService service = new SelfServiceImpl();
-		UsersInfo users = service.querySingleUser(accountId);
-		session.setAttribute("usersInfo", users);
-		request.getRequestDispatcher("self_center.jsp").forward(request, response);
-	}
+//	/**
+//	 * 根据用户ID查询用户所有信息
+//	 */
+//	public void querySingleUser(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+////		HttpSession session = request.getSession();
+////		Account acc = new Account();
+////		acc.setAccountId("2");
+////		session.setAttribute("account",acc);
+////		Account account = (Account)session.getAttribute("account");
+////		String accountId = account.getAccountId();
+////		SelfService service = new SelfServiceImpl();
+////		UsersInfo users = service.querySingleUser(accountId);
+////		session.setAttribute("usersInfo", users);
+////		request.getRequestDispatcher("self_center.jsp").forward(request, response);
+//	}
 	/**
 	 * 根据用户ID查询该用户所有收藏商品
 	 */
