@@ -33,7 +33,11 @@ public class LoginListener implements HttpSessionAttributeListener{
 
 	@Override
 	public void attributeRemoved(HttpSessionBindingEvent se) {
-		
+		String attrName = se.getName();
+		if("account".equals(attrName)){
+			HttpSession session = se.getSession();
+			session.removeAttribute("usersInfo");
+		}
 	}
 
 	@Override

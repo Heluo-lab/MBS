@@ -75,23 +75,23 @@
 							<a href="#">微信</a>
 							<span>|</span>
 						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="register.html">注册</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="login.html">登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<a href="javascript:void(0)" id="exitLogin">退出登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<!--<a href="#">你好，XXX</a>-->
-							<a href="self_center.html" id="username"></a>
-							<span>|</span>
-						</div>
+						<c:if test="${empty usersInfo }">
+							<div class="header-top-list-coll no-user">
+								<a href="register.jsp">注册</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<a href="login.jsp">登录</a> <span>|</span>
+							</div>
+						</c:if>
+						<c:if test="${!empty usersInfo }">
+							<div class="header-top-list-coll">
+								<a href="javascript:void(0)" id="exitLogin">退出登录</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<!--<a href="#">你好，XXX</a>-->
+								<a href="self_center.jsp" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -122,8 +122,8 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self.power?method=querySingleUser">首页</a>>
-				<a href="self.power?method=querySingleUser">个人中心</a>
+				<a href="self_center.jsp">首页</a>>
+				<a href="self_center.jsp">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
@@ -359,7 +359,7 @@
 </html>
 <script src="js/jquery.min.js"></script>
 <script src="js/self_base.js"></script>
-<script src="js/isLogin.js"></script>
+<script src="js/exitLogin.js"></script>
 <script>
 	$('.top a').each(function(){
 		$(this).click(function(){
