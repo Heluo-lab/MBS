@@ -50,13 +50,41 @@ public class AccountDaoImpl implements AccountDao{
 		return false;
 	}
 	
-	//登录，是否存在
+	//无密码登录登录，是否存在
 	@Override
 	public Account selectAccount(String email, Connection conn) throws Exception {
 		String sql="select * from Account where accountEmail=?";
 		Account account =null;
 		PreparedStatement ps =conn.prepareStatement(sql);
 		ps.setString(1, email);
+		ResultSet rs =ps.executeQuery();
+		if (rs.next()) {
+			account =new Account();
+			account.setAccountId(rs.getString("accountId"));
+			account.setAccountName(rs.getString("accountName"));
+			account.setAccountEmail(rs.getString("accountEmail"));
+			account.setAccountPass(rs.getString("accountPass"));
+			account.setAccountBirth(rs.getString("accountBirth"));
+		}
+		return account;
+	}
+	//修改用户密码
+	@Override
+	public void updateAccount(Account account, Connection conn) throws Exception {
+		String sql ="update account set accountPass=? where accountEmail=?";
+		PreparedStatement ps =conn.prepareStatement(sql);
+		ps.setString(1, account.getAccountPass());
+		ps.setString(2, account.getAccountEmail());
+		int result =ps.executeUpdate();
+	}
+	//登录
+	@Override
+	public Account login(String email, String pwd, Connection conn) throws Exception {
+		String sql="select * from Account where accountEmail=? and accountPass=?";
+		Account account =null;
+		PreparedStatement ps =conn.prepareStatement(sql);
+		ps.setString(1, email);
+		ps.setString(2, pwd);
 		ResultSet rs =ps.executeQuery();
 		if (rs.next()) {
 			account =new Account();
