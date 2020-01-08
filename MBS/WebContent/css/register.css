@@ -92,6 +92,17 @@ body{
 	/*设置最小高度*/
 	min-height: 408px;
 }
+/* 判断注册是否成功 */
+#registerMsg{
+	width: 324px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #e60065;
+	display: none; 
+	font-size: 14px;
+	text-align: center;
+	color: #e60065;
+}
 /*右边下边表格输入框的标签图标*/
 .i_lable{
 	width: 45px;

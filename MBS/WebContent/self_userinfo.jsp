@@ -168,7 +168,7 @@
 							<h1 class="showon option" status='0'>个人信息</h1>
 							<ul style="display: block;">
 								<li><a href="javascript:void(0)" class="active">基本信息</a></li>
-								<li><a href="self_address.html">收获地址</a></li>
+								<li><a href="self.power?method=queryReceAddress">收获地址</a></li>
 								<li><a href="privilege_security.html">安全验证</a></li>
 							</ul>
 						</div>
@@ -499,4 +499,5 @@
 			document.getElementById("img").src=content;
 		};
 	}
+
 </script>

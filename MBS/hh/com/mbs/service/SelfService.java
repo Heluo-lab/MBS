@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Receivinggoods;
 
 /**
  * 个人信息具体业务
@@ -30,4 +31,19 @@ public interface SelfService {
 	
 	//根据账号ID修改账号和用户信息
 	public boolean updateUsersAndAccountByAccountId(UsersInfo usersInfo);
+	
+	//根据用户Id查询该用户所有录入的收货地址
+	public List<Receivinggoods> queryReceAddress(String usersId);
+	
+	//根据用户Id增加用户的收货地址
+	public int insertReceAddressByUsersId(Receivinggoods rece);
+	
+	//根据收货信息ID删除该收获地址
+	public int deleteReceAddressByUsersIdAndReceId(String receId);
+	
+	//根据用户Id与收货信息ID修改该收获地址
+	public int updateReceAddressByUsersIdAndReceId(Receivinggoods rece);
+	
+	//根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败
+	public boolean setDefaultAddressByUsersIdAndReceId(String beforeReceId,String afterReceId);
 }

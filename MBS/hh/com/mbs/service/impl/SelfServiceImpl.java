@@ -9,6 +9,7 @@ import com.mbs.dao.SelfDAO;
 import com.mbs.dao.impl.SelfDAOImpl;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Receivinggoods;
 import com.mbs.service.SelfService;
 /**
  * 个人信息具体业务实现类
@@ -73,6 +74,8 @@ public class SelfServiceImpl implements SelfService{
 		}
 		return "success";
 	}
+	
+	//根据用户Id,商品名称在收藏商品查询相关商品
 	@Override
 	public List<Goods> queryCollectGoodsByUsersId(String usersId, String goodsName) {
 		List<Goods> goodsList = null;
@@ -95,6 +98,68 @@ public class SelfServiceImpl implements SelfService{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			flag = false;
+		}
+		return flag;
+	}
+	
+	//根据用户Id查询该用户所有录入的收货地址
+	@Override
+	public List<Receivinggoods> queryReceAddress(String usersId) {
+		List<Receivinggoods> receList = null;
+		try {
+			receList = dao.queryReceAddress(usersId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return receList;
+	}
+	
+	//根据用户Id增加用户的收货地址
+	@Override
+	public int insertReceAddressByUsersId(Receivinggoods rece) {
+		int rows = -1;
+		try {
+			rows = dao.insertReceAddressByUsersId(rece);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+	
+	//根据收货信息ID删除该收获地址
+	@Override
+	public int deleteReceAddressByUsersIdAndReceId(String receId) {
+		int rows = -1;
+		try {
+			rows = dao.deleteReceAddressByUsersIdAndReceId(receId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+	
+	//根据用户Id与收货信息ID修改该收获地址
+	@Override
+	public int updateReceAddressByUsersIdAndReceId(Receivinggoods rece) {
+		int rows = -1;
+		try {
+			rows = dao.updateReceAddressByUsersIdAndReceId(rece);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+	
+	//根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败
+	@Override
+	public boolean setDefaultAddressByUsersIdAndReceId(String beforeReceId, String afterReceId) {
+		boolean flag = false;
+		try {
+			dao.removeDefaultAddressByUsersIdAndReceId(beforeReceId);
+			dao.setDefaultAddressByUsersIdAndReceId(afterReceId);
+			flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return flag;
 	}

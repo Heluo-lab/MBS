@@ -78,8 +78,8 @@ public class UploadServlet extends HttpServlet {
 						//获得上传文件的名称
 						fileName = item.getName();
 						if("".equals(fileName)){
-							//当用户没有上传图片时，跳出循环，使用用户当前头像
-							break;
+							//当用户没有上传图片时，跳出此次循环，使用用户当前头像
+							continue;
 						}
 //						System.out.println(fileName+"===");
 						//clz.getDeclaredField("");

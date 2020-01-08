@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -131,7 +134,7 @@
 								<li><a href="self_order.html">我的订单</a></li>
 								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="self_mypointment.html">我的预约</a></li>
-								<li><a href="self_mycollect.html">我的收藏</a></li>
+								<li><a href="self.power?method=queryCollectGoodsByUsersId">我的收藏</a></li>
 								<li><a href="shop_apply.html">商家申请</a></li>
 							</ul>
 						</div>
@@ -165,7 +168,7 @@
 						<div class="lelf-menu">
 							<h1 class="showon option" status='0'>个人信息</h1>
 							<ul style="display: block;">
-								<li><a href="self_userinfo.html">基本信息</a></li>
+								<li><a href="self_userinfo.jsp">基本信息</a></li>
 								<li><a href="javascript:void(0)" class="active">收获地址</a></li>
 								<li><a href="privilege_security.html">安全验证</a></li>
 							</ul>
@@ -186,10 +189,14 @@
 					<div class="bottom">
 						<div class="close" id="add">新增收获地址</div>
 						<div class="new-address" style="display: none;">
-							<table>
+							<table id="addRece">
 								<tr>
-									<td><span>*</span>真实姓名：</td>
-									<td><input type="text" name="username" /></td>
+									<td><span>*</span>收货姓名：</td>
+									<td>
+										<input type="hidden" value="" class="hid">
+										<input type="text" name="receName" />
+										<span id="receNameSpan"></span>
+									</td>
 								</tr>
 								<tr>
 									<td><span>*</span>省/市/区县：</td>
@@ -203,46 +210,64 @@
 										<select id="country" onchange="selectCountry(this)">
 											<option>-请选择区域-</option>
 										</select>
+										<span id="receAddSpan"></span>
 									</td>
 								</tr>
 								<tr>
 									<td><span>*</span>联系地址：</td>
-									<td><input type="text" name="useraddress"/>&nbsp;为能精确配送，请详细录入街道/路段</td>
-								</tr>
-								<tr>
-									<td><span>*</span>邮政编码：</td>
-									<td><input type="text" name="usermail"/></td>
+									<td>
+										<input type="text" name="receAddressDetaile"/>&nbsp;为能精确配送，请详细录入街道/路段
+										<span id="detaile"></span>
+									</td>
 								</tr>
 								<tr>
 									<td><span>*</span>电话：</td>
-									<td><input type="text" name="userphone" /></td>
+									<td>
+										<input type="text" name="recePhone" />
+										<span id="recePhoneSpan"></span>
+									</td>
 								</tr>
 								<tr>
 									<td></td>
-									<td><input type="button" value="保存新增"/></td>
+									<td>
+										<input type="button" value="保存新增" id="saveReceBtn" status="0"/>
+										<span id="checkAddInfo"></span>
+									</td>
 								</tr>
 							</table>
 						</div>
 						<div class="my-address">
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-									<th>收货人</th>
-									<th>省/市/县区</th>
-									<th>联系地址</th>
-									<th>邮编	</th>
-									<th>电话/手机</th>
-									<th>操作</th>
-									<th>默认地址</th>
-								</tr>
-								<t>
-									<td>何落</td>
-									<td>湖南省 长沙市 岳麓区</td>
-									<td>延农大厦</td>
-									<td>410006</td>
-									<td>15697383242</td>
-									<td><a href="#">修改</a>|<a href="#">删除</a></td>
-									<td><input type="radio"/></td>
-								</tr>
+							<table cellpadding="0" cellspacing="0" id="receAddressTable">
+								<thead>
+									<tr>
+										<th>收货人</th>
+										<th>省/市/县区</th>
+										<th>联系地址</th>
+										<th>电话/手机</th>
+										<th>操作</th>
+										<th>默认地址</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${receList }" var="rece"> 
+										<tr class="addressInfo">
+											<td class="receNameTd">${rece.receName }</td>
+											<td class="receAddTd">${rece.receAddressProv } ${rece.receAddressCity } ${rece.receAddressCountry }</td>
+											<td class="receDetaileTd">${rece.receAddressDetaile }</td>
+											<td class="recePhoneTd">${rece.recePhone }</td>
+											<td><a href="javascript:void(0)" onclick="updateRece(this)">修改</a>|<a href="javascript:void(0)" onclick="deleteRece('${rece.receId }')">删除</a></td>
+											<td>
+												<c:if test="${rece.isDefault==1 }">
+													<input type="radio" name="isDefault" checked/>
+												</c:if>
+												<c:if test="${rece.isDefault==0 }">
+													<input type="radio" name="isDefault"/>
+												</c:if>
+												<input type="hidden" value="${rece.receId }" class="hid">
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
 							</table>
 						</div>
 					</div>
@@ -341,5 +366,174 @@
 		}
 		$(this).removeClass('open').addClass('close');
 		$('.new-address').slideUp();
-	})
+		$(this).html("新增收货地址");
+		$("#addRece input[type='button']").val("保存新增");
+		$("#addRece input[name='receName']").val("");
+		$("#prov option").each(function(i){
+			if($(this).html()=="-请选择省份-"){
+				$(this).prop("selected",true);
+				showCity($(this).parent().get(0));
+				return;
+			}
+		});
+		$("#addRece input[name='receAddressDetaile']").val("");
+		$("#addRece input[name='recePhone']").val("");
+	});
+	//收货人校验正则表达式
+	var nameRegex = /^(\w|[\u4e00-\u9fa5]){2,8}$/;
+	//收货电话校验正则表达式
+	var phoneRegex = /\d{11}/;
+	//保存地址
+	$("#saveReceBtn").click(function(){
+		$("#receNameSpan").html("");
+		$("#recePhoneSpan").html("");
+		$("#receAddSpan").html("");
+		$("#detaile").html("");
+		//$("#receNameSpan").css("color","red");
+		//$("#recePhoneSpan").css("color","red");
+		//$("#receAddSpan").css("color","red");
+		//校验收货人
+		var receName = $("#addRece input[name='receName']").val().trim();
+		if(""==receName){
+			$("#receNameSpan").html("请输入收货人");
+			return;
+		}
+		if(!nameRegex.test(receName)){
+			//console.log(receName.length);
+			$("#receNameSpan").html("限输入2至8位由数字字母或汉字组成的收货名");
+			return;
+		}
+		//校验收货地址
+		var prov = $("#prov").find('option:selected').html();
+		var city = $("#city").find('option:selected').html();
+		var country = $("#country").find('option:selected').html();
+		if("-请选择省份-"==prov || "-请选择城市-"==city || "-请选择区域-"==country){
+			$("#receAddSpan").html("请选择收货地址");
+			return;
+		}
+		//校验详细街道
+		var receAddressDetaile = $("#addRece input[name='receAddressDetaile']").val().trim();
+		if(""==receAddressDetaile){
+			$("#detaile").html("请填写详细街道/路段");
+			return;
+		}
+		//校验收货电话
+		var recePhone = $("#addRece input[name='recePhone']").val().trim();
+		if(""==recePhone){
+			$("#recePhoneSpan").html("请输入收货号码");
+			return;
+		}
+		if(!phoneRegex.test(recePhone)){
+			$("#recePhoneSpan").html("请输入正确的电话号码");
+			return;
+		}
+		//console.log(receName);
+		//console.log(prov+"==="+city+"==="+country);
+		//console.log(receAddressDetaile+"==="+recePhone);
+		var status = $(this).attr("status");
+		if(status == 0){
+			$.ajax({
+				url:"self.power?method=insertReceAddressByUsersId",
+				type:"post",
+				data:{"receName":receName,"recePhone":recePhone,"receAddressProv":prov,"receAddressCity":city,"receAddressCountry":country,"receAddressDetaile":receAddressDetaile},
+				success:function(result){
+					result = JSON.parse(result);
+					//console.log(result.length);
+					$(".my-address tbody").html("");
+					
+					for(var i = 0 ; i <result.length; i++ ){
+						
+					}
+					$("#add").removeClass('open').addClass('close');
+					$('.new-address').slideUp();
+				},
+				error:function(){
+					//console.log("添加失败");
+				}
+			});
+		}else if(status == 1){
+			var receId = $("#addRece .hid").val().trim();
+			$.ajax({
+				url:"self.power?method=updateReceAddressByUsersIdAndReceId",
+				type:"post",
+				data:{"receName":receName,"recePhone":recePhone,"receAddressProv":prov,"receAddressCity":city,"receAddressCountry":country,"receAddressDetaile":receAddressDetaile,"receId":receId},
+				success:function(result){
+					result = JSON.parse(result);
+					//console.log(result.length);
+					$(".my-address tbody").html("");
+					
+					for(var i = 0 ; i <result.length; i++ ){
+						
+					}
+					$("#add").removeClass('open').addClass('close');
+					$('.new-address').slideUp();
+				},
+				error:function(){
+					console.log("修改失败");
+				}
+			});
+			$(this).attr("status","0");
+		}
+	});
+	
+	//修改收货地址
+	function updateRece(obj){
+		$("#saveReceBtn").attr("status","1");
+		var tr = $(obj).parent().parent();
+		var receId = tr.find(".hid").val();
+		$("#addRece .hid").val(receId);
+		var receName = tr.find(".receNameTd").html().trim();
+		var receAdd = tr.find(".receAddTd").html().trim();
+		var addArr = receAdd.split(" ");
+		var prov = addArr[0];
+		var city = addArr[1];
+		var country = addArr[2];
+		var receDetaile = tr.find(".receDetaileTd").html().trim();
+		var recePhone = tr.find(".recePhoneTd").html().trim();
+		$("#addRece input[name='receName']").val(receName);
+		$("#prov option").each(function(i){
+			if($(this).html()==prov){
+				$(this).prop("selected",true);
+				showCity($(this).parent().get(0));
+				return;
+			}
+		});
+		$("#city option").each(function(i){
+			if($(this).html()==city){
+				$(this).prop("selected",true);
+				showCountry($(this).parent().get(0));
+				return;
+			}
+		});
+		$("#country option").each(function(i){
+			if($(this).html()==country){
+				$(this).prop("selected",true);
+				return;
+			}
+		});
+		$("#addRece input[name='receAddressDetaile']").val(receDetaile);
+		$("#addRece input[name='recePhone']").val(recePhone);
+		
+		$("#add").html("取消修改");
+		$("#add").removeClass('colse').addClass('open');
+		$('.new-address').slideDown();
+		$("#addRece input[type='button']").val("保存修改");
+		//var prov = $("#prov").find('option:selected').html();
+		//var city = $("#city").find('option:selected').html();
+		//var country = $("#country").find('option:selected').html();
+	}
+	
+	//删除收货地址
+	function deleteRece(val){
+		if(confirm("您确定要删除该收货地址吗?")){
+			$.ajax({
+				url:"self.power?method=deleteReceAddressByUsersIdAndReceId",
+				data:"receId="+val,
+				type:"post",
+				success:function(){
+					alert("删除成功");
+				}
+			});
+		}
+	}
 </script>

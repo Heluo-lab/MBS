@@ -81,6 +81,7 @@ body{
 .login-header span{
 	cursor: pointer;
 }
+
 /*右边下边表格*/
 .right>.login-form{
 	width: 364px;
@@ -91,6 +92,17 @@ body{
 	position: relative;
 	/*设置最小高度*/
 	min-height: 408px;
+}
+/* 判断登录是否成功 */
+#loginMsg{
+	width: 324px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #e60065;
+	display: none; 
+	font-size: 14px;
+	text-align: center;
+	color: #e60065;
 }
 /*右边下边表格输入框的标签图标*/
 .i_lable{
@@ -161,8 +173,10 @@ body{
 	float: right;
 }
 /*按钮样式*/
-.btn-a>.btn{
+.i_btn_ok{
+	width:324px;
 	height: 42px;
+	overflow:hidden;
 	background: #E30265;
 	color: white;
 	text-align: center;
@@ -173,6 +187,11 @@ body{
 	font-size: 15px;
 	margin-top: 10px;
 	cursor: pointer;
+	border:0;
+}
+/* 无密码登录登录按钮不可见 */
+#btnSmsLogin{
+	display: none;
 }
 /*输入框主要部分样式*/
 .login_input_main{

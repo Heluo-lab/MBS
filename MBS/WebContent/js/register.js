@@ -1,13 +1,4 @@
-//点击上边登录.register-txt1跳转到登录界面
-
-/*//点击.articles梦芭莎注册条款,父级兄弟.deal去掉类名.hide
-$('.articles').click(function(){
-	$(this).parent('.tick_txt').siblings('.deal').removeClass('.hide');
-});*/
-
-//公共的前缀
-var URL ='http://www.wjian.top/shop/';
-
+//用于判断注册按钮是否可用
 var isName =false;
 var isUser = false;
 var isPwd = false;
@@ -39,10 +30,6 @@ $('.i_text').each(function(i){
 		$(this).css('outline', 'none');
 	})
 });
-//验证码输入框聚焦时无默认颜色
-/*$('.i_text_checkcode').focus(function(){
-	$(this).css('outline', 'none');
-});*/
 //动态验证输入框无默认颜色
 $('.code_i_text').focus(function(){
 	$(this).css('outline', 'none');
@@ -75,24 +62,25 @@ $('#txtRegisterName').blur(function(){
 		return;
 	}
 	//昵称格式正确，但是后台已存在
-    $.post(URL +'api_user.php', {'status':'check','username':registername},function(re){
-    	var obj =JSON.parse(re);
+	registername =encodeURI(encodeURI(registername));
+    $.post('accountName', {'registername':registername},function(result){
     	//昵称存在
-    	if (obj.code ==2001) {
+    	if (result==true) {
     		//文本解释
 			$('#txtRegisterNameTip').addClass('f_explain').html('昵称已存在');
 			//注册昵称输入框#txtLoginName添加类.i_text_error，边框为红色
-			$(this).addClass('i_text_error');
+			$('#txtRegisterName').addClass('i_text_error');
 			//设置不能注册
             isName = false;
 			return;
     	}else{
     		//注册昵称输入框#txtRegisterName去掉类.i_text_error
-			$(this).removeClass('i_text_error');
+			$('#txtRegisterName').removeClass('i_text_error');
 			//文本解释去掉类.f-explain
 			$('#txtRegisterNameTip').removeClass('f_explain').html('');
 			//设置能注册
             isName = true;
+            return;
     	}
     });
 });
@@ -122,24 +110,25 @@ $('#txtRegisterID').blur(function(){
 		return;
 	}
 	//邮箱格式正确，但是后台已存在
-    $.post(URL +'api_user.php', {'status':'check','username':registerid},function(re){
-    	var obj =JSON.parse(re);
+	registerid =encodeURI(encodeURI(registerid));
+    $.post('accountEmail', {'registerid':registerid},function(result){
     	//用户存在
-    	if (obj.code ==2001) {
+    	if (result==true) {
     		//文本解释
 			$('#txtRegisterIDTip').addClass('f_explain').html('该邮箱已注册');
 			//注册邮箱输入框#txtLoginID添加类.i_text_error，边框为红色
-			$(this).addClass('i_text_error');
+			$('#txtRegisterID').addClass('i_text_error');
 			//设置不能注册
             isUser = false;
 			return;
     	}else{
     		//注册邮箱输入框#txtRegisterID去掉类.i_text_error
-			$(this).removeClass('i_text_error');
+			$('#txtRegisterID').removeClass('i_text_error');
 			//文本解释去掉类.f-explain
 			$('#txtRegisterIDTip').removeClass('f_explain').html('');
 			//设置能注册
             isUser = true;
+            return;
     	}
     });
 });
@@ -148,22 +137,31 @@ $('#txtRegisterID').blur(function(){
 //动态验证码输入框失焦事件
 $('#txtCode').blur(function(){
 	//获取动态验证码输入框的值
-	var dyncode =$(this).val();
+	var registercode =$(this).val().trim();
 	//输入框为空时
-	if (dyncode =='') {
+	if (registercode =='') {
 		//动态验证码输入框#txtCode添加类.i_text_error
 		$(this).addClass('i_text_error');
 		//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
 		$('#txtCodeTip').addClass('f_explain').html('请输入动态验证码');
+		//设置不能注册
+		isCode =false;
 		return;
 	}
-	//动态验证码输入错误
-	
-	
+	if (registercode.length !=4) {
+		//动态验证码输入框#txtCode添加类.i_text_error
+		$(this).addClass('i_text_error');
+		//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
+		$('#txtCodeTip').addClass('f_explain').html('请输入四位验证码');
+		//设置不能注册
+		isCode =false;
+		return;
+	}
 	//动态验证码输入框.code_i_text去掉类.i_text_error
 	$(this).removeClass('i_text_error');
 	//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
 	$('#txtCodeTip').removeClass('f_explain').html('');
+	isCode =true;
 });
 	
 //密码输入框失焦事件
@@ -209,7 +207,10 @@ $('#txtRegisterPwd').blur(function(){
 		//文本解释去掉类.f-explain
 		$('#txtRegisterPwdTip').removeClass('f_explain').html('');
 		//#txtRegisterPwdTip添加儿子.pwd_weak图标
-		$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_weak'></div>")
+		$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_weak'></div>");
+		//增加正确图标
+		$('#txtRegisterPwdCorrent').addClass('i_correct');
+		isPwd = true;
 		return;
     }
     var re_middle =/^(([a-z]{11,20}$)|([A-Z]{11,20}$)|([0-9]{11,20}$))/g
@@ -219,7 +220,10 @@ $('#txtRegisterPwd').blur(function(){
 		//文本解释去掉类.f-explain
 		$('#txtRegisterPwdTip').removeClass('f_explain').html('');
 		//#txtRegisterPwdTip添加儿子.pwd_middle图标
-		$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_middle'></div>")
+		$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_middle'></div>");
+		//增加正确图标
+		$('#txtRegisterPwdCorrent').addClass('i_correct');
+		isPwd = true;
 		return;
     }
 	//密码输入框#txtRegisterPwd去掉类.i_text_error
@@ -228,6 +232,8 @@ $('#txtRegisterPwd').blur(function(){
 	$('#txtRegisterPwdTip').removeClass('f_explain').html('');
 	//#txtRegisterPwdTip添加儿子.pwd_strong图标
 	$('#txtRegisterPwdTip').append("<div class='pwd_level pwd_strong'></div>")
+	//增加正确图标
+	$('#txtRegisterPwdCorrent').addClass('i_correct');
 	//设置能注册
     isPwd = true;
 });
@@ -257,7 +263,7 @@ $('#txtConfirmPwd').blur(function(){
 		//文本解释添加类.f-explain,两次输入的密码不一致
 		$('#txtConfirmPwdTip').addClass('f_explain').html('两次输入的密码不一致');
 		//去掉正确图标
-		$('#ttxtConfirmPwdCorrent').removeClass('i_correct');
+		$('#txtConfirmPwdCorrent').removeClass('i_correct');
 		//设置不能注册
         isConfirmPwd = false;
 		return;
@@ -275,52 +281,153 @@ $('#txtConfirmPwd').blur(function(){
 		return;
 	}
 });
-
+var t;
+//点击事件
+//点击获取动态验证码按钮
+$('#getCode').click(function(){
+	//如果邮箱输入框 isUser = true;，则.i_btn_getCode中value为正在发送...，且禁用
+	if (isUser == true) {
+		$(this).val('验证码正在发送...');
+		$(this).attr('disabled', 'disabled');
+		//该按钮手势为no-drop
+		$(this).css('cursor','no-drop');
+		//获取客户填入的邮箱值
+		var email =$('#txtRegisterID').val().trim();
+		//获取生成的邮箱验证码
+		$.post('emailCode',{'email':email}, function(result){
+			//获取#getCode中data-time的值
+			var second =parseInt($('#getCode').attr('data-time'));
+			//每隔一秒,属性为data-time的值就-1,减到0就停止
+			t =setInterval(function(){
+				second =second-1;
+				//#getCode中data-time的值位second秒
+				$('#getCode').attr("data-time", second);
+				//#getCode中value为120秒后重新发送
+				$('#getCode').val(second+'秒后重新发送');
+				if (second==1) {
+					//#getCode中value为获取动态验证码
+					$('#getCode').val('获取动态验证码');
+					//#getCode中data-time的值位120秒
+					$('#getCode').attr('data-time','120');
+					//#getCode可用
+					$('#getCode').removeAttr('disabled');
+					//该按钮手势cursor: pointer;
+					$('#getCode').css('cursor','pointer');
+					//清除定时器
+					clearInterval(t);
+				}
+			},1000);
+		});
+	}
+	else{
+		return;
+	}
+});
 
  //点击注册
 $('.reg_btn').click(function(){
-	//获取注册账号输入框填的值
+	//#getCode中value为获取动态验证码
+	$('#getCode').val('获取动态验证码');
+	//#getCode中data-time的值位120秒
+	$('#getCode').attr('data-time','120');
+	//#getCode可用
+	$('#getCode').removeAttr('disabled');
+	//该按钮手势cursor: pointer;
+	$('#getCode').css('cursor','pointer');
+	//清除定时器
+	clearInterval(t);
+	//#registerMsg中display不可见
+	  $('#registerMsg').css('display','none');
+	//获取注册昵称输入框的值
+	var registername =$('#txtRegisterName').val().trim();
+	//获取注册邮箱输入框填的值
 	var registerid =$('#txtRegisterID').val().trim();
 	//获取密码输入框填的值
 	var registerpwd =$('#txtRegisterPwd').val();
+	//获取动态输入框填的值
+	var registercode =$('#txtCode').val().trim();
+	//获取用户创建时间
+	//创建时间对象
+	var date =new Date();
+	//获取年
+	var year =''+date.getFullYear();
+	//获取月
+	var month =date.getMonth()+1;
+	//获取日
+	var day =date.getDate();
+	//添加0
+	function addZero(n){
+		return n<10 ? '0'+n :''+n;
+	};
+	var registerbirth =year+'/'+addZero(month)+'/'+addZero(day);
 	//点击注册按钮时候看所有项都为true才能请求后台
-	if(isUser == false || isPwd == false || isConfirmPwd ==false || isCode ==false){
+	if(isName == false || isUser == false || isPwd == false || isConfirmPwd ==false || isCode ==false){
 	  return;
 	};
-	console.log('可以注册了')
 	//请求注册之前查看每项都OK发起请求
-	$.post(URL + 'api_user.php', {
-	  status : 'register',
-	  username : registerid,
-	  password : registerpwd
-	}, function(re){
-	  var obj = JSON.parse(re);
-	  console.log(obj);
-	  //验证
-	  if(obj.code == 2001){
-	  //文本解释
-		$('#txtRegisterIDTip').addClass('f_explain').html('账号已存在');
-		//注册账号输入框#txtLoginID添加类.i_text_error，边框为红色
-		$('#txtRegisterID').addClass('i_text_error');
-	    //设置不能注册
-	    isUser = false;
-	    return;
-	  };
-	  
-	  if(obj.code != 0){return;}
-	  //注册成功 把文本框清空,设置不能注册
-	  $('.i_text').val('');    
-	  $('.code_i_text').val('');
-	  $('.i_text_checkcode').val('');
-	  isUser = false;
-	  isPwd = false;
-	  //跳转到登录页面
-	  alert('注册成功，2秒之后跳转登录页面');
-	  setTimeout(function(){
-	    //跳转到登录页面
-	    window.location.href = 'login.html';
-	      },2000);
-	   });
+	registername =encodeURI(encodeURI(registername));
+	registerid =encodeURI(encodeURI(registerid));
+	registerpwd =encodeURI(encodeURI(registerpwd));
+	registercode =encodeURI(encodeURI(registercode));
+	registerbirth =encodeURI(encodeURI(registerbirth));
+	
+	$.ajax({
+	 type: 'post',
+	 async :false,
+	 url: 'registerBtn',
+	 data:{
+	  'registername' : registername,
+	  'registerid' : registerid,
+	  'registerpwd' : registerpwd,
+	  'registercode' : registercode,
+	  'registerbirth' : registerbirth
+	  },  
+	 success :function(result){
+		  //验证码错误
+		  if(result=='code'){
+			//动态验证码输入框#txtCode添加类.i_text_error
+			$('#txtCode').addClass('i_text_error');
+			//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
+			$('#txtCodeTip').addClass('f_explain').html('动态验证码错误！');
+			//设置不能注册
+			isCode =false;
+			return;
+		  };
+		  if (result==false) {
+			//#registerMsg中display可见
+			  $('#registerMsg').css('display','block');
+			  return;
+		 }
+		  if(result==true){
+			  var loginemail =$('#txtRegisterID').val().trim();
+			  alert(loginemail);
+			  //注册成功 把文本框清空,设置不能注册
+			  $('#txtRegisterName').val('');    
+			  $('#txtRegisterID').val('');
+			  $('#txtCode').val('');
+			  $('#txtRegisterPwd').val('');
+			  $('#txtConfirmPwd').val('');
+			  //去掉正确图标
+			  $('#txtConfirmPwdCorrent').removeClass('i_correct');
+			  $('#txtRegisterPwdCorrent').removeClass('i_correct');
+			  //设置不能注册
+			  isName == false
+			  isUser = false;
+			  isPwd = false;
+			  isConfirmPwd ==false;
+			  isCode ==false;
+			  //跳转到登录页面
+			  alert('注册成功，2秒之后跳转登录页面');
+			//把用户名和token存到本地
+			  localStorage.setItem('registerid', loginemail);
+			  setTimeout(function(){
+			    //跳转到登录页面
+			    window.location.href = 'login.jsp';
+			      },2000);
+			  return;
+		  	}
+		 }
+	 });
  });
 
 //获得地址栏参数值
