@@ -434,7 +434,12 @@
 								<li class="sizebtn">
 									<span class="size-yyy">
 									<c:forEach items="${colorsize}" var="size" varStatus="img">
-											<a>${size}</a>
+									<c:if test="${img.count eq 1}">
+											<a class="dq">${size}</a>
+									</c:if>	
+									<c:if test="${img.count ne 1}">	
+										<a>${size}</a>
+									</c:if>	
 									</c:forEach>
 									
 										
