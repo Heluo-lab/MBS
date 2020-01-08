@@ -178,9 +178,6 @@ img{border: none; vertical-align: bottom;}
 	font-size: 12px;
 }
 .price{
-	width: 145px; height: 52px;
-}
-.price{
 	height: 52px;
 	font-size: 48px;
 	line-height: 48px;
@@ -305,7 +302,7 @@ img{border: none; vertical-align: bottom;}
 	position: relative;
 	border: 1px solid #ccc;
 }
-.sizebtn .size-yyy .dq{
+.sizebtn .size-yyy .bxz{
 	border: 1px solid red;
 }
 .num{

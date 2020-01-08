@@ -336,7 +336,7 @@
 						<c:forEach items="${colorImage}" var="falg" varStatus="img">
 							<li>
 								<c:if test="${img.count eq 1}">
-									<img class="current" src="${falg}"/>
+									<img class="current" id="img-banner" src="${falg}"/>
 								</c:if>
 							</li>
 						</c:forEach>
@@ -360,6 +360,11 @@
 							<a href="javascript:void(0)" class="shoucang" onclick="addCollect('${goods.id}')"><span>收藏</span></a>
 						</div>
 						<div class="tu-big">
+						<c:forEach items="${colorImage}" var="falg" varStatus="img">
+								<c:if test="${img.count eq 1}">
+									<img class="big-img" src="${falg}"/>
+								</c:if>
+						</c:forEach>
 						<!--<img class="big-img" src="img/430917402-116-01-H.jpg" />-->
 						</div>
 					</div>
@@ -435,10 +440,10 @@
 									<span class="size-yyy">
 									<c:forEach items="${colorsize}" var="size" varStatus="img">
 									<c:if test="${img.count eq 1}">
-											<a class="dq">${size}</a>
+											<a class="sizetp bxz"  href="javascript:;">${size}</a>
 									</c:if>	
 									<c:if test="${img.count ne 1}">	
-										<a>${size}</a>
+										<a class="sizetp" href="javascript:;">${size}</a>
 									</c:if>	
 									</c:forEach>
 									
@@ -578,8 +583,6 @@
 		</div>
 </body>
 </html>
-<script src="js/isLogin.js"></script>
-<script type="text/javascript" src="js/product.js" ></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery.mousewheel.min.js" type="text/javascript"
 charset="utf-8"></script>
