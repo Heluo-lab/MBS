@@ -89,6 +89,7 @@ select{
 	display: block;
 	background: white;
 	color: gray;
+	padding-bottom: 30px;
 }
 /*.order-info-yes{
 	display: none;

@@ -78,9 +78,9 @@ s	 */
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
-//		String goodsId = request.getParameter("goodsId");
-		String goodsId = "100";
-		String result = service.addCollect(usersId, Integer.parseInt(goodsId));
+		String id = request.getParameter("id");
+		//String goodsId = "100";
+		String result = service.addCollect(usersId, Integer.parseInt(id));
 		response.getWriter().print(result);
 	}
 	
@@ -133,11 +133,17 @@ s	 */
 		response.getWriter().print(array.toString());
 	}
 	
-	//根据收货信息ID删除该收获地址
+	//根据收货信息ID删除该收获地址并返回收藏地址集
 	public void deleteReceAddressByUsersIdAndReceId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		SelfService service = new SelfServiceImpl();
 		String receId = request.getParameter("receId");
 		service.deleteReceAddressByUsersIdAndReceId(receId);
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		List<Receivinggoods> receList = service.queryReceAddress(usersId);
+		response.setCharacterEncoding("UTF-8");
+		JSONArray array = JSONArray.fromObject(receList);
+		response.getWriter().print(array.toString());
 	}
 	
 	//根据用户Id与收货信息ID修改该收获地址
@@ -168,11 +174,14 @@ s	 */
 		response.getWriter().print(array.toString());
 	}
 	
-	//根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败
+	// xx 根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败 xx 失效
+	//根据用户Id将该用户所有地址都设为不默认 并将receId设为默认地址  true表示都修改成功 , false表示为修改失败 
 	public void setDefaultAddressByUsersIdAndReceId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		SelfService service = new SelfServiceImpl();
-		String beforeReceId = request.getParameter("beforeReceId");
-		String afterReceId = request.getParameter("afterReceId");
-		service.setDefaultAddressByUsersIdAndReceId(beforeReceId, afterReceId);
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		String receId = request.getParameter("receId");
+		boolean flag = service.setDefaultAddressByUsersIdAndReceId(usersId, receId);
+		response.getWriter().print(flag);
 	}
 }

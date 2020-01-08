@@ -244,13 +244,14 @@ public class SelfDAOImpl implements SelfDAO{
 		return rows;
 	}
 
-	//根据用户Id与收货信息ID将此收货信息取消默认地址
+	//xx根据用户Id与收货信息ID将此收货信息取消默认地址xx 失效
+	//根据用户Id将该用户所有地址都设为不默认
 	@Override
-	public int removeDefaultAddressByUsersIdAndReceId(String receId) throws SQLException {
+	public int removeDefaultAddressByUsersIdAndReceId(String usersId) throws SQLException {
 		Connection conn = DBHelper.getConnection();
-		String sql = "update receivinggoods set isDefault = 0 where receId = ?";
+		String sql = "update receivinggoods set isDefault = 0 where usersId = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, receId);
+		pstmt.setString(1, usersId);
 		int rows = pstmt.executeUpdate();
 		DBHelper.release();
 		return rows;
