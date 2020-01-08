@@ -153,7 +153,6 @@ function cancelChange(){
 function newAddress(){
 	var newa=`
 		<form action="javascript:;" onsubmit="javascript:return submitCurrent();" id="allrecemsg">
-		<input type="hidden" id="receId" value="${obj.receId}"/>
 		<div class="receiver">收货人：<input type="text" id="receName" class="recemsg" placeholder="请输入姓名"/></div>
 		<div class="selectArea">
 		<div class="province">
@@ -222,7 +221,6 @@ function newAddress(){
 }
 function submitCurrent(){
 	var receivinggoods = new Receivinggoods($('#receId').val(),$('#receName').val(),$('#recePhone').val(),$('.receAddressProv').val(),$('.receAddressCity').val(),$('#receAddressDetaile').val());
-	console.log(JSON.stringify(receivinggoods));
 	$.ajax({
   		  type:"post",
   		  url:"newaddress",
