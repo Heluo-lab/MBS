@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mbs.dao.CartDao;
+import com.mbs.dao.impl.CartDaoImpl;
+import com.mbs.dto.GoodsMsg;
 import com.mbs.pojo.Goods;
 import com.mbs.pojo.Type;
 import com.mbs.service.GoodsService;
@@ -24,6 +27,7 @@ public class IndexServlet extends HttpServlet {
 		//准备数据
 		TypeService typeService = new TypeServiceImpl(); 
 		GoodsService goodsService = new GoodsServiceImpl();
+		CartDao cd = new CartDaoImpl();
 		//准备商品顶级分类的集合
 		List<Type> goodsTopTypeList = typeService.getGoodsTopType();
 		//准备男装子集分类六条
@@ -38,7 +42,22 @@ public class IndexServlet extends HttpServlet {
 		List<Type> goodsRecommendTypeList = typeService.getGoodsRecommendType();
 		//装备热销商品
 		List<Goods> goodsList=goodsService.selectReconmmendGoods();
-		
+		//获得购物车，usersId从session
+		List<GoodsMsg> goodsMsgList = cd.selectGoodsMsg("1");
+		//查看购物车有无商品
+		boolean hasGoods = false;
+		int size = goodsMsgList.size();
+		if (size==0) {
+			hasGoods = false;
+		}else {
+			hasGoods = true;
+		}
+		//获得总价格
+		double total = 0;
+		for (GoodsMsg goodsMsg : goodsMsgList) {
+			total +=goodsMsg.getGoodsNum()*goodsMsg.getPrice();
+		}
+
 		request.setAttribute("goodsTopTypeList", goodsTopTypeList);
 		request.setAttribute("manList", manList);
 		request.setAttribute("womanList", womanList);
@@ -46,6 +65,11 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("shoesBagList", shoesBagList);
 		request.setAttribute("goodsRecommendTypeList",goodsRecommendTypeList);
 		request.setAttribute("goodsList",goodsList);
+		request.setAttribute("goodsMsg", goodsMsgList);
+		request.setAttribute("hasGoods", hasGoods);
+		request.setAttribute("total", total);
+		request.setAttribute("size", size);
+		
 		
 		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
