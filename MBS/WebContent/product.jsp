@@ -356,7 +356,7 @@
 
 						</div>
 						<div class="Shopping-zuo-xia">
-							<p>商品编码：${goods.id}</p>
+							<p>商品编码：<span class="goodsid-yyy">${goods.id}</span></p>
 							<a href="javascript:void(0)" class="shoucang" onclick="addCollect('${goods.id}')"><span>收藏</span></a>
 						</div>
 						<div class="tu-big">
@@ -406,16 +406,22 @@
 								<li class="licolork">
 						<c:forEach items="${colorlist}" var="color" varStatus="img">
 								<c:if test="${img.count eq 1}">
+						<a class="colorbtn" href="javascipt:;">
 							<p class="dq" >
+									<input type="hidden" id="colorcode-yyy" value="${color.colorCode}">
 									<img src="${color.colorImage}"/>
-									${color.colorName}
+									<span>${color.colorName}</span>
 							</p>
+						</a>
 								</c:if>
 								<c:if test="${img.count ne 1}">
+						<a class="colorbtn" href="javascipt:;">		
 							<p>	
+									<input type="hidden" id="colorcode-yyy" value="${color.colorCode}">
 									<img class="current" src="${color.colorImage}"/>
-									${color.colorName}
+									<span>${color.colorName}</span>
 							</p>	
+						</a>	
 								</c:if>
 						</c:forEach>									
 								</li>
@@ -426,10 +432,11 @@
 							<ul>
 								<li class="txt">尺码</li>
 								<li class="sizebtn">
-									<span>
+									<span class="size-yyy">
 									<c:forEach items="${colorsize}" var="size" varStatus="img">
 											<a>${size}</a>
 									</c:forEach>
+									
 										
 									</span>
 								</li>

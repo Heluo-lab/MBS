@@ -22,3 +22,45 @@ jQuery("#addshoppingcart").click(function(){
 		jQuery(".count").html(jsq);
 	})
 })
+var color = null;
+var colorCode = null;
+jQuery(".colorbtn").click(function(){
+//	商品自增ID
+	var goodsid = $(".goodsid-yyy").html();
+	if(lock == true){
+		return;
+	}
+	lock = true;
+//	颜色
+	color = $(this).children("span").html();
+	var obj = $(this).children("p");
+//	colorCode
+	colorCode = $(this).children().children("#colorcode-yyy").val();
+	console.log(colorCode);
+	
+	$.ajax({
+		type:"post",
+		url:"getsize",
+		data:"goodsid="+goodsid+"&colorcode="+colorCode,
+		success:function(result){
+			console.log(result);
+			str=` `;
+			$(".size-yyy").html(str);
+			var size = result.split(",");
+			for (var i = 0; i < size.length; i++) {
+				var size1 = size[i]
+				str=`<a class="sizetp" href="javascript:;">${size1}</a>`;
+				$(".size-yyy").append(str);
+			}
+			$(".dq").removeClass();
+			obj.addClass("dq");
+			lock = false;
+		}
+	});
+})
+var size =null;
+jQuery(".sizetp").click(function(){
+	lock = true;
+	size = $(this).html();
+	console.log(size);
+})
