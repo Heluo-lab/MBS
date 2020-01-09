@@ -41,6 +41,47 @@ jQuery(".colorbtn").click(function(){
 				$(this).addClass("bxz")
 				size = $(this).html();
 			})
+			//图片对应颜色转换
+			$.ajax({
+					type:"post",
+					url:"imgreload",
+					data:"goodsid="+goodsid+"&colorcode="+colorCode,
+					success:function(result){
+						var imgss = result.split("@l@");
+						console.log(result);
+						if(imgss.length == 0){
+							return;
+						}
+						$(".zoomPad").empty();
+						for (var i = 0; i < imgss.length; i++) {
+							str=`
+								<li>
+								
+								</li>
+								`;
+							$(".zoomPad").append(str);
+						}
+						$(".zoomPad").append(`<div class="slide"></div>`);
+						str=`<img  id="img-banner" src="${imgss[0]}"/>`
+						$(".zoomPad").children(":first").html(str);
+						$(".tu-big").html(`<img class="big-img" src="${imgss[0]}"/>`)
+						
+						$(".tp-xiaomianb").children().empty();
+						for (var i = 0; i < 5; i++) {
+							str=`
+								<li>
+									<img src="${imgss[i]}"/>
+								</li>
+								`;
+							$(".tp-xiaomianb").children().append(str);
+						}
+						  $('.tp-xiaomianb img').mouseenter(function(){
+							    //移入当前拿当前的src值
+							    var nowSrc = $(this).attr('src');
+							    //再设置另外小图和大图这个SRC值
+							    $('#img-banner, .big-img').attr('src', nowSrc);
+							  });
+					}});
 			lock = false;
 		}
 	});
@@ -81,6 +122,10 @@ jQuery("#addshoppingcart").click(function(){
 		data:"goodsid="+goodsid+"&color="+color+"&size="+size+"&goodsnum=1",
 		success:function(result){}});
 })
+
+
+
+//	放大镜
  //鼠标移入移出事件
   $('.zoomPad').hover(function(){
     $('.slide, .tu-big').show();

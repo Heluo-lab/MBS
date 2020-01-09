@@ -23,8 +23,8 @@ public class GetSizeServlet extends HttpServlet{
 		int goodsid =Integer.parseInt(req.getParameter("goodsid"));
 		String colorCode = req.getParameter("colorcode");
 		ProductDao dao = new ProductDaoimpl();
-		dao.IdToColor(goodsid);
-		
+
+//		dao.IdToColor(goodsid);
 		List<DataMapping> colorCodelist = dao.IdToColor(goodsid).getColorCode();
 //		for (DataMapping dataMapping : colorCodelist) {
 //			System.out.println(dataMapping);

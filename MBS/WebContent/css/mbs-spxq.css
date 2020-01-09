@@ -1,6 +1,6 @@
 *{margin: 0;padding: 0;}
 li{list-style: none;}
-a{text-decoration: none;}
+a{text-decoration: none; color:#000}
 img{border: none; vertical-align: bottom;}
 
 .daohang{
@@ -71,7 +71,7 @@ img{border: none; vertical-align: bottom;}
 	clear: both;
 	position: relative;
 }
-#img-banner{width: 100%;height: 100%;}
+#img-banner{width: 100%;height: 100%;} 
 .zoomPad{position: relative;}
 .bk{border: 3px solid black;}
 .slide{
@@ -103,7 +103,7 @@ img{border: none; vertical-align: bottom;}
 	width: 378px;height: 81px;
 	/*background: red;*/
 	margin: 8px auto 0;
-	position: relative;
+	border: 2px solid #000;
 }
 .tp-xiaomianb ul{
 	width: 342px;height: 81px;
@@ -261,6 +261,7 @@ img{border: none; vertical-align: bottom;}
 	font-size: 14px;
 	line-height: 38px;
 	float: left;
+	border:2px solid #ccc
 }
 .licolork .dq{
 	background: url(../img/color_bg.jpg);
@@ -508,5 +509,9 @@ img{border: none; vertical-align: bottom;}
 .pro_info{
 	text-align: center;
 }
-.detali_destrct img{width: 775px;}
+.detali_destrct img{
+			width: 775px;
+	 		display:table;
+	 		margin:0 auto;
+	 		}
 .smallimg{width: 383px;}

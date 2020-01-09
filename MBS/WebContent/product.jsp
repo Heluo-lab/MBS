@@ -347,7 +347,7 @@
 						<!--滚动小图界面-->
 						<div class="tp-xiaomianb">
 						<ul>
-						<c:forEach items="${colorImage}" var="falg" varStatus="img">
+						<c:forEach items="${colorImage}" begin="1"  end="5" var="falg" step="1">
 							<li>
 								<img src="${falg}"/>
 							</li>
@@ -664,7 +664,14 @@ charset="utf-8"></script>
 					alert("添加失败");
 				}else if(result=="exit"){
 					alert("此商品已被收藏");
+				}else{
+					if(confirm("请先登录，点击确定跳转到登录页面")){
+						location.href="login.jsp";						
+					}
 				}
+			},
+			error:function(){
+				alert("添加失败");
 			}
 		});
 	}
