@@ -11,11 +11,11 @@ public class UsersServiceImpl implements UsersService{
 	private UsersDao dao =new UsersDaoImpl();
 	//插入用户
 	@Override
-	public void insertUsers(String usersId) {
+	public void insertUsers(String usersId,String usersPic) {
 		Connection conn =DBHelper.getConnection();
 		try {
 			conn.setAutoCommit(false);
-			dao.insertUsers(usersId, conn);
+			dao.insertUsers(usersId, usersPic, conn);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

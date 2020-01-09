@@ -12,5 +12,5 @@ import com.mbs.pojo.Users;
  */
 public interface UsersDao {
 	//插入注册用户，为了完善用户信息
-	public void insertUsers(String usersId,Connection conn) throws Exception;
+	public void insertUsers(String usersId,String usersPic,Connection conn) throws Exception;
 }
