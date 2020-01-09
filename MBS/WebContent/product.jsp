@@ -320,9 +320,9 @@
 				<div class="Shopping-zuo">
 					<!--面包屑-->
 					<div class="page">
-						<a rel="nofollow" href="/index">首页</a>
+						<a rel="nofollow" href="${pageContext.request.contextPath }/index">首页</a>
 						>
-						<a href="/product_list">全部商品</a>
+						<a href="${pageContext.request.contextPath }/product_list">全部商品</a>
 						>
 						<a>详情</a>
 					</div>
