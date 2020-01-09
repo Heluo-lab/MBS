@@ -1,0 +1,91 @@
+/*全局样式*/
+*{margin: 0px; padding: 0px;}
+li{list-style: none;}
+a{text-decoration: none;color: #fff;}
+img{border: none; vertical-align: bottom;}
+
+/*页面背景颜色*/
+body{
+	background: #CECCCF;
+	font-family: "宋体";
+	color: #555;
+}
+/*头部图片居中*/
+.head{
+	text-align: center;
+}
+
+/*中间身体大小*/
+.section{
+	width: 1017px;
+	height: 508px;
+	background: white;
+	margin: 0px auto;
+}
+
+/*中间上边步骤图片块*/
+.pwd_step{
+	padding: 23px 0;
+	width: 840px;
+	margin: 0 auto;
+	border-bottom: 1px dotted #b2b2b2;
+}
+/*身体的中间部分*/
+.pwd_new{
+	background: url(../img/forgetsucc.jpg) no-repeat;
+	height: 140px;
+	width: 330px;
+	margin: 61px auto 0px;
+	padding-bottom: 60px;
+	padding-left: 65px;
+}
+/*dl 样式*/
+/*.pwd_new dl{
+	float: left;
+}*/
+/*dt 字体部分样式*/
+.pwd_new dl dt{
+	color: #565656;
+	font-size: 12px;
+	width: 330px;
+	height: 46px;
+}
+.pwd_new dl dt b{
+	font-size: 16px;
+}
+.pwd_new dl dt span{
+	height: 30px;
+	line-height: 30px;
+}
+/*dd,登录链接*/
+.pwd_new dl dd{
+	background: #E30165;
+	width: 198px;
+	height: 45px;
+	display: block;
+	line-height: 45px;
+	text-align: center;
+	font-size: 18px;
+	margin: 60px 0px 0px;
+	border-radius: 4px;
+}
+
+/*尾部*/
+.footer-txt{
+	margin-top: 78px;
+	text-align: center;
+	padding-bottom: 20px;
+}
+.footer-txt a{
+	color: gray;
+	font-size: 12px;
+	height: 22px;
+	line-height: 22px;
+}
+.footer-txt div{
+	color: gray;
+	height: 22px;
+	font-size: 12px;
+	line-height: 22px;
+}
+
