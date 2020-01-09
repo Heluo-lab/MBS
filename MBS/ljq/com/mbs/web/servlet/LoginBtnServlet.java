@@ -56,7 +56,7 @@ public class LoginBtnServlet extends HttpServlet{
 			//将该用户存在session里,方便获取该用户名字
 			req.getSession().setAttribute("account", account);
 			//存一个标识到session中，用来标识记住密码还是自动登录,还是都没有勾选
-			String loginsymbol="";
+			//String loginsymbol="";
 			//判断是否勾选了自动登录
 			if ("true".equals(checkedauto)) {
 				//存loginid到cookie
@@ -69,11 +69,11 @@ public class LoginBtnServlet extends HttpServlet{
 				resp.addCookie(cookie_loginid);
 				resp.addCookie(cookie_loginpwd);
 				//存一个标识到session中，用来标识记住密码还是自动登录
-				loginsymbol ="autologin";
+				String loginsymbol ="autologin";
 				req.getSession().setAttribute("loginsymbol", loginsymbol);
 			}
 			//判断是否勾选了记住密码,且没有勾选自动登录
-			if ("false".equals(checkedauto) && "true".equals(checkedpwd)) {
+//			if ("false".equals(checkedauto) && "true".equals(checkedpwd)) {
 //				//存loginid到cookie
 //				Cookie cookie_loginid =new Cookie("cookie_loginid", loginid);
 //				cookie_loginid.setMaxAge(10*60);
@@ -83,17 +83,17 @@ public class LoginBtnServlet extends HttpServlet{
 //				
 //				resp.addCookie(cookie_loginid);
 //				resp.addCookie(cookie_loginpwd);
-				
-				//存一个标识到session中，用来标识记住密码还是自动登录
-				loginsymbol ="rempwd";
-				req.getSession().setAttribute("loginsymbol", loginsymbol);
-			}
+//				
+//				//存一个标识到session中，用来标识记住密码还是自动登录
+//				loginsymbol ="rempwd";
+//				req.getSession().setAttribute("loginsymbol", loginsymbol);
+//			}
 			//记住密码，自动登录都没有勾选
-			if ("false".equals(checkedauto) && "false".equals(checkedpwd)) {
-				//存一个标识到session中，用来标识记住密码还是自动登录
-				loginsymbol ="";
-				req.getSession().setAttribute("loginsymbol", loginsymbol);
-			}
+//			if ("false".equals(checkedauto) && "false".equals(checkedpwd)) {
+//				//存一个标识到session中，用来标识记住密码还是自动登录
+//				loginsymbol ="";
+//				req.getSession().setAttribute("loginsymbol", loginsymbol);
+//			}
 			//告诉前台传的是json
 			resp.setCharacterEncoding("UTF-8");
 			resp.setHeader("Content-Type", "application/json;charset=utf-8");
