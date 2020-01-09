@@ -53,6 +53,7 @@ public class AccountServiceImpl implements AccountService{
 		}
 		return flag;
 	}
+	//插入用户
 	@Override
 	public boolean insertAccount(Account account) {
 		Connection conn =DBHelper.getConnection();
@@ -83,6 +84,46 @@ public class AccountServiceImpl implements AccountService{
 		try {
 			conn.setAutoCommit(false);
 			account =dao.selectAccount(email, conn);
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			DBHelper.release();
+		}
+		return account;
+	}
+	//修改用户密码
+	@Override
+	public void updateAccount(Account account) {
+		Connection conn =DBHelper.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			dao.updateAccount(account, conn);
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			DBHelper.release();
+		}
+	}
+	//普通登录
+	@Override
+	public Account login(String email, String pwd) {
+		Connection conn =DBHelper.getConnection();
+		Account account =null;
+		try {
+			conn.setAutoCommit(false);
+			account =dao.login(email, pwd, conn);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
