@@ -132,13 +132,13 @@
 							<ul>
 								<li><a href="cart">我的购物车</a></li>
 								<li><a href="javascript:void(0)" class="active">我的订单</a></li>
-								<li><a href="shop_order.html">门店订单</a></li>
-								<li><a href="self_mypointment.html">我的预约</a></li>
 								<li><a href="self.power?method=queryCollectGoodsByUsersId">我的收藏</a></li>
-								<li><a href="shop_apply.html">商家申请</a></li>
 							</ul>
 						</div>
 						<!-- 
+								<li><a href="self_mypointment.html">我的预约</a></li>
+								<li><a href="shop_apply.html">商家申请</a></li>
+								<li><a href="shop_order.html">门店订单</a></li>
 							<div class="lelf-menu">
 								<h1 class="showoff option" status='0'>我的资产</h1>
 								<ul>

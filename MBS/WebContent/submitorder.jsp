@@ -16,7 +16,7 @@
 		<!--头部-->
 		<div class="nav">
 			<div class="container">
-				<a href="index.html" class="logo"><img src="img/cartlogo.jpg"/></a>
+				<a href="index" class="logo"><img src="img/cartlogo.jpg"/></a>
 				<div class="headleft">
 					<ul>
 						<li>　9年品质保证<span>　|　</span></li>
