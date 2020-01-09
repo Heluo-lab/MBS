@@ -205,7 +205,7 @@
 			<!-- 顶部导航栏 -->
 			<ul class="loginInfo_l">
 				<li class="lw_home lineHeight"><i class="i lw_home_icon"></i><a
-					href="http://www.moonbasa.com/" alt="">梦芭莎首页</a></li>
+					href="index" alt="">梦芭莎首页</a></li>
 				<li class="lineHeight"><i class="i lw_100_icon"></i><span>100%正品保证&nbsp;9年品质保证</span>
 				</li>
 			</ul>
@@ -272,7 +272,7 @@
 				<div class="BhCon">
 					<div class="brandLogo">
 						<div class="logoPic fl">
-							<a href="http://www.moonbasa.com"> <img
+							<a href="${pageContext.request.contextPath }/index"> <img
 								src="http://i3.mbscss.com/img/moonbasa2/item/logomoonbasa.png"
 								alt="梦芭莎" />
 							</a>

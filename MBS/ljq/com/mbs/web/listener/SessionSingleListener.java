@@ -15,7 +15,7 @@ import com.mbs.pojo.Account;
  * @author Administrator
  *
  */
-@WebListener()
+@WebListener
 public class SessionSingleListener implements HttpSessionAttributeListener{
 	//key就是登录的账号，值是当前最新的session
 	Map<String, HttpSession> map =new HashMap<String, HttpSession>();

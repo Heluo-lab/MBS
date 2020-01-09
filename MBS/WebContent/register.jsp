@@ -10,7 +10,7 @@
 	<body>
 		<!--头部添加图片-->
 		<div class="head">
-			<a href="index.jsp" target="_blank">
+			<a href="index" target="_blank">
 				<img src="img/tubiao1.jpg" />
 			</a>
 		</div>
@@ -132,7 +132,7 @@
 		</div>
 		<!--尾部内容-->
 		<div class="footer-txt">
-			<a href="index.html">首页</a>
+			<a href="index">首页</a>
 			<a href="">旗下品牌</a>
 			<a href="">零售店址</a>
 			<a href="">梦芭莎网盟 </a>

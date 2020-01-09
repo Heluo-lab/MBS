@@ -108,7 +108,7 @@
 			</div>
 			<div class="header-bottom">
 				<div class="logo">
-					<a href="index.html"><img src="img/logo.jpg"/></a>
+					<a href="index"><img src="img/logo.jpg"/></a>
 				</div>
 				<div class="header-bottom-search">
 					<input type="text" placeholder="请输入宝贝" name="search"/>
@@ -132,52 +132,55 @@
 							<ul>
 								<li><a href="cart">我的购物车</a></li>
 								<li><a href="self.power?method=queryAllOrdersByUsersId">我的订单</a></li>
-								<li><a href="shop_order.html">门店订单</a></li>
-								<li><a href="self_mypointment.html">我的预约</a></li>
 								<li><a href="javasrcpt:void(0)" class="active">我的收藏</a></li>
+							</ul>
+						</div>
+						<!-- 
+								<li><a href="self_mypointment.html">我的预约</a></li>
+								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="shop_apply.html">商家申请</a></li>
-							</ul>
-						</div>
-						<div class="lelf-menu">
-							<h1 class="showoff option" status='0'>我的资产</h1>
-							<ul>
-								<li><a href="self_moeny.html">我的余额</a></li>
-								<li><a href="self_voucher.html">我的礼卷</a></li>
-								<li><a href="self_discount.html">我的优惠</a></li>
-								<li><a href="self_integral.html">我的积分</a></li>
-								<li><a href="money_apply.html">申请提现</a></li>
-								<li><a href="add_order.html">充值订单</a></li>
-							</ul>
-						</div>
-						<div class="lelf-menu">
-							<ul>
-								<li><a href="self_message.html">我的消息</a></li>
-								<li><a href="self_comment.html">我的评论</a></li>
-								<li><a href="operate_goods.html">退换货</a></li>
-							</ul>
-						</div>
-						<div class="lelf-menu">
-							<h1 class="showoff option" status='0'>会员俱乐部</h1>
-							<ul>
-								<li><a href="club_index.html">俱乐部首页</a></li>
-								<li><a href="club_privilege.html">会员特权	</a></li>
-								<li><a href="privilege_intro.html">特权介绍</a></li>
-								<li><a href="self_value.html">我的成长值</a></li>
-							</ul>
-						</div>
+							<div class="lelf-menu">
+								<h1 class="showoff option" status='0'>我的资产</h1>
+								<ul>
+									<li><a href="self_moeny.html">我的余额</a></li>
+									<li><a href="self_voucher.html">我的礼卷</a></li>
+									<li><a href="self_discount.html">我的优惠</a></li>
+									<li><a href="self_integral.html">我的积分</a></li>
+									<li><a href="money_apply.html">申请提现</a></li>
+									<li><a href="add_order.html">充值订单</a></li>
+								</ul>
+							</div>
+							<div class="lelf-menu">
+								<ul>
+									<li><a href="self_message.html">我的消息</a></li>
+									<li><a href="self_comment.html">我的评论</a></li>
+									<li><a href="operate_goods.html">退换货</a></li>
+								</ul>
+							</div>
+							<div class="lelf-menu">
+								<h1 class="showoff option" status='0'>会员俱乐部</h1>
+								<ul>
+									<li><a href="club_index.html">俱乐部首页</a></li>
+									<li><a href="club_privilege.html">会员特权	</a></li>
+									<li><a href="privilege_intro.html">特权介绍</a></li>
+									<li><a href="self_value.html">我的成长值</a></li>
+								</ul>
+							</div>
+							<div class="lelf-menu">
+								<h1 class="showoff option" status='0'>我的分享</h1>
+								<ul>
+									<li><a href="pro_share.html">制作分享</a></li>
+									<li><a href="share_rebate.html">分享返利</a></li>
+								</ul>
+							</div>
+							
+						 -->
 						<div class="lelf-menu">
 							<h1 class="showoff option" status='0'>个人信息</h1>
 							<ul>
 								<li><a href="self_userinfo.jsp">基本信息</a></li>
 								<li><a href="self.power?method=queryReceAddress">收获地址</a></li>
 								<li><a href="privilege_security.html">安全验证</a></li>
-							</ul>
-						</div>
-						<div class="lelf-menu">
-							<h1 class="showoff option" status='0'>我的分享</h1>
-							<ul>
-								<li><a href="pro_share.html">制作分享</a></li>
-								<li><a href="share_rebate.html">分享返利</a></li>
 							</ul>
 						</div>
 					</div>

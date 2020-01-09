@@ -43,8 +43,8 @@ public class AutoLoginFilter implements Filter{
 		//是自动登录
 		if("/MBS/login.jsp".equals(uri) && account != null) {
 			//从session获取自动登录的标识
-			String loginsymbol =req.getSession().getAttribute("loginsymbol").toString();
-			if ("autologin".equals(loginsymbol)) {
+			Object obj =req.getSession().getAttribute("loginsymbol");
+			if (obj!=null&&"autologin".equals(obj.toString())) {
 				resp.sendRedirect("index");
 			}
 		}
