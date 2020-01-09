@@ -325,6 +325,10 @@
 						<a href="${pageContext.request.contextPath }/product_list">全部商品</a>
 						>
 						<a>详情</a>
+						
+						
+						
+						
 					</div>
 					<!--商品图片-->
 					<div class="Shopping-zuo-tu">
