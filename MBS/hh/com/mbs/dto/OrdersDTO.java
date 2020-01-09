@@ -20,7 +20,7 @@ public class OrdersDTO {
 	private String ordersTime;
 	//订单总金额
 	private double ordersTotalMoney;
-	//订单状态  //1未付款/2已付款/3已发货/4已完成
+	//订单状态  //1未付款/2已付款/3已发货/4已完成/5删除
 	private int ordersStatus;
 	//订单编号
 	private String ordersNum;

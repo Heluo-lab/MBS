@@ -192,7 +192,23 @@ s	 */
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
 		List<OrdersDTO> ordersDTOList = service.queryAllOrdersByUsersId(usersId);
-		System.out.println(ordersDTOList);
+		request.setAttribute("ordersDTOList", ordersDTOList);
+		request.getRequestDispatcher("self_order.jsp").forward(request, response);
+	}
+	
+	//根据用户Id与条件查询得到订单信息
+	public void queryOrdersByCondition(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		String ordersTime = request.getParameter("ordersTime");
+		String ordersStatus = request.getParameter("ordersStatus");
+		String ordersNum = request.getParameter("ordersNum");
+		System.out.println(ordersTime+"==="+ordersStatus+"==="+ordersNum);
+		List<OrdersDTO> ordersDTOList = service.queryOrdersByCondition(usersId, Integer.parseInt(ordersTime), Integer.parseInt(ordersStatus), ordersNum);
+		request.setAttribute("ordersTime", ordersTime);
+		request.setAttribute("ordersStatus", ordersStatus);
+		request.setAttribute("ordersNum", ordersNum);
 		request.setAttribute("ordersDTOList", ordersDTOList);
 		request.getRequestDispatcher("self_order.jsp").forward(request, response);
 	}

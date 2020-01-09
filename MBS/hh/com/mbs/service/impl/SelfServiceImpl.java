@@ -1,7 +1,11 @@
 package com.mbs.service.impl;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -204,8 +208,85 @@ public class SelfServiceImpl implements SelfService{
 				ordersDTOList.add(ordersDTO);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return ordersDTOList;
 	}
 	
+	//根据用户Id与限制条件查询得到全部订单信息
+	@Override
+	public List<OrdersDTO> queryOrdersByCondition(String usersId,int ordersTime, int ordersStatus,String ordersNum){
+		List<OrdersDTO> ordersDTOList = new ArrayList<>();
+		try {
+			List<Orders> ordersList = dao.queryOrdersByCondition(usersId, ordersStatus, ordersNum);
+			for (Orders orders : ordersList) {
+				Receivinggoods rece = dao.querySingleReceAddressByReceId(orders.getReceivingGoodsId());
+				UsersInfo usersInfo = dao.querySingleUser(orders.getUsersId());
+				OrdersDTO ordersDTO = new OrdersDTO();
+				ordersDTO.setOrdersId(orders.getOrdersId());
+				ordersDTO.setRece(rece);
+				ordersDTO.setUsersInfo(usersInfo);
+				ordersDTO.setOrdersTime(orders.getOrdersTime());
+				ordersDTO.setOrdersTotalMoney(orders.getOrdersTotalMoney());
+				ordersDTO.setOrdersStatus(orders.getOrdersStatus());
+				ordersDTO.setOrdersNum(orders.getOrdersNum());
+				List<Ordersitem> ordersItemList = dao.queryAllOrdersItemByOrdersId(orders.getOrdersId());
+				List<OrdersItemDTO> ordersItemDTOList = new ArrayList<OrdersItemDTO>();
+				for (Ordersitem ordersitem : ordersItemList) {
+					Goods goods = dao.queryGoodsById(Long.valueOf(ordersitem.getGoodsId()).intValue());
+					OrdersItemDTO ordersItemDTO = new OrdersItemDTO();
+					ordersItemDTO.setOrdersItemId(ordersitem.getOrdersItemId());
+					ordersItemDTO.setGoods(goods);
+					ordersItemDTO.setGoodsNum(Long.valueOf(ordersitem.getGoodsNum()).intValue());
+					ordersItemDTO.setOrdersId(ordersitem.getOrdersId());
+					ordersItemDTO.setColor(ordersitem.getColor());
+					ordersItemDTO.setSize(ordersitem.getSize());
+					ordersItemDTOList.add(ordersItemDTO);
+				}
+				ordersDTO.setItemsList(ordersItemDTOList);
+				ordersDTOList.add(ordersDTO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Iterator<OrdersDTO> iterator = ordersDTOList.iterator();
+			while(iterator.hasNext()){
+				OrdersDTO ordersDTO = iterator.next();
+				long oldDate = sdf.parse(ordersDTO.getOrdersTime()).getTime();
+				long nowDate = new Date().getTime();
+				//订单过去时间的毫秒数
+				long time = nowDate - oldDate;
+				long binary = 1000*60*60*24;
+				binary *= 30;
+				long month = time/binary;
+				switch (ordersTime) {
+				case 0:
+					break;
+				case 1:
+					if(month>3){
+						iterator.remove();
+					}
+					break;
+				case 2:
+					if(month>6){
+						iterator.remove();
+					}
+					break;
+				case 3:
+					if(month>12){
+						iterator.remove();
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return ordersDTOList;
+	}
+
 }

@@ -63,10 +63,14 @@ public interface SelfDAO {
 	//根据用户Id查询该用户所有订单
 	public List<Orders> queryAllOrdersByUsersId(String usersId) throws SQLException;
 	
+	//根据用户Id与限制条件查询订单
+	public List<Orders> queryOrdersByCondition(String usersId,int ordersStatus,String ordersNum) throws SQLException;
+	
 	//根据订单号查询所有订单项
 	public List<Ordersitem> queryAllOrdersItemByOrdersId(String ordersId) throws SQLException;
 	
 	//根据商品Id查询商品名字 图片信息
 	public Goods queryGoodsById(int id) throws SQLException;
+	
 	
 }

@@ -295,6 +295,7 @@ public class SelfDAOImpl implements SelfDAO{
 		return rows;
 	}
 
+	//根据用户Id查询该用户所有订单
 	@Override
 	public List<Orders> queryAllOrdersByUsersId(String usersId) throws SQLException {
 		List<Orders> ordersList = new ArrayList<>();
@@ -317,7 +318,8 @@ public class SelfDAOImpl implements SelfDAO{
 		DBHelper.release();
 		return ordersList;
 	}
-
+	
+	//根据订单号查询所有订单项
 	@Override
 	public List<Ordersitem> queryAllOrdersItemByOrdersId(String ordersId) throws SQLException {
 		List<Ordersitem> ordersItemList = new ArrayList<>();
@@ -340,6 +342,7 @@ public class SelfDAOImpl implements SelfDAO{
 		return ordersItemList;
 	}
 
+	//根据商品Id查询商品名字 图片信息
 	@Override
 	public Goods queryGoodsById(int id) throws SQLException {
 		Connection conn = DBHelper.getConnection();
@@ -358,5 +361,37 @@ public class SelfDAOImpl implements SelfDAO{
 		return goods;
 	}
 
+	//根据用户Id与限制条件查询订单
+	public List<Orders> queryOrdersByCondition(String usersId,int ordersStatus,String ordersNum) throws SQLException{
+		List<Orders> ordersList = new ArrayList<>();
+		Connection conn = DBHelper.getConnection();
+		PreparedStatement pstmt = null;
+		if(ordersStatus==0){
+			String sql = "select * from orders where usersId = ? and ordersNum like ?";
+			pstmt =  conn.prepareStatement(sql);
+			pstmt.setString(1, usersId);
+			pstmt.setString(2, "%"+ordersNum+"%");
+		}else{
+			String sql = "select * from orders where usersId = ? and ordersStatus = ? and ordersNum like ?";
+			pstmt =  conn.prepareStatement(sql);
+			pstmt.setString(1, usersId);
+			pstmt.setInt(2, ordersStatus);
+			pstmt.setString(3, "%"+ordersNum+"%");
+		}
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			Orders orders = new Orders();
+			orders.setOrdersId(rs.getString("ordersId"));
+			orders.setReceivingGoodsId(rs.getString("receivingGoodsId"));
+			orders.setUsersId(rs.getString("usersId"));
+			orders.setOrdersTime(rs.getString("ordersTime"));
+			orders.setOrdersTotalMoney(rs.getDouble("ordersTotalMoney"));
+			orders.setOrdersStatus(rs.getInt("ordersStatus"));
+			orders.setOrdersNum(rs.getString("ordersNum"));
+			ordersList.add(orders);
+		}
+		DBHelper.release();
+		return ordersList;
+	}
 
 }

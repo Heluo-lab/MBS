@@ -184,35 +184,39 @@
 				</div>
 				<div class="section-self-right">
 					<div class="right-top">
-						<div class="menu">
-							<ul>
-								<li class="on"><a href="javascript:void(0)">全部订单</a></li>
-								<li><a href="javascript:void(0)">待付款(0)</a></li>
-								<li><a href="javascript:void(0)">待发货(0)</a></li>
-								<li><a href="javascript:void(0)">待收货(0)</a></li>
-								<li><a href="javascript:void(0)">待评价(0)</a></li>
-								<li><a href="javascript:void(0)">分阶段(0)</a></li>
-							</ul>
-						</div>
+						<!-- 
+							<div class="menu">
+								<ul>
+									<li class="on"><a href="javascript:void(0)">全部订单</a></li>
+									<li><a href="javascript:void(0)">待付款(0)</a></li>
+									<li><a href="javascript:void(0)">待发货(0)</a></li>
+									<li><a href="javascript:void(0)">待收货(0)</a></li>
+									<li><a href="javascript:void(0)">待评价(0)</a></li>
+									<li><a href="javascript:void(0)">分阶段(0)</a></li>
+								</ul>
+							</div>
+						 -->
 						<div class="search">
-							<form>
-								<div class="order-time">
-								<select>
-									<option>三月内订单</option>
-									<option>2015-01-01以后</option>
-									<option>2015-01-01以前</option>
-								</select>
+							<form action="self.power?method=queryOrdersByCondition" method="post">
+								<div class="order-time" val="${ordersTime }">
+									<select name="ordersTime">
+										<option value="0">所有时间的订单</option>
+										<option value="1">三月内订单</option>
+										<option value="2">六月内订单</option>
+										<option value="3">一年内订单</option>
+									</select>
 								</div>
-								<div class="order-status">
-									<select>
-										<option>所有订单状态</option>
-										<option>未完成订单</option>
-										<option>已完成订单</option>
-										<option>已作废订单</option>
+								<div class="order-status" val="${ordersStatus }">
+									<select name="ordersStatus">
+										<option value="0">所有订单状态</option>
+										<option value="1">未付款</option>
+										<option value="2">已付款</option>
+										<option value="3">已发货</option>
+										<option value="4">已完成</option>
 									</select>
 								</div>
 								<div class="order-search">
-									<input type="text" name=""  />
+									<input type="text" name="ordersNum" placeholder="请输入订单号" value="${ordersNum }"/>
 									<input type="submit" value="查询"/>
 								</div>
 							</form>
@@ -222,7 +226,7 @@
 						<div class="right-bottom-no">
 							<div class="order-info-no">
 								<p>没有效订单，快去挑选心仪的产品吧！</p>
-								<a href="base.html">去首页逛逛</a>
+								<a href="index">去首页逛逛</a>
 							</div>
 						</div>
 					</c:if>
@@ -232,12 +236,12 @@
 							<div class="order-info-yes">
 								
 								<c:forEach items="${ordersDTOList }" var="ordersDTO">
-									<!-- 每个订单项 -->
+									<!-- 每个订单 -->
 									<div class="order-item">
 										<div class="order-id">订单编号：${ordersDTO.ordersNum }</div>
 										<!-- 订单项中的单一数据 -->
 										<div class="item-pro">
-											<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;">
+											<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;width:980px">
 												<tr>
 													<th style="width:340px">宝贝</th>
 													<th>宝贝属性</th>
@@ -263,7 +267,7 @@
 															</c:if>
 														</td>
 														<c:if test="${ordersDTO.ordersStatus==1 }">
-															<td>未发货</td>
+															<td>未付款</td>
 														</c:if>
 														<c:if test="${ordersDTO.ordersStatus==2 }">
 															<td>已付款</td>
@@ -395,6 +399,22 @@
 <script src="js/self_base.js"></script>
 <script src="js/exitLogin.js"></script>
 <script>
+	$(function(){
+		var orderTime = $(".order-time").attr("val");
+		var orderStatus = $(".order-status").attr("val");
+		console.log(orderTime+"==="+orderStatus+"===");
+		$("[name='ordersTime'] option").each(function(){
+			if($(this).val()==orderTime){
+				$(this).prop("selected",true);
+				return;
+			}
+		});
+		$("[name='ordersStatus'] option").each(function(){
+			if($(this).val() == orderStatus){
+				$(this).prop("selected",true)
+			}
+		});
+	})
 	$('.menu li').each(function(){
 		$(this).click(function(){
 			$(this).addClass('on').siblings('li').removeClass('on');

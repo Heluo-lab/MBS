@@ -51,4 +51,7 @@ public interface SelfService {
 	
 	//根据用户Id查询得到全部订单信息
 	public List<OrdersDTO> queryAllOrdersByUsersId(String usersId);
+	
+	//根据用户Id与限制条件查询得到全部订单信息
+	public List<OrdersDTO> queryOrdersByCondition(String usersId,int ordersTime, int ordersStatus,String ordersNum);
 }
