@@ -192,7 +192,7 @@
 		</div>
 		<div class="header-bottom">
 			<div class="logo">
-				<a href="index.html"><img src="img/logo.jpg" /></a>
+				<a href="index"><img src="img/logo.jpg" /></a>
 			</div>
 			<div class="header-bottom-search" style="position: relative">
 				<input type="text" placeholder="请输入宝贝" name="search" id="search"

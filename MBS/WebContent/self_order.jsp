@@ -411,7 +411,8 @@
 		});
 		$("[name='ordersStatus'] option").each(function(){
 			if($(this).val() == orderStatus){
-				$(this).prop("selected",true)
+				$(this).prop("selected",true);
+				return;
 			}
 		});
 	})
