@@ -410,13 +410,13 @@ $('.reg_btn').click(function(){
 			  $('#txtConfirmPwdCorrent').removeClass('i_correct');
 			  $('#txtRegisterPwdCorrent').removeClass('i_correct');
 			  //设置不能注册
-			  isName == false
+			  isName = false
 			  isUser = false;
 			  isPwd = false;
-			  isConfirmPwd ==false;
-			  isCode ==false;
+			  isConfirmPwd =false;
+			  isCode =false;
 			  //跳转到登录页面
-			  alert('注册成功，2秒之后跳转登录页面');
+			  alert('注册成功，点击确定跳转登录页面');
 			//把用户名和token存到本地
 			  localStorage.setItem('registerid', loginemail);
 			  setTimeout(function(){
