@@ -143,7 +143,7 @@ $('#txtCode').blur(function(){
 		//动态验证码输入框#txtCode添加类.i_text_error
 		$(this).addClass('i_text_error');
 		//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
-		$('#txtCodeTip').addClass('f_explain').html('请输入动态验证码');
+		$('#txtCodeTip').addClass('f_explain').html('请输入邮箱验证码');
 		//设置不能注册
 		isCode =false;
 		return;
@@ -306,7 +306,7 @@ $('#getCode').click(function(){
 				$('#getCode').val(second+'秒后重新发送');
 				if (second==1) {
 					//#getCode中value为获取动态验证码
-					$('#getCode').val('获取动态验证码');
+					$('#getCode').val('获取邮箱验证码');
 					//#getCode中data-time的值位120秒
 					$('#getCode').attr('data-time','120');
 					//#getCode可用
@@ -327,7 +327,7 @@ $('#getCode').click(function(){
  //点击注册
 $('.reg_btn').click(function(){
 	//#getCode中value为获取动态验证码
-	$('#getCode').val('获取动态验证码');
+	$('#getCode').val('获取邮箱验证码');
 	//#getCode中data-time的值位120秒
 	$('#getCode').attr('data-time','120');
 	//#getCode可用
@@ -388,7 +388,7 @@ $('.reg_btn').click(function(){
 			//动态验证码输入框#txtCode添加类.i_text_error
 			$('#txtCode').addClass('i_text_error');
 			//提示内容#mtxtCodeTip请输入动态验证码,文本解释添加类.f-explain
-			$('#txtCodeTip').addClass('f_explain').html('动态验证码错误！');
+			$('#txtCodeTip').addClass('f_explain').html('邮箱验证码错误！');
 			//设置不能注册
 			isCode =false;
 			return;

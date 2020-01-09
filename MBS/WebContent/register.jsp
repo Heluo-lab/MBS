@@ -54,9 +54,9 @@
 						<!--动态验证部分-->
 						<div class="user_item dymatic">
 							<!--动态输入框-->
-							<input type="text" name="txtCode" id="txtCode" class="code_i_text" placeholder="请输入动态验证码" />
+							<input type="text" name="txtCode" id="txtCode" class="code_i_text" placeholder="请输入邮箱验证码" />
 							<!--动态按钮-->
-							<input type="button" value="获取动态验证码" id="getCode" class="i_btn_getCode" data-time="120" />
+							<input type="button" value="获取邮箱验证码" id="getCode" class="i_btn_getCode" data-time="120" />
 							<!--输入有效时-->
 							<label id="txtMobileCorrect"></label>
 							<!--动态验证为空时的解释-->
