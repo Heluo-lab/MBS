@@ -5,33 +5,68 @@ var isPwd=false;
 var isEmail=false;
 var isCode =false;
 
-//如果是从注册跳转过来
-var loginemail =localStorage.getItem('registerid');
-if (loginemail!=null || loginemail=='') {
-	$('#txtLoginID').val(loginemail);
+//localStorage.removeItem('registerid');
+//$('#txtLoginID').val(loginemail);
+////获取账号输入框填的值
+//var loginid =$('#txtLoginID').val().trim();
+//if (loginid!='') {
+//	isID =true;
+//}
+//记住密码#txtLoginID，#txtLoginPwd
+//获取邮箱
+var loginid =localStorage.getItem('loginid');
+if (loginid!=null || loginid!='') {
+	$('#txtLoginID').val(loginid);
 	isID =true;
-	localStorage.removeItem('registerid');
-}else{
-	//直接从登录界面
-	//保存用户的登录信息到cookie，当登录页面打开，就查询cookie
-	window.onload =function(){
-		console.log("cc");
-		var loginidValue =getCookieValue("loginid");
-		$('#txtLoginID').val(loginidValue);
+}
+//获取密码
+var loginpwd =localStorage.getItem('loginpwd');
+if (loginpwd!=null || loginpwd!='') {
+	$('#txtLoginPwd').val(loginpwd);
+	isPwd =true;
+}
+//获取记住密码的值
+var checkedpwd =localStorage.getItem('checkedpwd');
+if (checkedpwd=='true') {
+	 $('#remember_pwd').prop('checked', true);
+     $('#remember_pwd').data('waschecked', true);
+}
+
+//如果是从注册跳转过来
+if (isID=false) {
+	var loginemail =localStorage.getItem('registerid');
+	if (loginemail!=null || loginemail!='') {
+		$('#txtLoginID').val(loginemail);
 		isID =true;
-		var loginpwdValue =getCookieValue("loginpwd");
-		$('#txtLoginPwd').val(loginpwdValue);
-		isPwd=true;
-		  $('#remember_pwd').prop('checked', true);
-		  $('#remember_pwd').data('waschecked', true);
-		  //自动登录
-		 if (localStorage.getItem('checkedauto')!=null) {
-		   $('#auto_login').prop('checked', true);
-		   $('#auto_login').data('waschecked', true);
-			btnlogin();
-		} 
+		localStorage.removeItem('registerid');
+		$('#txtLoginPwd').val('');
 	}
 }
+
+//else{
+//	//直接从登录界面
+//	//保存用户的登录信息到cookie，当登录页面打开，就查询cookie
+//	window.onload =function(){
+//		console.log("aaa");
+//		var loginidValue =getCookieValue("loginid");
+//		$('#txtLoginID').val(loginidValue);
+//		isID =true;
+//		var loginpwdValue =getCookieValue("loginpwd");
+//		$('#txtLoginPwd').val(loginpwdValue);
+//		isPwd=true;
+//		  $('#remember_pwd').prop('checked', true);
+//		  $('#remember_pwd').data('waschecked', true);
+//		  //自动登录
+//		/*  console.log(localStorage.getItem('checkedauto')==true);
+//		 if (localStorage.getItem('checkedauto')==true) {
+//			localStorage.removeItem('checkedauto');
+//		   $('#auto_login').prop('checked', true);
+//		   $('#auto_login').data('waschecked', true);
+//			btnlogin();
+//		} */
+//		 return;
+//	}
+//}
 //点击事件
 //点击无密码登录时
 $('.login-txt2').click(function(){
@@ -355,16 +390,17 @@ $('#auto_login').click(function(){
 
 //立即登录点击事件
 //普通登录点击事件
-//登录类别
-//var loginsort;
-function btnlogin() {
+$('#btnLogin').click(function(){
 	//#loginMsg中display不可见
 	$('#loginMsg').css('display','none');
   alert("login");
 	if (isID == false || isPwd == false) {
 		return;
 	}
-		//loginsort='ordinary';
+	 //获取记住密码的值
+	var checkedpwd =$('#remember_pwd').is(':checked');
+	//获取自动登录的值
+	var checkedauto =$('#auto_login').is(':checked');
 		//获取账号输入框填的值
 	    var loginid =$('#txtLoginID').val().trim();
 	    //获取密码输入框填的值
@@ -377,6 +413,8 @@ function btnlogin() {
 			 async :false,
 			 url: 'loginBtn',
 			 data:{
+			  'checkedpwd':checkedpwd,
+			  'checkedauto':checkedauto,
 			  'loginid' : loginid,
 			  'loginpwd' : loginpwd
 			  },  
@@ -397,13 +435,21 @@ function btnlogin() {
 			    	//localStorage.setItem('token', obj.data.token);
 					var checkedpwd =$('#remember_pwd').is(':checked');
 					if (checkedpwd) {
-						//添加cookie
-						addCookie("loginid",loginid,7,"/");
-						addCookie("loginpwd",loginpwd,7,"/");
+//						//添加cookie
+//						addCookie("loginid",loginid,7,"/");
+//						addCookie("loginpwd",loginpwd,7,"/");
+						//添加用户名到本地
+						localStorage.setItem('loginid', loginid);
+						//添加密码到本地
+						localStorage.setItem('loginpwd', loginpwd);
+						//添加记住密码单选框值到本地
+						localStorage.setItem('checkedpwd', checkedpwd);
 					}
 					//如果点击了自动登录，存到本地
-					var checkedauto =$('#auto_login').is(':checked');
-					localStorage.setItem('checkedauto', checkedauto);
+//					var checkedauto =$('#auto_login').is(':checked');
+//					if (checkedauto) {
+//						localStorage.setItem('checkedauto', checkedauto);
+//					}
 					//跳首页还是详情
 			    	if (goodsId) {
 			    		location.href ='product?goods_id='+goodsId;
@@ -418,8 +464,8 @@ function btnlogin() {
 			 }
 			});
 	  return;
-}
-	$('#btnLogin').click(btnlogin);
+});
+	
 
 //无密码登录块
 //.getDpwd获取动态口令按钮点击事件

@@ -87,7 +87,7 @@
 						</div>
 						<!--两个链接和按钮-->
 						<div class="btn-a">
-							<a href="#" class="forget-pwd">忘记密码？</a>
+							<a href="forgetpwdstep1.jsp" class="forget-pwd">忘记密码？</a>
 							<input type="radio" id="remember_pwd" name="remember_pwd" value="记住密码"/>
 							<label for="remember_pwd" id="txt_remember">记住密码</label>
 							<input type="radio"  id="auto_login" name="auto_login" value="自动登录"/>
