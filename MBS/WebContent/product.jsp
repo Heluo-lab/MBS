@@ -347,7 +347,7 @@
 						<!--滚动小图界面-->
 						<div class="tp-xiaomianb">
 						<ul>
-						<c:forEach items="${colorImage}" begin="0"  end="5" var="falg" step="1">
+						<c:forEach items="${colorImage}" begin="0"  end="4" var="falg" step="1">
 							<c:if test="${!empty falg }">
 							<li>
 								<img src="${falg}"/>
