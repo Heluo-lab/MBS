@@ -25,19 +25,12 @@
 				</div>
 				
 				<div class="headright">
-					<!-- 没登陆-->
-					<ul class="message message-no">
-						<li>欢迎光临梦芭莎！</li>
-						<li><a href="">登陆<span>　|</span></a></li>
-						<li><a href="">注册<span>　|</span></a></li>
-					</ul>
-					
 					<!-- 已登陆-->
 					<ul class="message message-yes">
-						<li class="userid">你好无病呻吟！<span>　|</span></li>
+						<li class="userid">你好${account.accountName }！<span>　|</span></li>
 						<li>
 						<div class=" message-border">
-							<a href="">
+							<a href="self_center.jsp">
 							<img src="img/icon_img3.png" />我的梦芭莎
 							</a>
 							<ul class="myaccount">
@@ -49,7 +42,7 @@
 							<span>　|</span>
 							
 						</li>
-						<li class="exit-btn"><a href="javascript:;">退出登录<span>　|</span></a></li>
+						<li class="exit-btn"><a href="javascript:void(0)" id="exitLogin">退出登录<span>　|</span></a></li>
 					</ul>
 					
 					<div class="help">
@@ -278,3 +271,4 @@
 <script type="text/javascript" src="js/city.js" ></script>
 <script type="text/javascript" src="js/order.js" ></script>
 <script type="text/javascript" src="js/ydxLazyLoad.js" ></script>
+<script src="js/exitLogin.js"></script>

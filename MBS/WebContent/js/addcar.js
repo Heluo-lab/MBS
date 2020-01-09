@@ -205,7 +205,7 @@ jQuery("#addshoppingcart").click(function(){
 			  var re = JSON.parse(result);
 			  if (re.length==0) {
 				  str=`
-				  <a href="cart.html">购物车</a>
+				  <a href="cart">购物车</a>
 				  <div class="header-cart-no">
 								购物车里还没有任何商品，快去选购吧!
 					</div>`;
@@ -213,7 +213,7 @@ jQuery("#addshoppingcart").click(function(){
 				mine.remove();
 			}else {
 				str=`
-					<a href="cart.html">购物车</a>
+					<a href="cart">购物车</a>
 					<div class="header-cart-yes">
 								<ul>
 									
@@ -232,7 +232,6 @@ jQuery("#addshoppingcart").click(function(){
 						<span>￥${obj.price}</span>
 						<div>
 						<label type="text" class="minicart_num">×${obj.goodsNum}</label>
-						<a href="javascript:void(0)" class="del">删除</a>
 						</div>
 						</li>
 						`;
@@ -247,7 +246,7 @@ jQuery("#addshoppingcart").click(function(){
 					<span class="fl">共<strong>${goodssize}</strong>件商品</span>
 					<span>合计：<strong>¥${total}</strong></span>
 					</p>
-					<a class="checkout_btn" href="#">去结算</a>
+					<a class="checkout_btn" href="order">去结算</a>
 					</div>
 					`;
 				$(".header-top-list-cart").children(".header-cart-yes").append(str);
@@ -275,7 +274,7 @@ jQuery("#addshoppingcart").click(function(){
 			  if (re.length==0) {
 				  str=`
 					  <div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div>
-					  <a href="">
+					  <a href="cart">
 						<img src="img/cart.png" >
 						<span>购物车</span>
 						<span class="count">0</span>
@@ -288,7 +287,7 @@ jQuery("#addshoppingcart").click(function(){
 						<ul>
 						</ul>
 					</div>
-					  <a href="">
+					  <a href="cart">
 						<img src="img/cart.png" >
 						<span>购物车</span>
 						<span class="count">${goodssize}</span>
@@ -305,7 +304,6 @@ jQuery("#addshoppingcart").click(function(){
 						  <span>￥${obj.price}</span>
 						  <div>
 						  <label type="text" class="minicart_num">×${obj.goodsNum}</label>
-						  <a href="javascript:void(0)" class="del" style="color: black;">删除</a>
 						  </div>
 						  </li>
 						  `;
@@ -320,7 +318,7 @@ jQuery("#addshoppingcart").click(function(){
 					  <span class="fl">共<strong>${goodssize}</strong>件商品</span>
 					  <span>合计：<strong>¥${total}</strong></span>
 					  </p>
-					  <a class="checkout_btn" href="#">去结算</a>
+					  <a class="checkout_btn" href="order">去结算</a>
 					  </div>
 					  `;
 				  $(".list-car").append(str);

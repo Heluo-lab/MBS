@@ -116,7 +116,7 @@
 					</div>
 					<div class="header-top-list">
 						<div class="header-top-list-cart">
-							<a href="cart.html">购物车</a>
+							<a href="cart">购物车</a>
 							<div class="header-cart-no">
 								购物车里还没有任何商品，快去选购吧!
 							</div>
@@ -280,7 +280,7 @@
 							<a class="checkout_btn" href="#">去结算</a>
 						</div>
 					</div>
-					<a href="">
+					<a href="cart">
 						<img src="img/cart.png" >
 						<span>购物车</span>
 						<span class="count">0</span>
