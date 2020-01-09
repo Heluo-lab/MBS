@@ -89,7 +89,8 @@ public class RegisterBtnServlet extends HttpServlet{
 			//如果注册成功，则插入到users表中
 			if (flag) {
 				UsersService userservice =new UsersServiceImpl();
-				userservice.insertUsers(accountId);
+				String usersPic="headPic/defaultHead.jpg";
+				userservice.insertUsers(accountId,usersPic);
 			}
 		}else {
 //			//传验证码错误
