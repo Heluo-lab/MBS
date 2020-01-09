@@ -9,9 +9,18 @@ public class Orders {
   private String ordersTime;
   private double ordersTotalMoney;
   private int ordersStatus;//1未付款/2已付款/3已发货/4已完成
+  private String ordersNum;
 
 
-  public String getOrdersId() {
+  public String getOrdersNum() {
+	return ordersNum;
+}
+
+public void setOrdersNum(String ordersNum) {
+	this.ordersNum = ordersNum;
+}
+
+public String getOrdersId() {
     return ordersId;
   }
 

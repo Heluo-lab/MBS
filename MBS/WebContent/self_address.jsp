@@ -75,23 +75,23 @@
 							<a href="#">微信</a>
 							<span>|</span>
 						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="register.html">注册</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="login.html">登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<a href="javascript:void(0)" id="exitLogin">退出登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<!--<a href="#">你好，XXX</a>-->
-							<a href="self_center.html" id="username"></a>
-							<span>|</span>
-						</div>
+						<c:if test="${empty usersInfo }">
+							<div class="header-top-list-coll no-user">
+								<a href="register.jsp">注册</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<a href="login.jsp">登录</a> <span>|</span>
+							</div>
+						</c:if>
+						<c:if test="${!empty usersInfo }">
+							<div class="header-top-list-coll">
+								<a href="javascript:void(0)" id="exitLogin">退出登录</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<!--<a href="#">你好，XXX</a>-->
+								<a href="self_center.jsp" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -122,16 +122,16 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self_center.html">首页</a>>
-				<a href="self_center.html">个人中心</a>
+				<a href="self_center.jsp">首页</a>>
+				<a href="self_center.jsp">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
 					<div class="section-self-left-content">
 						<div class="lelf-menu">
 							<ul>
-								<li><a href="cart.html">我的购物车</a></li>
-								<li><a href="self_order.html">我的订单</a></li>
+								<li><a href="cart">我的购物车</a></li>
+								<li><a href="self.power?method=queryAllOrdersByUsersId">我的订单</a></li>
 								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="self_mypointment.html">我的预约</a></li>
 								<li><a href="self.power?method=queryCollectGoodsByUsersId">我的收藏</a></li>
@@ -258,10 +258,10 @@
 											<td><a href="javascript:void(0)" onclick="updateRece(this)">修改</a>|<a href="javascript:void(0)" onclick="deleteRece('${rece.receId }')">删除</a></td>
 											<td>
 												<c:if test="${rece.isDefault==1 }">
-													<input type="radio" name="isDefault" checked/>
+													<input type="radio" name="isDefault" checked />
 												</c:if>
 												<c:if test="${rece.isDefault==0 }">
-													<input type="radio" name="isDefault"/>
+													<input type="radio" name="isDefault" />
 												</c:if>
 												<input type="hidden" value="${rece.receId }" class="hid">
 											</td>
@@ -355,7 +355,7 @@
 </html>
 <script src="js/jquery.min.js"></script>
 <script src="js/self_base.js"></script>
-<script src="js/isLogin.js"></script>
+<script src="js/exitLogin.js"></script>
 <script src="js/province.js"></script>
 <script>
 	$('#add').click(function(){
@@ -367,6 +367,10 @@
 		$(this).removeClass('open').addClass('close');
 		$('.new-address').slideUp();
 		$(this).html("新增收货地址");
+		clearInfo();
+	});
+	//清空填入的信息
+	function clearInfo(){
 		$("#addRece input[type='button']").val("保存新增");
 		$("#addRece input[name='receName']").val("");
 		$("#prov option").each(function(i){
@@ -378,11 +382,11 @@
 		});
 		$("#addRece input[name='receAddressDetaile']").val("");
 		$("#addRece input[name='recePhone']").val("");
-	});
+	}
 	//收货人校验正则表达式
 	var nameRegex = /^(\w|[\u4e00-\u9fa5]){2,8}$/;
 	//收货电话校验正则表达式
-	var phoneRegex = /\d{11}/;
+	var phoneRegex = /1\d{10}/;
 	//保存地址
 	$("#saveReceBtn").click(function(){
 		$("#receNameSpan").html("");
@@ -437,15 +441,26 @@
 				type:"post",
 				data:{"receName":receName,"recePhone":recePhone,"receAddressProv":prov,"receAddressCity":city,"receAddressCountry":country,"receAddressDetaile":receAddressDetaile},
 				success:function(result){
-					result = JSON.parse(result);
+					var reces = JSON.parse(result);
 					//console.log(result.length);
 					$(".my-address tbody").html("");
-					
-					for(var i = 0 ; i <result.length; i++ ){
-						
+					var str = "";
+					for(var i = 0 ; i <reces.length; i++ ){
+						str = "<tr class='addressInfo'><td class='receNameTd'>"+reces[i].receName+"</td><td class='receAddTd'>"+reces[i].receAddressProv+" "+reces[i].receAddressCity+" "+reces[i].receAddressCountry+"</td><td class='receDetaileTd'>"+reces[i].receAddressDetaile+"</td><td class='recePhoneTd'>"+reces[i].recePhone+"</td><td><a href='javascript:void(0)' onclick='updateRece(this)'>修改</a>|<a href='javascript:void(0)' onclick='deleteRece(this)'>删除</a></td><td>";
+						if(reces[i].isDefault==1){
+							str = str + "<input type='radio' name='isDefault' checked  />"
+						}else{
+							str = str + "<input type='radio' name='isDefault' />"
+						}
+						str = str + "<input type='hidden' value="+reces[i].receId+" class='hid'></td></tr>"	
+						$(str).appendTo($(".my-address tbody"));
 					}
 					$("#add").removeClass('open').addClass('close');
 					$('.new-address').slideUp();
+					clearInfo();
+					$(".my-address tbody input[name='isDefault']").each(function(){
+						$(this).bind("click",setDefultAddress);
+					});
 				},
 				error:function(){
 					//console.log("添加失败");
@@ -458,22 +473,35 @@
 				type:"post",
 				data:{"receName":receName,"recePhone":recePhone,"receAddressProv":prov,"receAddressCity":city,"receAddressCountry":country,"receAddressDetaile":receAddressDetaile,"receId":receId},
 				success:function(result){
-					result = JSON.parse(result);
+					reces = JSON.parse(result);
 					//console.log(result.length);
 					$(".my-address tbody").html("");
-					
-					for(var i = 0 ; i <result.length; i++ ){
-						
+					var str = "";
+					for(var i = 0 ; i <reces.length; i++ ){
+						str = "<tr class='addressInfo'><td class='receNameTd'>"+reces[i].receName+"</td><td class='receAddTd'>"+reces[i].receAddressProv+" "+reces[i].receAddressCity+" "+reces[i].receAddressCountry+"</td><td class='receDetaileTd'>"+reces[i].receAddressDetaile+"</td><td class='recePhoneTd'>"+reces[i].recePhone+"</td><td><a href='javascript:void(0)' onclick='updateRece(this)'>修改</a>|<a href='javascript:void(0)' onclick='deleteRece(this)'>删除</a></td><td>";
+						if(reces[i].isDefault==1){
+							str = str + "<input type='radio' name='isDefault' checked  />"
+						}else{
+							str = str + "<input type='radio' name='isDefault' />"
+						}
+						str = str + "<input type='hidden' value="+reces[i].receId+" class='hid'></td></tr>"	
+						$(str).appendTo($(".my-address tbody"));
 					}
 					$("#add").removeClass('open').addClass('close');
 					$('.new-address').slideUp();
+					clearInfo();
+					$(".my-address tbody input[name='isDefault']").each(function(){
+						$(this).bind("click",setDefultAddress);
+					});
 				},
 				error:function(){
 					console.log("修改失败");
 				}
 			});
 			$(this).attr("status","0");
+			
 		}
+		$('#add').html("新增收货地址");
 	});
 	
 	//修改收货地址
@@ -524,16 +552,48 @@
 	}
 	
 	//删除收货地址
-	function deleteRece(val){
+	function deleteRece(obj){
 		if(confirm("您确定要删除该收货地址吗?")){
+			var tr = $(obj).parent().parent();
+			var receId = tr.find(".hid").val();
 			$.ajax({
 				url:"self.power?method=deleteReceAddressByUsersIdAndReceId",
-				data:"receId="+val,
+				data:"receId="+receId,
 				type:"post",
-				success:function(){
-					alert("删除成功");
-				}
+				success:function(result){
+					reces = JSON.parse(result);
+					//console.log(result.length);
+					$(".my-address tbody").html("");
+					var str = "";
+					for(var i = 0 ; i <reces.length; i++ ){
+						str = "<tr class='addressInfo'><td class='receNameTd'>"+reces[i].receName+"</td><td class='receAddTd'>"+reces[i].receAddressProv+" "+reces[i].receAddressCity+" "+reces[i].receAddressCountry+"</td><td class='receDetaileTd'>"+reces[i].receAddressDetaile+"</td><td class='recePhoneTd'>"+reces[i].recePhone+"</td><td><a href='javascript:void(0)' onclick='updateRece(this)'>修改</a>|<a href='javascript:void(0)' onclick='deleteRece(this)'>删除</a></td><td>";
+						if(reces[i].isDefault==1){
+							str = str + "<input type='radio' name='isDefault' checked  />"
+						}else{
+							str = str + "<input type='radio' name='isDefault' />"
+						}
+						str = str + "<input type='hidden' value="+reces[i].receId+" class='hid'></td></tr>"	
+						$(str).appendTo($(".my-address tbody"));
+					}
+					$(".my-address tbody input[name='isDefault']").click(setDefultAddress);
+				},
 			});
 		}
+	}
+	$(".my-address tbody input[name='isDefault']").click(setDefultAddress);
+	function setDefultAddress(){
+		var receId = $(this).siblings(".hid").val();
+		$.ajax({
+			url:"self.power",
+			data:{"receId":receId,"method":"setDefaultAddressByUsersIdAndReceId"},
+			type:"post",
+			success:function(result){
+				if(result=='true'){
+					alert("修改默认地址成功");
+				}else if(result=='false'){
+					alert("修改默认地址失败");
+				}
+			}
+		});
 	}
 </script>

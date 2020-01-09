@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -72,23 +75,23 @@
 							<a href="#">微信</a>
 							<span>|</span>
 						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="register.html">注册</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="login.html">登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<a href="javascript:void(0)" id="exitLogin">退出登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<!--<a href="#">你好，XXX</a>-->
-							<a href="self_center.html" id="username"></a>
-							<span>|</span>
-						</div>
+						<c:if test="${empty usersInfo }">
+							<div class="header-top-list-coll no-user">
+								<a href="register.jsp">注册</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<a href="login.jsp">登录</a> <span>|</span>
+							</div>
+						</c:if>
+						<c:if test="${!empty usersInfo }">
+							<div class="header-top-list-coll">
+								<a href="javascript:void(0)" id="exitLogin">退出登录</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<!--<a href="#">你好，XXX</a>-->
+								<a href="self_center.jsp" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -215,119 +218,97 @@
 							</form>
 						</div>
 					</div>
-					<div class="right-bottom-no">
-						<div class="order-info-no">
-							<p>没有效订单，快去挑选心仪的产品吧！</p>
-							<a href="base.html">去首页逛逛</a>
-						</div>
-					</div>
-					<div class="right-bottom-yes">
-						<!--展示订单详情-->
-						<div class="order-info-yes">
-							<!-- 每个订单项 -->
-							<div class="order-item">
-								<div class="order-id">订单编号：89898</div>
-								<!-- 订单项中的单一数据 -->
-								<div class="item-pro">
-									<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;">
-										<tr>
-											<th style="width:340px">宝贝</th>
-											<th>宝贝属性</th>
-											<th class="item-smart">状态</th>
-											<th class="item-smart">服务</th>
-											<th class="item-smart">单价</th>
-											<th class="item-smart">数量</th>
-											<th class="item-smart">优惠</th>
-											<th class="item-smart price-total" total="999">商品总价</th>
-										</tr>
-										<tr>
-											<td>
-												<img src="img/060122303-035-01-L.jpg"/>
-												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
-											</td>
-											<td>
-												<p>颜色分类：白色</p>
-												<p>尺寸：大尺寸</p>
-											</td>
-											<td>未发货</td>
-											<td></td>
-											<td>99.0</td>
-											<td>1</td>
-											<td>无</td>
-											<td class="showTotal" rowspan="2"></td>
-										</tr>
-										<tr>
-											<td>
-												<img src="img/060122303-035-01-L.jpg"/>
-												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
-											</td>
-											<td>
-												<p>颜色分类：白色</p>
-												<p>尺寸：大尺寸</p>
-											</td>
-											<td>未发货</td>
-											<td></td>
-											<td>99.0</td>
-											<td>1</td>
-											<td>无</td>
-										</tr>
-									</table>
-								</div>
+					<c:if test="${empty ordersDTOList}">
+						<div class="right-bottom-no">
+							<div class="order-info-no">
+								<p>没有效订单，快去挑选心仪的产品吧！</p>
+								<a href="base.html">去首页逛逛</a>
 							</div>
-							
-							<!-- 每个订单项 -->
-							<div class="order-item">
-								<div class="order-id">订单编号：89898</div>
-								<!-- 订单项中的单一数据 -->
-								<div class="item-pro">
-									<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;">
-										<tr>
-											<th style="width:340px">宝贝</th>
-											<th>宝贝属性</th>
-											<th class="item-smart">状态</th>
-											<th class="item-smart">服务</th>
-											<th class="item-smart">单价</th>
-											<th class="item-smart">数量</th>
-											<th class="item-smart">优惠</th>
-											<th class="item-smart price-total" total="888">商品总价</th>
-										</tr>
-										<tr>
-											<td>
-												<img src="img/060122303-035-01-L.jpg"/>
-												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
-											</td>
-											<td>
-												<p>颜色分类：白色</p>
-												<p>尺寸：大尺寸</p>
-											</td>
-											<td>未发货</td>
-											<td></td>
-											<td>99.0</td>
-											<td>1</td>
-											<td>无</td>
-											<td class="showTotal" rowspan="2"></td>
-										</tr>
-										<tr>
-											<td>
-												<img src="img/060122303-035-01-L.jpg"/>
-												<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
-											</td>
-											<td>
-												<p>颜色分类：白色</p>
-												<p>尺寸：大尺寸</p>
-											</td>
-											<td>未发货</td>
-											<td></td>
-											<td>99.0</td>
-											<td>1</td>
-											<td>无</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							
 						</div>
-					</div>
+					</c:if>
+					<c:if test="${!empty ordersDTOList}">
+						<div class="right-bottom-yes">
+							<!--展示订单详情-->
+							<div class="order-info-yes">
+								
+								<c:forEach items="${ordersDTOList }" var="ordersDTO">
+									<!-- 每个订单项 -->
+									<div class="order-item">
+										<div class="order-id">订单编号：${ordersDTO.ordersNum }</div>
+										<!-- 订单项中的单一数据 -->
+										<div class="item-pro">
+											<table border="1" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;text-align: center;">
+												<tr>
+													<th style="width:340px">宝贝</th>
+													<th>宝贝属性</th>
+													<th class="item-smart">状态</th>
+													<th class="item-smart">服务</th>
+													<th class="item-smart">单价</th>
+													<th class="item-smart">数量</th>
+													<th class="item-smart">优惠</th>
+													<th class="item-smart price-total" total="${ordersDTO.ordersTotalMoney }">商品总价</th>
+												</tr>
+												<c:forEach items="${ordersDTO.itemsList }" var="ordersItemDTO" varStatus="i">
+													<tr>
+														<td>
+															<img src="${ordersItemDTO.goods.showImage }"/>
+															<div class="item-pro-info">${ordersItemDTO.goods.goodsName }</div>
+														</td>
+														<td>
+															<c:if test="${!empty ordersItemDTO.color }">
+																<p>颜色分类：${ordersItemDTO.color }</p>
+															</c:if>
+															<c:if test="${!empty ordersItemDTO.size }">
+																<p>尺寸：${ordersItemDTO.size }</p>
+															</c:if>
+														</td>
+														<c:if test="${ordersDTO.ordersStatus==1 }">
+															<td>未发货</td>
+														</c:if>
+														<c:if test="${ordersDTO.ordersStatus==2 }">
+															<td>已付款</td>
+														</c:if>
+														<c:if test="${ordersDTO.ordersStatus==3 }">
+															<td>已发货</td>
+														</c:if>
+														<c:if test="${ordersDTO.ordersStatus==4 }">
+															<td>已完成</td>
+														</c:if>
+														<td></td>
+														<td>${ordersItemDTO.goods.price }</td>
+														<td>${ordersItemDTO.goodsNum }</td>
+														<td>无</td>
+														<c:if test="${i.count==1 }">
+															<td class="showTotal" rowspan="2"></td>
+														</c:if>
+													</tr>
+												</c:forEach>
+												<!-- 
+													<tr>
+														<td>
+															<img src="img/060122303-035-01-L.jpg"/>
+															<div class="item-pro-info">森麦 SM-IH852耳机挂耳式 运动跑步电脑手机耳麦K歌游戏头戴耳挂</div>
+														</td>
+														<td>
+															<p>颜色分类：白色</p>
+															<p>尺寸：大尺寸</p>
+														</td>
+														<td>未发货</td>
+														<td></td>
+														<td>99.0</td>
+														<td>1</td>
+														<td>无</td>
+													</tr>
+												 -->
+											</table>
+										</div>
+									</div>
+								</c:forEach>
+								
+								
+							</div>
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</section>
@@ -412,7 +393,7 @@
 </html>
 <script src="js/jquery.min.js"></script>
 <script src="js/self_base.js"></script>
-<script src="js/isLogin.js"></script>
+<script src="js/exitLogin.js"></script>
 <script>
 	$('.menu li').each(function(){
 		$(this).click(function(){

@@ -1,14 +1,19 @@
 package com.mbs.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.mbs.dao.SelfDAO;
 import com.mbs.dao.impl.SelfDAOImpl;
+import com.mbs.dto.OrdersDTO;
+import com.mbs.dto.OrdersItemDTO;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Orders;
+import com.mbs.pojo.Ordersitem;
 import com.mbs.pojo.Receivinggoods;
 import com.mbs.service.SelfService;
 /**
@@ -150,18 +155,57 @@ public class SelfServiceImpl implements SelfService{
 		return rows;
 	}
 	
-	//根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败
+	//xx 根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败 xx 失效
+	//根据用户Id将该用户所有地址都设为不默认 并将receId设为默认地址
 	@Override
-	public boolean setDefaultAddressByUsersIdAndReceId(String beforeReceId, String afterReceId) {
+	public boolean setDefaultAddressByUsersIdAndReceId(String userId, String receId) {
 		boolean flag = false;
 		try {
-			dao.removeDefaultAddressByUsersIdAndReceId(beforeReceId);
-			dao.setDefaultAddressByUsersIdAndReceId(afterReceId);
+			dao.removeDefaultAddressByUsersIdAndReceId(userId);
+			dao.setDefaultAddressByUsersIdAndReceId(receId);
 			flag = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+	
+	//根据用户Id查询得到全部订单信息
+	@Override
+	public List<OrdersDTO> queryAllOrdersByUsersId(String usersId){
+		List<OrdersDTO> ordersDTOList = new ArrayList<>();
+		try {
+			List<Orders> ordersList = dao.queryAllOrdersByUsersId(usersId);
+			for (Orders orders : ordersList) {
+				Receivinggoods rece = dao.querySingleReceAddressByReceId(orders.getReceivingGoodsId());
+				UsersInfo usersInfo = dao.querySingleUser(orders.getUsersId());
+				OrdersDTO ordersDTO = new OrdersDTO();
+				ordersDTO.setOrdersId(orders.getOrdersId());
+				ordersDTO.setRece(rece);
+				ordersDTO.setUsersInfo(usersInfo);
+				ordersDTO.setOrdersTime(orders.getOrdersTime());
+				ordersDTO.setOrdersTotalMoney(orders.getOrdersTotalMoney());
+				ordersDTO.setOrdersStatus(orders.getOrdersStatus());
+				ordersDTO.setOrdersNum(orders.getOrdersNum());
+				List<Ordersitem> ordersItemList = dao.queryAllOrdersItemByOrdersId(orders.getOrdersId());
+				List<OrdersItemDTO> ordersItemDTOList = new ArrayList<OrdersItemDTO>();
+				for (Ordersitem ordersitem : ordersItemList) {
+					Goods goods = dao.queryGoodsById(Long.valueOf(ordersitem.getGoodsId()).intValue());
+					OrdersItemDTO ordersItemDTO = new OrdersItemDTO();
+					ordersItemDTO.setOrdersItemId(ordersitem.getOrdersItemId());
+					ordersItemDTO.setGoods(goods);
+					ordersItemDTO.setGoodsNum(Long.valueOf(ordersitem.getGoodsNum()).intValue());
+					ordersItemDTO.setOrdersId(ordersitem.getOrdersId());
+					ordersItemDTO.setColor(ordersitem.getColor());
+					ordersItemDTO.setSize(ordersitem.getSize());
+					ordersItemDTOList.add(ordersItemDTO);
+				}
+				ordersDTO.setItemsList(ordersItemDTOList);
+				ordersDTOList.add(ordersDTO);
+			}
+		} catch (Exception e) {
+		}
+		return ordersDTOList;
 	}
 	
 }

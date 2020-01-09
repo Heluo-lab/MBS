@@ -116,7 +116,7 @@ public class CartDaoImpl implements CartDao{
 					}
 				}
 				//查询购物车中是否已经有了商品
-				String sql5 = "select * from cartItem where goodsId="+goodsId+" and cartId="+cid+" and color="+color+" and size="+size;
+				String sql5 = "select * from cartItem where goodsId="+goodsId+" and cartId="+cid+" and color='"+color+"' and size='"+size+"'";
 				ps1 = connection.prepareStatement(sql5);
 				rs = ps1.executeQuery();
 				rs.next();

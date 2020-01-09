@@ -3,6 +3,7 @@ package com.mbs.service;
 
 import java.util.List;
 
+import com.mbs.dto.OrdersDTO;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Goods;
 import com.mbs.pojo.Receivinggoods;
@@ -44,6 +45,10 @@ public interface SelfService {
 	//根据用户Id与收货信息ID修改该收获地址
 	public int updateReceAddressByUsersIdAndReceId(Receivinggoods rece);
 	
-	//根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败
-	public boolean setDefaultAddressByUsersIdAndReceId(String beforeReceId,String afterReceId);
+	//xx 根据收货地址Id修改为默认地址 beforeReceId为用户更改前的默认地址 afterReceId为更改后的地址 true表示都修改成功 , false表示为修改失败 xx失效
+	//根据用户Id将该用户所有地址都设为不默认 并将receId设为默认地址
+	public boolean setDefaultAddressByUsersIdAndReceId(String usersId,String receId);
+	
+	//根据用户Id查询得到全部订单信息
+	public List<OrdersDTO> queryAllOrdersByUsersId(String usersId);
 }

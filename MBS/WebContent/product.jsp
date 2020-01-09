@@ -171,23 +171,23 @@
 							<a href="#">微信</a>
 							<span>|</span>
 						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="register.html">注册</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll no-user">
-							<a href="login.html">登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<a href="javascript:void(0)" id="exitLogin">退出登录</a>
-							<span>|</span>
-						</div>
-						<div class="header-top-list-coll yes-user">
-							<!--<a href="#">你好，XXX</a>-->
-							<a href="self_center.html" id="username"></a>
-							<span>|</span>
-						</div>
+						<c:if test="${empty usersInfo }">
+							<div class="header-top-list-coll no-user">
+								<a href="register.jsp">注册</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<a href="login.jsp">登录</a> <span>|</span>
+							</div>
+						</c:if>
+						<c:if test="${!empty usersInfo }">
+							<div class="header-top-list-coll">
+								<a href="javascript:void(0)" id="exitLogin">退出登录</a> <span>|</span>
+							</div>
+							<div class="header-top-list-coll">
+								<!--<a href="#">你好，XXX</a>-->
+								<a href="self_center.jsp" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -336,7 +336,7 @@
 						<c:forEach items="${colorImage}" var="falg" varStatus="img">
 							<li>
 								<c:if test="${img.count eq 1}">
-									<img class="current" src="${falg}"/>
+									<img class="current" id="img-banner" src="${falg}"/>
 								</c:if>
 							</li>
 						</c:forEach>
@@ -347,7 +347,7 @@
 						<!--滚动小图界面-->
 						<div class="tp-xiaomianb">
 						<ul>
-						<c:forEach items="${colorImage}" var="falg" varStatus="img">
+						<c:forEach items="${colorImage}" begin="1"  end="5" var="falg" step="1">
 							<li>
 								<img src="${falg}"/>
 							</li>
@@ -356,10 +356,15 @@
 
 						</div>
 						<div class="Shopping-zuo-xia">
-							<p>商品编码：${goods.id}</p>
+							<p>商品编码：<span class="goodsid-yyy">${goods.id}</span></p>
 							<a href="javascript:void(0)" class="shoucang" onclick="addCollect('${goods.id}')"><span>收藏</span></a>
 						</div>
 						<div class="tu-big">
+						<c:forEach items="${colorImage}" var="falg" varStatus="img">
+								<c:if test="${img.count eq 1}">
+									<img class="big-img" src="${falg}"/>
+								</c:if>
+						</c:forEach>
 						<!--<img class="big-img" src="img/430917402-116-01-H.jpg" />-->
 						</div>
 					</div>
@@ -406,16 +411,22 @@
 								<li class="licolork">
 						<c:forEach items="${colorlist}" var="color" varStatus="img">
 								<c:if test="${img.count eq 1}">
+						<a class="colorbtn" href="javascipt:;">
 							<p class="dq" >
+									<input type="hidden" id="colorcode-yyy" value="${color.colorCode}">
 									<img src="${color.colorImage}"/>
-									${color.colorName}
+									<span>${color.colorName}</span>
 							</p>
+						</a>
 								</c:if>
 								<c:if test="${img.count ne 1}">
+						<a class="colorbtn" href="javascipt:;">		
 							<p>	
+									<input type="hidden" id="colorcode-yyy" value="${color.colorCode}">
 									<img class="current" src="${color.colorImage}"/>
-									${color.colorName}
+									<span>${color.colorName}</span>
 							</p>	
+						</a>	
 								</c:if>
 						</c:forEach>									
 								</li>
@@ -426,10 +437,16 @@
 							<ul>
 								<li class="txt">尺码</li>
 								<li class="sizebtn">
-									<span>
+									<span class="size-yyy">
 									<c:forEach items="${colorsize}" var="size" varStatus="img">
-											<a>${size}</a>
+									<c:if test="${img.count eq 1}">
+											<a class="sizetp bxz"  href="javascript:;">${size}</a>
+									</c:if>	
+									<c:if test="${img.count ne 1}">	
+										<a class="sizetp" href="javascript:;">${size}</a>
+									</c:if>	
 									</c:forEach>
+									
 										
 									</span>
 								</li>
@@ -566,12 +583,11 @@
 		</div>
 </body>
 </html>
-<script src="js/isLogin.js"></script>
-<script type="text/javascript" src="js/product.js" ></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery.mousewheel.min.js" type="text/javascript"
 charset="utf-8"></script>
 <script src="js/addcar.js"></script>
+<script src="js/exitLogin.js"></script>
 <!-- 回到顶部 -->
 <script type="text/javascript">
 	$('.return-top').click(function() {
@@ -649,7 +665,14 @@ charset="utf-8"></script>
 					alert("添加失败");
 				}else if(result=="exit"){
 					alert("此商品已被收藏");
+				}else{
+					if(confirm("请先登录，点击确定跳转到登录页面")){
+						location.href="login.jsp";						
+					}
 				}
+			},
+			error:function(){
+				alert("添加失败");
 			}
 		});
 	}

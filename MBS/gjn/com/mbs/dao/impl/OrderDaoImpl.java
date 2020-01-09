@@ -7,12 +7,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.mbs.dao.CartDao;
 import com.mbs.dao.OrderDao;
 import com.mbs.dao.ProductDao;
 import com.mbs.pojo.CartItem;
 import com.mbs.pojo.Receivinggoods;
+import com.mbs.util.OrderNumUtil;
 
 import net.sf.json.JSONObject;
 
@@ -142,11 +144,12 @@ public class OrderDaoImpl implements OrderDao{
 	
 	}
 	
-	private static int ordersId = 0;
+	private static String ordersId = UUID.randomUUID().toString().replaceAll("-","");
 	private static int ordersItemId = 0;
+	private static String ordersNum = "";
 	@Override
 	public void submitOrder(String usersId) {
-		String sql1 = "insert into orders value(?,?,?,?,?,?)";
+		String sql1 = "insert into orders value(?,?,?,?,?,?,?)";
 		String sql2 = "insert into ordersitem value(?,?,?,?,?,?)";
 		String sql3 = "select * from orders";
 		String sql4 = "select * from ordersitem";
@@ -178,23 +181,25 @@ public class OrderDaoImpl implements OrderDao{
 		try {
 			PreparedStatement ps1 = connection.prepareStatement(sql3);
 			ResultSet rs = ps1.executeQuery();
-			ordersId++;
 			while(rs.next()){
 				if (rs.getString("ordersId").equals(ordersId+"")) {
-					ordersId++;
+					ordersId = UUID.randomUUID().toString().replaceAll("-","");
 				}
 			}
 			PreparedStatement ps = connection.prepareStatement(sql1);
 			double total = 0;
-			ps.setString(1, ordersId+"");
+			ps.setString(1, ordersId);
 			ps.setString(2, "");
 			ps.setString(3, usersId);
 			ps.setString(4, time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			for (GoodsMsg goodsMsg2 : msglist) {
 				total += goodsMsg2.getGoodsNum()*goodsMsg2.getPrice();
 			}
+			String orderTatalMoney = total+"";
+			String[] t = orderTatalMoney.split("\\.");
 			ps.setDouble(5, total);
-			ps.setInt(6, 1);
+			ps.setInt(6, 2);
+			ps.setString(7, OrderNumUtil.getOrderNum(t[0]));
 			ps.executeUpdate();
 			ps = connection.prepareStatement(sql2);
 			ps1 = connection.prepareStatement(sql4);

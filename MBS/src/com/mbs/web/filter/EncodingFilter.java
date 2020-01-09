@@ -43,6 +43,7 @@ public class EncodingFilter implements Filter {
 		if("POST".equalsIgnoreCase(method)){
 			Hrequest.setCharacterEncoding("UTF-8");
 		}
+		Hresponse.setContentType( "text/html; charset=UTF-8");
 		chain.doFilter(Hrequest, Hresponse);
 	}
 

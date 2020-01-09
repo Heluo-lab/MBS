@@ -10,6 +10,8 @@ import com.mbs.dto.UsersInfo;
  *
  */
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Orders;
+import com.mbs.pojo.Ordersitem;
 import com.mbs.pojo.Receivinggoods;
 public interface SelfDAO {
 	
@@ -40,6 +42,9 @@ public interface SelfDAO {
 	//根据用户Id查询该用户所有录入的收货地址
 	public List<Receivinggoods> queryReceAddress(String usersId)throws SQLException;
 	
+	//根据收货Id查询该收货地址
+	public Receivinggoods querySingleReceAddressByReceId(String receId) throws SQLException;
+	
 	//根据用户Id增加用户的收货地址
 	public int insertReceAddressByUsersId(Receivinggoods rece) throws SQLException;
 	
@@ -54,5 +59,14 @@ public interface SelfDAO {
 	
 	//根据收货信息ID将此收货信息设置为默认地址
 	public int setDefaultAddressByUsersIdAndReceId(String receId) throws SQLException;
+	
+	//根据用户Id查询该用户所有订单
+	public List<Orders> queryAllOrdersByUsersId(String usersId) throws SQLException;
+	
+	//根据订单号查询所有订单项
+	public List<Ordersitem> queryAllOrdersItemByOrdersId(String ordersId) throws SQLException;
+	
+	//根据商品Id查询商品名字 图片信息
+	public Goods queryGoodsById(int id) throws SQLException;
 	
 }

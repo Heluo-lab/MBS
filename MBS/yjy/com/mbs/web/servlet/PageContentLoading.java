@@ -82,6 +82,7 @@ public class PageContentLoading extends HttpServlet {
 		List<Color> Cnimgcodelist = null;
 		//颜色集合
 		List<Color> colorlist = dao.ColorCodeAndGoodsIdOfColorNameAndColorImg(flag);
+		System.out.println("================="+colorlist.size());
 		request.setAttribute("colorlist", colorlist);
 //		尺码集合
 		String colorsize = colorCodelist.get(0).getSizes();

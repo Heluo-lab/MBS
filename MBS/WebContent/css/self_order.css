@@ -66,7 +66,7 @@ select{
 	cursor: pointer;
 }
 .right-bottom-no{
-	display: none;
+	/*display: none;*/
 	padding: 170px;
 	background: white;
 }
@@ -89,6 +89,7 @@ select{
 	display: block;
 	background: white;
 	color: gray;
+	padding-bottom: 30px;
 }
 /*.order-info-yes{
 	display: none;

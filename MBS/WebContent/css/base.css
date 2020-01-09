@@ -62,7 +62,7 @@ header{
 	display: none;
 }
 .header-top-list-cart:hover .header-cart-no{
-	/*display: block;*/
+	display: block;
 }
 .header-top-list-cart .header-cart-yes{
 	display: none;
