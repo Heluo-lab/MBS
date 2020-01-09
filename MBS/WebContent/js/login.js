@@ -338,7 +338,7 @@ $('#txtLoginDpwd').blur(function(){
 		//验证码输入框#txtLoginDpwd添加类.i_text_error
 		$(this).addClass('i_text_error');
 		//提示内容##txtLoginDpwd验证码不能为空,文本解释添加类.f-explain
-		$('#txtLoginDpwdTip').addClass('f_explain').html('请输入动态口令');
+		$('#txtLoginDpwdTip').addClass('f_explain').html('请输入邮箱验证码');
 		isCode =false;
 		return;
 	}
@@ -515,7 +515,7 @@ $('.getDpwd').click(function(){
 				$('.getDpwd').val(second+'秒后重新发送');
 				if (second==1) {
 					//.getDpwd中value为获取动态口令
-					$('.getDpwd').val('获取动态口令');
+					$('.getDpwd').val('获取邮箱验证码');
 					//.getDpwd中data-time的值位120秒
 					$('.getDpwd').attr('data-time','60');
 					//#getCode可用
@@ -536,7 +536,7 @@ $('.getDpwd').click(function(){
 //无密码点击事件
 $('#btnSmsLogin').click(function(){
 	//.getDpwd中value为获取动态口令
-	$('.getDpwd').val('获取动态口令');
+	$('.getDpwd').val('获取邮箱验证码');
 	//.getDpwd中data-time的值位60秒
 	$('.getDpwd').attr('data-time','60');
 	//#getCode可用

@@ -79,7 +79,7 @@
 						<div class="input_block_2 dymatic">
 							<!--动态输入框-->
 							<label class="i_lable pwd-lable" for="txtLoginDpwd"></label>
-							<input type="text" name="member_mail_code" title="请输入动态口令" class="i_text" id="txtLoginDpwd" placeholder="动态口令" />
+							<input type="text" name="member_mail_code" title="请输入动态口令" class="i_text" id="txtLoginDpwd" placeholder="邮箱验证码" />
 							<!--动态按钮-->
 							<input type="button" value="获取动态口令" class="getDpwd" data-time="60" />
 							<!--动态输入框为空时的解释-->
