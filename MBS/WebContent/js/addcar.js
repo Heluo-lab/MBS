@@ -123,6 +123,10 @@ jQuery(".sizetp").click(function(){
 var lock = false;
 var jsq = 0;
 jQuery("#addshoppingcart").click(function(){
+	if(!$.isEmptyObject($(".no-user"))){
+		alert("请先登录");
+		return;   
+	}
 	if(lock == true){
 		return;
 	}
