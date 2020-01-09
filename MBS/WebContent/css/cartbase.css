@@ -48,9 +48,6 @@ img{ border: none; vertical-align: bottom;}
 .container .headright .message-no{
 	display: block;
 }
-.container .headright .message-yes{
-	display: none;
-}
 .container .headright .message-border ul{
 	display: none;
 }
