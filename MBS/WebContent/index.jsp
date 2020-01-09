@@ -114,7 +114,7 @@
 				</div>
 				<div class="header-top-list">
 					<div class="header-top-list-cart">
-						<a href="cart.html">购物车</a>
+						<a href="cart">购物车</a>
 						<c:if test="${!hasGoods }">
 							<div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div>
 						</c:if>

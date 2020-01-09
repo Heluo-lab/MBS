@@ -25,16 +25,9 @@
 				</div>
 				
 				<div class="headright">
-					<!-- 没登陆-->
-					<ul class="message message-no">
-						<li>欢迎光临梦芭莎！</li>
-						<li><a href="login.html  ">登陆<span>　|</span></a></li>
-						<li><a href="register.html ">注册<span>　|</span></a></li>
-					</ul>
-					
 					<!-- 已登陆-->
 					<ul class="message message-yes">
-						<li class="userid">你好无病呻吟！<span>　|</span></li>
+						<li class="userid">${account.accountName }<span>　|</span></li>
 						<li>
 						<div class=" message-border">
 							<a href="self_center.html">
@@ -47,7 +40,6 @@
 							</ul>
 						</div>
 							<span>　|</span>
-							
 						</li>
 						<li class="exit-btn"><a href="javascript:;">退出登录<span>　|</span></a></li>
 					</ul>

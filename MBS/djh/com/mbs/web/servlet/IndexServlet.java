@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mbs.dao.CartDao;
 import com.mbs.dao.impl.CartDaoImpl;
 import com.mbs.dto.GoodsMsg;
+import com.mbs.pojo.Account;
 import com.mbs.pojo.Goods;
 import com.mbs.pojo.Type;
 import com.mbs.service.GoodsService;
@@ -43,25 +44,29 @@ public class IndexServlet extends HttpServlet {
 		//装备热销商品
 		List<Goods> goodsList=goodsService.selectReconmmendGoods();
 		//获得购物车，usersId从session
-		List<GoodsMsg> goodsMsgList = cd.selectGoodsMsg("1");
-		//查看购物车有无商品
+		Account info = (Account)request.getSession().getAttribute("account");
 		boolean hasGoods = false;
-		int size = goodsMsgList.size();
-		if (size==0) {
-			hasGoods = false;
-		}else {
-			hasGoods = true;
+		if (info!=null) {
+			String usersId = info.getAccountId();
+			List<GoodsMsg> goodsMsgList = cd.selectGoodsMsg(usersId);
+			//查看购物车有无商品
+			int size = goodsMsgList.size();
+			if (size==0) {
+				hasGoods = false;
+			}else {
+				hasGoods = true;
+			}
+			//获得总价格
+			double total = 0;
+			for (GoodsMsg goodsMsg : goodsMsgList) {
+				total +=goodsMsg.getGoodsNum()*goodsMsg.getPrice();
+			}
+			
+			request.setAttribute("goodsMsg", goodsMsgList);
+			request.setAttribute("hasGoods", hasGoods);
+			request.setAttribute("total", total);
+			request.setAttribute("size", size);
 		}
-		//获得总价格
-		double total = 0;
-		for (GoodsMsg goodsMsg : goodsMsgList) {
-			total +=goodsMsg.getGoodsNum()*goodsMsg.getPrice();
-		}
-
-		request.setAttribute("goodsMsg", goodsMsgList);
-		request.setAttribute("hasGoods", hasGoods);
-		request.setAttribute("total", total);
-		request.setAttribute("size", size);
 		request.setAttribute("goodsTopTypeList", goodsTopTypeList);
 		request.setAttribute("manList", manList);
 		request.setAttribute("womanList", womanList);
