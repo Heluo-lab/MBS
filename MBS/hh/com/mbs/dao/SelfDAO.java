@@ -42,6 +42,9 @@ public interface SelfDAO {
 	//根据用户Id查询该用户所有录入的收货地址
 	public List<Receivinggoods> queryReceAddress(String usersId)throws SQLException;
 	
+	//根据收货Id查询该收货地址
+	public Receivinggoods querySingleReceAddressByReceId(String receId) throws SQLException;
+	
 	//根据用户Id增加用户的收货地址
 	public int insertReceAddressByUsersId(Receivinggoods rece) throws SQLException;
 	

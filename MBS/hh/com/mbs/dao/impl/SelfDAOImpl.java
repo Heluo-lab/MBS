@@ -195,6 +195,30 @@ public class SelfDAOImpl implements SelfDAO{
 		DBHelper.release();
 		return receList;
 	}
+	
+	//根据收货Id查询该收货地址
+	public Receivinggoods querySingleReceAddressByReceId(String receId) throws SQLException{
+		Receivinggoods rece = null;
+		Connection conn = DBHelper.getConnection();
+		String sql = "select * from receivinggoods where receId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, receId);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			rece = new Receivinggoods();
+			rece.setReceId(rs.getString("receId"));
+			rece.setReceName(rs.getString("receName"));
+			rece.setRecePhone(rs.getString("recePhone"));
+			rece.setReceAddressProv(rs.getString("receAddressProv"));
+			rece.setReceAddressCity(rs.getString("receAddressCity"));
+			rece.setReceAddressCountry(rs.getString("receAddressCountry"));
+			rece.setReceAddressDetaile(rs.getString("receAddressDetaile"));
+			rece.setIsDefault(rs.getLong("isDefault"));
+			rece.setUsersId(rs.getString("usersId"));
+		}
+		DBHelper.release();
+		return rece;
+	}
 
 	//根据用户Id增加用户的收货地址
 	@Override
@@ -282,6 +306,13 @@ public class SelfDAOImpl implements SelfDAO{
 		while(rs.next()){
 			Orders orders = new Orders();
 			orders.setOrdersId(rs.getString("ordersId"));
+			orders.setReceivingGoodsId(rs.getString("receivingGoodsId"));
+			orders.setUsersId(rs.getString("usersId"));
+			orders.setOrdersTime(rs.getString("ordersTime"));
+			orders.setOrdersTotalMoney(rs.getDouble("ordersTotalMoney"));
+			orders.setOrdersStatus(rs.getInt("ordersStatus"));
+			orders.setOrdersNum(rs.getString("ordersNum"));
+			ordersList.add(orders);
 		}
 		DBHelper.release();
 		return ordersList;
@@ -289,14 +320,42 @@ public class SelfDAOImpl implements SelfDAO{
 
 	@Override
 	public List<Ordersitem> queryAllOrdersItemByOrdersId(String ordersId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Ordersitem> ordersItemList = new ArrayList<>();
+		Connection conn = DBHelper.getConnection();
+		String sql = "select * from ordersItem where ordersId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, ordersId);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			Ordersitem ordersItem = new Ordersitem();
+			ordersItem.setOrdersItemId(rs.getString("ordersItemId"));
+			ordersItem.setGoodsId(rs.getLong("goodsId"));
+			ordersItem.setGoodsNum(rs.getLong("goodsNum"));
+			ordersItem.setOrdersId(rs.getString("ordersId"));
+			ordersItem.setColor(rs.getString("color"));
+			ordersItem.setSize(rs.getString("size"));
+			ordersItemList.add(ordersItem);
+		}
+		DBHelper.release();
+		return ordersItemList;
 	}
 
 	@Override
 	public Goods queryGoodsById(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = DBHelper.getConnection();
+		String sql ="select goodsName,showImage,price from goods where id = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		Goods goods = null;
+		if(rs.next()){
+			goods = new Goods();
+			goods.setId(id);
+			goods.setGoodsName(rs.getString("goodsName"));
+			goods.setShowImage(rs.getString("showImage"));
+			goods.setPrice(rs.getDouble("price"));
+		}
+		return goods;
 	}
 
 

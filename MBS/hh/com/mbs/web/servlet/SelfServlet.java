@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mbs.dto.OrdersDTO;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Account;
 import com.mbs.pojo.Goods;
@@ -183,5 +184,16 @@ s	 */
 		String receId = request.getParameter("receId");
 		boolean flag = service.setDefaultAddressByUsersIdAndReceId(usersId, receId);
 		response.getWriter().print(flag);
+	}
+	
+	//根据用户Id查询得到全部订单信息
+	public void queryAllOrdersByUsersId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfService service = new SelfServiceImpl();
+		Account acc =(Account)request.getSession().getAttribute("account");
+		String usersId = acc.getAccountId();
+		List<OrdersDTO> ordersDTOList = service.queryAllOrdersByUsersId(usersId);
+		System.out.println(ordersDTOList);
+		request.setAttribute("ordersDTOList", ordersDTOList);
+		request.getRequestDispatcher("self_order.jsp").forward(request, response);
 	}
 }

@@ -13,7 +13,7 @@ public class OrdersItemDTO {
 	//订单项商品信息
 	private Goods goods;
 	//商品个数
-	private String goodsNum;
+	private int goodsNum;
 	//所属订单Id
 	private String ordersId;
 	//商品颜色
@@ -37,10 +37,10 @@ public class OrdersItemDTO {
 	public void setGoods(Goods goods) {
 		this.goods = goods;
 	}
-	public String getGoodsNum() {
+	public int getGoodsNum() {
 		return goodsNum;
 	}
-	public void setGoodsNum(String goodsNum) {
+	public void setGoodsNum(int goodsNum) {
 		this.goodsNum = goodsNum;
 	}
 	public String getOrdersId() {

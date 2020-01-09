@@ -27,7 +27,7 @@ public class ExitLogin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("come in");
+//		System.out.println("come in");
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("account");
 		if(obj!=null){

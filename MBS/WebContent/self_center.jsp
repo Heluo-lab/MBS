@@ -132,7 +132,7 @@
 						<div class="lelf-menu">
 							<ul>
 								<li><a href="cart">我的购物车</a></li>
-								<li><a href="self_order.html">我的订单</a></li>
+								<li><a href="self.power?method=queryAllOrdersByUsersId">我的订单</a></li>
 								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="self_mypointment.html">我的预约</a></li>
 								<li><a href="self.power?method=queryCollectGoodsByUsersId">我的收藏</a></li>

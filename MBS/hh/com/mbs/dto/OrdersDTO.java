@@ -3,7 +3,6 @@ package com.mbs.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mbs.pojo.Account;
 import com.mbs.pojo.Receivinggoods;
 /**
  * 订单详细信息
@@ -16,7 +15,7 @@ public class OrdersDTO {
 	//收货信息
 	private Receivinggoods rece = new Receivinggoods();
 	//订单所属账户
-	private Account account = new Account();
+	private UsersInfo usersInfo = new UsersInfo();
 	//下单时间
 	private String ordersTime;
 	//订单总金额
@@ -47,12 +46,12 @@ public class OrdersDTO {
 		this.rece = rece;
 	}
 
-	public Account getAccount() {
-		return account;
+	public UsersInfo getUsersInfo() {
+		return usersInfo;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setUsersInfo(UsersInfo usersInfo) {
+		this.usersInfo = usersInfo;
 	}
 
 	public String getOrdersTime() {
@@ -94,7 +93,13 @@ public class OrdersDTO {
 	public void setItemsList(List<OrdersItemDTO> itemsList) {
 		this.itemsList = itemsList;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "OrdersDTO [ordersId=" + ordersId + ", rece=" + rece + ", usersInfo=" + usersInfo + ", ordersTime="
+				+ ordersTime + ", ordersTotalMoney=" + ordersTotalMoney + ", ordersStatus=" + ordersStatus
+				+ ", ordersNum=" + ordersNum + ", itemsList=" + itemsList + "]";
+	}
+
 	
 }
