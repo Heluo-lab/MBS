@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.pojo.Account;
 import com.mbs.service.AccountService;
+import com.mbs.service.UsersService;
 import com.mbs.service.impl.AccountServiceImpl;
+import com.mbs.service.impl.UsersServiceImpl;
 
 /**
  * 注册按钮
@@ -63,7 +65,9 @@ public class RegisterBtnServlet extends HttpServlet{
 		if (servercode.equals(registercode)) {
 			AccountService service =new AccountServiceImpl();
 			Account account =new Account();
-			account.setAccountId(UUID.randomUUID().toString());
+			//用户ID，account,users
+			String accountId =UUID.randomUUID().toString();
+			account.setAccountId(accountId);
 			account.setAccountName(registername);
 			account.setAccountEmail(registerid);
 			account.setAccountPass(registerpwd);
@@ -82,6 +86,11 @@ public class RegisterBtnServlet extends HttpServlet{
 			resp.setCharacterEncoding("UTF-8");
 			resp.setHeader("Content-Type", "application/json;charset=utf-8");
 			resp.getWriter().print(flag);
+			//如果注册成功，则插入到users表中
+			if (flag) {
+				UsersService userservice =new UsersServiceImpl();
+				userservice.insertUsers(accountId);
+			}
 		}else {
 //			//传验证码错误
 //			req.getSession().setAttribute("msg", "动态验证码错误！");
