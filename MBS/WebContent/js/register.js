@@ -359,10 +359,10 @@ $('.reg_btn').click(function(){
 	function addZero(n){
 		return n<10 ? '0'+n :''+n;
 	};
-	var registerbirth =year+'/'+addZero(month)+'/'+addZero(day);
+	var registerbirth =year+'-'+addZero(month)+'-'+addZero(day);
 	//点击注册按钮时候看所有项都为true才能请求后台
 	if(isName == false || isUser == false || isPwd == false || isConfirmPwd ==false || isCode ==false){
-	  return;
+		return;
 	};
 	//请求注册之前查看每项都OK发起请求
 	registername =encodeURI(encodeURI(registername));
