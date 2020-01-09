@@ -416,7 +416,6 @@ $('#auto_login').click(function(){
 $('#btnLogin').click(function(){
 	//#loginMsg中display不可见
 	$('#loginMsg').css('display','none');
-  alert("login");
 	if (isID == false || isPwd == false) {
 		return;
 	}
