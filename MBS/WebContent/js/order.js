@@ -115,7 +115,7 @@ function changeAddress(){
 					`;
 				}else{
 					str=`
-						<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg"/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg(this)">修改</a></div>
+						<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg"/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg($(this).siblings().eq(1).attr('id'))">修改</a></div>
 						`;
 				}
 				  $(".address").append(str);
@@ -231,11 +231,11 @@ function submitCurrent(){
 			  $.each(receivinggoods,function(i,receivinggoods1){
 				  if (receivinggoods1.isDefault==1) {
 						str=`
-							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg" checked/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg(re)">修改</a></div>
+							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg" checked/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg($(this).siblings().eq(1).attr('id'))">修改</a></div>
 						`;
 					}else{
 						str=`
-							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg"/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg(re)">修改</a></div>
+							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg"/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg($(this).siblings().eq(1).attr('id'))">修改</a></div>
 							`;
 					}
 					  $(".address").append(str);
@@ -256,17 +256,17 @@ function submitCurrent(){
 function deleteAddress(o){
 	var obj = $(o).parent();
 	var receId = $(o).siblings(":first").attr("id");
+	if(confirm("你确定删除吗？")){
 	$.ajax({
 		  type:"post",
 		  url:"deleteaddress",
 		  data:"receId="+receId,
 		  success:function(result){
-			  if(!confirm("你确定提交吗？")){
-					return;
-				}
 			  obj.remove();
 		  }
 	});
+	}else{
+	}
 }
 function changeDefault(receId){
 	$.ajax({
@@ -278,8 +278,8 @@ function changeDefault(receId){
 		  }
 	});
 }
-function changeAllMsg(obj){
-	var obj = JSON.parse(obj);
+function changeAllMsg(o){
+	var obj = JSON.parse(o);
 	var str = `
 		<form action="javascript:;" onsubmit="javascript:return updateAddress();" id="allrecemsg">
 		<input type="hidden" id="receId" value="${obj.receId}"/>
@@ -362,11 +362,11 @@ function updateAddress(){
 			  $.each(receivinggoods,function(i,receivinggoods1){
 				  if (receivinggoods1.isDefault==1) {
 						str=`
-							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg" checked/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg(re)">修改</a></div>
+							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg" checked/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg($(this).siblings().eq(1).attr('id'))">修改</a></div>
 						`;
 					}else{
 						str=`
-							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg"/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg(re)">修改</a></div>
+							<div><input type="hidden" id="${receivinggoods1.receId}"/><input type="radio" name="selectmsg"/>${receivinggoods1.receName } ${receivinggoods1.receAddressProv } ${receivinggoods1.receAddressCity } ${receivinggoods1.receAddressDetaile } ${receivinggoods1.recePhone }<a class="delete" href="javascript:;" style="text-decoration:none;float:right;margin-left:30px;" onclick="deleteAddress(this)">删除</a><a class="change" href="javascript:;" style="text-decoration:none;float:right;" onclick="changeAllMsg($(this).siblings().eq(1).attr('id'))">修改</a></div>
 							`;
 					}
 					  $(".address").append(str);

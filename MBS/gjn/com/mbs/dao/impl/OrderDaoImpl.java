@@ -27,7 +27,7 @@ public class OrderDaoImpl implements OrderDao{
 	@Override
 	public List<Receivinggoods> selectAddress(String usersId) {
 		Connection connection = DBHelper.getConnection();
-		String sql = "select * from receivinggoods where usersId="+usersId;
+		String sql = "select * from receivinggoods where usersId='"+usersId+"'";
 		List<Receivinggoods> list = new ArrayList<Receivinggoods>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class OrderDaoImpl implements OrderDao{
 	@Override
 	public void changeDefault(String receId,String usersId) {
 		Connection connection = DBHelper.getConnection();
-		String sql = "update receivinggoods set isDefault=0 where usersId="+usersId;
+		String sql = "update receivinggoods set isDefault=0 where usersId='"+usersId+"'";
 		String sql1 = "update receivinggoods set isDefault=1 where receId="+receId;
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);

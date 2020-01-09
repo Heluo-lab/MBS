@@ -22,7 +22,7 @@ public class CartDaoImpl implements CartDao{
 	@Override
 	public List<CartItem> selectAllCartId(String usersId){
 		Connection connection = DBHelper.getConnection();
-		String sql = "select * from cart where usersId= "+usersId;
+		String sql = "select * from cart where usersId= '"+usersId+"'";
 		List<CartItem> list = new ArrayList<CartItem>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -65,9 +65,9 @@ public class CartDaoImpl implements CartDao{
 		}
 		Connection connection = DBHelper.getConnection();
 		String sql1 = "insert into cart (cartId,usersId) value (?,?) ";
-		String sql2 = "select * from cart where usersId="+usersId;
+		String sql2 = "select * from cart where usersId='"+usersId+"'";
 		String sql3 = "insert into cartItem (cartItemId,goodsId,goodsNum,cartId,color,size) value (?,?,?,?,?,?)";
-		String sqlci = "select * from cartItem where cartId=?";
+		String sqlci = "select * from cartItem";
 		String sql = "select * from cartItem";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql2);
@@ -75,9 +75,18 @@ public class CartDaoImpl implements CartDao{
 			rs.next();
 			//该用户是否有购物车
 			if (rs.getRow()==0) {
+				String sqls = "select * from cart";
+				ps = connection.prepareStatement(sqls);
+				ResultSet rr = ps.executeQuery();
+				cartId++;
+				while(rr.next()) {
+					int comparecartItemId = Integer.parseInt(rr.getString("cartId"));
+					if (comparecartItemId==cartId) {
+						cartId++;
+					}
+				}
 				//插入购物车
 				ps = connection.prepareStatement(sql1);
-				cartId++;
 				ps.setString(1, cartId+"");
 				ps.setString(2, usersId+"");
 				ps.executeUpdate();
@@ -106,7 +115,6 @@ public class CartDaoImpl implements CartDao{
 				rs.next();
 				int cid = Integer.parseInt(rs.getString("cartId"));
 				ps1 = connection.prepareStatement(sqlci);
-				ps1.setString(1,cid+"");
 				ResultSet rsci = ps1.executeQuery();
 				cartItemId++;
 				while(rsci.next()) {
@@ -154,8 +162,8 @@ public class CartDaoImpl implements CartDao{
 		}
 		Connection connection = DBHelper.getConnection();
 		int cid = 0;
-		String sql1 = "delete from cartItem where cartId=? and goodsId="+goodsId+" and color="+color+" and size="+size;
-		String sql2 = "select * from cart where usersId="+usersId;
+		String sql1 = "delete from cartItem where cartId=? and goodsId="+goodsId+" and color='"+color+"' and size='"+size+"'";
+		String sql2 = "select * from cart where usersId='"+usersId+"'";
 		try {
 			//查询cartId
 			PreparedStatement ps = connection.prepareStatement(sql2);
@@ -183,7 +191,7 @@ public class CartDaoImpl implements CartDao{
 			size = "0";
 		}
 		Connection connection = DBHelper.getConnection();
-		String sql = "update cart set goodsNum="+goodsNum+"where cartId = ? and goodsId = "+goodsId+" and color="+color+" and size="+size;
+		String sql = "update cart set goodsNum="+goodsNum+"where cartId = ? and goodsId = "+goodsId+" and color='"+color+"' and size='"+size+"'";
 		String sql1 = "select * from cart where usersId ="+usersId;
 		try {
 			//查cartId
@@ -206,7 +214,7 @@ public class CartDaoImpl implements CartDao{
 	public void deleteCart(String usersId) {
 		Connection connection = DBHelper.getConnection();
 		String sql1 = "delete from cartItem where cartId=?";
-		String sql2 = "select * from cart where usersId="+usersId;
+		String sql2 = "select * from cart where usersId='"+usersId+"'";
 		try {
 			//查询cartId
 			PreparedStatement ps = connection.prepareStatement(sql2);
@@ -245,8 +253,7 @@ public class CartDaoImpl implements CartDao{
 
 	@Override
 	public List<GoodsMsg> selectGoodsMsg(String usersId) {
-		Connection connection = DBHelper.getConnection();
-		List<CartItem> list = selectAllCartId("1");
+		List<CartItem> list = selectAllCartId(usersId);
 		List<GoodsMsg> msglist = new ArrayList<GoodsMsg>();
 		for (CartItem cart : list) {
 			ProductDao pd = new ProductDaoimpl();
