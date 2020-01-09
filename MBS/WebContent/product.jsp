@@ -320,13 +320,11 @@
 				<div class="Shopping-zuo">
 					<!--面包屑-->
 					<div class="page">
-						<a rel="nofollow" href="">首页</a>
+						<a rel="nofollow" href="/index">首页</a>
 						>
-						<a href="">热销排行</a>
+						<a href="/product_list">全部商品</a>
 						>
-						<a href="">全部商品</a>
-						>
-						<a href="">上装</a>
+						<a>详情</a>
 					</div>
 					<!--商品图片-->
 					<div class="Shopping-zuo-tu">
