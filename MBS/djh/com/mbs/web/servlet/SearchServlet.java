@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mbs.dao.CartDao;
+import com.mbs.dao.impl.CartDaoImpl;
+import com.mbs.dto.GoodsMsg;
 import com.mbs.pojo.Goods;
 import com.mbs.pojo.Type;
 import com.mbs.service.GoodsService;
@@ -41,6 +44,7 @@ public class SearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GoodsService gs = new GoodsServiceImpl();
 		TypeService ts = new TypeServiceImpl();
+		CartDao cd = new CartDaoImpl();
 		String goodsName = request.getParameter("name");
 		// 顶级分类集合
 		List<Type> TopTypeList = ts.getGoodsTopType();
@@ -99,7 +103,26 @@ public class SearchServlet extends HttpServlet {
 				pageNo = maxNo;
 			}
 		}
-
+		//获得购物车，usersId从session
+		List<GoodsMsg> goodsMsgList = cd.selectGoodsMsg("1");
+		//查看购物车有无商品
+		boolean hasGoods = false;
+		int cartsize = goodsMsgList.size();
+		if (cartsize==0) {
+			hasGoods = false;
+		}else {
+			hasGoods = true;
+		}
+		//获得总价格
+		double total = 0;
+		for (GoodsMsg goodsMsg : goodsMsgList) {
+			total +=goodsMsg.getGoodsNum()*goodsMsg.getPrice();
+		}
+		
+		request.setAttribute("goodsMsg", goodsMsgList);
+		request.setAttribute("hasGoods", hasGoods);
+		request.setAttribute("total", total);
+		request.setAttribute("size", cartsize);
 		// List<Goods> Goodslist = gs.selectGoodsByName(goodsName, pageSize, pageNo);
 		List<Goods> Goodslist = gs.selectGoodsByName(goodsName, param, pageSize, pageNo);
 		// 存储低级分类集合

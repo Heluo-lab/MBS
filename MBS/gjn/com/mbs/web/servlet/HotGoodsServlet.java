@@ -18,6 +18,7 @@ import com.mbs.dao.impl.CartDaoImpl;
 import com.mbs.dao.impl.ProductDaoimpl;
 import com.mbs.dto.GoodsMsg;
 import com.mbs.dto.IDColorSizeOf;
+import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.CartItem;
 
 import net.sf.json.JSONArray;
@@ -33,25 +34,6 @@ public class HotGoodsServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		GoodsMsg goods = new GoodsMsg();
-//		List<GoodsMsg> list = new ArrayList<GoodsMsg>();
-//		PrintWriter out = resp.getWriter();
-//		goods.setGoodsId(1);
-//		goods.setGoodsName("蒙蒂埃莫羊绒手感时尚字母logo提花翻边针织羊毛帽");
-//		goods.setPrice(79);
-//		goods.setShowImage("http://images6.monteamor.com/ProductImg/3/1804/middle/068218403-075-01-M.jpg");
-//		goods.setSize("均码/F");  
-//		goods.setColor("红色");  
-//		list.add(goods);
-//		GoodsMsg goods1 = new GoodsMsg();
-//		goods1.setGoodsId(2);
-//		goods1.setGoodsName("蒙蒂埃莫意式经典舒适微弹混纺百搭常规版男士休闲长裤");
-//		goods1.setPrice(198);
-//		goods1.setShowImage("http://images6.monteamor.com/ProductImg/3/1902/middle/065019103-009-01-M.jpg");  
-//		goods1.setSize("34");  
-//		goods1.setColor("黑色");  
-//		list.add(goods1);
-//		out.print(JSONArray.fromObject(list));
 		//通过随机数获得900以上的商品热度
 		PrintWriter out = resp.getWriter();
 		Random r = new Random();
@@ -93,11 +75,12 @@ public class HotGoodsServlet extends HttpServlet{
 			for (GoodsMsg goodsMsg : hotgoods) {
 				flag = false;
 				if (goodsMsg.getGoodsId()==goodsmsglist.get(n).getGoodsId()) {
-					flag = true;
+					flag = false;
 					break;
 				}
+				flag = true;
 			}
-			if (true) {
+			if (flag) {
 				hotgoods.add(goodsmsglist.get(n));
 			}
 			if (hotgoods.size()==5) {

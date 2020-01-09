@@ -16,7 +16,7 @@
 		<!--头部-->
 		<div class="nav">
 			<div class="container">
-				<a href="index.html" class="logo"><img src="img/cartlogo.jpg"/></a>
+				<a href="index" class="logo"><img src="img/cartlogo.jpg"/></a>
 				<div class="headleft">
 					<ul>
 						<li>　9年品质保证<span>　|　</span></li>
@@ -95,7 +95,7 @@
 						<div class="buygoods" id="buygoods" style="background: url(img/shopcar.jpg) 200px 62px no-repeat;">
 						<div class="had-sign shopcar" style="height: 217px;">
 							您的购物车中没有商品，您可以：
-							<p><a href="index.html">立即选购商品>></a>></p>
+							<p><a href="index">立即选购商品>></a>></p>
 						</div>
 					</c:if>
 					<!-- 有商品 -->
@@ -225,7 +225,7 @@
 				<img src="img/footer_img03.jpg" />
 			</div>
 			<div class="footer-txt">
-				<a href="index.html">首页</a>
+				<a href="index">首页</a>
 				<a href="">旗下品牌</a>
 				<a href="">零售店址</a>
 				<a href="">梦芭莎网盟 </a>

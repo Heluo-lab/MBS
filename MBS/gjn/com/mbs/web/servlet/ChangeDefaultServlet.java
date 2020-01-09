@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.OrderDao;
 import com.mbs.dao.impl.OrderDaoImpl;
+import com.mbs.dto.UsersInfo;
+import com.mbs.pojo.Account;
 
 @WebServlet("/changedefault")
 public class ChangeDefaultServlet extends HttpServlet{
@@ -21,9 +23,11 @@ public class ChangeDefaultServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Account info = (Account)req.getSession().getAttribute("account");
+		String usersId = info.getAccountId();
 		OrderDao od = new OrderDaoImpl();
 		String receId = req.getParameter("receId");
-		od.changeDefault(receId, "1");
+		od.changeDefault(receId, usersId);
 	}
 
 }

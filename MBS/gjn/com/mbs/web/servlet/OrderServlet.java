@@ -18,6 +18,8 @@ import com.mbs.dao.impl.OrderDaoImpl;
 import com.mbs.dao.impl.ProductDaoimpl;
 import com.mbs.dto.GoodsMsg;
 import com.mbs.dto.IDColorSizeOf;
+import com.mbs.dto.UsersInfo;
+import com.mbs.pojo.Account;
 import com.mbs.pojo.CartItem;
 import com.mbs.pojo.Receivinggoods;
 
@@ -31,9 +33,11 @@ public class OrderServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Account info = (Account)req.getSession().getAttribute("account");
+		String usersId = info.getAccountId();
 		//获得地址信息
 		OrderDao od = new OrderDaoImpl();
-		List<Receivinggoods> recelist = od.selectAddress("1");
+		List<Receivinggoods> recelist = od.selectAddress(usersId);
 		boolean hasmsg = false;
 		Receivinggoods recegoods = new Receivinggoods();
 		for (Receivinggoods regoods : recelist) {
@@ -46,7 +50,7 @@ public class OrderServlet extends HttpServlet{
 		double money = 0;
 		CartDao cd = new CartDaoImpl();
 		//usersid
-		List<CartItem> list = cd.selectAllCartId("1");
+		List<CartItem> list = cd.selectAllCartId(usersId);
 		List<GoodsMsg> msglist = new ArrayList<GoodsMsg>();
 		for (CartItem cart : list) {
 			ProductDao pd = new ProductDaoimpl();
@@ -62,7 +66,7 @@ public class OrderServlet extends HttpServlet{
 		}
 		req.getSession().setAttribute("money", money);
 		req.getSession().setAttribute("goodslist", msglist);
-		req.getSession().setAttribute("usersId", "1");
+		req.getSession().setAttribute("usersId", usersId);
 		String receName = recegoods.getReceName();
 		String receAddressCity = recegoods.getReceAddressCity();
 		String receAddressDetaile = recegoods.getReceAddressDetaile();

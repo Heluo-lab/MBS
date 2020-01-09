@@ -217,7 +217,7 @@
 			<div class="menu-car">
 				<c:if test="${!hasGoods }">
 					<div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div>
-					<a href=""> <img src="img/cart.png"> <span>购物车</span> <span class="count">0</span></a>
+					<a href="cart"> <img src="img/cart.png"> <span>购物车</span> <span class="count">0</span></a>
 				</c:if>
 				<c:if test="${hasGoods }">
 					<div class="list-car">
@@ -246,7 +246,7 @@
 								<a class="checkout_btn" href="order">去结算</a>
 							</div>
 						</div>
-				<a href=""> <img src="img/cart.png"> <span>购物车</span> <span class="count">${size }</span></a>
+				<a href="cart"> <img src="img/cart.png"> <span>购物车</span> <span class="count">${size }</span></a>
 				</c:if>
 				
 			</div>

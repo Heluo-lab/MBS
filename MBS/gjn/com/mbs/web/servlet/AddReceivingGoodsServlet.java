@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.OrderDao;
 import com.mbs.dao.impl.OrderDaoImpl;
+import com.mbs.dto.UsersInfo;
+import com.mbs.pojo.Account;
 import com.mbs.pojo.Receivinggoods;
 
 import net.sf.json.JSONObject;
@@ -25,11 +27,19 @@ public class AddReceivingGoodsServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Account info = (Account)req.getSession().getAttribute("account");
+		String usersId = null;
+		if (info==null) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}else {
+			usersId = info.getAccountId();
+		}
 		OrderDao od = new OrderDaoImpl();
 		String receMsg = req.getParameter("receivinggoods");
 		JSONObject object = JSONObject.fromObject(receMsg);
 		Receivinggoods receivinggoods = (Receivinggoods)JSONObject.toBean(object,Receivinggoods.class);
-		receivinggoods.setUsersId("1");
+		receivinggoods.setUsersId(usersId);
 		od.addAddress(JSONObject.fromObject(receivinggoods).toString());
 		PrintWriter out = resp.getWriter();
 		out.print(JSONObject.fromObject(receivinggoods).toString());

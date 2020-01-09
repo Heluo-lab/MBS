@@ -18,6 +18,8 @@ import com.mbs.dao.impl.ProductDaoimpl;
 import com.mbs.dto.DataMapping;
 import com.mbs.dto.GoodsMsg;
 import com.mbs.dto.IDColorSizeOf;
+import com.mbs.dto.UsersInfo;
+import com.mbs.pojo.Account;
 import com.mbs.pojo.CartItem;
 import com.mbs.pojo.Goods;
 
@@ -39,8 +41,17 @@ public class CartServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Account info = (Account)req.getSession().getAttribute("account");
+		String usersId = null;
+		if (info==null) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}else {
+			usersId = info.getAccountId();
+		}
+		System.out.println("cart");
 		CartDao cd = new CartDaoImpl();
-		List<CartItem> list = cd.selectAllCartId("1");
+		List<CartItem> list = cd.selectAllCartId(usersId);
 		List<GoodsMsg> msglist = new ArrayList<GoodsMsg>();
 		for (CartItem cart : list) {
 			ProductDao pd = new ProductDaoimpl();

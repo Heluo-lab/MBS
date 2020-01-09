@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.OrderDao;
 import com.mbs.dao.impl.OrderDaoImpl;
+import com.mbs.dto.UsersInfo;
+import com.mbs.pojo.Account;
 import com.mbs.pojo.Receivinggoods;
 
 import net.sf.json.JSONArray;
@@ -26,8 +28,10 @@ public class ChangeAddressServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Account info = (Account)req.getSession().getAttribute("account");
+		String usersId = info.getAccountId();
 		OrderDao od = new OrderDaoImpl();
-		List<Receivinggoods> list = od.selectAddress("1");
+		List<Receivinggoods> list = od.selectAddress(usersId);
 		PrintWriter out = resp.getWriter();
 		out.print(JSONArray.fromObject(list));
 	}

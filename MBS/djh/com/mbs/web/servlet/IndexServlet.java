@@ -58,6 +58,10 @@ public class IndexServlet extends HttpServlet {
 			total +=goodsMsg.getGoodsNum()*goodsMsg.getPrice();
 		}
 
+		request.setAttribute("goodsMsg", goodsMsgList);
+		request.setAttribute("hasGoods", hasGoods);
+		request.setAttribute("total", total);
+		request.setAttribute("size", size);
 		request.setAttribute("goodsTopTypeList", goodsTopTypeList);
 		request.setAttribute("manList", manList);
 		request.setAttribute("womanList", womanList);
@@ -65,10 +69,6 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("shoesBagList", shoesBagList);
 		request.setAttribute("goodsRecommendTypeList",goodsRecommendTypeList);
 		request.setAttribute("goodsList",goodsList);
-		request.setAttribute("goodsMsg", goodsMsgList);
-		request.setAttribute("hasGoods", hasGoods);
-		request.setAttribute("total", total);
-		request.setAttribute("size", size);
 		
 		
 		
