@@ -474,10 +474,6 @@
 							</span>
 						</div>
 						
-						<div class="goumai-btn">
-							<span id="collect">
-								<i>立刻购买</i>
-							</span>
 							<span class="addgouwu-btn" id="addshoppingcart">
 								<i>加入购物车</i>
 							</span>
