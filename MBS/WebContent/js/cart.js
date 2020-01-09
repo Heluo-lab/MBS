@@ -52,7 +52,7 @@ $(function(){
 				  //数据渲染
 				  var str = `
 					  <ul>
-					  <li><a href="product.html?goods_id=${obj.goodsId}" id="${obj.goodsId}" target="_blank">
+					  <li><a href="pageConetentLoading?id=${obj.goodsId}" id="${obj.goodsId}" target="_blank">
 					  <img src="img/loading.gif" lazyLoadSrc="${obj.showImage}" />
 					  </a>
 					  </li>
@@ -180,7 +180,7 @@ function shop(id){
 				  console.log(obj.goodsId);
 				  var str = `
 					  <ul>
-					  <li><a href="product.html?goods_id=${obj.goodsId}" id="${obj.goodsId}" target="_blank">
+					  <li><a href="pageConetentLoading?id=${obj.goodsId}" id="${obj.goodsId}" target="_blank">
 					  <img src="img/loading.gif" lazyLoadSrc="${obj.showImage}" />
 					  </a>
 					  </li>
@@ -479,7 +479,7 @@ function cartEvent(){
 			str=`
 				<div class="had-sign shopcar" style="height: 217px;">
 				您的购物车中没有商品，您可以：
-				<p><a href="index.html">立即选购商品>></a>></p>
+				<p><a href="index">立即选购商品>></a>></p>
 				</div>
 				`;
 			$('#buygoods').html(str);

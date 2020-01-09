@@ -200,3 +200,28 @@
 	width: 150px;
 	padding-top: 10px;
 }
+
+.collect-list{
+	float: left;
+	width: 23%;
+	margin: 10px 10px 0px 0px;
+	/*height: 340px;*/
+	border: 1px solid white;
+	position: relative;
+	text-align:center;
+}
+.collect-list img{
+	width: 180px;
+	height: 260px;
+}
+.pro_title{
+	color: #8d8d8d;
+    font-size: 12px;
+    margin-top: 8px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 22px;
+	text-indent: 4px;
+}

@@ -29,7 +29,7 @@
 						<li class="userid">你好${account.accountName }！<span>　|</span></li>
 						<li>
 						<div class=" message-border">
-							<a href="self_center.jsp">
+							<a href="self.power?method=selfCenter">
 							<img src="img/icon_img3.png" />我的梦芭莎
 							</a>
 							<ul class="myaccount">

@@ -45,6 +45,7 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SelfService service = new SelfServiceImpl();
+//		SelfServlet.getCart(request);
 		//request.setCharacterEncoding("UTF-8");
 		try {
 			//接受上传文件

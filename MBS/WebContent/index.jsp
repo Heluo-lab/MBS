@@ -173,7 +173,7 @@
 						</div>
 						<div class="header-top-list-coll">
 							<!--<a href="#">你好，XXX</a>-->
-							<a href="self_center.jsp" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
+							<a href="self.power?method=selfCenter" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
 						</div>
 					</c:if>
 				</div>

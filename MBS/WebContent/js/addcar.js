@@ -123,7 +123,8 @@ jQuery(".sizetp").click(function(){
 var lock = false;
 var jsq = 0;
 jQuery("#addshoppingcart").click(function(){
-	if(!$.isEmptyObject($(".no-user"))){
+	var isLogin = $("#loginTest").attr("means");
+	if(!isLogin){
 		alert("请先登录");
 		return;   
 	}

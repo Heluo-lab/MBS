@@ -21,43 +21,37 @@
 					<div class="header-top-list">
 						<div class="header-top-list-cart">
 							<a href="cart">购物车</a>
-							<div class="header-cart-no">
-								购物车里还没有任何商品，快去选购吧!
-							</div>
-							<div class="header-cart-yes">
+							<c:if test="${!hasGoods }">
+								<div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div>
+							</c:if>
+							<c:if test="${hasGoods }">
+								<div class="header-cart-yes">
 								<ul>
+								<c:forEach items="${goodsMsg}" var="goodsMsg">
 									<li>
-										<a href="#" target="_blank">
-											<img width="40" height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫" src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
-										</a>
-										<a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
-										<span>￥198.00</span>
+										<input type="hidden" id="${goodsMsg.goodsId }"/>
+										<input type="hidden" id="color" value="${goodsMsg.color }"/>
+										<input type="hidden" id="size" value="${goodsMsg.size }"/>
+										<a href="#" target="_blank"> <img width="40" height="55" alt="${goodsMsg.goodsName }" src="${goodsMsg.showImage }"></a> 
+										<a href="#" class="pro_info" target="_blank">${goodsMsg.goodsName }</a>
+										<span>${goodsMsg.price }</span>
 										<div>
-											<label type="text" class="minicart_num">×1</label>
-											<a href="javascript:void(0)" class="del">删除</a>
+											<label type="text" class="minicart_num">×${goodsMsg.goodsNum }</label>
 										</div>
 									</li>
-									<li>
-										<a href="#" target="_blank">
-											<img width="40" height="55" alt="休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫" src="http://images.monteamor.com/ProductImg/3/1903/middle/062022305-010-01-M.jpg">
-										</a>
-										<a href="#" class="pro_info" target="_blank">休闲舒适柔软全棉磨毛牛津纺男士修身版长袖衬衫</a>
-										<span>￥198.00</span>
-										<div>
-											<label type="text" class="minicart_num">×1</label>
-											<a href="javascript:void(0)" class="del">删除</a>
-										</div>
-									</li> 
+								</c:forEach>
 								</ul>
 								<div class="checkout_box">
 									<br>
 									<p>
-										<span class="fl">共<strong>1</strong>件商品</span>
-										<span>合计：<strong>¥198.00</strong></span>
+										<span class="fl">共<strong>${size }</strong>件商品
+										</span> <span>合计：<strong>¥${total }</strong></span>
 									</p>
-									<a class="checkout_btn" href="#">去结算</a>
+									<a class="checkout_btn" href="order">去结算</a>
 								</div>
 							</div>
+							</c:if>
+							
 						</div>
 						<div class="header-top-list-coll">
 							<a href="#">收藏梦芭莎</a>
@@ -89,7 +83,7 @@
 							</div>
 							<div class="header-top-list-coll">
 								<!--<a href="#">你好，XXX</a>-->
-								<a href="self_center.jsp" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
+								<a href="self.power?method=selfCenter" id="username">你好，${usersInfo.accountName }</a> <span>|</span>
 							</div>
 						</c:if>
 					</div>
@@ -122,8 +116,8 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self_center.jsp">首页</a>>
-				<a href="self_center.jsp">个人中心</a>
+				<a href="self.power?method=selfCenter">首页</a>>
+				<a href="self.power?method=selfCenter">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
@@ -180,10 +174,10 @@
 								<li><a href="self_userinfo.jsp">基本信息</a></li>
 								<li><a href="javascript:void(0)" class="active">收获地址</a></li>
 								<!--  -->
-								<li><a href="privilege_security.html">安全验证</a></li>
 							</ul>
 						</div>
 						<!-- 
+								<li><a href="privilege_security.html">安全验证</a></li>
 							<div class="lelf-menu">
 								<h1 class="showoff option" status='0'>我的分享</h1>
 								<ul>

@@ -205,6 +205,7 @@ public class SelfServiceImpl implements SelfService{
 					ordersItemDTOList.add(ordersItemDTO);
 				}
 				ordersDTO.setItemsList(ordersItemDTOList);
+				ordersDTO.setOrdersItemDTOLength(ordersItemDTOList.size());
 				ordersDTOList.add(ordersDTO);
 			}
 		} catch (Exception e) {
@@ -244,6 +245,7 @@ public class SelfServiceImpl implements SelfService{
 					ordersItemDTOList.add(ordersItemDTO);
 				}
 				ordersDTO.setItemsList(ordersItemDTOList);
+				ordersDTO.setOrdersItemDTOLength(ordersItemDTOList.size());
 				ordersDTOList.add(ordersDTO);
 			}
 		} catch (Exception e) {

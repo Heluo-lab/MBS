@@ -2,7 +2,10 @@ package com.mbs.web.servlet;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -11,6 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mbs.dao.CartDao;
+import com.mbs.dao.ProductDao;
+import com.mbs.dao.impl.CartDaoImpl;
+import com.mbs.dao.impl.ProductDaoimpl;
+import com.mbs.dto.GoodsMsg;
+import com.mbs.dto.IDColorSizeOf;
 import com.mbs.dto.OrdersDTO;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Account;
@@ -49,6 +58,7 @@ public class SelfServlet extends SelfServletDispatcher{
 	 * 根据用户ID查询该用户所有收藏商品
 	 */
 	public void queryCollectGoodsByUsersId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfServlet.getCart(request);
 		HttpSession session = request.getSession();
 		UsersInfo userInfo  = (UsersInfo)session.getAttribute("usersInfo");
 		SelfService service = new SelfServiceImpl();
@@ -87,6 +97,7 @@ s	 */
 	
 	//根据用户ID和商品名称查询收藏中的商品
 	public void queryCollectGoodsByUsersIdAndGoodsName(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfServlet.getCart(request);
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
@@ -99,6 +110,7 @@ s	 */
 	
 	//根据用户Id查询该用户所有录入的收货地址
 	public void queryReceAddress(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfServlet.getCart(request);
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
@@ -188,6 +200,7 @@ s	 */
 	
 	//根据用户Id查询得到全部订单信息
 	public void queryAllOrdersByUsersId(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfServlet.getCart(request);
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
@@ -198,6 +211,7 @@ s	 */
 	
 	//根据用户Id与条件查询得到订单信息
 	public void queryOrdersByCondition(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfServlet.getCart(request);
 		SelfService service = new SelfServiceImpl();
 		Account acc =(Account)request.getSession().getAttribute("account");
 		String usersId = acc.getAccountId();
@@ -212,4 +226,151 @@ s	 */
 		request.setAttribute("ordersDTOList", ordersDTOList);
 		request.getRequestDispatcher("self_order.jsp").forward(request, response);
 	}
+	
+	//购物车
+	public static void getCart(HttpServletRequest request){
+		CartDao cd = new CartDaoImpl();
+		//获得购物车，usersId从session
+		Account info = (Account)request.getSession().getAttribute("account");
+		boolean hasGoods = false;
+		if (info!=null) {
+			String usersId = info.getAccountId();
+			List<GoodsMsg> goodsMsgList = cd.selectGoodsMsg(usersId);
+			//查看购物车有无商品
+			int size = goodsMsgList.size();
+			if (size==0) {
+				hasGoods = false;
+			}else {
+				hasGoods = true;
+			}
+			//获得总价格
+			double total = 0;
+			for (GoodsMsg goodsMsg : goodsMsgList) {
+				total +=goodsMsg.getGoodsNum()*goodsMsg.getPrice();
+			}
+			request.setAttribute("goodsMsg", goodsMsgList);
+			request.setAttribute("hasGoods", hasGoods);
+			request.setAttribute("total", total);
+			request.setAttribute("size", size);
+		}
+	}
+	
+	//推荐商品servlet
+	public void selfCenter(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		SelfServlet.getCart(request);
+		//通过随机数获得900以上的商品热度
+		PrintWriter out = response.getWriter();
+		Random r = new Random();
+		int hot = r.nextInt(100)+900;
+		List<Integer> hotlist = new ArrayList<Integer>();
+		for (int i = 0; i < 15; i++) {
+			hotlist.add(hot);
+			hot = r.nextInt(100)+900;
+			for (Integer integer : hotlist) {
+				if (integer == hot) {
+					hot = r.nextInt(100)+900;
+				}
+			}
+		}
+		//通过商品热度获得对应的商品id
+		ProductDao pd = new ProductDaoimpl();
+		CartDao cd = new CartDaoImpl();
+		List<Integer> goodsIdlist = new ArrayList<Integer>();
+		for (Integer goodsHot : hotlist) {
+			goodsIdlist.add(cd.selectGoodsId(goodsHot));
+		}
+		//通过商品id获得商品详情
+		List<GoodsMsg> goodsmsglist = new ArrayList<GoodsMsg>();
+		for (Integer goodsId : goodsIdlist) {
+			GoodsMsg goodsmsg = new GoodsMsg();
+			IDColorSizeOf goods = pd.LoadingfoGoodsID(goodsId);
+			goodsmsg.setGoodsName(goods.getGoodsName());
+			goodsmsg.setGoodsId(goodsId);
+			goodsmsg.setPrice(goods.getPrice());
+			goodsmsg.setShowImage(goods.getShowImage());
+			goodsmsg.setColor(goods.getColour());
+			goodsmsg.setSize(goods.getSizes());
+			goodsmsglist.add(goodsmsg);
+		}
+		List<GoodsMsg> hotgoods = new ArrayList<GoodsMsg>();
+		boolean flag = true;
+		while(true) {
+			int n = r.nextInt(5);
+			for (GoodsMsg goodsMsg : hotgoods) {
+				flag = false;
+				if (goodsMsg.getGoodsId()==goodsmsglist.get(n).getGoodsId()) {
+					flag = false;
+					break;
+				}
+				flag = true;
+			}
+			if (flag) {
+				hotgoods.add(goodsmsglist.get(n));
+			}
+			if (hotgoods.size()==4) {
+				break;
+			}
+		}
+		request.setAttribute("hotgoods", hotgoods);
+		request.getRequestDispatcher("self_center.jsp").forward(request, response);
+	}
+	
+	//推荐商品Ajax
+	public void selfCenterAjax(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		//通过随机数获得900以上的商品热度
+		PrintWriter out = response.getWriter();
+		Random r = new Random();
+		int hot = r.nextInt(100)+900;
+		List<Integer> hotlist = new ArrayList<Integer>();
+		for (int i = 0; i < 15; i++) {
+			hotlist.add(hot);
+			hot = r.nextInt(100)+900;
+			for (Integer integer : hotlist) {
+				if (integer == hot) {
+					hot = r.nextInt(100)+900;
+				}
+			}
+		}
+		//通过商品热度获得对应的商品id
+		ProductDao pd = new ProductDaoimpl();
+		CartDao cd = new CartDaoImpl();
+		List<Integer> goodsIdlist = new ArrayList<Integer>();
+		for (Integer goodsHot : hotlist) {
+			goodsIdlist.add(cd.selectGoodsId(goodsHot));
+		}
+		//通过商品id获得商品详情
+		List<GoodsMsg> goodsmsglist = new ArrayList<GoodsMsg>();
+		for (Integer goodsId : goodsIdlist) {
+			GoodsMsg goodsmsg = new GoodsMsg();
+			IDColorSizeOf goods = pd.LoadingfoGoodsID(goodsId);
+			goodsmsg.setGoodsName(goods.getGoodsName());
+			goodsmsg.setGoodsId(goodsId);
+			goodsmsg.setPrice(goods.getPrice());
+			goodsmsg.setShowImage(goods.getShowImage());
+			goodsmsg.setColor(goods.getColour());
+			goodsmsg.setSize(goods.getSizes());
+			goodsmsglist.add(goodsmsg);
+		}
+		List<GoodsMsg> hotgoods = new ArrayList<GoodsMsg>();
+		boolean flag = true;
+		while(true) {
+			int n = r.nextInt(5);
+			for (GoodsMsg goodsMsg : hotgoods) {
+				flag = false;
+				if (goodsMsg.getGoodsId()==goodsmsglist.get(n).getGoodsId()) {
+					flag = false;
+					break;
+				}
+				flag = true;
+			}
+			if (flag) {
+				hotgoods.add(goodsmsglist.get(n));
+			}
+			if (hotgoods.size()==4) {
+				break;
+			}
+		}
+		response.getWriter().print(JSONArray.fromObject(hotgoods));
+	}
+	
 }

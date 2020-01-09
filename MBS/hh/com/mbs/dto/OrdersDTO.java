@@ -26,7 +26,17 @@ public class OrdersDTO {
 	private String ordersNum;
 	//订单所有订单项
 	private List<OrdersItemDTO> itemsList = new ArrayList<>();
+	//订单项个数
+	private int ordersItemDTOLength;
 	
+	public int getOrdersItemDTOLength() {
+		return ordersItemDTOLength;
+	}
+
+	public void setOrdersItemDTOLength(int ordersItemDTOLength) {
+		this.ordersItemDTOLength = ordersItemDTOLength;
+	}
+
 	public OrdersDTO() {
 	}
 
