@@ -5,6 +5,28 @@ var isPwd=false;
 var isEmail=false;
 var isCode =false;
 
+//如果从其他页面进登录页面，输入框都有值
+//普通登录
+//获取邮箱输入的值
+var loginid =$('#txtLoginID').val().trim();
+//获取密码输入框的值
+var loginpwd =$('#txtLoginDpwd').val();
+if (loginid !='') {
+	isID=true;
+}
+if (loginpwd !='') {
+	isPwd=true;
+}
+//无密码登录
+//获取邮箱输入框的值
+var loginmob =$('#txtLoginMob').val().trim();
+if (loginmob !='') {
+	 isEmail=true;
+}
+//获取口令输入框的值
+//var checkcode =$('#txtLoginDpwd').val();
+
+
 //localStorage.removeItem('registerid');
 //$('#txtLoginID').val(loginemail);
 ////获取账号输入框填的值
@@ -32,16 +54,17 @@ if (checkedpwd=='true') {
      $('#remember_pwd').data('waschecked', true);
 }
 
+
 //如果是从注册跳转过来
-if (isID=false) {
-	var loginemail =localStorage.getItem('registerid');
-	if (loginemail!=null || loginemail!='') {
-		$('#txtLoginID').val(loginemail);
-		isID =true;
-		localStorage.removeItem('registerid');
-		$('#txtLoginPwd').val('');
-	}
-}
+//if (isID=false) {
+//	var loginemail =localStorage.getItem('registerid');
+//	if (loginemail!=null || loginemail!='') {
+//		$('#txtLoginID').val(loginemail);
+//		isID =true;
+//		localStorage.removeItem('registerid');
+//		$('#txtLoginPwd').val('');
+//	}
+//}
 
 //else{
 //	//直接从登录界面
@@ -338,10 +361,10 @@ $('#txtLoginDpwd').blur(function(){
 
 
 //公共的前缀
-var URL ='http://www.wjian.top/shop/';
+//var URL ='http://www.wjian.top/shop/';
 //拿地址栏参数
-var goodsId = getUrlVal('goods_id');
-//console.log(goodsId);
+var goodsId = getUrlVal('id');
+console.log(goodsId);
 //获得地址栏参数值
 function getUrlVal(property){
 	var urlStr =window.location.search.substring(1);
@@ -452,7 +475,7 @@ $('#btnLogin').click(function(){
 //					}
 					//跳首页还是详情
 			    	if (goodsId) {
-			    		location.href ='product?goods_id='+goodsId;
+			    		location.href ='pageConetentLoading?id='+goodsId;
 			    	}else{
 			    		location.href = 'index'; 
 			    	}
@@ -567,8 +590,9 @@ $('#btnSmsLogin').click(function(){
 			    	//localStorage.setItem('accountname', obj.data.accountName);
 			    	//localStorage.setItem('token', obj.data.token);
 					//跳首页还是详情
+					//跳首页还是详情
 			    	if (goodsId) {
-			    		location.href ='product?goods_id='+goodsId;
+			    		location.href ='pageConetentLoading?id='+goodsId;
 			    	}else{
 			    		location.href = 'index'; 
 			    	}
