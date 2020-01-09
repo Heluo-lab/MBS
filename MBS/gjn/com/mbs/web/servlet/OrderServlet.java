@@ -61,6 +61,8 @@ public class OrderServlet extends HttpServlet{
 			goodsmsg.setGoodsNum(cart.getGoodsNum());
 			goodsmsg.setPrice(goods.getPrice());
 			goodsmsg.setShowImage(goods.getShowImage());
+			goodsmsg.setColor(cart.getColor());
+			goodsmsg.setSize(cart.getSize());
 			money = money + goodsmsg.getPrice()*goodsmsg.getGoodsNum();
 			msglist.add(goodsmsg);
 		}

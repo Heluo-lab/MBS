@@ -63,8 +63,9 @@ public class CartServlet extends HttpServlet{
 			goodsmsg.setGoodsNum(cart.getGoodsNum());
 			goodsmsg.setPrice(goods.getPrice());
 			goodsmsg.setShowImage(goods.getShowImage());
-			goodsmsg.setColor(goods.getColour());
-			goodsmsg.setSize(goods.getSizes());
+			System.out.println(cart.getColor());
+			goodsmsg.setColor(cart.getColor());
+			goodsmsg.setSize(cart.getSize());
 			msglist.add(goodsmsg);
 		}
 		req.getSession().setAttribute("goodslist", msglist);
