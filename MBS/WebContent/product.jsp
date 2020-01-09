@@ -398,7 +398,7 @@
 					
 					</div>
 						<div class="zhekou">
-							<span class="discountBox">7.0折</span>
+							<span class="discountBox">不打折</span>
 							<span class="marketBox">
 								<!--￥<del>569</del>-->
 								￥<del>${goods.price}</del>
