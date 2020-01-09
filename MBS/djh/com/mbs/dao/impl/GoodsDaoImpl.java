@@ -16,7 +16,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 返回type类型的最大页数
 	public int selectMaxPage(int tyid, int pageSize, Connection conn) throws Exception {
-		String sql = "select count(*) from goods where tyid=?";
+		String sql = "select count(*) from goods where tyid=? and goodStatus = 1";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, tyid);
 		ResultSet rs = ps.executeQuery();
@@ -29,7 +29,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 查分页的集合对象(不带条件查询)
 	public List<Goods> selectAllGoods(int tyid, int pageNo, int pageSize, Connection conn) throws SQLException {
-		String sql = "select * from goods where tyId=? limit ?,?";
+		String sql = "select * from goods where tyId=? and goodStatus = 1 limit ?,?";
 		List<Goods> list = new ArrayList<Goods>();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, tyid);
@@ -51,7 +51,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 查询此类型商品条数
 	public int getTypeCount(int tyid, Connection conn) throws SQLException {
-		String sql = "select count(*) from goods where tyid=?";
+		String sql = "select count(*) from goods where tyid=? and goodStatus = 1 ";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, tyid);
 		ResultSet rs = ps.executeQuery();
@@ -65,7 +65,7 @@ public class GoodsDaoImpl implements GoodsDao {
 	// 模糊查询商品(固定条数)
 	public List<Object> findProductByWord(String word, Connection conn) throws SQLException {
 		List<Object> list = new ArrayList<Object>();
-		String sql = "select goodsName from goods where goodsName like ? limit 0,8";
+		String sql = "select goodsName from goods where goodStatus = 1 and goodsName like ? limit 0,8";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, "%" + word + "%");
 		ResultSet rs = ps.executeQuery();
@@ -80,7 +80,7 @@ public class GoodsDaoImpl implements GoodsDao {
 	public List<Goods> findProductByName(String goodsName, int pageSize, int pageNo, Connection conn)
 			throws SQLException {
 		List<Goods> list = new ArrayList<Goods>();
-		String sql = "select * from goods where goodsName like ?  limit ?,?";
+		String sql = "select * from goods where goodStatus = 1 and goodsName like ?  limit ?,?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, "%" + goodsName + "%");
 		ps.setInt(2, (pageNo - 1) * pageSize);
@@ -101,7 +101,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	@Override
 	public int getGoodsCount(String goodsName, Connection conn) throws SQLException {
-		String sql = "select count(*) from goods where goodsName like ? ";
+		String sql = "select count(*) from goods where goodStatus = 1 and goodsName like ? ";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, "%" + goodsName + "%");
 		ResultSet rs = ps.executeQuery();
@@ -114,7 +114,7 @@ public class GoodsDaoImpl implements GoodsDao {
 
 	// 通过商品名和商品页面展示数查询总页数
 	public int selectMaxPageByName(String goodsName, int pageSize, Connection conn) throws SQLException {
-		String sql = "select count(*) from goods where goodsName like ?";
+		String sql = "select count(*) from goods where goodStatus = 1 and goodsName like ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, "%" + goodsName + "%");
 		ResultSet rs = ps.executeQuery();
@@ -129,7 +129,7 @@ public class GoodsDaoImpl implements GoodsDao {
 	@Override
 	public List<Goods> selectAllGoods(int tyid, Map<String, String> map,int pageNo,int pageSize, Connection conn) throws SQLException {
 		List<Goods> list = new ArrayList<Goods>();
-		String sql = "select * from goods where tyId=? ";
+		String sql = "select * from goods where tyId=? and goodStatus = 1";
 		StringBuffer sb = new StringBuffer(sql);
 		if (map != null) {
 			String sort=map.get("sort");
@@ -208,7 +208,7 @@ public class GoodsDaoImpl implements GoodsDao {
 	public List<Goods> selectGoodsByName(String goodsName, Map<String, String> map, int pageNo, int pageSize,
 			Connection conn) throws SQLException {
 		List<Goods> list = new ArrayList<Goods>();
-		String sql = "select * from goods where goodsName like ? ";
+		String sql = "select * from goods where goodStatus = 1 and goodsName like ? ";
 		StringBuffer sb = new StringBuffer(sql);
 		if (map != null) {
 			String sort=map.get("sort");

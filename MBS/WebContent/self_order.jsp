@@ -122,19 +122,19 @@
 		<!--主体-->
 		<section>
 			<div class="member-label">
-				<a href="self_center.html">首页</a>>
-				<a href="self_center.html">个人中心</a>
+				<a href="self_center.jsp">首页</a>>
+				<a href="self_center.jsp">个人中心</a>
 			</div>
 			<div class="section-self">
 				<div class="section-self-left">
 					<div class="section-self-left-content">
 						<div class="lelf-menu">
 							<ul>
-								<li><a href="cart.html">我的购物车</a></li>
+								<li><a href="cart">我的购物车</a></li>
 								<li><a href="javascript:void(0)" class="active">我的订单</a></li>
 								<li><a href="shop_order.html">门店订单</a></li>
 								<li><a href="self_mypointment.html">我的预约</a></li>
-								<li><a href="self_mycollect.html">我的收藏</a></li>
+								<li><a href="self.power?method=queryCollectGoodsByUsersId">我的收藏</a></li>
 								<li><a href="shop_apply.html">商家申请</a></li>
 							</ul>
 						</div>
@@ -168,8 +168,8 @@
 						<div class="lelf-menu">
 							<h1 class="showoff option" status='0'>个人信息</h1>
 							<ul>
-								<li><a href="self_userinfo.html">基本信息</a></li>
-								<li><a href="self_address.html">收获地址</a></li>
+								<li><a href="self_userinfo.jsp">基本信息</a></li>
+								<li><a href="self.power?method=queryReceAddress">收获地址</a></li>
 								<li><a href="privilege_security.html">安全验证</a></li>
 							</ul>
 						</div>
