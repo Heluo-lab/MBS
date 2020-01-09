@@ -43,7 +43,6 @@ public class SessionSingleListener implements HttpSessionAttributeListener{
 			}
 			//第一次用账号登录或者前面被移除
 			map.put(accountEmail, event.getSession());
-			System.out.println("帐号" + account.getAccountEmail()+ "登录。");
 		}
 	}
 
@@ -55,7 +54,6 @@ public class SessionSingleListener implements HttpSessionAttributeListener{
 			Account account =(Account)event.getValue();
 			//从map中消除session记录
 			map.remove(account.getAccountEmail());
-			System.out.println("帐号" + account.getAccountEmail() + "注销。");
 		}
 	}
 
