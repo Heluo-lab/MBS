@@ -43,11 +43,11 @@ public class EmailCodeBtnServlet extends HttpServlet{
 			//设置邮箱主题
 			String subject="code";
 			//将验证码发送给客户邮箱
-//			try {
-//				MailUtils.sendMail(email,subject,emailMsg);
-//			} catch (MessagingException e) {
-//				e.printStackTrace();
-//			}
+			try {
+				MailUtils.sendMail(email,subject,emailMsg);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 			//生成的验证码json
 			resp.setCharacterEncoding("UTF-8");
 			//告诉前台传的是json

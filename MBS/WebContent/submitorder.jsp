@@ -149,4 +149,5 @@
 		</footer>
 	</body>
 </html>
+<script src="js/jquery.min.js"></script>
 <script src="js/exitLogin.js"></script>

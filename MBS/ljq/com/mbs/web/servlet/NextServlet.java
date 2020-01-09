@@ -54,11 +54,11 @@ public class NextServlet extends HttpServlet{
 				//设置邮箱主题
 				String subject="code";
 				//发送临时密码到该邮箱
-//				try {
-//					MailUtils.sendMail(email,subject,emailMsg);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
+				try {
+					MailUtils.sendMail(email,subject,emailMsg);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println("next "+emailMsg);
 				//并将该临时密码替换
 				account.setAccountPass(emailMsg);
