@@ -15,7 +15,7 @@ import com.mbs.pojo.Account;
  * @author Administrator
  *
  */
-@WebListener("/single")
+@WebListener()
 public class SessionSingleListener implements HttpSessionAttributeListener{
 	//key就是登录的账号，值是当前最新的session
 	Map<String, HttpSession> map =new HashMap<String, HttpSession>();
@@ -39,10 +39,11 @@ public class SessionSingleListener implements HttpSessionAttributeListener{
 				//从老的session中移除掉之前存进去的用户
 				oldSession.removeAttribute("account");
 				//向老的session中存入一个信息，目的是告诉用户被T下线
-				oldSession.setAttribute("msg", "您的帐号已经在其他机器上登录，您被迫下线。");
+				oldSession.setAttribute("logoutMsg", "您的帐号已经在其他机器上登录，您被迫下线。");
 			}
 			//第一次用账号登录或者前面被移除
 			map.put(accountEmail, event.getSession());
+			System.out.println("帐号" + account.getAccountEmail()+ "登录。");
 		}
 	}
 
@@ -54,6 +55,7 @@ public class SessionSingleListener implements HttpSessionAttributeListener{
 			Account account =(Account)event.getValue();
 			//从map中消除session记录
 			map.remove(account.getAccountEmail());
+			System.out.println("帐号" + account.getAccountEmail() + "注销。");
 		}
 	}
 
@@ -73,7 +75,7 @@ public class SessionSingleListener implements HttpSessionAttributeListener{
 				//map中有记录，表明该账号在其他机器上登录过，将以前的登录失效
 				HttpSession session = map.get(account.getAccountEmail());
 				session.removeAttribute("account");
-				session.setAttribute("msg", "您的帐号已经在其他机器上登录，您被迫下线。");
+				session.setAttribute("logoutMsg", "您的帐号已经在其他机器上登录，您被迫下线。");
 			}
 			map.put(account.getAccountEmail(), event.getSession());
 		}
