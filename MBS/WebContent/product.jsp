@@ -347,10 +347,12 @@
 						<!--滚动小图界面-->
 						<div class="tp-xiaomianb">
 						<ul>
-						<c:forEach items="${colorImage}" begin="1"  end="5" var="falg" step="1">
+						<c:forEach items="${colorImage}" begin="0"  end="5" var="falg" step="1">
+							<c:if test="${!empty falg }">
 							<li>
 								<img src="${falg}"/>
 							</li>
+							</c:if>
 						</c:forEach>
 						</ul> 
 
@@ -473,7 +475,7 @@
 							</c:forEach>
 							</span>
 						</div>
-						
+						<div class="goumai-btn">
 							<span class="addgouwu-btn" id="addshoppingcart">
 								<i>加入购物车</i>
 							</span>

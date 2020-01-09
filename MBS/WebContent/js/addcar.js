@@ -68,12 +68,15 @@ jQuery(".colorbtn").click(function(){
 						
 						$(".tp-xiaomianb").children().empty();
 						for (var i = 0; i < 5; i++) {
+							if(imgss[i]!=null){
 							str=`
 								<li>
 									<img src="${imgss[i]}"/>
 								</li>
 								`;
 							$(".tp-xiaomianb").children().append(str);
+							
+							}
 						}
 						  $('.tp-xiaomianb img').mouseenter(function(){
 							    //移入当前拿当前的src值
@@ -86,6 +89,31 @@ jQuery(".colorbtn").click(function(){
 		}
 	});
 })
+
+var nub = 1;
+jQuery(".add").click(function(){
+	if(lock == true){
+		return;
+	}
+//	$(this).remove();
+	nub=nub+1;
+	jQuery("#product_num").html(nub);
+	lock = false;
+})
+
+jQuery(".remove").click(function(){
+	if(lock == true){
+		return;
+	}
+//	$(this).remove();
+	nub=nub-1;
+	if(nub<=0){
+		nub=1;
+	}
+	jQuery("#product_num").html(nub);
+	lock = false;
+})
+
 jQuery(".sizetp").click(function(){
 				$(".bxz").removeClass("bxz");
 				$(this).addClass("bxz")
@@ -119,10 +147,9 @@ jQuery("#addshoppingcart").click(function(){
 		$.ajax({
 		type:"post",
 		url:"addcartdata",
-		data:"goodsid="+goodsid+"&color="+color+"&size="+size+"&goodsnum=1",
+		data:"goodsid="+goodsid+"&color="+color+"&size="+size+"&goodsnum="+nub,
 		success:function(result){}});
 })
-
 
 
 //	放大镜
