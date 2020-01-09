@@ -71,6 +71,10 @@ $('.i_text').blur(function(){
 $('.checkcode-link').click(function(){
 	$('.code_img').attr("src","codeImage?d="+new Date().getTime());
 }); 
+//点击#container图片部分,刷新.code_img验证码
+$('.code_img').click(function(){
+	$('.code_img').attr("src","codeImage?d="+new Date().getTime());
+}); 
 //点击取消#btncancel回到登录界面
 $('#btncancel').click(function(){
 	location.href = 'login.jsp'; 
