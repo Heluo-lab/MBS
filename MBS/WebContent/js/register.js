@@ -400,7 +400,6 @@ $('.reg_btn').click(function(){
 		 }
 		  if(result==true){
 			  var loginemail =$('#txtRegisterID').val().trim();
-			  alert(loginemail);
 			  //注册成功 把文本框清空,设置不能注册
 			  $('#txtRegisterName').val('');    
 			  $('#txtRegisterID').val('');
