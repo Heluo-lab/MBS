@@ -12,6 +12,8 @@ import com.mbs.dao.SelfDAO;
 import com.mbs.db.DBHelper;
 import com.mbs.dto.UsersInfo;
 import com.mbs.pojo.Goods;
+import com.mbs.pojo.Orders;
+import com.mbs.pojo.Ordersitem;
 import com.mbs.pojo.Receivinggoods;
 /**
  * 个人信息具体实现类
@@ -267,6 +269,34 @@ public class SelfDAOImpl implements SelfDAO{
 		int rows = pstmt.executeUpdate();
 		DBHelper.release();
 		return rows;
+	}
+
+	@Override
+	public List<Orders> queryAllOrdersByUsersId(String usersId) throws SQLException {
+		List<Orders> ordersList = new ArrayList<>();
+		Connection conn = DBHelper.getConnection();
+		String sql = "select * from orders where usersId = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, usersId);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+			Orders orders = new Orders();
+			orders.setOrdersId(rs.getString("ordersId"));
+		}
+		DBHelper.release();
+		return ordersList;
+	}
+
+	@Override
+	public List<Ordersitem> queryAllOrdersItemByOrdersId(String ordersId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Goods queryGoodsById(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
