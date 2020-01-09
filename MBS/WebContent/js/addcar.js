@@ -188,3 +188,149 @@ jQuery("#addshoppingcart").click(function(){
     //设置大图移动
     $('.big-img').css({left : -l * biliX, top: -t * biliY});
   });
+  
+  lock=false;
+  $('.header-top-list-cart').hover(function(){
+	  if(lock == true){
+			return;
+		}
+		lock = true;
+	  console.log("on");
+	  var mine = $(this).children(".header-cart-yes");
+	  $.ajax({
+		  type:"post",
+		  url:"getcart",
+		  data:"count=1",
+		  success:function(result){
+			  var re = JSON.parse(result);
+			  if (re.length==0) {
+				  str=`
+				  <a href="cart.html">购物车</a>
+				  <div class="header-cart-no">
+								购物车里还没有任何商品，快去选购吧!
+					</div>`;
+				  $(".header-top-list-cart").html(str);
+				mine.remove();
+			}else {
+				str=`
+					<a href="cart.html">购物车</a>
+					<div class="header-cart-yes">
+								<ul>
+									
+								</ul>
+								
+							</div>`;
+				$(".header-top-list-cart").html(str);
+				var total = 0;
+				$.each(re,function(i,obj){
+					str = `
+						<li>
+						<a href="#" target="_blank">
+						<img width="40" height="55" alt="${obj.goodsName}" src="${obj.showImage}">
+						</a>
+						<a href="#" class="pro_info" target="_blank">${obj.goodsName}</a>
+						<span>￥${obj.price}</span>
+						<div>
+						<label type="text" class="minicart_num">×${obj.goodsNum}</label>
+						<a href="javascript:void(0)" class="del">删除</a>
+						</div>
+						</li>
+						`;
+					$(".header-top-list-cart").children(".header-cart-yes").children("ul").append(str);
+					total = total + obj.goodsNum*obj.price;
+				});
+				var goodssize = re.length;
+				str=`
+					<div class="checkout_box">
+					<br>
+					<p>
+					<span class="fl">共<strong>${goodssize}</strong>件商品</span>
+					<span>合计：<strong>¥${total}</strong></span>
+					</p>
+					<a class="checkout_btn" href="#">去结算</a>
+					</div>
+					`;
+				$(".header-top-list-cart").children(".header-cart-yes").append(str);
+				
+			}
+		  }
+	  });
+	  setTimeout(function(){
+		  //开锁
+		  lock = false;
+	  },500)
+  });
+  $('.menu-car').hover(function(){
+	  if(lock == true){
+		  return;
+	  }
+	  lock = true;
+	  $.ajax({
+		  type:"post",
+		  url:"getcart",
+		  data:"count=1",
+		  success:function(result){
+			  var re = JSON.parse(result);
+			  var goodssize = re.length;
+			  if (re.length==0) {
+				  str=`
+					  <div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div>
+					  <a href="">
+						<img src="img/cart.png" >
+						<span>购物车</span>
+						<span class="count">0</span>
+					</a>
+					 `;
+				  $(".menu-car").html(str);
+			  }else {
+				  str=`
+					<div class="list-car">
+						<ul>
+						</ul>
+					</div>
+					  <a href="">
+						<img src="img/cart.png" >
+						<span>购物车</span>
+						<span class="count">${goodssize}</span>
+					</a>
+					  `;
+				  $(".menu-car").html(str);
+				  var total = 0;
+				  $.each(re,function(i,obj){
+					  str = `
+						  <li>
+						  <a href="#" target="_blank"> <img width="40" height="55" alt="${obj.goodsName}" src="${obj.showImage}">
+						  </a>
+						  <a href="#" class="pro_info" target="_blank">${obj.goodsName}</a>
+						  <span>￥${obj.price}</span>
+						  <div>
+						  <label type="text" class="minicart_num">×${obj.goodsNum}</label>
+						  <a href="javascript:void(0)" class="del" style="color: black;">删除</a>
+						  </div>
+						  </li>
+						  `;
+					  $(".list-car").children("ul").append(str);
+					  total = total + obj.goodsNum*obj.price;
+				  });
+				  
+				  str=`
+					  <div class="checkout_box">
+					  <br>
+					  <p>
+					  <span class="fl">共<strong>${goodssize}</strong>件商品</span>
+					  <span>合计：<strong>¥${total}</strong></span>
+					  </p>
+					  <a class="checkout_btn" href="#">去结算</a>
+					  </div>
+					  `;
+				  $(".list-car").append(str);
+				  
+			  }
+		  }
+	  });
+	  setTimeout(function(){
+		  //开锁
+		  lock = false;
+	  },500)
+  });
+
