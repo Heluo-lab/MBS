@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mbs.dao.OrderDao;
 import com.mbs.dao.impl.OrderDaoImpl;
+import com.mbs.pojo.Account;
 import com.mbs.pojo.Receivinggoods;
 
 import net.sf.json.JSONObject;
@@ -26,8 +27,10 @@ public class CancelChangeServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Account info = (Account)req.getSession().getAttribute("account");
+		String usersId = info.getAccountId();
 		OrderDao od = new OrderDaoImpl();
-		List<Receivinggoods> list = od.selectAddress("1");
+		List<Receivinggoods> list = od.selectAddress(usersId);
 		Receivinggoods recegoods = new Receivinggoods();
 		for (Receivinggoods receivinggoods : list) {
 			if (receivinggoods.getIsDefault()==1) {

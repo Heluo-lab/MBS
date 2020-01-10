@@ -188,7 +188,7 @@
 							
 						 -->
 						 <form action="self.power?method=queryCollectGoodsByUsersIdAndGoodsName" method="post">
-							<input type="text" name="goodsName" value="${goodsName }" />
+							<input type="text" name="goodsName" value="${goodsName }" placeholder="请输入商品名" />
 							<input type="submit" value="查询"/>
 						 </form>
 					</div>

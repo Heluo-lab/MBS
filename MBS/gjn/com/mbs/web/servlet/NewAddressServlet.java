@@ -37,7 +37,7 @@ public class NewAddressServlet extends HttpServlet{
 		Receivinggoods receivinggoods = (Receivinggoods)JSONObject.toBean(object,Receivinggoods.class);
 		//usersid
 		receivinggoods.setUsersId(usersId);
-		od.addAddress(JSONObject.fromObject(receivinggoods).toString());
+		od.addAddress(JSONObject.fromObject(receivinggoods).toString(),usersId);
 		//usersid
 		List<Receivinggoods> list = od.selectAddress(usersId);
 		PrintWriter out = resp.getWriter();

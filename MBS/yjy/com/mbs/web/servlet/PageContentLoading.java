@@ -50,7 +50,10 @@ public class PageContentLoading extends HttpServlet {
 		System.out.println("=========="+colorCode);
 //		解析img长字段
 		String imgUrl =  dao.LoadingfoGoodsID(flag).getGoodsInfoImage();
-		String[] imgUrls = imgUrl.split("@l@");
+		String[]  imgUrls= null;
+		if(imgUrl!=null) {
+			imgUrls= imgUrl.split("@l@");
+		}
 
 //		解析颜色尺码对象字段
 //		拿到对象

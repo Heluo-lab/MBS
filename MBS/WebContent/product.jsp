@@ -176,7 +176,7 @@
 								<a href="register.jsp">注册</a> <span>|</span>
 							</div>
 							<div class="header-top-list-coll">
-								<a href="login.jsp">登录</a> <span>|</span>
+								<a href="login.jsp?id=${goods.id}">登录</a> <span>|</span>
 							</div>
 						</c:if>
 						<c:if test="${!empty usersInfo }">
@@ -240,10 +240,13 @@
 		<div class="menu-right">
 			<div class="menu-right-main">
 				<div class="menu-myifo">
+				<!-- 
 					<div class="list-myinfo">
 						请登录
 					</div>
-					<a href="">
+				
+				 -->
+					<a href="self.power?method=selfCenter">
 						<img src="img/info.png" >
 					</a>
 				</div>

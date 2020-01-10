@@ -210,8 +210,10 @@
 	<div class="menu-right">
 		<div class="menu-right-main">
 			<div class="menu-myifo">
-				<div class="list-myinfo">请登录</div>
-				<a href=""> <img src="img/info.png">
+				<!-- 
+					<div class="list-myinfo">请登录</div>
+				 -->
+				<a href="self.power?method=selfCenter"> <img src="img/info.png">
 				</a>
 			</div>
 			<div class="menu-car">

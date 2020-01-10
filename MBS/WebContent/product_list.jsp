@@ -211,6 +211,18 @@
 			</ul>
 			<ul class="loginInfo_r" mola="minimember"
 				data-templateid="membertemplate">
+				<c:if test="${empty usersInfo }">
+					<li class="lw_weixin_li lineHeight" style="position:relative ;z-index:1232">
+						<a class="lw_weixin" href="login.jsp?">登录</a></li>
+					<li class="lw_weixin_li lineHeight" style="position:relative ;z-index:1222">
+						<a class="lw_weixin" href="register.jsp">注册</a></li>
+				</c:if>
+				<c:if test="${!empty usersInfo }">
+					<li class="lw_weixin_li lineHeight" style="position:relative ;z-index:1222">
+						<a class="lw_weixin" href="self.power?method=selfCenter" id="username">你好，${usersInfo.accountName }</a></li>
+					<li class="lw_weixin_li lineHeight" style="position:relative ;z-index:1232">
+						<a class="lw_weixin" href="javascript:void(0)" id="exitLogin"">退出登录</a></li>
+				</c:if>
 				<li class="lw_weixin_li lineHeight"><i class="i lw_weixin_icon"></i>
 					<a class="lw_weixin" href="javascript:void(0);">微信<img
 						class="twoCode"
@@ -976,14 +988,16 @@
 	<div class="menu-right">
 		<div class="menu-right-main">
 			<div class="menu-myifo">
-				<div class="list-myinfo">请登录</div>
-				<a href=""> <img src="img/info.png">
+			<!-- 
+					<div class="list-myinfo">请登录</div>
+			 -->
+				<a href="self.power?method=selfCenter"> <img src="img/info.png">
 				</a>
 			</div>
 			<div class="menu-car">
 				<c:if test="${!hasGoods }">
 					<div class="header-cart-no">购物车里还没有任何商品，快去选购吧!</div>
-					<a href=""> <img src="img/cart.png"> <span>购物车</span> <span class="count">0</span></a>
+					<a href="cart"> <img src="img/cart.png"> <span>购物车</span> <span class="count">0</span></a>
 				</c:if>
 				<c:if test="${hasGoods }">
 					<div class="list-car">
@@ -1012,7 +1026,7 @@
 								<a class="checkout_btn" href="order">去结算</a>
 							</div>
 						</div>
-				<a href=""> <img src="img/cart.png"> <span>购物车</span> <span class="count">${size }</span></a>
+				<a href="cart"> <img src="img/cart.png"> <span>购物车</span> <span class="count">${size }</span></a>
 				</c:if>
 				
 			</div>
@@ -1042,6 +1056,7 @@
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery.mousewheel.min.js" type="text/javascript"
 	charset="utf-8"></script>
+<script src="js/exitLogin.js"></script>
 <!-- 回到顶部 -->
 <script type="text/javascript">
 	$('.return-top').click(function() {

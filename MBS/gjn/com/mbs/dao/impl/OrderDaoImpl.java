@@ -54,12 +54,12 @@ public class OrderDaoImpl implements OrderDao{
 	}
 	private static int receId = 0;
 	@Override
-	public void addAddress(String receMsg) {
+	public void addAddress(String receMsg,String usersId) {
 		JSONObject object = JSONObject.fromObject(receMsg);
 		Receivinggoods receivinggoods = (Receivinggoods) JSONObject.toBean(object,Receivinggoods.class);
 		Connection connection = DBHelper.getConnection();
 		String sql = "insert into receivinggoods value(?,?,?,?,?,?,?,?,?)";
-		String sql1 = "select * from receivinggoods ";
+		String sql1 = "select * from receivinggoods where usersId='"+usersId+"'";
 		boolean isdefault = false;
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql1);
@@ -189,7 +189,7 @@ public class OrderDaoImpl implements OrderDao{
 			PreparedStatement ps = connection.prepareStatement(sql1);
 			double total = 0;
 			ps.setString(1, ordersId);
-			ps.setString(2, "");
+			ps.setString(2, "13");
 			ps.setString(3, usersId);
 			ps.setString(4, time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 			for (GoodsMsg goodsMsg2 : msglist) {

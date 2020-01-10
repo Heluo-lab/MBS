@@ -40,7 +40,7 @@ public class AddReceivingGoodsServlet extends HttpServlet{
 		JSONObject object = JSONObject.fromObject(receMsg);
 		Receivinggoods receivinggoods = (Receivinggoods)JSONObject.toBean(object,Receivinggoods.class);
 		receivinggoods.setUsersId(usersId);
-		od.addAddress(JSONObject.fromObject(receivinggoods).toString());
+		od.addAddress(JSONObject.fromObject(receivinggoods).toString(),usersId);
 		PrintWriter out = resp.getWriter();
 		out.print(JSONObject.fromObject(receivinggoods).toString());
 	}

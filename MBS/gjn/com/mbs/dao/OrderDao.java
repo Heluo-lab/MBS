@@ -8,7 +8,7 @@ public interface OrderDao {
 	//查询所有地址根据usersId
 	public List<Receivinggoods> selectAddress(String usersId);
 	//增加地址
-	public void addAddress(String receMsg);
+	public void addAddress(String receMsg,String usersId);
 	//删除地址
 	public void deleteAddress(String receId);
 	//改变默认
